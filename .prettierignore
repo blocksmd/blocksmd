@@ -1,0 +1,9 @@
+**/.git
+**/.svn
+**/.hg
+**/node_modules
+dist/js
+dist/css/blocksmd.min.css
+dist/css/blocksmd.min.css.map
+dist/css/blocksmd.rtl.min.css
+dist/css/blocksmd.rtl.min.css.map

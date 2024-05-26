@@ -1,0 +1,11 @@
+{
+	"include": ["src/*.js"],
+	"compilerOptions": {
+		"allowJs": true,
+		"declaration": true,
+		"emitDeclarationOnly": true,
+		"moduleResolution": "node",
+		"outDir": "types",
+		"target": "es2021"
+	}
+}

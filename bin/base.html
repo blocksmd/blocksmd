@@ -1,0 +1,83 @@
+<!doctype html>
+<html
+	dir="{{ settings['dir'] }}"
+	lang="{{ settings['lang'] }}"
+	spellcheck="false"
+	class="bmd-root"
+	data-bmd-color-scheme="{{ settings['color-scheme'] }}"
+	data-bmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
+	data-bmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
+>
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!-- Title and favicon -->
+		<title>{{ settings["title"] }}</title>
+		<link rel="icon" href="{{ settings['favicon'] }}" />
+
+		<!-- SEO -->
+		<meta name="description" content="{{ settings['meta-description'] }}" />
+		<meta name="author" content="{{ settings['meta-author'] }}" />
+		<meta name="keywords" content="{{ settings['meta-keywords'] }}" />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="{{ settings['meta-type'] }}" />
+		<meta property="og:url" content="{{ settings['meta-url'] }}" />
+		<meta property="og:title" content="{{ settings['title'] }}" />
+		<meta
+			property="og:description"
+			content="{{ settings['meta-description'] }}"
+		/>
+		<meta property="og:image" content="{{ settings['meta-image'] }}" />
+
+		<!-- Blocksmd JS -->
+		<script src="./blocksmd/js/blocksmd.bundle.min.js"></script>
+
+		<!-- Toggle color scheme -->
+		<script type="text/javascript">
+			if (
+				document.documentElement.getAttribute(
+					"data-bmd-color-scheme-toggle",
+				) === "show"
+			)
+				blocksmd.setPreferredColorScheme();
+		</script>
+
+		<!-- Blocksmd CSS -->
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="./blocksmd/css/blocksmd{% if settings['dir'] == 'rtl' %}.rtl{% endif %}.min.css"
+		/>
+	</head>
+	<body class="bmd-body">
+		<noscript>Please turn on JavaScript to see this page.</noscript>
+		<main class="bmd-main">
+			<div class="bmd-main-container">
+				<div class="bmd-loader-container">
+					<div
+						class="bmd-loader-spinner"
+						role="status"
+						aria-label="Loading"
+					></div>
+				</div>
+			</div>
+		</main>
+
+		<!-- Content -->
+		<script type="text/javascript">
+			String.prototype.blocksmd = function () {
+				blocksmd.init(this, {
+					// getHeaders: {},
+					// postData: {},
+					// postHeaders: {},
+					// prioritizeURLFormData: false,
+					// sanitize: false,
+				});
+			};
+		</script>
+		<script src="./content/{{ route }}.md.js"></script>
+	</body>
+</html>
