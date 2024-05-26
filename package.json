@@ -26,7 +26,8 @@
 		"ssg",
 		"static-site-generator",
 		"static site generator",
-		"typeform"
+		"typeform",
+		"typeform-clone"
 	],
 	"author": "Tahmid Khan Nafee",
 	"license": "BUSL-1.1",
