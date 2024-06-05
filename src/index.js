@@ -42,6 +42,7 @@ var options = {
 	postHeaders: {},
 	prioritizeURLFormData: false,
 	sanitize: false,
+	setColorSchemeAttrsAgain: true,
 };
 
 /**
@@ -1426,6 +1427,12 @@ function init(template, opts) {
 		// Sanitize
 		if (opts["sanitize"] !== undefined && typeof opts["sanitize"] === "boolean")
 			options["sanitize"] = opts["sanitize"];
+		// Set color scheme attributes again
+		if (
+			opts["setColorSchemeAttrsAgain"] !== undefined &&
+			typeof opts["setColorSchemeAttrsAgain"] === "boolean"
+		)
+			options["setColorSchemeAttrsAgain"] = opts["setColorSchemeAttrsAgain"];
 	}
 
 	// Initialize settings
@@ -1483,9 +1490,6 @@ function init(template, opts) {
 	// Add the necessary attributes from the settings to the root
 	const rootElem = document.querySelector(".bmd-root");
 	const rootSettingsAttributesMap = {
-		"color-scheme": "data-bmd-color-scheme",
-		"color-scheme-scope": "data-bmd-color-scheme-scope",
-		"color-scheme-toggle": "data-bmd-color-scheme-toggle",
 		"dir": "dir",
 		"field-size": "data-bmd-field-size",
 		"font-size": "data-bmd-font-size",
@@ -1494,6 +1498,13 @@ function init(template, opts) {
 		"lang": "lang",
 		"rounded": "data-bmd-rounded",
 	};
+	if (options["setColorSchemeAttrsAgain"]) {
+		rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";
+		rootSettingsAttributesMap["color-scheme-scope"] =
+			"data-bmd-color-scheme-scope";
+		rootSettingsAttributesMap["color-scheme-toggle"] =
+			"data-bmd-color-scheme-toggle";
+	}
 	for (const [key, value] of Object.entries(state["settings"])) {
 		if (rootSettingsAttributesMap[key] !== undefined) {
 			const attribute = rootSettingsAttributesMap[key];
@@ -1502,9 +1513,12 @@ function init(template, opts) {
 	}
 
 	// Set the preferred color scheme
-	// This is done here again because we are re-setting the "color-scheme"
+	// This is done here again in case we are re-setting the "color-scheme"
 	// attribute to the root
-	if (state["settings"]["color-scheme-toggle"] === "show")
+	if (
+		options["setColorSchemeAttrsAgain"] &&
+		state["settings"]["color-scheme-toggle"] === "show"
+	)
 		setPreferredColorScheme();
 
 	// Add the made in loader to the DOM body

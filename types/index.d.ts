@@ -25,6 +25,7 @@ declare namespace options {
 	let postHeaders: {};
 	let prioritizeURLFormData: boolean;
 	let sanitize: boolean;
+	let setColorSchemeAttrsAgain: boolean;
 }
 /**
  * Set the preferred color scheme (if one is found in the local storage).

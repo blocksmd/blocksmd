@@ -32,7 +32,8 @@
 	"author": "Tahmid Khan Nafee",
 	"license": "BUSL-1.1",
 	"devDependencies": {
-		"@babel/core": "^7.24.0",
+		"@babel/cli": "^7.24.7",
+		"@babel/core": "^7.24.7",
 		"@babel/preset-env": "^7.24.0",
 		"beautify": "^0.0.8",
 		"csso-cli": "^4.0.2",
