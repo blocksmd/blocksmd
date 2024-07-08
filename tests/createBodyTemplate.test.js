@@ -47,8 +47,8 @@ const expectedTemplate1 = `
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 		</button>
 	</div>
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		Made in <strong>blocks.md</strong>
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		Made in <strong class="bmd-antialiased">blocks.md</strong>
 	</a>
 </footer>
 `;
@@ -126,8 +126,8 @@ const expectedTemplate2 = `
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 		</button>
 	</div>
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		Made in <strong>blocks.md</strong>
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		Made in <strong class="bmd-antialiased">blocks.md</strong>
 	</a>
 </footer>
 `;
@@ -205,8 +205,8 @@ const expectedTemplate3 = `
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 		</button>
 	</div>
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		<strong>blocks.md</strong> তে তৈরি
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		<strong class="bmd-antialiased">blocks.md</strong> তে তৈরি
 	</a>
 </footer>
 `;
@@ -418,8 +418,8 @@ const expectedTemplate7 = `
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 		</button>
 	</div>
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		Made in <strong>blocks.md</strong>
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		Made in <strong class="bmd-antialiased">blocks.md</strong>
 	</a>
 </footer>
 `;
@@ -463,8 +463,8 @@ const expectedTemplate8 = `
 </main>
 
 <footer class="bmd-footer">
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		Made in <strong>blocks.md</strong>
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		Made in <strong class="bmd-antialiased">blocks.md</strong>
 	</a>
 </footer>
 `;
@@ -510,8 +510,8 @@ const expectedTemplate9 = `
 </main>
 
 <footer class="bmd-footer">
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
-		Made in <strong>blocks.md</strong>
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		Made in <strong class="bmd-antialiased">blocks.md</strong>
 	</a>
 </footer>
 `;

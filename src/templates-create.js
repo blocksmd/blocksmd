@@ -188,7 +188,7 @@ const bodyTemplate = `
 	</div>
 	{% endif %}
 	{% if settings["blocksmd-branding"] != "hide" %}
-	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control bmd-antialiased">
+	<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
 		{{ translations.madeInBtn | safe }}
 	</a>
 	{% endif %}

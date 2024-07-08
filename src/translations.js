@@ -14,7 +14,7 @@ const translations = {
 		"list-check": "Not checked",
 		"list-checked": "Checked",
 		"loading": "Loading",
-		"made-in-btn": "Made in <strong>blocks.md</strong>",
+		"made-in-btn": 'Made in <strong class="bmd-antialiased">blocks.md</strong>',
 		"made-in-loader":
 			'<div class="bmd-specific-fs-14">Made in</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>',
 		"next-btn": "Next",
@@ -44,7 +44,7 @@ const translations = {
 		"list-check": "চিহ্নিত না",
 		"list-checked": "চিহ্নিত",
 		"loading": "লোড হচ্ছে",
-		"made-in-btn": "<strong>blocks.md</strong> তে তৈরি",
+		"made-in-btn": '<strong class="bmd-antialiased">blocks.md</strong> তে তৈরি',
 		"made-in-loader":
 			'<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div><div class="bmd-specific-fs-14">তে তৈরি</div>',
 		"next-btn": "পরবর্তী",
