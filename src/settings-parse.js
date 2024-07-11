@@ -462,8 +462,8 @@ function parseSettings(template) {
 			accepted: "start",
 		},
 		"vertical-padding": {
-			pattern: /^dynamic$/,
-			accepted: "dynamic",
+			pattern: /^(calculated|xs:calculated)$/,
+			accepted: "calculated || xs:calculated",
 		},
 	};
 

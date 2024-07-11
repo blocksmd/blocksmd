@@ -130,7 +130,7 @@ const template3 = `
 	#! slide-delimiter = ***
 #! title = Title
 #! vertical-alignment = start
-	#! vertical-padding = dynamic
+	#! vertical-padding = xs:calculated
 
 # Heading
 
@@ -170,7 +170,7 @@ const expectedSettings3 = {
 	"slide-delimiter": "***",
 	"title": "Title",
 	"vertical-alignment": "start",
-	"vertical-padding": "dynamic",
+	"vertical-padding": "xs:calculated",
 };
 
 test("Case 3 (weird formatting)", () => {
