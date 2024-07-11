@@ -129,6 +129,8 @@ const template3 = `
 			#! slide-controls = hide
 	#! slide-delimiter = ***
 #! title = Title
+#! vertical-alignment = start
+	#! vertical-padding = dynamic
 
 # Heading
 
@@ -167,6 +169,8 @@ const expectedSettings3 = {
 	"slide-controls": "hide",
 	"slide-delimiter": "***",
 	"title": "Title",
+	"vertical-alignment": "start",
+	"vertical-padding": "dynamic",
 };
 
 test("Case 3 (weird formatting)", () => {

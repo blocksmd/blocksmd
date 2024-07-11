@@ -1497,6 +1497,8 @@ function init(template, opts) {
 		"headings": "data-bmd-headings",
 		"lang": "lang",
 		"rounded": "data-bmd-rounded",
+		"vertical-alignment": "data-bmd-vertical-alignment",
+		"vertical-padding": "data-bmd-vertical-padding",
 	};
 	if (options["setColorSchemeAttrsAgain"]) {
 		rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";

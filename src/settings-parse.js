@@ -457,6 +457,14 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
+		"vertical-alignment": {
+			pattern: /^start$/,
+			accepted: "start",
+		},
+		"vertical-padding": {
+			pattern: /^dynamic$/,
+			accepted: "dynamic",
+		},
 	};
 
 	// Go through each line to extract settings
