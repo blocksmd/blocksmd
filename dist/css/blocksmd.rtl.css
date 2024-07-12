@@ -2556,6 +2556,20 @@
 	text-align: left !important;
 }
 
+@media (max-width: 575.98px) {
+	.bmd-root .bmd-xs\:text-start {
+		text-align: right !important;
+	}
+
+	.bmd-root .bmd-xs\:text-center {
+		text-align: center !important;
+	}
+
+	.bmd-root .bmd-xs\:text-end {
+		text-align: left !important;
+	}
+}
+
 /* Font size */
 
 .bmd-root .bmd-fs-lead {
