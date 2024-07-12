@@ -1603,7 +1603,6 @@
 .bmd-root .bmd-input-group-text {
 	display: flex;
 	align-items: center;
-	min-width: var(--bmd-spacer);
 	font-size: var(--bmd-input-font-size);
 	color: var(--bmd-input-color);
 	text-align: center;
