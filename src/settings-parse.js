@@ -398,8 +398,8 @@ function parseSettings(template) {
 			accepted: "valid HTML language code",
 		},
 		"localization": {
-			pattern: /^(en|bn)$/,
-			accepted: "en (default) || bn",
+			pattern: /^(en|bn|es)$/,
+			accepted: "en (default) || bn || es",
 		},
 		"meta-author": {
 			pattern: /^.*$/,

@@ -59,6 +59,36 @@ const translations = {
 		"toggle-color-scheme-btn": "রঙের স্কিম টগল করুন",
 		"try-again-btn": "আবার চেষ্টা করুন",
 	},
+	es: {
+		"choice-field-required": "Seleccione un artículo de la lista.",
+		"choose-many-text": "Elige tantos como quieras",
+		"copy-btn": "Copia",
+		"copy-btn-success": "Copiado",
+		"end-slide-title": "Gracias",
+		"end-slide-subtitle": "Has llegado al final. Gracias por leernos!",
+		"form-submit-btn": "OK",
+		"form-submitted-title": "Gracias",
+		"form-submitted-subtitle": "Su respuesta ha quedado registrada. Gracias!",
+		"list-check": "No comprobado",
+		"list-checked": "Comprobado",
+		"loading": "Cargando",
+		"made-in-btn":
+			'Fabricado en <strong class="bmd-antialiased">blocks.md</strong>',
+		"made-in-loader":
+			'<div class="bmd-specific-fs-14">Fabricado en</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>',
+		"next-btn": "Siguiente",
+		"number-input-placeholder": "Escriba un número aquí...",
+		"page-progress": "Avance de página (%)",
+		"previous-btn": "Anterior",
+		"restart-btn": "Reinicie",
+		"select-box-placeholder": "Seleccione una opción",
+		"slide-error": "Algo ha ido mal. Por favor, inténtelo de nuevo.",
+		"start-btn": "Inicio",
+		"text-input-placeholder": "Escriba aquí su respuesta...",
+		"textarea-new-line-text": "para añadir una nueva línea",
+		"toggle-color-scheme-btn": "Alternar combinación de colores",
+		"try-again-btn": "Inténtalo de nuevo",
+	},
 };
 
 /**
