@@ -484,7 +484,7 @@ test("Case 11 (telephone number)", () => {
 	).toBe(beautify(expectedTemplate11, { format: "html" }));
 });
 
-// Case 12 (telephone number with different localization)
+// Case 12 (telephone number with different country)
 
 const expectedTemplate12 = `
 <div class="bmd-form-field">
@@ -496,15 +496,18 @@ const expectedTemplate12 = `
 		id="id_phone"
 		type="tel"
 		class="bmd-form-control"
-		placeholder="০১৮১২-৩৪৫৬৭৮"
+		placeholder="01812-345678"
 	>
 </div>
 `;
 
-test("Case 12 (telephone number with different localization)", () => {
+test("Case 12 (telephone number with different country)", () => {
 	expect(
-		beautify(createTextField("phone", "tel", false, "", "", "|", "bn"), {
-			format: "html",
-		}),
+		beautify(
+			createTextField("phone", "tel", false, "", "country=bd", "|", "bn"),
+			{
+				format: "html",
+			},
+		),
 	).toBe(beautify(expectedTemplate12, { format: "html" }));
 });

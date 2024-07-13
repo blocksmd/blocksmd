@@ -2,6 +2,7 @@
 
 const { addReservedClass } = require("./attrs-parse");
 const { isNumeric, unescape } = require("./helpers");
+const { getPhoneNumberPlaceholder } = require("./phone-number-placeholders");
 const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
@@ -189,11 +190,6 @@ function createTextField(
 		validParams["placeholder"] = "name@example.com";
 	} else if (inputType === "url") {
 		validParams["placeholder"] = "https://example.com";
-	} else if (inputType === "tel") {
-		validParams["placeholder"] = getTranslation(
-			localization,
-			"tel-input-placeholder",
-		);
 	}
 
 	// Go through the rest of the params and validate
@@ -214,11 +210,21 @@ function createTextField(
 			validParams[key] = value;
 		} else if (key === "value" && value && typeof value === "string") {
 			validParams[key] = value;
+		} else if (key === "country" && value && typeof value === "string") {
+			validParams[key] = value;
 		} else {
 			console.warn(
 				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
 			);
 		}
+	}
+
+	// Add the telephone input placeholder using the country (if applicable)
+	if (inputType === "tel") {
+		validParams["country"] = validParams["country"] || "US";
+		validParams["placeholder"] = getPhoneNumberPlaceholder(
+			validParams["country"],
+		);
 	}
 
 	// Set up template
