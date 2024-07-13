@@ -71,7 +71,6 @@ const template2 = `
 #! get-url = https://example.com/api/examples/
 #! header = align
 #! headings = anchored
-#! lang = bn
 #! localization = bn
 
 # Heading
@@ -102,7 +101,6 @@ const expectedSettings2 = {
 	"get-url": "https://example.com/api/examples/",
 	"header": "align",
 	"headings": "anchored",
-	"lang": "bn",
 	"localization": "bn",
 };
 

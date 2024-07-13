@@ -1495,7 +1495,7 @@ function init(template, opts) {
 		"font-size": "data-bmd-font-size",
 		"header": "data-bmd-header",
 		"headings": "data-bmd-headings",
-		"lang": "lang",
+		"localization": "lang",
 		"rounded": "data-bmd-rounded",
 		"vertical-alignment": "data-bmd-vertical-alignment",
 		"vertical-padding": "data-bmd-vertical-padding",

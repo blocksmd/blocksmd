@@ -244,7 +244,6 @@ function getDefaultSettings() {
 		"form-delimiter": "|",
 		"get-format": "csv",
 		"get-objects-name": "objects",
-		"lang": "en",
 		"localization": "en",
 		"page": "form-slides",
 		"slide-delimiter": "---",
@@ -392,10 +391,6 @@ function parseSettings(template) {
 		"headings": {
 			pattern: /^anchored$/,
 			accepted: "anchored",
-		},
-		"lang": {
-			pattern: /^.*$/,
-			accepted: "valid HTML language code",
 		},
 		"localization": {
 			pattern: /^(en|bn|es)$/,
