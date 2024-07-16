@@ -214,7 +214,7 @@ function getChoiceFieldValue(name, type) {
 function setChoiceFieldValue(name, type, value) {
 	// For radio buttons, the value is a single string
 	if (type === "radio") {
-		value = value.trim();
+		if (typeof value === "string") value = value.trim();
 		const input = document.querySelector(
 			`.bmd-form-check-input[type="radio"][name="${name}"][value="${value}"]`,
 		);
