@@ -165,9 +165,11 @@ function parseSlide(template, isForm, isFirstSlide, localization) {
 			line = line.slice(2).trim();
 			if (line.match(/^[0-9.]+%$/)) {
 				pageProgress = line;
+			} else if (line.match(/^[0-9]+\s*\/\s*[0-9]+$/)) {
+				pageProgress = `calc(100% * (${line}))`;
 			} else {
 				console.warn(
-					`[SLIDES] "${line}" is not a valid percentage, acceptable examples: 25%, 33.33%, 75%, etc.`,
+					`[SLIDES] "${line}" is not a valid percentage or fraction, acceptable examples: 25%, 33.33%, 75%, 1/4, 1/3, 3/4, etc.`,
 				);
 			}
 		}

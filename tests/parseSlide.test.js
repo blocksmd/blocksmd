@@ -106,7 +106,7 @@ test("Case 2 (form, slide with form field and incorrect page progress, different
 // Case 3 (form, slide without form field)
 
 const template3 = `
-|> 75%
+|> 3/4
 >> post
 
 # Heading
@@ -116,7 +116,7 @@ This is a paragraph.
 const expectedTemplate3 = `
 <div
 	class="bmd-slide"
-	data-bmd-page-progress="75%"
+	data-bmd-page-progress="calc(100% * (3/4))"
 >
 	<div class="bmd-grid">
 		<markdown>
