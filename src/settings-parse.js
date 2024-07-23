@@ -393,8 +393,8 @@ function parseSettings(template) {
 			accepted: "anchored",
 		},
 		"localization": {
-			pattern: /^(en|bn|es)$/,
-			accepted: "en (default) || bn || es",
+			pattern: /^.*$/,
+			accepted: "valid string",
 		},
 		"meta-author": {
 			pattern: /^.*$/,

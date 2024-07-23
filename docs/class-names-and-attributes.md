@@ -1,13 +1,11 @@
-# Class names and attributes
+# On this page
 
-## On this page
-
-- [Overview](#overview)
+- [Add class names and attributes](#add-class-names-and-attributes)
 - [`<div>` element and data-binding](#div-element-and-data-binding)
-- [Available utility classes](#available-utility-classes)
+- [Available CSS utility classes](#available-css-utility-classes)
 - [Use with Tailwind CSS or other frameworks](#use-with-tailwind-css-or-other-frameworks)
 
-## Overview
+# Add class names and attributes
 
 Add class names and other attributes (such as IDs, WAI-ARIA tags, etc.) to any block-level element by putting them inside `[...]` and placing this at the very start of the element's syntax. IDs start with `#`, class names start with `.`, and other attributes can be added as-is, for example, `style="..."`.
 
@@ -41,7 +39,7 @@ input* = TextInput(
 )
 ````
 
-## `<div>` element and data-binding
+# `<div>` element and data-binding
 
 Create wrapping `<div>` elements by putting content inside pairs of `:::`. The content inside can be any valid Markdown, such as headings, paragraphs, lists, form fields, etc. Class names and other attributes are supported via `[...]`. Moreover, you can bind one or more fields to a `<div>` element by adding the names of the fields inside `{$...$}` (separated by spaces), and placing this within the `[...]`. This means that whenever the value of a binded field changes, the content inside the `<div>` will be automatically re-rendered.
 
@@ -63,14 +61,13 @@ quantity* = NumberInput(
 :::
 ```
 
-**Learn more:** [Data-binding, content division and content span
-](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
+**Learn more:** [Data-binding, content division and content span](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
 
-## Available utility classes
+# Available CSS utility classes
 
 The following CSS utility classes are included by default in **blocks.md**:
 
-### Layout
+## Layout
 
 The content in **blocks.md** uses a grid based, 12-column system. This means you can add a `.col-{value}` class to any block-level element to have it occupy only a portion of the full width of the row. These class names come in the following formats:
 
@@ -129,14 +126,14 @@ Paragraph
 
 ![Layout classes](https://res.cloudinary.com/dnriuttuy/image/upload/v1721305236/layout-3_ognbco.png)
 
-### Color
+## Color
 
 | Class            | Description                                                                                    |
 | ---------------- | ---------------------------------------------------------------------------------------------- |
 | `.text-emphasis` | `color: var(--bmd-emphasis-color)` (`black` in light mode and `white` in dark mode by default) |
 | `.text-accent`   | Sets `color` to `accent`                                                                       |
 
-### Display (and flex)
+## Display (and flex)
 
 | Class                     | Description                   |
 | ------------------------- | ----------------------------- |
@@ -150,7 +147,18 @@ Paragraph
 | `.justify-content-end`    | `justify-content: flex-end`   |
 | `.d-none`                 | `display: none`               |
 
-### Font size
+## Heading
+
+| Class | Description                    |
+| ----- | ------------------------------ |
+| `.h1` | Match the appearance of `<h1>` |
+| `.h2` | Match the appearance of `<h2>` |
+| `.h3` | Match the appearance of `<h3>` |
+| `.h4` | Match the appearance of `<h4>` |
+| `.h5` | Match the appearance of `<h5>` |
+| `.h6` | Match the appearance of `<h6>` |
+
+## Font size
 
 | Class             | Description                                              |
 | ----------------- | -------------------------------------------------------- |
@@ -161,7 +169,7 @@ Paragraph
 | `.specific-fs-18` | `font-size: 18px`                                        |
 | `.specific-fs-20` | `font-size: 20px`                                        |
 
-### Font weight
+## Font weight
 
 | Class          | Description            |
 | -------------- | ---------------------- |
@@ -173,32 +181,39 @@ Paragraph
 | `.fw-bold`     | `font-weight: 700`     |
 | `.fw-bolder`   | `font-weight: bolder`  |
 
-### Light/dark mode
+## Form
+
+| Class               | Description                                      |
+| ------------------- | ------------------------------------------------ |
+| `.form-question`    | Match the appearance of a form field question    |
+| `.form-description` | Match the appearance of a form field description |
+
+## Light/dark mode
 
 | Class      | Description                        |
 | ---------- | ---------------------------------- |
 | `.hide-lm` | `display: none` only in light mode |
 | `.hide-dm` | `display: none` only in dark mode  |
 
-### List
+## List
 
 | Class            | Description                                         |
 | ---------------- | --------------------------------------------------- |
 | `.list-inside`   | `padding-left: 0` and `list-style-position: inside` |
 | `.list-unstyled` | `padding-left: 0` and `list-style: none`            |
 
-### LTR/RTL
+## LTR/RTL
 
 | Class       | Description                 |
 | ----------- | --------------------------- |
 | `.hide-ltr` | `display: none` only in LTR |
 | `.hide-rtl` | `display: none` only in RTL |
 
-### Spacing
+## Spacing
 
 The class names for the `margin` and `padding` utilities come in the following formats: `.m{sides}-{size}` and `.p{sides}-{size}`.
 
-#### `{sides}`
+### `{sides}`
 
 | `{sides}`   | Description                                              |
 | ----------- | -------------------------------------------------------- |
@@ -207,7 +222,7 @@ The class names for the `margin` and `padding` utilities come in the following f
 | `s` (start) | Sets `margin-left` or `padding-left` (inverted in RTL)   |
 | `e` (end)   | Sets `margin-right` or `padding-right` (inverted in RTL) |
 
-#### `{size}`
+### `{size}`
 
 | `{size}` | Description                                    |
 | -------- | ---------------------------------------------- |
@@ -217,7 +232,7 @@ The class names for the `margin` and `padding` utilities come in the following f
 | `3`      | Sets `margin` or `padding` to `16px`           |
 | `auto`   | Sets `margin-left` or `margin-right` to `auto` |
 
-### Text alignment
+## Text alignment
 
 | Class             | Description                                          |
 | ----------------- | ---------------------------------------------------- |
@@ -228,13 +243,13 @@ The class names for the `margin` and `padding` utilities come in the following f
 | `.xs:text-center` | `text-align: center` only on phones                  |
 | `.xs:text-end`    | `text-align: right` only on phones (inverted in RTL) |
 
-### Visibility
+## Visibility
 
 | Class        | Description          |
 | ------------ | -------------------- |
 | `.invisible` | `visibility: hidden` |
 
-## Use with Tailwind CSS or other frameworks
+# Use with Tailwind CSS or other frameworks
 
 **blocks.md** adds a `bmd-` prefix to all CSS classes. This prefix comes from the `#! css-prefix = bmd-` setting. You can see how all of the available utility classes discussed on this page have this prefix in [`blocksmd.css`](https://github.com/blocksmd/blocksmd/blob/main/dist/css/blocksmd.css). This makes sure that there are no collisions with other CSS frameworks that you may choose to use.
 
