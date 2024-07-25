@@ -61,7 +61,7 @@ quantity* = NumberInput(
 :::
 ```
 
-**Learn more:** [Data-binding, content division and content span](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
+**Learn more:** [Data-binding, `<div>` and `<span>` elements](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
 
 # Available CSS utility classes
 
@@ -149,14 +149,15 @@ Paragraph
 
 ## Heading
 
-| Class | Description                    |
-| ----- | ------------------------------ |
-| `.h1` | Match the appearance of `<h1>` |
-| `.h2` | Match the appearance of `<h2>` |
-| `.h3` | Match the appearance of `<h3>` |
-| `.h4` | Match the appearance of `<h4>` |
-| `.h5` | Match the appearance of `<h5>` |
-| `.h6` | Match the appearance of `<h6>` |
+| Class       | Description                                        |
+| ----------- | -------------------------------------------------- |
+| `.h1`       | Match the appearance of `<h1>`                     |
+| `.h2`       | Match the appearance of `<h2>`                     |
+| `.h3`       | Match the appearance of `<h3>`                     |
+| `.h4`       | Match the appearance of `<h4>`                     |
+| `.h5`       | Match the appearance of `<h5>`                     |
+| `.h6`       | Match the appearance of `<h6>`                     |
+| `.anchored` | Adds an anchor link to the heading (`#` to itself) |
 
 ## Font size
 
