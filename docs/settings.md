@@ -1,14 +1,10 @@
 # On this page
 
-- [How to create slides](#how-to-create-slides)
-- [Conditionally show slides using logic jumps](#conditionally-show-slides-using-logic-jumps)
-- [Page progress](#page-progress)
-- [Partial or slide-level submissions](#partial-or-slide-level-submissions)
-- [Slide action button alignment](#slide-action-button-alignment)
-- [Disable previous button](#disable-previous-button)
-- [Start slides](#start-slides)
-- [End slide](#end-slide)
-  - [Redirect from end slide](#redirect-from-end-slide)
+- [Customize colors, branding, and much more with settings](#customize-colors-branding-and-much-more-with-settings)
+  - [Different values for light mode and dark mode](#different-values-for-light-mode-and-dark-mode)
+- [Available settings](#available-settings)
+  - [Colors](#colors)
+  - [Other settings](#other-settings)
 
 # Customize colors, branding, and much more with settings
 
