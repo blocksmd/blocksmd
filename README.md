@@ -24,6 +24,8 @@ It's quite a lot to take in, but **blocks.md** is remarkably simple to use and u
 
 ## How to use
 
+> Full documentation: [How to use](https://github.com/blocksmd/blocksmd/blob/main/docs/how-to-use.md)
+
 ### Install via `npm`
 
 ```
@@ -32,7 +34,7 @@ npm install blocksmd
 
 ### Convert Markdown files to forms and pages
 
-Once you have it installed, put all of your Markdown files in a `src` directory. You can also have your images and media files in `src/static` (that is, within the input directory), and this directory will be copied for you. Once you're ready, run the following command in your CLI:
+Once you've installed **blocks.md**, put all of your Markdown files in a `src` directory. You can also have your images and media files in `src/static` (that is, within the input directory), and this directory will be copied for you. Once you're ready, run the following command in your CLI:
 
 ```
 blocksmd

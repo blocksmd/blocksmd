@@ -235,7 +235,7 @@ If set to `hide`, the footer will be hidden.
 
 ### `get-format`
 
-Please refer to this document: [set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
 
 - **Default value**: `csv`
 - **Accepted value**: `csv` or `json` or `tsv`
@@ -243,14 +243,14 @@ Please refer to this document: [set and read data](https://github.com/blocksmd/b
 
 ### `get-objects-name`
 
-Please refer to this document: [set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
 
 - **Accepted value**: Valid string
 - **Example(s)**: `#! get-objects-name = items`, `#! get-objects-name = articles`
 
 ### `get-url`
 
-Please refer to this document: [set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
 
 - **Accepted value**: Valid URL
 - **Example(s)**: `#! get-url = {url}`
@@ -392,7 +392,7 @@ By default, the content of each slide (and page) is centered vertically. However
 
 ### `vertical-padding`
 
-By default, the content of each slide (and page) has equal padding on top and bottom, irrespective of whether or not the page has a header and/or footer. However, you set the value of this setting to `calculated` to make sure that the padding on top is calculated using the height of the page progress and header, and the padding on bottom is calculated using the height of the footer, that is, padding on top would be smaller if the page has no header (no `brand` and `cta` setting, or `#! header = hide`), and padding on bottom would be smaller if the footer has been hidden. If you want to apply this calculation only on phones, use `#! vertical-padding = xs:calculated` instead of `calculated`.
+By default, the content of each slide (and page) has equal padding on top and bottom, irrespective of whether or not the page has a header and/or footer. However, you can set the value of this setting to `calculated` to make sure that the padding on top is calculated using the height of the page progress and header, and the padding on bottom is calculated using the height of the footer, that is, padding on top would be smaller if the page has no header (no `brand` and `cta` setting, or `#! header = hide`), and padding on bottom would be smaller if the footer has been hidden. If you want to apply this calculation only on phones, use `#! vertical-padding = xs:calculated` instead of `calculated`.
 
 Please note, if this is a bit difficult to understand, try playing around with this setting on a page and see how each value affects the padding on top and bottom.
 
