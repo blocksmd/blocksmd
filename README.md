@@ -1,26 +1,21 @@
-> This `README.md` is a work in progress.
-
 # [blocks.md](https://blocks.md)
 
 **blocks.md** is a tool that takes your Markdown files and turns them into amazing forms and web pages. Here are some key features:
 
-- Easy to write and undestand. If you know Markdown, you can jump right in.
-- All the basic form fields are supported, and more are on the way.
-- By default, slides can be created using `---`. You can also turn this off to create a single page instead.
-- Full support for logic jumps and progress indicator.
-- Save form response remotely at any slide.
-- If-else support, for loops, and more (thanks to **Nunjucks**).
-- Data binding support.
-- Pull in data from remote sources, with built-in Google Sheets integration.
-- Save your form responses via POST requests, again with built-in Google Sheets integration.
+- Easy to write and undestand, especially if you know Markdown
+- Support for form fields: text, email, choice, select, etc.
+- Create form-slides and slides using `---`, or create single pages instead
+- Logic jumps and page progress
+- Save form responses, with support for partial or slide-level submissions
+- Google Sheets integration
+- Add class names and attributes
+- Data-binding
+- Highly customizable, including branding
+- Set and read data, create reactive blog posts and articles
+- Localizable to any language
+- Accessibility out of the box
 
-Moreover, the resulting forms and pages are:
-
-- Fully accessible
-- Beautiful, and highly customizable, with support for light and dark color schemes
-- Fully localizable to your language of choice
-
-It's quite a lot to take in, but **blocks.md** is remarkably simple to use and understand in practice. Please check out [our website](https://blocks.md) and see the examples there to get a better idea.
+It's quite a lot to take in, but **blocks.md** is remarkably simple to use and understand in practice. Please check out [our website](https://blocks.md) and see the examples there.
 
 ## How to use
 
@@ -82,4 +77,4 @@ Again, make sure you have the dev dependencies installed.
 
 ## Documentation
 
-https://blocks.md/docs/
+https://github.com/blocksmd/blocksmd/tree/main/docs/README.md
