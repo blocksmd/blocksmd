@@ -1,4 +1,4 @@
-# [blocks.md](https://blocks.md)
+# [blocks.md](https://blocks.md) - Markdown to amazing forms and web pages
 
 **blocks.md** is a tool that takes your Markdown files and turns them into amazing forms and web pages. Here are some key features:
 
