@@ -77,4 +77,4 @@ Again, make sure you have the dev dependencies installed.
 
 ## Documentation
 
-https://github.com/blocksmd/blocksmd/tree/main/docs/README.md
+https://github.com/blocksmd/blocksmd/blob/main/docs/README.md
