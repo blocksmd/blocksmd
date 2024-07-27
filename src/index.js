@@ -1384,7 +1384,7 @@ function addEventListeners(container) {
 function init(template, opts) {
 	// Ping the server
 	if (window.location.protocol !== "file:")
-		fetch("https://ping.blocks.md", { method: "GET" });
+		fetch("https://blocks.md/ping/", { method: "GET" });
 
 	// Set the options for use
 	if (opts) {
