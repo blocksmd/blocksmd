@@ -157,6 +157,8 @@ Let's say we want to read https://jsonplaceholder.typicode.com/users, which retu
 ]
 ```
 
+Let's read this data and put it on the template:
+
 ```text
 #! get-format = json
 #! get-objects-name = users
