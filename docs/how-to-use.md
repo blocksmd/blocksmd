@@ -80,10 +80,10 @@ During initialization of each form/page, the `blocksmd.init(...)` function is ca
 
 ```javascript
 blocksmd.init(template, {
-  postHeaders: {
-    "X-API-KEY": "...",
-  },
-  sanitize: false,
+	postHeaders: {
+		"X-API-KEY": "...",
+	},
+	sanitize: false,
 });
 ```
 

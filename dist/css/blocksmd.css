@@ -61,7 +61,8 @@
 
 	/* Border */
 
-	--bmd-border-radius: 4px;
+	--bmd-border-radius-base: 4px;
+	--bmd-border-radius: var(--bmd-border-radius-base);
 
 	/* Background */
 
@@ -134,7 +135,7 @@
 	--bmd-code-font-size: 0.875em;
 	--bmd-code-color: inherit;
 	--bmd-code-bg: rgba(var(--bmd-body-color-rgb), 0.0875);
-	--bmd-code-border-radius: 4px;
+	--bmd-code-border-radius: var(--bmd-border-radius-base);
 
 	/* Keyboard input */
 
@@ -1239,7 +1240,7 @@
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-error {
-	border-radius: 4px;
+	border-radius: var(--bmd-border-radius-base);
 }
 
 .bmd-root .bmd-error-icon {
@@ -1582,7 +1583,7 @@
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check,
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check-label,
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check-frame > img {
-	border-radius: 4px;
+	border-radius: var(--bmd-border-radius-base);
 }
 
 /* Input group */
@@ -1802,7 +1803,7 @@
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-code-wrapper {
-	border-radius: 4px;
+	border-radius: var(--bmd-border-radius-base);
 }
 
 .bmd-root .bmd-code-header {

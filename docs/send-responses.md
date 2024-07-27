@@ -50,9 +50,9 @@ Here's an example response from this form:
 
 ```json
 {
-  "_rid": "2690ebfd-ef08-4eb4-9e17-4fe438e7b988",
-  "_submitted": "Thu, 16 May 2024 08:29:33 GMT",
-  "email": "john@example.com",
-  "_end": "TRUE"
+	"_rid": "2690ebfd-ef08-4eb4-9e17-4fe438e7b988",
+	"_submitted": "Thu, 16 May 2024 08:29:33 GMT",
+	"email": "john@example.com",
+	"_end": "TRUE"
 }
 ```
