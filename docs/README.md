@@ -2,7 +2,7 @@
 
 ## [How to use](https://github.com/blocksmd/blocksmd/blob/main/docs/how-to-use.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Install via `npm`
 - Convert Markdown files to forms and pages
@@ -24,7 +24,7 @@ Contains the following section(s):
 
 ## [Slides](https://github.com/blocksmd/blocksmd/blob/main/docs/slides.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - How to create slides
 - Conditionally show slides using logic jumps
@@ -38,14 +38,14 @@ Contains the following section(s):
 
 ## [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Send full and partial responses to your server or Google Sheets
 - Format of responses
 
 ## [Class names and attributes](https://github.com/blocksmd/blocksmd/blob/main/docs/class-names-and-attributes.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Add class names and attributes
 - `<div>` element and data-binding
@@ -54,13 +54,13 @@ Contains the following section(s):
 
 ## [Data-binding](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
 
-Contains the following section(s):
+Contains the following section:
 
 - Data-binding, `<div>` and `<span>` elements
 
 ## [Settings](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Customize colors, branding, and much more with settings
   - Different values for light mode and dark mode
@@ -70,7 +70,7 @@ Contains the following section(s):
 
 ## [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Set data to use on templates
 - Read data from remote sources (such as Google Sheets)
@@ -79,7 +79,7 @@ Contains the following section(s):
 
 ## [Localize](https://github.com/blocksmd/blocksmd/blob/main/docs/localize.md)
 
-Contains the following section(s):
+Contains the following sections:
 
 - Localizable to any language
 - Supported language codes
