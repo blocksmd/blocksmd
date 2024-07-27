@@ -1,5 +1,10 @@
 const scriptProp = PropertiesService.getScriptProperties();
 
+function intialSetup() {
+	const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+	scriptProp.setProperty("key", activeSpreadsheet.getId());
+}
+
 /**
  * Given a number, convert it to the equivalent spreadsheet column reference.
  * For example, 0 would return "A", 7 would return "H", 26 would return "AA",
@@ -17,11 +22,6 @@ function getSpreadsheetColRef(num) {
 	} else {
 		return letter;
 	}
-}
-
-function intialSetup() {
-	const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-	scriptProp.setProperty("key", activeSpreadsheet.getId());
 }
 
 function doPost(e) {
