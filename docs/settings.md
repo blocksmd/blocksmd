@@ -235,7 +235,7 @@ If set to `hide`, the footer will be hidden.
 
 ### `get-format`
 
-Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md#read-data-from-remote-sources-such-as-google-sheets).
 
 - **Default value**: `csv`
 - **Accepted value**: `csv` or `json` or `tsv`
@@ -243,14 +243,14 @@ Please refer to the documentation: [Set and read data](https://github.com/blocks
 
 ### `get-objects-name`
 
-Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md#read-data-from-remote-sources-such-as-google-sheets).
 
 - **Accepted value**: Valid string
 - **Example(s)**: `#! get-objects-name = items`, `#! get-objects-name = articles`
 
 ### `get-url`
 
-Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md).
+Please refer to the documentation: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md#read-data-from-remote-sources-such-as-google-sheets).
 
 - **Accepted value**: Valid URL
 - **Example(s)**: `#! get-url = {url}`

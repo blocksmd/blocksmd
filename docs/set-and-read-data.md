@@ -126,7 +126,7 @@ As you can see above, the rows read from the remote source are available as `obj
 
 So far, we've been only talking about reading CSV or TSV data from Google Sheets. However, JSON data from a traditional web API is also fully supported. You can read JSON data by setting `#! get-format = JSON`, placing your URL in the `#! get-url = {url}`, and (optionally) changing the objects reference using `#! get-objects-name = {name}`.
 
-Let's say we want to read https://jsonplaceholder.typicode.com/users, which returns the following JSON data:
+Let's say we want to read https://jsonplaceholder.typicode.com/users, which returns random JSON data in the following format:
 
 ```json
 [
