@@ -238,7 +238,7 @@ Here's a video of the form in action:
 
 https://www.loom.com/share/16541b8f10744c63a0f1fba4b27e1c6d?sid=906c9be3-2dcb-4f56-8a5e-82d2b4287bb0
 
-## 7. Change the sheet where the responses are saved
+## 7. Change the sheet where the response is saved
 
 By default, the response is saved in the very first sheet of the document. However, you can specify which sheet to save the response in by putting the name of the sheet as the value of the `post-shee-name` setting. For example, `#! post-sheet-name = Sheet2` would save the response in `Sheet2`.
 
