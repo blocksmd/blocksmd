@@ -244,7 +244,7 @@ budget* = NumberInput(
 
 And that's it. You should be able to save your form responses directly in your Google Sheets now!
 
-## 6. Video example
+## 6. See the form in action
 
 Here's a video of the form in action:
 
