@@ -43,6 +43,13 @@ Contains the following sections:
 - Send full and partial responses to your server or Google Sheets
 - Format of responses
 
+## [Google Sheets integration](https://github.com/blocksmd/blocksmd/blob/main/docs/google-sheets-integration.md)
+
+Contains the following sections:
+
+- Save form responses in Google Sheets
+- Read data from Google Sheets
+
 ## [Class names and attributes](https://github.com/blocksmd/blocksmd/blob/main/docs/class-names-and-attributes.md)
 
 Contains the following sections:

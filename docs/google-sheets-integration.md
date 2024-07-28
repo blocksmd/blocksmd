@@ -2,12 +2,6 @@
 
 - [Save form responses in Google Sheets](#save-form-responses-in-google-sheets)
 - [Read data from Google Sheets](#read-data-from-google-sheets)
-  1. [Set up a Google Sheet](#set-up-a-google-sheet)
-  2. [Create a Google App Script](#create-a-google-app-script)
-  3. [Deploy the project](#deploy-the-project)
-  4. [Run the `initialSetup()` function](#run-the-initialsetup-function)
-  5. [Add the `Web app URL` as a setting](#add-the-web-app-url-as-a-setting)
-  6. [Video example](#video-example)
 
 # Save form responses in Google Sheets
 
@@ -243,3 +237,54 @@ And that's it. You should be able to save your form responses directly in your G
 Here's a video of the form in action:
 
 https://www.loom.com/share/16541b8f10744c63a0f1fba4b27e1c6d?sid=906c9be3-2dcb-4f56-8a5e-82d2b4287bb0
+
+# Read data from Google Sheets
+
+You can also easily prepare a Google Sheet so that your forms and pages are able to read its data and use it on the template using `#! get-url = {url}`. In order to do this, go through the following steps:
+
+- Open the Google Sheet
+- Click on `File -> Share -> Publish to web` from the top menu
+- A modal will open up: select the sheet you want to publish and change `Web page` to `Comma-separated values (.csv)` or `Tab-separated values (.csv)`
+- Click on `Publish` and confirm the action
+- Copy the URL that is shown on the screen
+
+All you need to do now is set this URL in the `#! get-url = {url}` setting. If you're reading TSV, then also set `#! get-format = tsv`.
+
+For example, here's a spreadsheet we want to read: https://docs.google.com/spreadsheets/d/1NTH5NCCwxeYO2VHZBOHv_Eem3yaI2iepoZnltwFtxFw/
+
+![Google Sheets source](https://res.cloudinary.com/dnriuttuy/image/upload/v1722065244/read-data-1_qdi1fb.png)
+
+````text
+#! get-url = https://docs.google.com/spreadsheets/d/e/2PACX-1vTKJSALN8U91YSqvQZ6bQf24z0okzMM2J9D2VtptW2eASFbIC9dKyj2SlSpeaozczNR-u15mfpHqjuV/pub?gid=0&single=true&output=csv
+#! page = single
+
+``` data
+{
+  "name": "John Doe",
+  "email": "john@example.com"
+}
+```
+
+# {{ name }}
+
+I'm a {{ A3 }} with {{ C3 }}+ years of experience, with a
+strong focus on building scalable microservices that can
+serve millions of users. I'm proficient in the following
+languages:
+
+- [.list-unstyled]
+- [x] Python
+- [x] JavaScript/TypeScript
+- [x] Go
+
+---
+{% if D3 -%}
+  I'm currently available for work: {{ email }}.
+{% else -%}
+  I'm currently not available for work.
+{% endif %}
+````
+
+![Read data from GSheets](https://res.cloudinary.com/dnriuttuy/image/upload/v1722065593/read-data-2_ylvp7v.png)
+
+Learn more: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md)
