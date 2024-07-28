@@ -238,9 +238,18 @@ Here's a video of the form in action:
 
 https://www.loom.com/share/16541b8f10744c63a0f1fba4b27e1c6d?sid=906c9be3-2dcb-4f56-8a5e-82d2b4287bb0
 
+## 7. Change the sheet where the responses are saved
+
+By default, the response is saved in the very first sheet of the document. However, you can specify which sheet to save the response in by putting the name of the sheet as the value of the `post-shee-name` setting. For example, `#! post-sheet-name = Sheet2` would save the response in `Sheet2`.
+
+Learn more: [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
+
 # Read data from Google Sheets
 
-You can also easily prepare a Google Sheet so that your forms and pages are able to read its data and use it on the template using `#! get-url = {url}`. In order to do this, go through the following steps:
+> [!WARNING]
+> A Google Sheet that has been published to the web can essentially be read by anyone. This is totally fine as long as it contains data that you want to make public. In general, it is highly recommended that you use one sheet for saving form responses, and another sheet for reading data.
+
+You can also easily prepare a Google Sheet so that your forms and pages are able to read its data and use it on the template. In order to do this, go through the following steps:
 
 - Open the Google Sheet
 - Click on `File -> Share -> Publish to web` from the top menu
