@@ -35,6 +35,12 @@ budget* = NumberInput(
 
 So we have three fields: `email`, `products`, and `budget`. Please note, the `>> post` will partially submit the form after the first slide (so that the email is captured immediately).
 
+## 0. Quick video guide
+
+Here's a quick video guide if you don't feel like reading:
+
+[![blocks.md - Save form responses in Google Sheets](https://img.youtube.com/vi/ssVxV1Vi06U/0.jpg)](https://www.youtube.com/watch?v=ssVxV1Vi06U)
+
 ## 1. Set up a Google Sheet
 
 The first step is to set up a Google Sheet so that the first row (headers) match the names of the form fields you want to save.
@@ -199,6 +205,12 @@ After the deployment, close the modal. Next, you need to run the `initialSetup()
 
 ![Run initialSetup](https://res.cloudinary.com/dnriuttuy/image/upload/v1722092477/gsheets-12_p8tbyi.png)
 
+**Please note**, at this point, you may need to `Review permissions` again. In that case, follow the steps as above:
+
+1. Select correct Google account
+2. `Advanced -> Go to blocksmd-form (Unsafe)`
+3. Click on `Allow` button
+
 ## 5. Add the `Web app URL` as a setting
 
 Finally, set the URL you copied from the deployment modal as a setting:
@@ -242,9 +254,7 @@ https://www.loom.com/share/16541b8f10744c63a0f1fba4b27e1c6d?sid=906c9be3-2dcb-4f
 
 By default, the response is saved in the very first sheet of the document. However, you can specify which sheet to save the response in by putting the name of the sheet as the value of the `post-shee-name` setting. For example, `#! post-sheet-name = Sheet2` would save the response in `Sheet2`.
 
----
-
-Learn more: [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
+> Learn more: [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
 
 # Read data from Google Sheets
 
