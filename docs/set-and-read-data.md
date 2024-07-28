@@ -1,11 +1,6 @@
-# On this page
+# Set and read data
 
-- [Set data to use on templates](#set-data-to-use-on-templates)
-- [Read data from remote sources (such as Google Sheets)](#read-data-from-remote-sources-such-as-google-sheets)
-  - [`get-objects-name`](#get-objects-name)
-  - [JSON data and `get-format`](#json-data-and-get-format)
-
-# Set data to use on templates
+## Set data to use on templates
 
 Set local data that can be used in the template by putting valid JSON inside pairs of <code>```</code> or <code>~~~</code>, with the `data` keyword placed right after the opening pair.
 
@@ -43,9 +38,9 @@ Hello, my name **{{ name }}** and my email address is {{ email }}.
 
 ![Set multiple local data-blocks](https://res.cloudinary.com/dnriuttuy/image/upload/v1722064199/set-read-data-2_dezdke.png)
 
-# Read data from remote sources (such as Google Sheets)
+## Read data from remote sources (such as Google Sheets)
 
-> Learn how to set up Google Sheets to read data: [Google Sheets integration](https://github.com/blocksmd/blocksmd/blob/main/docs/google-sheets-integration.md)
+> Learn how to set up Google Sheets to read data: [Google Sheets integration](google-sheets-integration/)
 
 You can also read data from a URL using `#! get-url = {url}`. By default, CSV is the expected format, and the incoming data is formatted so that each key is a spreadsheet cell reference. This is because by default, Google Sheets is the expected source.
 
@@ -106,7 +101,7 @@ Apart from directly referencing each cell on your template, you can also go thro
 
 Here, we are reading TSV data by setting the `#! get-format = tsv`. Also note, because **blocks.md** uses [Nunjucks](https://mozilla.github.io/nunjucks/), we are able to loop through the `objects` that we read from the spreadsheet and output the data on the template.
 
-## `get-objects-name`
+### `get-objects-name`
 
 As you can see above, the rows read from the remote source are available as `objects` in the template. However, you can change this reference name to anything you want using the `#! get-objects-name = {name}` setting. For example:
 
@@ -122,7 +117,7 @@ As you can see above, the rows read from the remote source are available as `obj
 {% endfor %}
 ```
 
-## JSON data and `get-format`
+### JSON data and `get-format`
 
 So far, we've been only talking about reading CSV or TSV data from Google Sheets. However, JSON data from a traditional web API is also fully supported. You can read JSON data by setting `#! get-format = JSON`, placing your URL in the `#! get-url = {url}`, and (optionally) changing the objects reference using `#! get-objects-name = {name}`.
 

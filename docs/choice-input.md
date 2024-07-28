@@ -1,11 +1,6 @@
-# On this page
+# Choice input
 
-- [Choice input at a glance](#choice-input-at-a-glance)
-- [Basics of a form field](#basics-of-a-form-field)
-- [Parameters](#parameters)
-  - [Available parameters](#available-parameters)
-
-# Choice input at a glance
+## Choice input at a glance
 
 A choice input lets the user select one or more items from a list. Here's a single choice input with only the required parameter(s):
 
@@ -43,7 +38,7 @@ colors* = ChoiceInput(
 )
 ```
 
-# Basics of a form field
+## Basics of a form field
 
 A form field is a **Markdown paragraph** in the following format:
 
@@ -82,9 +77,9 @@ address = TextInput(
 )
 ```
 
-# Parameters
+## Parameters
 
-Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md). For example, this would render the exact same email input from above:
+Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](settings/). For example, this would render the exact same email input from above:
 
 ```text
 #! form-delimiter = \\n
@@ -100,15 +95,15 @@ Your email is {$ yourEmail $}.
 
 Please note once again that parameter names are case insensitive, and boolean parameters only require their names to have effect (no need for values after `=`).
 
-## Available parameters
+### Available parameters
 
 The following parameters are available for choice inputs:
 
-### `question`
+#### `question`
 
 The main question of the form field. For choice inputs and picture choices, the question is placed inside a `<legend>` element, which in turn is placed inside the wrapping `<fieldset>`.
 
-### `choices`
+#### `choices`
 
 List of available choices as CSV (comma separated values), for example:
 
@@ -141,11 +136,11 @@ product* = ChoiceInput(
 )
 ```
 
-### `multiple`
+#### `multiple`
 
 Boolean parameter. When set, allows the user to select more than one choice. In case of multi-choice inputs, checkboxes are used instead of radio buttons.
 
-### `checked`
+#### `checked`
 
 If set and matches one or more choices, then the choices are checked by default. For instance, in the example below, choice `y` would be checked by default.
 
@@ -178,19 +173,19 @@ product* = ChoiceInput(
 
 In the above example, the `Apple` choice would be checked by default.
 
-### `description`
+#### `description`
 
 Any extra information that the user may need to fill out the form.
 
-### `horizontal`
+#### `horizontal`
 
 Boolean parameter. When set, the choices (checkboxes or radio buttons) are placed horizontally on a row with a maximum of three items per row (not applicable on phones because of screen size). The default orientation is vertical.
 
-### `fieldSize`
+#### `fieldSize`
 
 When set to `sm`, the font sizes of the question, description, and answer are made smaller. Can also be globally set via the `#! field-size = sm` setting.
 
-### `subfield`
+#### `subfield`
 
 Boolean parameter. When set, the question of the form field is made smaller. This is useful for creating subfields, especially inside `.col-*` classes. For example:
 
@@ -209,10 +204,10 @@ zip* = TextInput(
 )
 ```
 
-### `autofocus`
+#### `autofocus`
 
 Boolean parameter. When set, the first choice (checkbox or radio button) will be automatically focused when the parent slide becomes active, or immediately after page load (in case of single page layout). Can also be globally set via the `#! autofocus = all-slides` setting (only for slides).
 
-### `disabled`
+#### `disabled`
 
 Boolean parameter. When set, all the choices (checkboxes or radio buttons) are disabled.

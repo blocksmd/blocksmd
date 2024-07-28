@@ -1,28 +1,18 @@
-# On this page
-
-- [How to create slides](#how-to-create-slides)
-- [Conditionally show slides using logic jumps](#conditionally-show-slides-using-logic-jumps)
-- [Page progress](#page-progress)
-- [Partial or slide-level submissions](#partial-or-slide-level-submissions)
-- [Slide action button alignment](#slide-action-button-alignment)
-- [Disable previous button](#disable-previous-button)
-- [Start slides](#start-slides)
-- [End slide](#end-slide)
-  - [Redirect from end slide](#redirect-from-end-slide)
+# Slides
 
 > [!NOTE]
 > Please note, everything on this page is only applicable if you're using slides layout. Therefore, if you use `#! page = single` (no slides), then none of the following would apply.
 
-# How to create slides
+## How to create slides
 
-You can create slides by using the `slide-delimiter`&mdash;wherever this is added, a new slide is created exactly at this point. The `slide-delimiter` is `---` by default, but can be changed as a [setting](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md). For example: `#! slide-delimiter = +++`. Please take note of the following:
+You can create slides by using the `slide-delimiter`&mdash;wherever this is added, a new slide is created exactly at this point. The `slide-delimiter` is `---` by default, but can be changed as a [setting](settings/). For example: `#! slide-delimiter = +++`. Please take note of the following:
 
 - Everything up to the first `---` will become the first slide.
 - If no `---` is used, the entire form/page will just have one slide (plus the end slide which is added programmatically).
 
 In Markdown, `---` creates an `<hr>`, so if you're using the default `slide-delimiter`, you can use `***` or `___` (underscores) to create `<hr>` elements instead.
 
-# Conditionally show slides using logic jumps
+## Conditionally show slides using logic jumps
 
 Add `-> {condition}` to a slide to conditionally show it, that is, the slide will be shown to the user only if the jump condition is true. This is called a **logic jump**. Note that the `{condition}` has to be a valid [Nunjucks if-condition](https://mozilla.github.io/nunjucks/).
 
@@ -54,7 +44,7 @@ expertise* = SelectBox(
 
 Here, the second slide will be shown only if the `Back-end` choice is selected. Otherwise, the page will jump to the third slide.
 
-# Page progress
+## Page progress
 
 Use `|> {percentage|fraction}` to show page progress on top. This inidicates how much of the form has been completed so far.
 
@@ -88,7 +78,7 @@ expertise* = SelectBox(
 
 Here, the page progress bar will move to 50% (or half) when the user reaches the second or third slide. By default, the bar will be full when the user reaches the end slide.
 
-# Partial or slide-level submissions
+## Partial or slide-level submissions
 
 Set the `#! post-url = {url}` setting to send form responses to that URL using a POST request. There's also an incredibly useful integration that lets you send responses directly to Google Sheets. Responses are sent to the `{url}` when the user reaches the end slide.
 
@@ -117,7 +107,7 @@ products* = PictureChoice(
 
 Here, when the user reaches the second slide, the first slide's phone number will be sent to the `{url}`. Therefore, even if the user does not complete the form, the author will still have a way to reach out to the user and complete their order.
 
-# Slide action button alignment
+## Slide action button alignment
 
 Each slide has an action button added to it programmatically. For form slides, an `OK` button is added that submits the form and takes the user to the next slide. For non-form slides, a `Next` button is added which also takes the user to the next slide.
 
@@ -146,7 +136,7 @@ It's a **pleasure** to meet you. Let us continue.
 
 Here, the `OK` button in the first slide will be aligned to the center, and the `Next` button in the second slide will aligned to the end (or right).
 
-# Disable previous button
+## Disable previous button
 
 On the footer, there are previous and next buttons that allow the user to navigate between slides. You can disable the previous button in any particular slide by adding `<< disable` (case insensitive). This disables the previous button and stops the user from going back.
 
@@ -163,7 +153,7 @@ email = EmailInput(
 
 Here, once the user reaches the second slide, they will be unable to go back to the first one using the previous button.
 
-# Start slides
+## Start slides
 
 Start slides can be used to create introductions to your forms and pages. They are very similar to regular slides, with the only differences being the following:
 
@@ -202,7 +192,7 @@ Paragraph
 
 **Please note**, you can add more than one start slide. However, no matter where you add your start slides, they will always be gathered together and brought to the start of the page.
 
-# End slide
+## End slide
 
 An end slide is always added programmatically to every page. This slide contains a `Restart` button, along with some relevant text. However, you can override the contents of the end slide by adding `-> end` (case insensitive). This is the same syntax as logic jumps, but because this is the end slide, logic jumps are not relevant here. Here's an example:
 
@@ -222,7 +212,7 @@ name* = TextInput(
 
 **Please note**, only one end slide is supported per page (last one defined will be used). You also can't change the alignment of the action button (`Restart` button) on the end slide. This will always be centered.
 
-## Redirect from end slide
+### Redirect from end slide
 
 You can also redirect to any other URL from the end slide using the following: `-> end -> {url}`. In this case, no content needs to be added to the slide:
 

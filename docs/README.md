@@ -1,6 +1,6 @@
 # Documentation
 
-## [How to use](https://github.com/blocksmd/blocksmd/blob/main/docs/how-to-use.md)
+## [How to use](how-to-use/)
 
 Contains the following sections:
 
@@ -13,16 +13,16 @@ Contains the following sections:
 
 ## Form fields
 
-- [Text input](https://github.com/blocksmd/blocksmd/blob/main/docs/text-input.md)
-- [Email input](https://github.com/blocksmd/blocksmd/blob/main/docs/email-input.md)
-- [URL input](https://github.com/blocksmd/blocksmd/blob/main/docs/url-input.md)
-- [Telephone input](https://github.com/blocksmd/blocksmd/blob/main/docs/tel-input.md)
-- [Number input](https://github.com/blocksmd/blocksmd/blob/main/docs/number-input.md)
-- [Select box](https://github.com/blocksmd/blocksmd/blob/main/docs/select-box.md)
-- [Choice input](https://github.com/blocksmd/blocksmd/blob/main/docs/choice-input.md)
-- [Picture choice](https://github.com/blocksmd/blocksmd/blob/main/docs/picture-choice.md)
+- [Text input](text-input/)
+- [Email input](email-input/)
+- [URL input](url-input/)
+- [Telephone input](tel-input/)
+- [Number input](number-input/)
+- [Select box](select-box/)
+- [Choice input](choice-input/)
+- [Picture choice](picture-choice/)
 
-## [Slides](https://github.com/blocksmd/blocksmd/blob/main/docs/slides.md)
+## [Slides](slides/)
 
 Contains the following sections:
 
@@ -36,21 +36,21 @@ Contains the following sections:
 - End slide
   - Redirect from end slide
 
-## [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
+## [Send responses](send-responses/)
 
 Contains the following sections:
 
 - Send full and partial responses to your server or Google Sheets
 - Format of responses
 
-## [Google Sheets integration](https://github.com/blocksmd/blocksmd/blob/main/docs/google-sheets-integration.md)
+## [Google Sheets integration](google-sheets-integration/)
 
 Contains the following sections:
 
 - Save form responses in Google Sheets
 - Read data from Google Sheets
 
-## [Class names and attributes](https://github.com/blocksmd/blocksmd/blob/main/docs/class-names-and-attributes.md)
+## [Class names and attributes](class-names-and-attributes/)
 
 Contains the following sections:
 
@@ -59,13 +59,13 @@ Contains the following sections:
 - Available CSS utility classes
 - Use with Tailwind CSS or other frameworks
 
-## [Data-binding](https://github.com/blocksmd/blocksmd/blob/main/docs/data-binding.md)
+## [Data-binding](data-binding/)
 
 Contains the following section:
 
 - Data-binding, `<div>` and `<span>` elements
 
-## [Settings](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md)
+## [Settings](settings/)
 
 Contains the following sections:
 
@@ -75,7 +75,7 @@ Contains the following sections:
   - Colors
   - Other settings
 
-## [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md)
+## [Set and read data](set-and-read-data/)
 
 Contains the following sections:
 
@@ -84,7 +84,7 @@ Contains the following sections:
   - `get-objects-name`
   - JSON data and `get-format`
 
-## [Localize](https://github.com/blocksmd/blocksmd/blob/main/docs/localize.md)
+## [Localize](localize/)
 
 Contains the following sections:
 

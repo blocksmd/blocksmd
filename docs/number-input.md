@@ -1,11 +1,6 @@
-# On this page
+# Number input
 
-- [Number input at a glance](#number-input-at-a-glance)
-- [Basics of a form field](#basics-of-a-form-field)
-- [Parameters](#parameters)
-  - [Available parameters](#available-parameters)
-
-# Number input at a glance
+## Number input at a glance
 
 Here's a number input with only the required parameter(s):
 
@@ -35,7 +30,7 @@ amount* = NumberInput(
 )
 ```
 
-# Basics of a form field
+## Basics of a form field
 
 A form field is a **Markdown paragraph** in the following format:
 
@@ -74,9 +69,9 @@ address = TextInput(
 )
 ```
 
-# Parameters
+## Parameters
 
-Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md). For example, this would render the exact same email input from above:
+Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](settings/). For example, this would render the exact same email input from above:
 
 ```text
 #! form-delimiter = \\n
@@ -92,23 +87,23 @@ Your email is {$ yourEmail $}.
 
 Please note once again that parameter names are case insensitive, and boolean parameters only require their names to have effect (no need for values after `=`).
 
-## Available parameters
+### Available parameters
 
 The following parameters are available for number inputs:
 
-### `question`
+#### `question`
 
 The main question of the form field. For text, email, URL, telephone, number, and select inputs, the question is placed inside the main `<label>` element.
 
-### `description`
+#### `description`
 
 Any extra information that the user may need to fill out the form.
 
-### `fieldSize`
+#### `fieldSize`
 
 When set to `sm`, the font sizes of the question, description, and answer are made smaller. Can also be globally set via the `#! field-size = sm` setting.
 
-### `subfield`
+#### `subfield`
 
 Boolean parameter. When set, the question of the form field is made smaller. This is useful for creating subfields, especially inside `.col-*` classes. For example:
 
@@ -127,38 +122,38 @@ zip* = TextInput(
 )
 ```
 
-### `autofocus`
+#### `autofocus`
 
 Boolean parameter. When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load (in case of single page layout). Can also be globally set via the `#! autofocus = all-slides` setting (only for slides).
 
-### `placeholder`
+#### `placeholder`
 
 Sets the `placeholder` attribute of the input. By default, a generic one is provided, but this can be used to override and set a custom one.
 
-### `disabled`
+#### `disabled`
 
 Boolean parameter. When set, the input is disabled.
 
-### `min`
+#### `min`
 
 If set, the value of the input must be equal to or greater than this number.
 
-### `max`
+#### `max`
 
 If set, the value of the input must be equal to or less than this number.
 
-### `step`
+#### `step`
 
 If set, the value of the input must be a multiple of this number. Moreover, when the up and down arrow keys are used to change the value of the number input, this is the amount by which the value is incremented or decremented respectively. By default, this is set to `1`.
 
-### `unit`
+#### `unit`
 
 If set, an ornament or decoration is added to the start of the number input. This has no effect on the value of the input, but can be useful for adding additional units or prefixes such as `$`, `£`, `kg`, `Income`, `.00`, etc. This can be used together with the `unitEnd` parameter.
 
-### `unitEnd`
+#### `unitEnd`
 
 If set, an ornament or decoration is added to the end of the number input. This has no effect on the value of the input, but can be useful for adding additional units or suffixes such as `$`, `£`, `kg`, `Income`, `.00`, etc. This can be used together with the `unit` parameter.
 
-### `value`
+#### `value`
 
 If set, this becomes the default value of the input.

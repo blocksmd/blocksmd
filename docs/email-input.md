@@ -1,11 +1,6 @@
-# On this page
+# Email input
 
-- [Email input at a glance](#email-input-at-a-glance)
-- [Basics of a form field](#basics-of-a-form-field)
-- [Parameters](#parameters)
-  - [Available parameters](#available-parameters)
-
-# Email input at a glance
+## Email input at a glance
 
 Here's an email input with only the required parameter(s):
 
@@ -32,7 +27,7 @@ email* = EmailInput(
 )
 ```
 
-# Basics of a form field
+## Basics of a form field
 
 A form field is a **Markdown paragraph** in the following format:
 
@@ -71,9 +66,9 @@ address = TextInput(
 )
 ```
 
-# Parameters
+## Parameters
 
-Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md). For example, this would render the exact same email input from above:
+Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](settings/). For example, this would render the exact same email input from above:
 
 ```text
 #! form-delimiter = \\n
@@ -89,23 +84,23 @@ Your email is {$ yourEmail $}.
 
 Please note once again that parameter names are case insensitive, and boolean parameters only require their names to have effect (no need for values after `=`).
 
-## Available parameters
+### Available parameters
 
 The following parameters are available for email inputs:
 
-### `question`
+#### `question`
 
 The main question of the form field. For text, email, URL, telephone, number, and select inputs, the question is placed inside the main `<label>` element.
 
-### `description`
+#### `description`
 
 Any extra information that the user may need to fill out the form.
 
-### `fieldSize`
+#### `fieldSize`
 
 When set to `sm`, the font sizes of the question, description, and answer are made smaller. Can also be globally set via the `#! field-size = sm` setting.
 
-### `subfield`
+#### `subfield`
 
 Boolean parameter. When set, the question of the form field is made smaller. This is useful for creating subfields, especially inside `.col-*` classes. For example:
 
@@ -124,26 +119,26 @@ zip* = TextInput(
 )
 ```
 
-### `autofocus`
+#### `autofocus`
 
 Boolean parameter. When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load (in case of single page layout). Can also be globally set via the `#! autofocus = all-slides` setting (only for slides).
 
-### `placeholder`
+#### `placeholder`
 
 Sets the `placeholder` attribute of the input. By default, a generic one is provided, but this can be used to override and set a custom one.
 
-### `disabled`
+#### `disabled`
 
 Boolean parameter. When set, the input is disabled.
 
-### `maxlength`
+#### `maxlength`
 
 If set, this becomes the maximum number of allowed characters in the input.
 
-### `pattern`
+#### `pattern`
 
 If set, the input value must match the given pattern. Can be regex, such as `pattern = [a-zA-Z0-9\s]+`.
 
-### `value`
+#### `value`
 
 If set, this becomes the default value of the input.

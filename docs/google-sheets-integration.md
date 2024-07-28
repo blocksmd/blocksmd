@@ -1,9 +1,6 @@
-# On this page
+# Google Sheets integration
 
-- [Save form responses in Google Sheets](#save-form-responses-in-google-sheets)
-- [Read data from Google Sheets](#read-data-from-google-sheets)
-
-# Save form responses in Google Sheets
+## Save form responses in Google Sheets
 
 Follow the steps below to save **blocks.md** form responses in your Google Sheets. Let's use the following example:
 
@@ -35,13 +32,13 @@ budget* = NumberInput(
 
 So we have three fields: `email`, `products`, and `budget`. Please note, the `>> post` will partially submit the form after the first slide (so that the email is captured immediately).
 
-## 0. Quick video guide
+### 0. Quick video guide
 
 Here's a quick video guide if you don't feel like reading:
 
 [![blocks.md - Save form responses in Google Sheets](https://img.youtube.com/vi/ssVxV1Vi06U/0.jpg)](https://www.youtube.com/watch?v=ssVxV1Vi06U)
 
-## 1. Set up a Google Sheet
+### 1. Set up a Google Sheet
 
 The first step is to set up a Google Sheet so that the first row (headers) match the names of the form fields you want to save.
 
@@ -53,7 +50,7 @@ There are three other fields which are sent automatically:
 - `_submitted`&mdash;date and time when the response is submitted
 - `_end`&mdash;whether or not the user has reached the end or not (in case of partial submissions, this will not be TRUE)
 
-## 2. Create a Google App Script
+### 2. Create a Google App Script
 
 Click on `Extensions -> Apps Script`. This will open a new Google Script. Rename it to something like `blocksmd-form`.
 
@@ -162,7 +159,7 @@ function doPost(e) {
 
 Save the project before moving to the next step.
 
-## 3. Deploy the project
+### 3. Deploy the project
 
 Click on the `Deploy -> New Deployment` button on the top right corner of the screen. A modal will open up. Select `Web app` from the dropdown (open the dropdown by clicking on the settings icon on the left hand side).
 
@@ -199,7 +196,7 @@ You should see a successful deployment. Copy the `Web app URL` from this screen 
 
 ![Successful deployment](https://res.cloudinary.com/dnriuttuy/image/upload/v1722085919/gsheets-11_uedxvh.png)
 
-## 4. Run the `initialSetup()` function
+### 4. Run the `initialSetup()` function
 
 After the deployment, close the modal. Next, you need to run the `initialSetup()` function by clicking on the `Run` button. Make sure this function is the one selected.
 
@@ -211,7 +208,7 @@ After the deployment, close the modal. Next, you need to run the `initialSetup()
 2. `Advanced -> Go to blocksmd-form (Unsafe)`
 3. Click on `Allow` button
 
-## 5. Add the `Web app URL` as a setting
+### 5. Add the `Web app URL` as a setting
 
 Finally, set the URL you copied from the deployment modal as a setting:
 
@@ -244,19 +241,19 @@ budget* = NumberInput(
 
 And that's it. You should be able to save your form responses directly in your Google Sheets now!
 
-## 6. See the form in action
+### 6. See the form in action
 
 Here's a video of the form in action:
 
 https://www.loom.com/share/16541b8f10744c63a0f1fba4b27e1c6d?sid=906c9be3-2dcb-4f56-8a5e-82d2b4287bb0
 
-## 7. Change the sheet where the response is saved
+### 7. Change the sheet where the response is saved
 
 By default, the response is saved in the very first sheet of the document. However, you can specify which sheet to save the response in by putting the name of the sheet as the value of the `post-shee-name` setting. For example, `#! post-sheet-name = Sheet2` would save the response in `Sheet2`.
 
-> Learn more: [Send responses](https://github.com/blocksmd/blocksmd/blob/main/docs/send-responses.md)
+> Learn more: [Send responses](send-responses/)
 
-# Read data from Google Sheets
+## Read data from Google Sheets
 
 > [!WARNING]
 > A Google Sheet that has been published to the web can essentially be read by anyone. This is totally fine as long as it contains data that you want to make public. In general, it is highly recommended that you use one sheet for saving form responses, and another sheet for reading data.
@@ -308,4 +305,4 @@ languages:
 
 ![Read data from GSheets](https://res.cloudinary.com/dnriuttuy/image/upload/v1722065593/read-data-2_ylvp7v.png)
 
-Learn more: [Set and read data](https://github.com/blocksmd/blocksmd/blob/main/docs/set-and-read-data.md)
+Learn more: [Set and read data](set-and-read-data/)

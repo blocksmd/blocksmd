@@ -1,13 +1,10 @@
-# On this page
+# Send responses
 
-- [Send full and partial responses to your server or Google Sheets](#send-full-and-partial-responses-to-your-server-or-google-sheets)
-- [Format of responses](#format-of-responses)
+## Send full and partial responses to your server or Google Sheets
 
-# Send full and partial responses to your server or Google Sheets
+Set the `#! post-url = {url}` setting to send form responses to that URL using a POST request. There's also an incredibly useful integration that lets you [send responses directly to Google Sheets](google-sheets-integration/). Responses are sent to the `{url}` when the user reaches the end slide.
 
-Set the `#! post-url = {url}` setting to send form responses to that URL using a POST request. There's also an incredibly useful integration that lets you [send responses directly to Google Sheets](https://github.com/blocksmd/blocksmd/blob/main/docs/google-sheets-integration.md). Responses are sent to the `{url}` when the user reaches the end slide.
-
-Partial submissions are also supported. Add `>> post` (case insensitive) to a slide to enable partial submission up to that slide, that is, when a user completes this slide and goes to the next one, all the form data up to that slide will be sent to the URL you set in the setting. [Learn more](https://github.com/blocksmd/blocksmd/blob/main/docs/slides.md#partial-or-slide-level-submissions).
+Partial submissions are also supported. Add `>> post` (case insensitive) to a slide to enable partial submission up to that slide, that is, when a user completes this slide and goes to the next one, all the form data up to that slide will be sent to the URL you set in the setting. [Learn more](slides/#partial-or-slide-level-submissions).
 
 ```text
 #! post-url = {url}
@@ -30,7 +27,7 @@ products* = PictureChoice(
 )
 ```
 
-# Format of responses
+## Format of responses
 
 Each response is sent as a JSON object where the names of form fields are the keys, and value is the input provided by the user. There are three other fields added automatically:
 

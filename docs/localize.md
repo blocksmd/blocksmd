@@ -1,10 +1,6 @@
-# On this page
+# Localize
 
-- [Localizable to any language](#localizable-to-any-language)
-- [Supported language codes](#supported-language-codes)
-- [Adding support for a new language](#adding-support-for-a-new-language)
-
-# Localizable to any language
+## Localizable to any language
 
 Set the `#! localization = {lang}` to a supported language code, and write your Markdown in that language—everything will be automatically translated. Here's an example page in Spanish:
 
@@ -32,7 +28,7 @@ email* = EmailInput(
 )
 ```
 
-# Supported language codes
+## Supported language codes
 
 As of right now, the following language codes are supported:
 
@@ -40,7 +36,7 @@ As of right now, the following language codes are supported:
 - `bn` | Bengali
 - `es` | Spanish
 
-# Adding support for a new language
+## Adding support for a new language
 
 In order to add support for a new language, all we need is an entry for this language in the `translations` object within the [`src/translations.js`](https://github.com/blocksmd/blocksmd/blob/main/src/translations.js) file. The key for this entry would be the language code, and the value would be a JSON object containing translations required for creating the forms and pages. For example, if we wanted to support `{lang}`, we would need the following:
 

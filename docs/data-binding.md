@@ -1,10 +1,8 @@
-# On this page
+# Data-binding
 
-- [Data-binding, `<div>` and `<span>` elements](#data-binding-div-and-span-elements)
+## Data-binding, `<div>` and `<span>` elements
 
-# Data-binding, `<div>` and `<span>` elements
-
-Create wrapping `<div>` elements by putting content inside pairs of `:::`. The content inside can be any valid Markdown, such as headings, paragraphs, lists, form fields, etc. Class names and other attributes are supported via `[...]` ([learn more](https://github.com/blocksmd/blocksmd/blob/main/docs/class-names-and-attributes)). Moreover, you can bind one or more fields to a `<div>` element by adding the names of the fields inside `{$...$}` (separated by spaces), and placing this within the `[...]`. This means that whenever the value of a binded field changes, the content inside the `<div>` will be automatically re-rendered.
+Create wrapping `<div>` elements by putting content inside pairs of `:::`. The content inside can be any valid Markdown, such as headings, paragraphs, lists, form fields, etc. Class names and other attributes are supported via `[...]` ([learn more](class-names-and-attributes/)). Moreover, you can bind one or more fields to a `<div>` element by adding the names of the fields inside `{$...$}` (separated by spaces), and placing this within the `[...]`. This means that whenever the value of a binded field changes, the content inside the `<div>` will be automatically re-rendered.
 
 The templating is done using [Nunjucks](https://mozilla.github.io/nunjucks/), so its entire list of features such as if-else statements, loops, filters, etc. are fully supported. You can also bind a single field to a `<span>` element using `{$ field $}`. This is obviously not as flexible, but it is simple, and can be used inside paragraphs, headings, list items, etc.
 

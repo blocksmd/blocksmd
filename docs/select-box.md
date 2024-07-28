@@ -1,13 +1,8 @@
-# On this page
+# Select box
 
-- [Select box at a glance](#select-box-at-a-glance)
-- [Basics of a form field](#basics-of-a-form-field)
-- [Parameters](#parameters)
-  - [Available parameters](#available-parameters)
+## Select box at a glance
 
-# Select box at a glance
-
-A select box is an input element that lets the user select a single item from a list. For multi-select, please use a [choice input](https://github.com/blocksmd/blocksmd/blob/main/docs/choice-input.md) with the `multiple` parameter. Here's a select box with only the required parameter(s):
+A select box is an input element that lets the user select a single item from a list. For multi-select, please use a [choice input](choice-input/) with the `multiple` parameter. Here's a select box with only the required parameter(s):
 
 ```text
 color = SelectBox(
@@ -32,7 +27,7 @@ color* = SelectBox(
 )
 ```
 
-# Basics of a form field
+## Basics of a form field
 
 A form field is a **Markdown paragraph** in the following format:
 
@@ -71,9 +66,9 @@ address = TextInput(
 )
 ```
 
-# Parameters
+## Parameters
 
-Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](https://github.com/blocksmd/blocksmd/blob/main/docs/settings.md). For example, this would render the exact same email input from above:
+Parameters are information provided within the `(...)` when creating form fields. They must be separated by the `form-delimiter`, which by default is `|`. The `form-delimiter` can be changed as a [setting](settings/). For example, this would render the exact same email input from above:
 
 ```text
 #! form-delimiter = \\n
@@ -89,15 +84,15 @@ Your email is {$ yourEmail $}.
 
 Please note once again that parameter names are case insensitive, and boolean parameters only require their names to have effect (no need for values after `=`).
 
-## Available parameters
+### Available parameters
 
 The following parameters are available for select boxes:
 
-### `question`
+#### `question`
 
 The main question of the form field. For text, email, URL, telephone, number, and select inputs, the question is placed inside the main `<label>` element.
 
-### `options`
+#### `options`
 
 List of available options as CSV (comma separated values), for example:
 
@@ -130,7 +125,7 @@ product* = SelectBox(
 )
 ```
 
-### `selected`
+#### `selected`
 
 If set and matches one of the options, then that option is selected by default. For instance, in the example below, option `y` would be selected by default.
 
@@ -153,15 +148,15 @@ product* = SelectBox(
 
 In the above example, the `Apple` option would be selected by default.
 
-### `description`
+#### `description`
 
 Any extra information that the user may need to fill out the form.
 
-### `fieldSize`
+#### `fieldSize`
 
 When set to `sm`, the font sizes of the question, description, and answer are made smaller. Can also be globally set via the `#! field-size = sm` setting.
 
-### `subfield`
+#### `subfield`
 
 Boolean parameter. When set, the question of the form field is made smaller. This is useful for creating subfields, especially inside `.col-*` classes. For example:
 
@@ -180,14 +175,14 @@ zip* = TextInput(
 )
 ```
 
-### `autofocus`
+#### `autofocus`
 
 Boolean parameter. When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load (in case of single page layout). Can also be globally set via the `#! autofocus = all-slides` setting (only for slides).
 
-### `placeholder`
+#### `placeholder`
 
 Creates an `<option>` element with `value=""` and `disabled` attribute. This acts as a placeholder for the select box because it can't be selected. By default, a generic one is provided, but this can be used to override and set a custom one.
 
-### `disabled`
+#### `disabled`
 
 Boolean parameter. When set, the input is disabled.
