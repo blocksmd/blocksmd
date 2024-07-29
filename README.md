@@ -19,7 +19,7 @@ It's quite a lot to take in, but **blocks.md** is remarkably simple to use and u
 
 ## How to use
 
-> Full documentation: [How to use](https://github.com/blocksmd/blocksmd/blob/main/docs/how-to-use.md)
+> Full documentation: [How to use](https://blocksmd.gitbook.io/docs/how-to-use)
 
 ### Install via `npm`
 
@@ -77,4 +77,4 @@ Again, make sure you have the dev dependencies installed.
 
 ## Documentation
 
-https://github.com/blocksmd/blocksmd/blob/main/docs/README.md
+[https://blocksmd.gitbook.io/docs/](https://blocksmd.gitbook.io/docs/)
