@@ -55,6 +55,20 @@ blocksmd -i cms/pages -o website
 
 The output folder is a static site with regular HTML files, and you can host them on Github Pages, Netlify, Vercel, etc. For example, you can literally drag and drop an output folder created using **blocks.md** to [Netlify Drop](https://app.netlify.com/drop), and your forms and pages will all work properly.
 
+## Roadmap
+
+The following list contains upcoming features that have been planned for **blocks.md**:
+
+- Date time input
+- Multi-choice input with dynamic filtering and results
+- Rating input
+- File and image input
+- Ranking input (maybe)
+- Honeypot fields for spam prevention
+- Layout options with images and media (also slide level)
+- Classic form style
+- Payment support (create payment forms)
+
 ## Build
 
 Run the following to build the project:
