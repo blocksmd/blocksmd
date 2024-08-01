@@ -62,12 +62,12 @@ The following list contains upcoming features that have been planned for **block
 - Date time input
 - Multi-choice input with dynamic filtering and results
 - Rating input
-- File and image input
+- File/image upload
 - Ranking input (maybe)
 - Honeypot fields for spam prevention
 - Layout options with images and media (also slide level)
 - Classic form style
-- Payment support (create payment forms)
+- Payments
 
 ## Build
 
