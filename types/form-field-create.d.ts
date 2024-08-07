@@ -102,3 +102,22 @@ export function createChoiceField(
 	formDelimiter: string,
 	localization: string,
 ): string;
+/**
+ * Create a rating form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} localization
+ * @returns {string} rating input form field as HTML string
+ */
+export function createRatingField(
+	name: string,
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	localization: string,
+): string;
