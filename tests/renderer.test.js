@@ -106,6 +106,10 @@ pictureChoice* = PictureChoice(
 	| multiple
 )
 
+rating = RatingInput(
+	| question = How would you rate our service?
+)
+
 
 <!-- Headings -->
 
@@ -456,6 +460,84 @@ const expectedTemplate = `
 				</label>
 			</div>
 		</div>
+	</div>
+</fieldset>
+
+<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" class="bmd-form-field">
+	<legend class="bmd-form-question">
+		How would you rate our service?
+	</legend>
+	<div class="bmd-rating-grid">
+		<input 
+			name="rating"
+			id="id_rating-1"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="1"
+		>
+		<label class="bmd-form-rating-label" for="id_rating-1">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			1<span class="bmd-visually-hidden"> star</span>
+		</label>
+		<input 
+			name="rating"
+			id="id_rating-2"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="2"
+		>
+		<label class="bmd-form-rating-label" for="id_rating-2">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			2<span class="bmd-visually-hidden"> stars</span>
+		</label>
+		<input 
+			name="rating"
+			id="id_rating-3"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="3"
+		>
+		<label class="bmd-form-rating-label" for="id_rating-3">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			3<span class="bmd-visually-hidden"> stars</span>
+		</label>
+		<input 
+			name="rating"
+			id="id_rating-4"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="4"
+		>
+		<label class="bmd-form-rating-label" for="id_rating-4">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			4<span class="bmd-visually-hidden"> stars</span>
+		</label>
+		<input 
+			name="rating"
+			id="id_rating-5"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="5"
+		>
+		<label class="bmd-form-rating-label" for="id_rating-5">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			5<span class="bmd-visually-hidden"> stars</span>
+		</label>
 	</div>
 </fieldset>
 

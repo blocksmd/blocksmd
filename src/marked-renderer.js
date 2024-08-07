@@ -7,6 +7,7 @@ const {
 	createNumberField,
 	createSelectField,
 	createChoiceField,
+	createRatingField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
 const { getTranslation } = require("./translations");
@@ -253,6 +254,15 @@ renderer.paragraph = function (text) {
 				return createChoiceField(
 					fieldName,
 					fieldInputType === "picturechoice" ? true : false,
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings["localization"],
+				);
+			} else if (fieldInputType === "ratinginput") {
+				return createRatingField(
+					fieldName,
 					fieldRequired,
 					parsedAttrs,
 					fieldParams,

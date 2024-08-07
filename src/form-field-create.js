@@ -7,7 +7,7 @@ const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
 const formFieldPattern = new RegExp(
-	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice)\((.*)\)/,
+	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput)\((.*)\)/,
 	"is",
 );
 
@@ -651,9 +651,131 @@ function createChoiceField(
 	});
 }
 
+/* Rating field */
+
+const ratingFieldTemplate = `
+{{ startTag }}
+	<legend class="bmd-form-question">
+		{{ validParams.question | safe }}
+	</legend>
+	{% if validParams.description %}
+	<p class="bmd-form-description">
+		{{ validParams.description }}
+	</p>
+	{% endif %}
+	<div class="bmd-rating-grid{% if validParams.outof > 5 %} bmd-rating-grid-5-or-more{% endif %}">
+		{% for i in range(1, validParams.outof + 1) %}
+		<input 
+			name="{{ name }}"
+			id="{{ inputId }}-{{ i }}"
+			type="radio"
+			class="bmd-form-rating-input"
+			value="{{ i }}"
+			{% if validParams.value == i %}checked{% endif %}
+			{% if validParams.disabled %}disabled{% endif %}
+			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+		>
+		<label class="bmd-form-rating-label" for="{{ inputId }}-{{ i }}">
+			{% if validParams.icon == "heart" or validParams.icon == "hearts" %}
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			{% else %}
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			</svg>
+			{% endif %}
+			{% if not validParams.hidelabels %}
+			{{ i }}<span class="bmd-visually-hidden"> {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
+			{% else %}
+			<span class="bmd-visually-hidden">{{ i }} {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
+			{% endif %}
+		</label>
+		{% endfor %}
+	</div>
+</fieldset>
+`;
+
+/**
+ * Create a rating form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} localization
+ * @returns {string} rating input form field as HTML string
+ */
+function createRatingField(
+	name,
+	required,
+	parsedAttrs,
+	params,
+	formDelimiter,
+	localization,
+) {
+	// Set up the start tag, valid params, the rest, and translations
+	// Make sure to use <fieldset> for the start tag during setup
+	const {
+		startTag: startTag,
+		validParams: validParams,
+		restParams: restParams,
+	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, true);
+	const translations = {
+		starSingular: getTranslation(localization, "star-singular"),
+		starPlural: getTranslation(localization, "star-plural"),
+	};
+
+	// Set default params
+	validParams["outof"] = 5;
+	validParams["icon"] = "star";
+
+	// Go through the rest of the params and validate
+	for (let [key, value] of Object.entries(restParams)) {
+		if (key === "disabled" && value) {
+			validParams[key] = value;
+		} else if (key === "outof" && value && value.match(/^([1-9]|10)$/)) {
+			validParams[key] = parseInt(value);
+		} else if (
+			key === "icon" &&
+			value &&
+			(value.toLowerCase() === "heart" || value.toLowerCase() === "hearts")
+		) {
+			validParams[key] = value.toLowerCase();
+		} else if (key === "value" && value && typeof value === "string") {
+			validParams[key] = parseInt(value);
+		} else if (key === "hidelabels" && value) {
+			validParams[key] = value;
+		} else {
+			console.warn(
+				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
+			);
+		}
+	}
+
+	// Create the validation attributes (to be added to the start tag)
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="radio" data-bmd-cast="int"`;
+	if (required) validationAttrs += " data-bmd-required";
+
+	// Use Nunjucks to create the form field
+	nunjucks.configure({ autoescape: false });
+	return nunjucks.renderString(ratingFieldTemplate, {
+		startTag: `${startTag.slice(0, 9)} ${validationAttrs} ${startTag.slice(9)}`,
+		name: name,
+		inputId: `id_${name}`,
+		required: required,
+		validParams: validParams,
+		translations: translations,
+	});
+}
+
 exports.formFieldPattern = formFieldPattern;
 exports.formFieldSetup = formFieldSetup;
 exports.createTextField = createTextField;
 exports.createNumberField = createNumberField;
 exports.createSelectField = createSelectField;
 exports.createChoiceField = createChoiceField;
+exports.createRatingField = createRatingField;
