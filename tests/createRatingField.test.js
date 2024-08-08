@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap">rating?<sup class="bmd-text-accent">*</sup></span>
 	</legend>
@@ -118,7 +118,7 @@ test("Case 1", () => {
 // Case 2 (not required, out of 3, hearts, value)
 
 const expectedTemplate2 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" class="bmd-form-field">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" class="bmd-form-field">
 	<legend class="bmd-form-question">
 		What is your rating?
 	</legend>
@@ -198,7 +198,7 @@ test("Case 2 (not required, out of 3, hearts, value)", () => {
 // Case 3 (out of 5 or more, hide labels, different form delimiter)
 
 const expectedTemplate3 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap">rating?<sup class="bmd-text-accent">*</sup></span>
 	</legend>
@@ -318,7 +318,7 @@ test("Case 3 (out of 5 or more, hide labels, different form delimiter)", () => {
 // Case 4 (out of 2, different localization)
 
 const expectedTemplate4 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" data-bmd-required class="bmd-form-field">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap">rating?<sup class="bmd-text-accent">*</sup></span>
 	</legend>
@@ -382,7 +382,7 @@ test("Case 4 (out of 2, heart, different localization)", () => {
 // Case 5 (out of more than 10)
 
 const expectedTemplate5 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap">rating?<sup class="bmd-text-accent">*</sup></span>
 	</legend>
@@ -495,7 +495,7 @@ test("Case 5 (out of more than 10)", () => {
 // Case 6 (no params)
 
 const expectedTemplate6 = `
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" data-bmd-required class="bmd-form-field">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
 		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
 	</legend>

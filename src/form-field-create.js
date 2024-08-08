@@ -757,7 +757,7 @@ function createRatingField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="radio" data-bmd-cast="int"`;
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="rating"`;
 	if (required) validationAttrs += " data-bmd-required";
 
 	// Use Nunjucks to create the form field

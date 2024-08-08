@@ -295,6 +295,18 @@ function setFormDataToState() {
 			state["fieldTypes"][name] = "choice";
 			reRenderBindElems(name);
 		});
+
+	// Rating fields
+	document
+		.querySelectorAll("input.bmd-form-rating-input:first-child")
+		.forEach((elem) => {
+			const name = elem.getAttribute("name");
+			let value = getChoiceFieldValue(name, "radio");
+			value = value ? parseInt(value) : null;
+			state["formData"][name] = value;
+			state["fieldTypes"][name] = "rating";
+			reRenderBindElems(name);
+		});
 }
 
 /**
@@ -375,6 +387,21 @@ function setFormDataFromURL(updateLocalStorage) {
 				reRenderBindElems(name);
 			}
 		}
+
+		// Rating field
+		if (state["fieldTypes"][name] === "rating") {
+			const input = document.querySelector(
+				`.bmd-form-rating-input[name="${name}"]`,
+			);
+			if (input) {
+				setChoiceFieldValue(name, "radio", value);
+				value = getChoiceFieldValue(name, type);
+				value = value ? parseInt(value) : null;
+				state["formData"][name] = value;
+				if (updateLocalStorage) saveFieldValue(name, value);
+				reRenderBindElems(name);
+			}
+		}
 	}
 }
 
@@ -440,6 +467,18 @@ function setSavedFormData() {
 				reRenderBindElems(name);
 			}
 		}
+
+		// Rating field
+		if (state["fieldTypes"][name] === "rating") {
+			const input = document.querySelector(
+				`.bmd-form-rating-input[name="${name}"]`,
+			);
+			if (input) {
+				setChoiceFieldValue(name, "radio", String(value));
+				state["formData"][name] = getChoiceFieldValue(name, type);
+				reRenderBindElems(name);
+			}
+		}
 	}
 }
 
@@ -457,10 +496,17 @@ function removeFieldErrors(formField) {
 	// Form fields with errors will have a type attribute
 	const type = formField.getAttribute("data-bmd-type");
 
-	// Choice field
 	// Remove WAI-ARIA tags
+	// Choice field
 	if (type === "radio" || type === "checkbox") {
 		formField.querySelectorAll(".bmd-form-check-input").forEach((input) => {
+			input.removeAttribute("aria-invalid");
+			input.removeAttribute("aria-describedby");
+		});
+	}
+	// Rating field
+	else if (type === "rating") {
+		formField.querySelectorAll(".bmd-form-rating-input").forEach((input) => {
 			input.removeAttribute("aria-invalid");
 			input.removeAttribute("aria-describedby");
 		});
@@ -469,7 +515,7 @@ function removeFieldErrors(formField) {
 
 /**
  * Handle the inputs of text form fields: update value in the state, save
- * value in local storage remove, errors and re-render the bind <div> and
+ * value in local storage, remove errors and re-render the bind <div> and
  * <span> elements.
  *
  * @param {InputEvent} e
@@ -485,7 +531,7 @@ function textFieldOnInput(e) {
 
 /**
  * Handle the inputs of number form fields: update value in the state, save
- * value in local storage remove, errors and re-render the bind <div> and
+ * value in local storage, remove errors and re-render the bind <div> and
  * <span> elements.
  *
  * @param {InputEvent} e
@@ -501,7 +547,7 @@ function numberFieldOnInput(e) {
 
 /**
  * Handle the inputs of select form fields: update value in the state, save
- * value in local storage remove, errors and re-render the bind <div> and
+ * value in local storage, remove errors and re-render the bind <div> and
  * <span> elements.
  *
  * @param {InputEvent} e
@@ -517,7 +563,7 @@ function selectFieldOnInput(e) {
 
 /**
  * Handle the inputs of choice form fields: update value in the state, save
- * value in local storage remove, errors and re-render the bind <div> and
+ * value in local storage, remove errors and re-render the bind <div> and
  * <span> elements.
  *
  * @param {InputEvent} e
@@ -526,6 +572,22 @@ function choiceFieldOnInput(e) {
 	const name = e.target.getAttribute("name");
 	const type = e.target.getAttribute("type");
 	const value = getChoiceFieldValue(name, type);
+	state["formData"][name] = value;
+	saveFieldValue(name, value);
+	removeFieldErrors(e.target.closest(".bmd-form-field"));
+	reRenderBindElems(name);
+}
+
+/**
+ * Handle the inputs of rating form fields: update value in the state, save
+ * value in local storage, remove errors and re-render the bind <div> and
+ * <span> elements.
+ *
+ * @param {InputEvent} e
+ */
+function ratingFieldOnInput(e) {
+	const name = e.target.getAttribute("name");
+	const value = parseInt(getChoiceFieldValue(name, "radio"));
 	state["formData"][name] = value;
 	saveFieldValue(name, value);
 	removeFieldErrors(e.target.closest(".bmd-form-field"));
@@ -601,6 +663,25 @@ function removeSlideErrors(slide) {
 }
 
 /**
+ * Add an error inside the given form field element.
+ *
+ * @param {HTMLElement} formField
+ * @param {string} errorId
+ * @param {string} message
+ */
+function addFieldError(formField, errorId, message) {
+	const error = document.createElement("div");
+	error.setAttribute("id", errorId);
+	error.innerHTML = [
+		`<div class="bmd-error">`,
+		`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+		`	${message}`,
+		`</div>`,
+	].join("\n");
+	formField.insertAdjacentElement("beforeend", error);
+}
+
+/**
  * Given a <form> element, validate and add errors if necessary. By default,
  * most form fields rely entirely on built-in client-side validation that is
  * found in browsers.
@@ -622,7 +703,7 @@ function formValid(form) {
 	// These fields will have a type attribute
 	form
 		.querySelectorAll(
-			'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required]',
+			'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="rating"][data-bmd-required]',
 		)
 		.forEach((formField) => {
 			const name = formField.getAttribute("data-bmd-name");
@@ -636,20 +717,40 @@ function formValid(form) {
 					formFieldsWithError.push(formField);
 
 					// Add error
-					const error = document.createElement("div");
 					const errorId = `id_${name}-error`;
-					error.setAttribute("id", errorId);
-					error.innerHTML = [
-						`<div class="bmd-error">`,
-						`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
-						`	${getTranslation(localization, "choice-field-required")}`,
-						`</div>`,
-					].join("\n");
-					formField.insertAdjacentElement("beforeend", error);
+					addFieldError(
+						formField,
+						errorId,
+						getTranslation(localization, "choice-field-required"),
+					);
 
 					// Add WAI-ARIA tags to the inputs
 					formField
 						.querySelectorAll(".bmd-form-check-input")
+						.forEach((input) => {
+							input.setAttribute("aria-invalid", "true");
+							input.setAttribute("aria-describedby", errorId);
+						});
+				}
+			}
+			// Required rating fields
+			else if (type === "rating") {
+				const value = getChoiceFieldValue(name, type);
+				if (value.length === 0) {
+					isFormValid = false;
+					formFieldsWithError.push(formField);
+
+					// Add error
+					const errorId = `id_${name}-error`;
+					addFieldError(
+						formField,
+						errorId,
+						getTranslation(localization, "rating-field-required"),
+					);
+
+					// Add WAI-ARIA tags to the inputs
+					formField
+						.querySelectorAll(".bmd-form-rating-input")
 						.forEach((input) => {
 							input.setAttribute("aria-invalid", "true");
 							input.setAttribute("aria-describedby", errorId);
@@ -661,7 +762,7 @@ function formValid(form) {
 	// Focus on the first form field with error
 	if (formFieldsWithError.length > 0) {
 		const inputToFocus = formFieldsWithError[0].querySelector(
-			".bmd-form-check-input",
+			".bmd-form-check-input, .bmd-form-rating-input",
 		);
 		if (inputToFocus) inputToFocus.focus();
 	}

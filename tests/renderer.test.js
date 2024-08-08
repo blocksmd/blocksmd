@@ -463,7 +463,7 @@ const expectedTemplate = `
 	</div>
 </fieldset>
 
-<fieldset data-bmd-name="rating" data-bmd-type="radio" data-bmd-cast="int" class="bmd-form-field">
+<fieldset data-bmd-name="rating" data-bmd-type="rating" class="bmd-form-field">
 	<legend class="bmd-form-question">
 		How would you rate our service?
 	</legend>
