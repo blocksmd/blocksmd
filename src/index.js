@@ -177,15 +177,16 @@ function reRenderBindElems(name) {
  * Get value of a set of radio buttons or checkboxes.
  *
  * @param {string} name
+ * @param {string} inputClass
  * @param {"radio"|"checkbox"} type
  * @returns {string|Array.<string>}
  */
-function getChoiceFieldValue(name, type) {
+function getRadioCheckboxValue(name, inputClass, type) {
 	// For radio buttons, the single checked value is returned
 	if (type === "radio") {
 		let value = "";
 		const input = document.querySelector(
-			`.bmd-form-check-input[type="radio"][name="${name}"]:checked`,
+			`.${inputClass}[type="radio"][name="${name}"]:checked`,
 		);
 		if (input) value = input.value;
 		return value;
@@ -195,7 +196,7 @@ function getChoiceFieldValue(name, type) {
 		const value = [];
 		document
 			.querySelectorAll(
-				`.bmd-form-check-input[type="checkbox"][name="${name}"]:checked`,
+				`.${inputClass}[type="checkbox"][name="${name}"]:checked`,
 			)
 			.forEach((input) => {
 				value.push(input.value);
@@ -208,15 +209,16 @@ function getChoiceFieldValue(name, type) {
  * Set value of a set of radio buttons or checkboxes.
  *
  * @param {string} name
+ * @param {string} inputClass
  * @param {"radio"|"checkbox"} type
  * @param {string|Array.<string>} value
  */
-function setChoiceFieldValue(name, type, value) {
+function setRadioCheckboxValue(name, inputClass, type, value) {
 	// For radio buttons, the value is a single string
 	if (type === "radio") {
 		if (typeof value === "string") value = value.trim();
 		const input = document.querySelector(
-			`.bmd-form-check-input[type="radio"][name="${name}"][value="${value}"]`,
+			`.${inputClass}[type="radio"][name="${name}"][value="${value}"]`,
 		);
 		if (input) input.checked = true;
 	}
@@ -227,9 +229,7 @@ function setChoiceFieldValue(name, type, value) {
 			values[item.trim()] = true;
 		}
 		document
-			.querySelectorAll(
-				`.bmd-form-check-input[type="checkbox"][name="${name}"]`,
-			)
+			.querySelectorAll(`.${inputClass}[type="checkbox"][name="${name}"]`)
 			.forEach((input) => {
 				input.checked = false;
 				if (values[input.value]) input.checked = true;
@@ -290,7 +290,7 @@ function setFormDataToState() {
 		.forEach((elem) => {
 			const name = elem.getAttribute("name");
 			const type = elem.getAttribute("type");
-			const value = getChoiceFieldValue(name, type);
+			const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
 			state["formData"][name] = value;
 			state["fieldTypes"][name] = "choice";
 			reRenderBindElems(name);
@@ -301,7 +301,7 @@ function setFormDataToState() {
 		.querySelectorAll("input.bmd-form-rating-input:first-child")
 		.forEach((elem) => {
 			const name = elem.getAttribute("name");
-			let value = getChoiceFieldValue(name, "radio");
+			let value = getRadioCheckboxValue(name, "bmd-form-rating-input", "radio");
 			value = value ? parseInt(value) : null;
 			state["formData"][name] = value;
 			state["fieldTypes"][name] = "rating";
@@ -378,10 +378,10 @@ function setFormDataFromURL(updateLocalStorage) {
 
 				// Set value, for checkbox, convert to array first
 				if (type === "checkbox") value = value.split(",");
-				setChoiceFieldValue(name, type, value);
+				setRadioCheckboxValue(name, "bmd-form-check-input", type, value);
 
 				// Get value again, set to state, etc.
-				value = getChoiceFieldValue(name, type);
+				value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
 				state["formData"][name] = value;
 				if (updateLocalStorage) saveFieldValue(name, value);
 				reRenderBindElems(name);
@@ -394,8 +394,8 @@ function setFormDataFromURL(updateLocalStorage) {
 				`.bmd-form-rating-input[name="${name}"]`,
 			);
 			if (input) {
-				setChoiceFieldValue(name, "radio", value);
-				value = getChoiceFieldValue(name, type);
+				setRadioCheckboxValue(name, "bmd-form-rating-input", "radio", value);
+				value = getRadioCheckboxValue(name, "bmd-form-rating-input", "radio");
 				value = value ? parseInt(value) : null;
 				state["formData"][name] = value;
 				if (updateLocalStorage) saveFieldValue(name, value);
@@ -462,8 +462,12 @@ function setSavedFormData() {
 			);
 			if (input) {
 				const type = input.getAttribute("type");
-				setChoiceFieldValue(name, type, value);
-				state["formData"][name] = getChoiceFieldValue(name, type);
+				setRadioCheckboxValue(name, "bmd-form-check-input", type, value);
+				state["formData"][name] = getRadioCheckboxValue(
+					name,
+					"bmd-form-check-input",
+					type,
+				);
 				reRenderBindElems(name);
 			}
 		}
@@ -474,8 +478,17 @@ function setSavedFormData() {
 				`.bmd-form-rating-input[name="${name}"]`,
 			);
 			if (input) {
-				setChoiceFieldValue(name, "radio", String(value));
-				state["formData"][name] = getChoiceFieldValue(name, type);
+				setRadioCheckboxValue(
+					name,
+					"bmd-form-rating-input",
+					"radio",
+					String(value),
+				);
+				state["formData"][name] = getRadioCheckboxValue(
+					name,
+					"bmd-form-rating-input",
+					"radio",
+				);
 				reRenderBindElems(name);
 			}
 		}
@@ -571,7 +584,7 @@ function selectFieldOnInput(e) {
 function choiceFieldOnInput(e) {
 	const name = e.target.getAttribute("name");
 	const type = e.target.getAttribute("type");
-	const value = getChoiceFieldValue(name, type);
+	const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
 	state["formData"][name] = value;
 	saveFieldValue(name, value);
 	removeFieldErrors(e.target.closest(".bmd-form-field"));
@@ -587,7 +600,9 @@ function choiceFieldOnInput(e) {
  */
 function ratingFieldOnInput(e) {
 	const name = e.target.getAttribute("name");
-	const value = parseInt(getChoiceFieldValue(name, "radio"));
+	const value = parseInt(
+		getRadioCheckboxValue(name, "bmd-form-rating-input", "radio"),
+	);
 	state["formData"][name] = value;
 	saveFieldValue(name, value);
 	removeFieldErrors(e.target.closest(".bmd-form-field"));
@@ -711,7 +726,7 @@ function formValid(form) {
 
 			// Required choice fields
 			if (type === "radio" || type === "checkbox") {
-				const value = getChoiceFieldValue(name, type);
+				const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
 				if (value.length === 0) {
 					isFormValid = false;
 					formFieldsWithError.push(formField);
@@ -735,7 +750,11 @@ function formValid(form) {
 			}
 			// Required rating fields
 			else if (type === "rating") {
-				const value = getChoiceFieldValue(name, type);
+				const value = getRadioCheckboxValue(
+					name,
+					"bmd-form-rating-input",
+					"radio",
+				);
 				if (value.length === 0) {
 					isFormValid = false;
 					formFieldsWithError.push(formField);
@@ -1442,7 +1461,9 @@ function addEventListeners(container) {
 
 	// <input> elements
 	container
-		.querySelectorAll("input.bmd-form-control, input.bmd-form-check-input")
+		.querySelectorAll(
+			"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-rating-input",
+		)
 		.forEach((input) => {
 			if (
 				input.getAttribute("type") === "text" ||
@@ -1457,7 +1478,11 @@ function addEventListeners(container) {
 				input.getAttribute("type") === "radio" ||
 				input.getAttribute("type") === "checkbox"
 			) {
-				input.addEventListener("input", choiceFieldOnInput);
+				if (input.classList.contains("bmd-form-check-input")) {
+					input.addEventListener("input", choiceFieldOnInput);
+				} else if (input.classList.contains("bmd-form-rating-input")) {
+					input.addEventListener("input", ratingFieldOnInput);
+				}
 			}
 		});
 
