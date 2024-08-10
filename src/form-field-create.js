@@ -669,7 +669,7 @@ const ratingFieldTemplate = `
 			name="{{ name }}"
 			id="{{ inputId }}-{{ i }}"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="{{ i }}"
 			{% if validParams.value == i %}checked{% endif %}
 			{% if validParams.disabled %}disabled{% endif %}
@@ -757,7 +757,7 @@ function createRatingField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="rating"`;
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
 	if (required) validationAttrs += " data-bmd-required";
 
 	// Use Nunjucks to create the form field

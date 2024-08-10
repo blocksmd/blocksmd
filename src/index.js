@@ -296,15 +296,19 @@ function setFormDataToState() {
 			reRenderBindElems(name);
 		});
 
-	// Rating fields
+	// Number choice fields
 	document
-		.querySelectorAll("input.bmd-form-rating-input:first-child")
+		.querySelectorAll("input.bmd-form-num-check-input:first-child")
 		.forEach((elem) => {
 			const name = elem.getAttribute("name");
-			let value = getRadioCheckboxValue(name, "bmd-form-rating-input", "radio");
+			let value = getRadioCheckboxValue(
+				name,
+				"bmd-form-num-check-input",
+				"radio",
+			);
 			value = value ? parseInt(value) : null;
 			state["formData"][name] = value;
-			state["fieldTypes"][name] = "rating";
+			state["fieldTypes"][name] = "num-choice";
 			reRenderBindElems(name);
 		});
 }
@@ -388,14 +392,18 @@ function setFormDataFromURL(updateLocalStorage) {
 			}
 		}
 
-		// Rating field
-		if (state["fieldTypes"][name] === "rating") {
+		// Number choice field
+		if (state["fieldTypes"][name] === "num-choice") {
 			const input = document.querySelector(
-				`.bmd-form-rating-input[name="${name}"]`,
+				`.bmd-form-num-check-input[name="${name}"]`,
 			);
 			if (input) {
-				setRadioCheckboxValue(name, "bmd-form-rating-input", "radio", value);
-				value = getRadioCheckboxValue(name, "bmd-form-rating-input", "radio");
+				setRadioCheckboxValue(name, "bmd-form-num-check-input", "radio", value);
+				value = getRadioCheckboxValue(
+					name,
+					"bmd-form-num-check-input",
+					"radio",
+				);
 				value = value ? parseInt(value) : null;
 				state["formData"][name] = value;
 				if (updateLocalStorage) saveFieldValue(name, value);
@@ -472,21 +480,21 @@ function setSavedFormData() {
 			}
 		}
 
-		// Rating field
-		if (state["fieldTypes"][name] === "rating") {
+		// Number choice field
+		if (state["fieldTypes"][name] === "num-choice") {
 			const input = document.querySelector(
-				`.bmd-form-rating-input[name="${name}"]`,
+				`.bmd-form-num-check-input[name="${name}"]`,
 			);
 			if (input) {
 				setRadioCheckboxValue(
 					name,
-					"bmd-form-rating-input",
+					"bmd-form-num-check-input",
 					"radio",
 					String(value),
 				);
 				state["formData"][name] = getRadioCheckboxValue(
 					name,
-					"bmd-form-rating-input",
+					"bmd-form-num-check-input",
 					"radio",
 				);
 				reRenderBindElems(name);
@@ -517,9 +525,9 @@ function removeFieldErrors(formField) {
 			input.removeAttribute("aria-describedby");
 		});
 	}
-	// Rating field
-	else if (type === "rating") {
-		formField.querySelectorAll(".bmd-form-rating-input").forEach((input) => {
+	// Number choice field
+	else if (type === "num-radio") {
+		formField.querySelectorAll(".bmd-form-num-check-input").forEach((input) => {
 			input.removeAttribute("aria-invalid");
 			input.removeAttribute("aria-describedby");
 		});
@@ -592,16 +600,16 @@ function choiceFieldOnInput(e) {
 }
 
 /**
- * Handle the inputs of rating form fields: update value in the state, save
- * value in local storage, remove errors and re-render the bind <div> and
+ * Handle the inputs of number choice form fields: update value in the state,
+ * save value in local storage, remove errors and re-render the bind <div> and
  * <span> elements.
  *
  * @param {InputEvent} e
  */
-function ratingFieldOnInput(e) {
+function numChoiceFieldOnInput(e) {
 	const name = e.target.getAttribute("name");
 	const value = parseInt(
-		getRadioCheckboxValue(name, "bmd-form-rating-input", "radio"),
+		getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 	);
 	state["formData"][name] = value;
 	saveFieldValue(name, value);
@@ -718,7 +726,7 @@ function formValid(form) {
 	// These fields will have a type attribute
 	form
 		.querySelectorAll(
-			'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="rating"][data-bmd-required]',
+			'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required]',
 		)
 		.forEach((formField) => {
 			const name = formField.getAttribute("data-bmd-name");
@@ -748,11 +756,11 @@ function formValid(form) {
 						});
 				}
 			}
-			// Required rating fields
-			else if (type === "rating") {
+			// Required number choice fields
+			else if (type === "num-radio") {
 				const value = getRadioCheckboxValue(
 					name,
-					"bmd-form-rating-input",
+					"bmd-form-num-check-input",
 					"radio",
 				);
 				if (value.length === 0) {
@@ -764,12 +772,12 @@ function formValid(form) {
 					addFieldError(
 						formField,
 						errorId,
-						getTranslation(localization, "rating-field-required"),
+						getTranslation(localization, "number-choice-field-required"),
 					);
 
 					// Add WAI-ARIA tags to the inputs
 					formField
-						.querySelectorAll(".bmd-form-rating-input")
+						.querySelectorAll(".bmd-form-num-check-input")
 						.forEach((input) => {
 							input.setAttribute("aria-invalid", "true");
 							input.setAttribute("aria-describedby", errorId);
@@ -781,7 +789,7 @@ function formValid(form) {
 	// Focus on the first form field with error
 	if (formFieldsWithError.length > 0) {
 		const inputToFocus = formFieldsWithError[0].querySelector(
-			".bmd-form-check-input, .bmd-form-rating-input",
+			".bmd-form-check-input, .bmd-form-num-check-input",
 		);
 		if (inputToFocus) inputToFocus.focus();
 	}
@@ -1462,7 +1470,7 @@ function addEventListeners(container) {
 	// <input> elements
 	container
 		.querySelectorAll(
-			"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-rating-input",
+			"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-num-check-input",
 		)
 		.forEach((input) => {
 			if (
@@ -1480,8 +1488,8 @@ function addEventListeners(container) {
 			) {
 				if (input.classList.contains("bmd-form-check-input")) {
 					input.addEventListener("input", choiceFieldOnInput);
-				} else if (input.classList.contains("bmd-form-rating-input")) {
-					input.addEventListener("input", ratingFieldOnInput);
+				} else if (input.classList.contains("bmd-form-num-check-input")) {
+					input.addEventListener("input", numChoiceFieldOnInput);
 				}
 			}
 		});

@@ -463,7 +463,7 @@ const expectedTemplate = `
 	</div>
 </fieldset>
 
-<fieldset data-bmd-name="rating" data-bmd-type="rating" class="bmd-form-field">
+<fieldset data-bmd-name="rating" data-bmd-type="num-radio" class="bmd-form-field">
 	<legend class="bmd-form-question">
 		How would you rate our service?
 	</legend>
@@ -472,7 +472,7 @@ const expectedTemplate = `
 			name="rating"
 			id="id_rating-1"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="1"
 		>
 		<label class="bmd-form-rating-label" for="id_rating-1">
@@ -486,7 +486,7 @@ const expectedTemplate = `
 			name="rating"
 			id="id_rating-2"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="2"
 		>
 		<label class="bmd-form-rating-label" for="id_rating-2">
@@ -500,7 +500,7 @@ const expectedTemplate = `
 			name="rating"
 			id="id_rating-3"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="3"
 		>
 		<label class="bmd-form-rating-label" for="id_rating-3">
@@ -514,7 +514,7 @@ const expectedTemplate = `
 			name="rating"
 			id="id_rating-4"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="4"
 		>
 		<label class="bmd-form-rating-label" for="id_rating-4">
@@ -528,7 +528,7 @@ const expectedTemplate = `
 			name="rating"
 			id="id_rating-5"
 			type="radio"
-			class="bmd-form-rating-input"
+			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="5"
 		>
 		<label class="bmd-form-rating-label" for="id_rating-5">
