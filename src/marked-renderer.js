@@ -8,6 +8,7 @@ const {
 	createSelectField,
 	createChoiceField,
 	createRatingField,
+	createOpinionScaleField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
 const { getTranslation } = require("./translations");
@@ -262,6 +263,15 @@ renderer.paragraph = function (text) {
 				);
 			} else if (fieldInputType === "ratinginput") {
 				return createRatingField(
+					fieldName,
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings["localization"],
+				);
+			} else if (fieldInputType === "opinionscale") {
+				return createOpinionScaleField(
 					fieldName,
 					fieldRequired,
 					parsedAttrs,

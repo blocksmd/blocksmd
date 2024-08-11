@@ -46,6 +46,49 @@ var options = {
 };
 
 /**
+ * Add a single attribute value to an HTML element.
+ *
+ * @param {HTMLElement} elem
+ * @param {string} name
+ * @param {string} value
+ */
+function setSingleAttribute(elem, name, value) {
+	const attrs = elem.getAttribute(name) || "";
+	const attrsArr = attrs
+		.replace(/\s\s+/g, " ")
+		.split(" ")
+		.filter(function (v) {
+			return v !== "";
+		});
+	attrsArr.push(value);
+	elem.setAttribute(name, attrsArr.join(" "));
+}
+
+/**
+ * Remove a single attribute value from an HTML element.
+ *
+ * @param {HTMLElement} elem
+ * @param {string} name
+ * @param {string} value
+ */
+function removeSingleAttribute(elem, name, value) {
+	const attrs = elem.getAttribute(name) || "";
+	const attrsArr = attrs
+		.replace(/\s\s+/g, " ")
+		.split(" ")
+		.filter(function (v) {
+			return v !== "";
+		});
+	const index = attrsArr.indexOf(value);
+	if (index > -1) attrsArr.splice(index, 1);
+	if (attrsArr.length > 0) {
+		elem.setAttribute(name, attrsArr.join(" "));
+	} else {
+		elem.removeAttribute(name);
+	}
+}
+
+/**
  * Set the preferred color scheme (if one is found in the local storage).
  * Depending on the preference from settings, either the domain-wide or the
  * page-specific value is used.
@@ -529,7 +572,8 @@ function removeFieldErrors(formField) {
 	else if (type === "num-radio") {
 		formField.querySelectorAll(".bmd-form-num-check-input").forEach((input) => {
 			input.removeAttribute("aria-invalid");
-			input.removeAttribute("aria-describedby");
+			const name = input.getAttribute("name");
+			removeSingleAttribute(input, "aria-describedby", `id_${name}-error`);
 		});
 	}
 }
@@ -780,7 +824,7 @@ function formValid(form) {
 						.querySelectorAll(".bmd-form-num-check-input")
 						.forEach((input) => {
 							input.setAttribute("aria-invalid", "true");
-							input.setAttribute("aria-describedby", errorId);
+							setSingleAttribute(input, "aria-describedby", errorId);
 						});
 				}
 			}

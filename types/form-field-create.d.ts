@@ -121,3 +121,22 @@ export function createRatingField(
 	formDelimiter: string,
 	localization: string,
 ): string;
+/**
+ * Create an opinion scale form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} localization
+ * @returns {string} opinion scale form field as HTML string
+ */
+export function createOpinionScaleField(
+	name: string,
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	localization: string,
+): string;

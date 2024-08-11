@@ -7,7 +7,7 @@ const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
 const formFieldPattern = new RegExp(
-	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput)\((.*)\)/,
+	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale)\((.*)\)/,
 	"is",
 );
 
@@ -772,6 +772,138 @@ function createRatingField(
 	});
 }
 
+/* Opinion scale field */
+
+const opinionScaleFieldTemplate = `
+{{ startTag }}
+	<legend class="bmd-form-question">
+		{{ validParams.question | safe }}
+	</legend>
+	{% if validParams.description %}
+	<p class="bmd-form-description">
+		{{ validParams.description }}
+	</p>
+	{% endif %}
+	<div class="bmd-scale-grid">
+		{% for i in range(validParams.startat, validParams.outof + 1) %}
+		<input 
+			name="{{ name }}"
+			id="{{ inputId }}-{{ i }}"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="{{ i }}"
+			{% if validParams.value == i %}checked{% endif %}
+			{% if validParams.disabled %}disabled{% endif %}
+			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if i == validParams.startat and validParams.labelstart %}
+			aria-describedby="{{ inputId }}-label-start"
+			{% endif %}
+			{% if i == validParams.outof and validParams.labelend %}
+			aria-describedby="{{ inputId }}-label-end"
+			{% endif %}
+		>
+		<label class="bmd-form-scale-label" for="{{ inputId }}-{{ i }}">{{ i }}</label>
+		{% endfor %}
+	</div>
+	{% if validParams.labelstart or validParams.labelend  %}
+	<div class="bmd-form-scale-text">
+		{% if validParams.labelstart %}
+		<div class="bmd-form-scale-text-start">
+			<span class="bmd-d-none bmd-xs:d-inline-block">{{ validParams.startat }} &mdash;</span>
+			<span id="{{ inputId }}-label-start">{{ validParams.labelstart }}</span>
+		</div>
+		{% endif %}
+		{% if validParams.labelend %}
+		<div class="bmd-form-scale-text-end">
+			<span class="bmd-d-none bmd-xs:d-inline-block">{{ validParams.outof }} &mdash;</span>
+			<span id="{{ inputId }}-label-end">{{ validParams.labelend }}</span>
+		</div>
+		{% endif %}
+	</div>
+	{% endif %}
+</fieldset>
+`;
+
+/**
+ * Create an opinion scale form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} localization
+ * @returns {string} opinion scale form field as HTML string
+ */
+function createOpinionScaleField(
+	name,
+	required,
+	parsedAttrs,
+	params,
+	formDelimiter,
+	localization,
+) {
+	// Set up the start tag, valid params, the rest, and translations
+	// Make sure to use <fieldset> for the start tag during setup
+	const {
+		startTag: startTag,
+		validParams: validParams,
+		restParams: restParams,
+	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, true);
+	const translations = {};
+
+	// Set default params
+	validParams["startat"] = 0;
+	validParams["outof"] = 10;
+	validParams["labelstart"] = getTranslation(localization, "nps-label-start");
+	validParams["labelend"] = getTranslation(localization, "nps-label-end");
+
+	// Go through the rest of the params and validate
+	for (let [key, value] of Object.entries(restParams)) {
+		if (key === "disabled" && value) {
+			validParams[key] = value;
+		} else if (key === "startat" && value && value.match(/^(0|1)$/)) {
+			validParams[key] = parseInt(value);
+		} else if (key === "outof" && value && value.match(/^([5-9]|10)$/)) {
+			validParams[key] = parseInt(value);
+		} else if (key === "labelstart" && value && typeof value === "string") {
+			validParams[key] = value;
+		} else if (key === "labelend" && value && typeof value === "string") {
+			validParams[key] = value;
+		} else if (key === "hidelabelstart" && value) {
+			validParams[key] = value;
+		} else if (key === "hidelabelend" && value) {
+			validParams[key] = value;
+		} else if (key === "value" && value && typeof value === "string") {
+			validParams[key] = parseInt(value);
+		} else {
+			console.warn(
+				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
+			);
+		}
+	}
+
+	// Hide labels
+	if (validParams["hidelabelstart"] !== undefined)
+		validParams["labelstart"] = "";
+	if (validParams["hidelabelend"] !== undefined) validParams["labelend"] = "";
+
+	// Create the validation attributes (to be added to the start tag)
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
+	if (required) validationAttrs += " data-bmd-required";
+
+	// Use Nunjucks to create the form field
+	nunjucks.configure({ autoescape: false });
+	return nunjucks.renderString(opinionScaleFieldTemplate, {
+		startTag: `${startTag.slice(0, 9)} ${validationAttrs} ${startTag.slice(9)}`,
+		name: name,
+		inputId: `id_${name}`,
+		required: required,
+		validParams: validParams,
+		translations: translations,
+	});
+}
+
 exports.formFieldPattern = formFieldPattern;
 exports.formFieldSetup = formFieldSetup;
 exports.createTextField = createTextField;
@@ -779,3 +911,4 @@ exports.createNumberField = createNumberField;
 exports.createSelectField = createSelectField;
 exports.createChoiceField = createChoiceField;
 exports.createRatingField = createRatingField;
+exports.createOpinionScaleField = createOpinionScaleField;
