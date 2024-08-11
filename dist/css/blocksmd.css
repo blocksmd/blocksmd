@@ -1763,7 +1763,10 @@
 
 .bmd-root .bmd-form-scale-text {
 	margin-top: calc(var(--bmd-spacer) * 0.75);
+	font-size: var(--bmd-font-size-sm);
 	color: rgb(var(--bmd-accent-rgb));
+	-webkit-font-smoothing: auto;
+	-moz-osx-font-smoothing: auto;
 }
 
 .bmd-root .bmd-form-scale-text-end {
