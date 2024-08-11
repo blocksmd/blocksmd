@@ -221,7 +221,6 @@
 		calc((var(--bmd-body-bg-b) * 2 + var(--bmd-accent-b)) / 3)
 	);
 
-	--bmd-check-backdrop-opacity: 0;
 	--bmd-check-padding-x: 12px;
 	--bmd-check-padding-y: var(--bmd-action-padding-y);
 	--bmd-check-font-size: var(--bmd-font-size-lg);
@@ -229,6 +228,7 @@
 	--bmd-check-line-height: var(--bmd-action-line-height);
 	--bmd-check-color: var(--bmd-input-color);
 	--bmd-check-bg: rgba(var(--bmd-accent-rgb), 0.075);
+	--bmd-check-bg-blur-radius: 0;
 	--bmd-check-border-color: rgba(var(--bmd-accent-rgb), 0.625);
 	--bmd-check-border-radius: var(--bmd-border-radius);
 	--bmd-check-hover-color: var(--bmd-check-color);
@@ -1419,14 +1419,6 @@
 	gap: calc(var(--bmd-spacer) / 2);
 }
 
-.bmd-root .bmd-form-check {
-	background-color: rgba(
-		var(--bmd-body-bg-rgb),
-		var(--bmd-check-backdrop-opacity)
-	);
-	border-radius: var(--bmd-border-radius);
-}
-
 .bmd-root .bmd-form-check:not(:last-child) {
 	margin-bottom: calc(var(--bmd-spacer) / 2);
 }
@@ -1480,6 +1472,8 @@
 	cursor: pointer;
 	color: var(--bmd-check-color);
 	background-color: var(--bmd-check-bg);
+	backdrop-filter: blur(var(--bmd-check-bg-blur-radius));
+	-webkit-backdrop-filter: blur(var(--bmd-check-bg-blur-radius));
 	border: 1px solid var(--bmd-check-border-color);
 	border-radius: var(--bmd-check-border-radius);
 	-webkit-user-select: none;
@@ -1726,6 +1720,8 @@
 	cursor: pointer;
 	color: var(--bmd-check-color);
 	background-color: var(--bmd-check-bg);
+	backdrop-filter: blur(var(--bmd-check-bg-blur-radius));
+	-webkit-backdrop-filter: blur(var(--bmd-check-bg-blur-radius));
 	border: 1px solid var(--bmd-check-border-color);
 	border-radius: var(--bmd-check-border-radius);
 	-webkit-user-select: none;
