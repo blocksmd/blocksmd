@@ -470,7 +470,7 @@ const expectedTemplate4 = `
 	<div class="bmd-form-scale-text">
 		<div class="bmd-form-scale-text-start">
         	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
-        	<span id="id_opinion-label-start">মোটেও সম্ভাবনা নেই</span>
+        	<span id="id_opinion-label-start">কোনো সম্ভাবনা নেই</span>
         </div>
         <div class="bmd-form-scale-text-end">
         	<span class="bmd-d-none bmd-xs:d-inline-block">10 &mdash;</span>

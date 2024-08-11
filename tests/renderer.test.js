@@ -110,6 +110,11 @@ rating = RatingInput(
 	| question = How would you rate our service?
 )
 
+opinion* = OpinionScale(
+	| question = What is your opinion?
+	| description = Please choose.
+)
+
 
 <!-- Headings -->
 
@@ -539,6 +544,117 @@ const expectedTemplate = `
 			5<span class="bmd-visually-hidden"> stars</span>
 		</label>
 	</div>
+</fieldset>
+
+<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
+	<legend class="bmd-form-question">
+		What is your <span class="bmd-text-nowrap">opinion?<sup class="bmd-text-accent">*</sup></span>
+	</legend>
+	<p class="bmd-form-description">
+		Please choose.
+	</p>
+	<div class="bmd-scale-grid">
+		<input 
+			name="opinion"
+			id="id_opinion-0"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="0"
+			aria-describedby="id_opinion-label-start"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-0">0</label>
+		<input 
+			name="opinion"
+			id="id_opinion-1"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="1"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<input 
+			name="opinion"
+			id="id_opinion-2"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="2"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<input 
+			name="opinion"
+			id="id_opinion-3"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="3"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<input 
+			name="opinion"
+			id="id_opinion-4"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="4"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<input 
+			name="opinion"
+			id="id_opinion-5"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="5"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<input 
+			name="opinion"
+			id="id_opinion-6"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="6"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-6">6</label>
+		<input 
+			name="opinion"
+			id="id_opinion-7"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="7"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-7">7</label>
+		<input 
+			name="opinion"
+			id="id_opinion-8"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="8"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-8">8</label>
+		<input 
+			name="opinion"
+			id="id_opinion-9"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="9"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-9">9</label>
+		<input 
+			name="opinion"
+			id="id_opinion-10"
+			type="radio"
+			class="bmd-form-num-check-input bmd-form-scale-input"
+			value="10"
+			aria-describedby="id_opinion-label-end"
+		>
+		<label class="bmd-form-scale-label" for="id_opinion-10">10</label>
+	</div>
+	<div class="bmd-form-scale-text">
+		<div class="bmd-form-scale-text-start">
+        	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
+        	<span id="id_opinion-label-start">Not likely at all</span>
+        </div>
+        <div class="bmd-form-scale-text-end">
+        	<span class="bmd-d-none bmd-xs:d-inline-block">10 &mdash;</span>
+        	<span id="id_opinion-label-end">Extremely likely</span>
+        </div>
+    </div>
 </fieldset>
 
 
