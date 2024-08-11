@@ -53,7 +53,7 @@ const translations = {
 			'<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div><div class="bmd-specific-fs-14">তে তৈরি</div>',
 		"next-btn": "পরবর্তী",
 		"nps-label-end": "অত্যন্ত সম্ভাবনাময়",
-		"nps-label-start": "মোটেও সম্ভাবনা নেই",
+		"nps-label-start": "কোনো সম্ভাবনা নেই",
 		"number-choice-field-required": "একটি নির্বাচন করুন।",
 		"number-input-placeholder": "এখানে একটি সংখ্যা টাইপ করুন...",
 		"page-progress": "পৃষ্ঠার অগ্রগতি (%)",
