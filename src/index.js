@@ -1160,7 +1160,7 @@ function hasNewActiveSlide(slide, index) {
 		// Autofocus (if applicable)
 		if (state["settings"]["autofocus"] === "all-slides") {
 			const elemToAutofocus = slide.querySelector(
-				"input.bmd-form-control, textarea.bmd-form-control, select.bmd-form-select, input.bmd-form-check-input",
+				"input.bmd-form-control, textarea.bmd-form-control, select.bmd-form-select, input.bmd-form-check-input, input.bmd-form-num-check-input",
 			);
 			if (elemToAutofocus) elemToAutofocus.focus();
 		} else {
