@@ -66,6 +66,7 @@
 	/* Border */
 
 	--bmd-border-radius-base: 4px;
+	--bmd-border-radius-lg: 8px;
 	--bmd-border-radius: var(--bmd-border-radius-base);
 
 	/* Background */
@@ -1260,7 +1261,7 @@
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-error {
-	border-radius: var(--bmd-border-radius-base);
+	border-radius: var(--bmd-border-radius-lg);
 }
 
 .bmd-root .bmd-error-icon {
@@ -1595,7 +1596,7 @@
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check,
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check-label,
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-check-frame > img {
-	border-radius: var(--bmd-border-radius-base);
+	border-radius: var(--bmd-border-radius-lg);
 }
 
 /* Form rating */
@@ -1687,7 +1688,7 @@
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-rating-label {
-	border-radius: var(--bmd-border-radius-base);
+	border-radius: var(--bmd-border-radius-lg);
 }
 
 /* Form opinion scale */
@@ -2001,7 +2002,7 @@
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-code-wrapper {
-	border-radius: var(--bmd-border-radius-base);
+	border-radius: var(--bmd-border-radius-lg);
 }
 
 .bmd-root .bmd-code-header {
