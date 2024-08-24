@@ -6,6 +6,7 @@ export const formFieldPattern: RegExp;
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} localization
  * @param {boolean} useFieldset
  * @returns {{startTag: string, validParams: Object, restParams: Object}}
  * start tag, validated params, rest of the params
@@ -15,6 +16,7 @@ export function formFieldSetup(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	localization: string,
 	useFieldset: boolean,
 ): {
 	startTag: string;

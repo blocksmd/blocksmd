@@ -8,7 +8,7 @@ const beautify = require("beautify");
 const expectedTemplate1 = `
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -179,7 +179,7 @@ test("Case 2 (radio, not required, checked value, horizontal)", () => {
 const expectedTemplate3 = `
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -277,7 +277,7 @@ test("Case 3 (radio, multiple checked values)", () => {
 const expectedTemplate4 = `
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -479,7 +479,7 @@ test("Case 5 (radio, picture choice, hide labels, different form delimiter)", ()
 const expectedTemplate6 = `
 <fieldset data-bmd-name="choice" data-bmd-type="checkbox" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -659,7 +659,7 @@ test("Case 7 (checkbox, not required, checked values, horizontal, different loca
 const expectedTemplate8 = `
 <fieldset data-bmd-name="choice" data-bmd-type="checkbox" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -769,7 +769,7 @@ test("Case 8 (checkbox, picture choice)", () => {
 const expectedTemplate9 = `
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</legend>
 	<div class="bmd-check-grid-wrapper">
 		<div class="bmd-check-grid">
@@ -791,7 +791,7 @@ test("Case 9 (no params)", () => {
 const expectedTemplate10 = `
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</legend>
 	<div class="bmd-check-grid-wrapper">
 		<div class="bmd-check-grid bmd-check-grid-h">

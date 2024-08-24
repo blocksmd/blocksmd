@@ -16,6 +16,7 @@ test("Case 1", () => {
 				| maxlength = 255
 			`,
 			"|",
+			"en",
 			false,
 		),
 	).toMatchObject({
@@ -23,7 +24,7 @@ test("Case 1", () => {
 			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
-				'What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>',
+				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',
 			description: "Please enter your full name.",
 			fieldsize: "sm",
 			subfield: true,
@@ -48,13 +49,14 @@ test("Case 2 (no parsed attrbiutes, less params, weird formatting)", () => {
 				|
 			`,
 			"|",
+			"en",
 			false,
 		),
 	).toMatchObject({
 		startTag: '<div class="bmd-form-field bmd-form-field-sm">',
 		validParams: {
 			question:
-				'<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>',
+				'<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>',
 			fieldsize: "sm",
 		},
 		restParams: {
@@ -78,6 +80,7 @@ test("Case 3 (form delimiter set to new line)", () => {
 				maxlength = 255
 			`,
 			"\n",
+			"en",
 			false,
 		),
 	).toMatchObject({
@@ -103,6 +106,7 @@ test("Case 4", () => {
 			'id="some-id" class="bmd-col-8"',
 			"question = Address Line 1 | subfield",
 			"|",
+			"en",
 			false,
 		),
 	).toMatchObject({
@@ -130,6 +134,7 @@ test("Case 5 (use fieldset)", () => {
 				| maxlength = 255
 			`,
 			"|",
+			"en",
 			true,
 		),
 	).toMatchObject({
@@ -137,7 +142,7 @@ test("Case 5 (use fieldset)", () => {
 			'<fieldset id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
-				'What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>',
+				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',
 			description: "Please enter your full name.",
 			fieldsize: "sm",
 			subfield: true,

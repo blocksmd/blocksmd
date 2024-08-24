@@ -8,7 +8,7 @@ const beautify = require("beautify");
 const expectedTemplate1 = `
 <div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_name">
-		What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter your full name.
@@ -63,7 +63,7 @@ test("Case 1", () => {
 const expectedTemplate2 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
 	<label class="bmd-form-question" for="id_email">
-		What is your email <span class="bmd-text-nowrap">address?<sup class="bmd-text-accent">*</sup></span>
+		What is your email <span class="bmd-text-nowrap" aria-hidden="true">address?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">address? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		We'll reach you directly.
@@ -152,7 +152,7 @@ test("Case 3 (url)", () => {
 const expectedTemplate4 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_name">
-		আপনার নাম <span class="bmd-text-nowrap">কি?<sup class="bmd-text-accent">*</sup></span>
+		আপনার নাম <span class="bmd-text-nowrap" aria-hidden="true">কি?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">কি? (প্রয়োজন)</span>
 	</label>
 	<p class="bmd-form-description">
 		আপনার সম্পূর্ণ নাম লিখুন
@@ -193,7 +193,7 @@ test("Case 4 (form delimiter changed to new line, and different localization)", 
 const expectedTemplate5 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_name">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</label>
 	<input
 		name="name"
@@ -219,7 +219,7 @@ test("Case 5 (no params)", () => {
 const expectedTemplate6 = `
 <div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_description">
-		Write a short description of your <span class="bmd-text-nowrap">event<sup class="bmd-text-accent">*</sup></span>
+		Write a short description of your <span class="bmd-text-nowrap" aria-hidden="true">event<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">event (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		A few lines and you're good to go
@@ -316,7 +316,7 @@ test("Case 7 (multiline with value)", () => {
 const expectedTemplate8 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
 	<label class="bmd-form-question" for="id_email">
-		What is your email <span class="bmd-text-nowrap">address?<sup class="bmd-text-accent">*</sup></span>
+		What is your email <span class="bmd-text-nowrap" aria-hidden="true">address?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">address? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		We'll reach you directly.
@@ -439,7 +439,7 @@ test("Case 10 (multiline with different localization)", () => {
 const expectedTemplate11 = `
 <div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_phone">
-		What is your phone <span class="bmd-text-nowrap">number?<sup class="bmd-text-accent">*</sup></span>
+		What is your phone <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter a number where we can reach you.

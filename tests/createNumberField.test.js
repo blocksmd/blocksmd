@@ -8,7 +8,7 @@ const beautify = require("beautify");
 const expectedTemplate1 = `
 <div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap">number?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the number you like the best.
@@ -65,7 +65,7 @@ test("Case 1", () => {
 const expectedTemplate2 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
 	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap">number?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the number you like the best.
@@ -156,7 +156,7 @@ test("Case 3 (unit, not required)", () => {
 const expectedTemplate4 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
 	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap">number?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (প্রয়োজন)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the number you like the best.
@@ -201,7 +201,7 @@ test("Case 4 (unit end, different localization)", () => {
 const expectedTemplate5 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap">number?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the number you like the best.
@@ -247,7 +247,7 @@ test("Case 5 (invalid value, min, max, and step)", () => {
 const expectedTemplate6 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_amount">
-		What is the <span class="bmd-text-nowrap">amount?<sup class="bmd-text-accent">*</sup></span>
+		What is the <span class="bmd-text-nowrap" aria-hidden="true">amount?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">amount? (required)</span>
 	</label>
 	<div class="bmd-input-group">
 		<span id="id_amount-unit" class="bmd-input-group-text">$</span>
@@ -296,7 +296,7 @@ test("Case 6 (different form delimiter)", () => {
 const expectedTemplate7 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
 	<label class="bmd-form-question" for="id_number">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</label>
 	<div class="bmd-input-group">
 		<input

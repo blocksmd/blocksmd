@@ -259,7 +259,7 @@ const expectedTemplate = `
 
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_name">
-		What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter your full name.
@@ -276,7 +276,7 @@ const expectedTemplate = `
 
 <div class="bmd-hidden bmd-form-field">
 	<label class="bmd-form-question" for="id_text">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</label>
 	<input
 		name="text"
@@ -348,7 +348,7 @@ const expectedTemplate = `
 
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_number">
-		What number are you thinking <span class="bmd-text-nowrap">of?<sup class="bmd-text-accent">*</sup></span>
+		What number are you thinking <span class="bmd-text-nowrap" aria-hidden="true">of?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">of? (required)</span>
 	</label>
 	<div class="bmd-input-group">
 		<input
@@ -380,7 +380,7 @@ const expectedTemplate = `
 
 <fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<div class="bmd-check-grid-wrapper">
 		<div class="bmd-check-grid">
@@ -420,7 +420,7 @@ const expectedTemplate = `
 
 <fieldset data-bmd-name="pictureChoice" data-bmd-type="checkbox" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your picture <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your picture <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<div class="bmd-form-text">
 		Choose as many as you like
@@ -548,7 +548,7 @@ const expectedTemplate = `
 
 <fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">opinion?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.

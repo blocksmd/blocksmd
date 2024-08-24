@@ -18,6 +18,7 @@ const formFieldPattern = new RegExp(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} localization
  * @param {boolean} useFieldset
  * @returns {{startTag: string, validParams: Object, restParams: Object}}
  * start tag, validated params, rest of the params
@@ -27,12 +28,13 @@ function formFieldSetup(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	localization,
 	useFieldset,
 ) {
 	// Set up defaults
 	const validParams = {
 		question: required
-			? '<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>'
+			? `<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (${getTranslation(localization, "required")})</span>`
 			: "...",
 	};
 	const restParams = {};
@@ -59,7 +61,7 @@ function formFieldSetup(
 				let question = value.split(" ");
 				const questionLastWord = question.pop();
 				question.push(
-					`<span class="bmd-text-nowrap">${questionLastWord}<sup class="bmd-text-accent">*</sup></span>`,
+					`<span class="bmd-text-nowrap" aria-hidden="true">${questionLastWord}<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">${questionLastWord} (${getTranslation(localization, "required")})</span>`,
 				);
 				validParams[key] = question.join(" ");
 			} else {
@@ -178,7 +180,14 @@ function createTextField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, false);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		false,
+	);
 	const translations = {};
 
 	// Add the default placeholder based on input type
@@ -319,7 +328,14 @@ function createNumberField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, false);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		false,
+	);
 	const translations = {};
 
 	// Add the default placeholder
@@ -428,7 +444,14 @@ function createSelectField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, false);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		false,
+	);
 	const translations = {};
 
 	// Add the default placeholder
@@ -566,7 +589,14 @@ function createChoiceField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, true);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		true,
+	);
 	const translations = {
 		chooseManyText: getTranslation(localization, "choose-many-text"),
 	};
@@ -723,7 +753,14 @@ function createRatingField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, true);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		true,
+	);
 	const translations = {
 		starSingular: getTranslation(localization, "star-singular"),
 		starPlural: getTranslation(localization, "star-plural"),
@@ -849,7 +886,14 @@ function createOpinionScaleField(
 		startTag: startTag,
 		validParams: validParams,
 		restParams: restParams,
-	} = formFieldSetup(required, parsedAttrs, params, formDelimiter, true);
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		true,
+	);
 	const translations = {};
 
 	// Set default params

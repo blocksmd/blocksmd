@@ -8,7 +8,7 @@ const beautify = require("beautify");
 const expectedTemplate1 = `
 <fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">opinion?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -254,7 +254,7 @@ test("Case 2 (not required, start at 1, out of 5, value, disabled)", () => {
 const expectedTemplate3 = `
 <fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">opinion?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -359,7 +359,7 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 const expectedTemplate4 = `
 <fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">opinion?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (প্রয়োজন)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -509,7 +509,7 @@ test("Case 4 (different localization)", () => {
 const expectedTemplate5 = `
 <fieldset data-bmd-name="choice" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap">choice?<sup class="bmd-text-accent">*</sup></span>
+		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>
 	<p class="bmd-form-description">
 		Please choose.
@@ -831,7 +831,7 @@ test("Case 7 (not required, start at 1, out of 5, value, disabled, hide end labe
 const expectedTemplate8 = `
 <fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
 	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</legend>
 	<div class="bmd-scale-grid">
 		<input 

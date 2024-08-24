@@ -8,7 +8,7 @@ const beautify = require("beautify");
 const expectedTemplate1 = `
 <div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_color">
-		What is your favorite <span class="bmd-text-nowrap">color?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the color you like the best.
@@ -108,7 +108,7 @@ test("Case 2 (not required)", () => {
 const expectedTemplate3 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_color">
-		What is your favorite <span class="bmd-text-nowrap">color?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (প্রয়োজন)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the color you like the best.
@@ -153,7 +153,7 @@ test("Case 3 (different localization)", () => {
 const expectedTemplate4 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_color">
-		What is your favorite <span class="bmd-text-nowrap">color?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the color you like the best.
@@ -198,7 +198,7 @@ test("Case 4 (options with specific values)", () => {
 const expectedTemplate5 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_color">
-		What is your favorite <span class="bmd-text-nowrap">color?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the color you like the best.
@@ -243,7 +243,7 @@ test("Case 5 (option with empty value)", () => {
 const expectedTemplate6 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_color">
-		What is your favorite <span class="bmd-text-nowrap">color?<sup class="bmd-text-accent">*</sup></span>
+		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
 	<p class="bmd-form-description">
 		Please enter the color you like the best.
@@ -289,7 +289,7 @@ test("Case 6 (nothing selected, different form delimiter)", () => {
 const expectedTemplate7 = `
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_choice">
-		<span class="bmd-text-nowrap">...<sup class="bmd-text-accent">*</sup></span>
+		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
 	</label>
 	<select
 		name="choice"

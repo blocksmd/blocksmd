@@ -35,7 +35,7 @@ const expectedTemplate1 = `
 	<div class="bmd-grid">
 		<div class="bmd-form-field">
 			<label class="bmd-form-question" for="id_name">
-				What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>
+				What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
 			</label>
 			<input
 				name="name"
@@ -138,7 +138,7 @@ const expectedTemplate2 = `
 	<div class="bmd-grid">
 		<div class="bmd-form-field">
 			<label class="bmd-form-question" for="id_name">
-				What is your <span class="bmd-text-nowrap">name?<sup class="bmd-text-accent">*</sup></span>
+				What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
 			</label>
 			<input
 				name="name"
