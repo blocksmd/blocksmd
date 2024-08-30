@@ -59,15 +59,19 @@ The output folder is a static site with regular HTML files, and you can host the
 
 The following list contains upcoming features that have been planned for **blocks.md**:
 
-- Date time input
-- Multi-choice input with dynamic filtering and results
-- Rating input
-- File/image upload
-- Ranking input (maybe)
-- Honeypot fields for spam prevention
-- Layout options with images and media (also slide level)
-- Classic form style
-- Payments
+1. Date time input
+2. Multi-choice input with dynamic filtering and results
+3. Rating input ✅
+4. Opinion scale and Net Promoter Score<sup>®</sup> ✅
+5. File/image upload
+6. Ranking input (maybe)
+7. Honeypot fields for spam prevention
+8. Layout options with images and media (also slide level)
+9. Classic form style
+10. Payments
+11. WordPress plugin
+12. Cloud version
+13. Go open-source
 
 ## Build
 
