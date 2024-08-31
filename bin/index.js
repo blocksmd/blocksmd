@@ -47,9 +47,10 @@ const staticDirName = argv["static-dir-name"]
 
 // Set up the base
 // Use base if it exists in the input folder, otherwise use the library default
-const base = fs.existsSync(`${inputDir}/base.html`)
+const baseFile = fs.existsSync(`${inputDir}/base.html`)
 	? `${inputDir}/base.html`
 	: path.join(__dirname, "base.html");
+const base = fs.readFileSync(baseFile).toString();
 
 // Read the input directory
 fs.readdir(inputDir, function (err, files) {
@@ -77,7 +78,7 @@ fs.readdir(inputDir, function (err, files) {
 				};
 
 				// Use Nunjucks to create the HTML
-				const htmlContent = nunjucks.render(base, {
+				const htmlContent = nunjucks.renderString(base, {
 					route: route,
 					settings: settings,
 				});
