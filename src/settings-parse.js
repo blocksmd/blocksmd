@@ -457,8 +457,8 @@ function parseSettings(template) {
 			accepted: "start",
 		},
 		"vertical-padding": {
-			pattern: /^(calculated|xs:calculated)$/,
-			accepted: "calculated || xs:calculated",
+			pattern: /^(static|sm-and-up:static)$/,
+			accepted: "static || sm-and-up:static",
 		},
 	};
 

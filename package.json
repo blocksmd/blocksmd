@@ -1,6 +1,6 @@
 {
 	"name": "blocksmd",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Markdown to amazing forms and web pages",
 	"main": "src/index.js",
 	"types": "types/index.d.ts",

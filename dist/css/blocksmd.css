@@ -171,7 +171,9 @@
 	--bmd-content-padding-xs: calc(var(--bmd-spacer) * 1.25);
 	--bmd-main-container-width: 720px;
 	--bmd-main-vertical-alignment: center;
-	--bmd-main-extra-padding-top: 60px; /* Make sure this leaves enough space for page progress and header on top */
+	--bmd-main-extra-padding-top: calc(
+		var(--bmd-page-progress-height) + var(--bmd-header-height)
+	);
 	--bmd-main-extra-padding-bottom: 60px; /* Make sure this leaves enough space for footer on bottom */
 	--bmd-slide-transition-duration: 200ms;
 	--bmd-form-field-padding-y: calc(var(--bmd-spacer) / 2);
@@ -289,6 +291,7 @@
 .bmd-root[data-bmd-footer="hide"] {
 	/* Layout */
 
+	--bmd-main-extra-padding-bottom: 0px;
 	--bmd-footer-display: none;
 }
 
@@ -310,35 +313,21 @@
 	--bmd-main-vertical-alignment: flex-start;
 }
 
-.bmd-root[data-bmd-vertical-alignment="start"],
-.bmd-root[data-bmd-vertical-padding="calculated"] {
+.bmd-root[data-bmd-vertical-padding="static"],
+.bmd-root[data-bmd-footer="hide"][data-bmd-vertical-padding="static"] {
 	/* Layout */
 
-	--bmd-main-extra-padding-top: calc(
-		var(--bmd-page-progress-height) + var(--bmd-header-height)
-	);
+	--bmd-main-extra-padding-top: 60px; /* Make sure this leaves enough space for page progress and header on top */
+	--bmd-main-extra-padding-bottom: 60px; /* Make sure this leaves enough space for footer on bottom */
 }
 
-.bmd-root[data-bmd-footer="hide"][data-bmd-vertical-alignment="start"],
-.bmd-root[data-bmd-footer="hide"][data-bmd-vertical-padding="calculated"] {
-	/* Layout */
-
-	--bmd-main-extra-padding-bottom: 0px;
-}
-
-@media (max-width: 575.98px) {
-	.bmd-root[data-bmd-vertical-padding="xs:calculated"] {
+@media (min-width: 576px) {
+	.bmd-root[data-bmd-vertical-padding="sm-and-up:static"],
+	.bmd-root[data-bmd-footer="hide"][data-bmd-vertical-padding="sm-and-up:static"] {
 		/* Layout */
 
-		--bmd-main-extra-padding-top: calc(
-			var(--bmd-page-progress-height) + var(--bmd-header-height)
-		);
-	}
-
-	.bmd-root[data-bmd-footer="hide"][data-bmd-vertical-padding="xs:calculated"] {
-		/* Layout */
-
-		--bmd-main-extra-padding-bottom: 0px;
+		--bmd-main-extra-padding-top: 60px; /* Make sure this leaves enough space for page progress and header on top */
+		--bmd-main-extra-padding-bottom: 60px; /* Make sure this leaves enough space for footer on bottom */
 	}
 }
 
