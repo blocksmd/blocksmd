@@ -69,7 +69,7 @@ The following list contains upcoming features that have been planned for **block
 8. Layout options with images and media (also slide level)
 9. Classic form style
 10. Payments
-11. WordPress plugin
+11. [WordPress plugin](https://blocks.md/wordpress-plugin/) ✅
 12. Cloud version
 13. Go open-source
 
