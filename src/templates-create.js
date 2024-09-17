@@ -204,7 +204,14 @@ const bodyTemplate = `
  * updated settings
  */
 function createBodyTemplate(settings) {
-	marked.use({ renderer });
+	marked.use({
+		renderer: renderer,
+		markedSettings: {
+			"css-prefix": settings["css-prefix"],
+			"form-delimiter": settings["form-delimiter"],
+			"localization": settings["localization"],
+		},
+	});
 
 	// Parse the brand (if provided)
 	// The class for hiding depending on the color scheme is only added if the
@@ -323,7 +330,14 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 	template = nunjucks.renderString(template, data);
 
 	// Parse the <markdown>...</markdown> sections using Marked
-	marked.use({ renderer });
+	marked.use({
+		renderer: renderer,
+		markedSettings: {
+			"css-prefix": settings["css-prefix"],
+			"form-delimiter": settings["form-delimiter"],
+			"localization": settings["localization"],
+		},
+	});
 	template = template.replace(
 		/<markdown>(.*?)<\/markdown>/gs,
 		function (match, content) {

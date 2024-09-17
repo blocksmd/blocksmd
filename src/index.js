@@ -188,7 +188,14 @@ function reRenderBindElems(name) {
 	document.querySelectorAll(`div[data-bmd-bind-${name}]`).forEach((div) => {
 		const template =
 			state["bindDivTemplates"][div.getAttribute("data-bmd-bind-template-ref")];
-		marked.use({ renderer });
+		marked.use({
+			renderer: renderer,
+			markedSettings: {
+				"css-prefix": state["settings"]["css-prefix"],
+				"form-delimiter": state["settings"]["form-delimiter"],
+				"localization": state["settings"]["localization"],
+			},
+		});
 		let parsedTemplate = marked.parse(
 			nunjucks.renderString(template, {
 				...state["data"],
@@ -1614,21 +1621,12 @@ function init(template, opts) {
 	}
 
 	// Initialize settings
-	// Also save the settings required for the Marked renderer in local storage
 	const parsedTemplateAndSettings = parseSettings(template);
 	template = parsedTemplateAndSettings["template"];
 	state["settings"] = {
 		...state["settings"],
 		...parsedTemplateAndSettings["settings"],
 	};
-	localStorage.setItem(
-		`blocksmd:${window.location.hostname}${window.location.pathname}marked-settings`,
-		JSON.stringify({
-			"css-prefix": state["settings"]["css-prefix"],
-			"form-delimiter": state["settings"]["form-delimiter"],
-			"localization": state["settings"]["localization"],
-		}),
-	);
 
 	// Get or create response id
 	if (state["settings"]["page"] === "form-slides") getOrCreateResponseId();
