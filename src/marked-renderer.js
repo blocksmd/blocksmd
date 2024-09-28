@@ -150,6 +150,7 @@ renderer.heading = function (text, level, raw) {
 			.replace(/[^a-z0-9 -]/g, "")
 			.replace(/\s+/g, "-")
 			.replace(/-+/g, "-");
+		if (markedSettings["id"] !== "") id = `${markedSettings["id"]}:${id}`;
 		startTag = startTag.replace(/<([^\s>]+)/, `<$1 id="${id}"`);
 	}
 
@@ -234,6 +235,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			} else if (fieldInputType === "numberinput") {
@@ -243,6 +245,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			} else if (fieldInputType === "selectbox") {
@@ -252,6 +255,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			} else if (
@@ -265,6 +269,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			} else if (fieldInputType === "ratinginput") {
@@ -274,6 +279,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			} else if (fieldInputType === "opinionscale") {
@@ -283,6 +289,7 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
+					markedSettings["id"],
 					markedSettings["localization"],
 				);
 			}

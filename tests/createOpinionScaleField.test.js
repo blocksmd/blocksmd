@@ -146,6 +146,7 @@ test("Case 1", () => {
 					| outof = 4
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -242,6 +243,7 @@ test("Case 2 (not required, start at 1, out of 5, value, disabled)", () => {
 					| disabled
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -347,6 +349,7 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 					labelend = End
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -497,6 +500,7 @@ test("Case 4 (different localization)", () => {
 					| outof = 4
 				`,
 				"|",
+				"",
 				"bn",
 			),
 			{ format: "html" },
@@ -635,6 +639,7 @@ test("Case 5 (hide labels)", () => {
 					| hideLabelEnd
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -727,6 +732,7 @@ test("Case 6 (not required, start at 1, out of 5, value, disabled, hide start la
 					| hideLabelStart
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -819,6 +825,7 @@ test("Case 7 (not required, start at 1, out of 5, value, disabled, hide end labe
 					| hideLabelEnd
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -940,7 +947,7 @@ const expectedTemplate8 = `
 
 test("Case 8 (no params)", () => {
 	expect(
-		beautify(createOpinionScaleField("opinion", true, "", "", "|", "en"), {
+		beautify(createOpinionScaleField("opinion", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate8, { format: "html" }));

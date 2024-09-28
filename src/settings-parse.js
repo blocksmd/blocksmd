@@ -394,8 +394,8 @@ function parseSettings(template) {
 			accepted: "anchored",
 		},
 		"id": {
-			pattern: /^.*$/,
-			accepted: "valid string",
+			pattern: /^[a-zA-Z][\w:.-]*$/,
+			accepted: "valid HTML id",
 		},
 		"localization": {
 			pattern: /^.*$/,

@@ -108,6 +108,7 @@ test("Case 1", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -115,7 +116,7 @@ test("Case 1", () => {
 	).toBe(beautify(expectedTemplate1, { format: "html" }));
 });
 
-// Case 2 (not required, out of 3, hearts, value)
+// Case 2 (not required, out of 3, hearts, value, different id)
 
 const expectedTemplate2 = `
 <fieldset data-bmd-name="rating" data-bmd-type="num-radio" class="bmd-form-field">
@@ -128,12 +129,12 @@ const expectedTemplate2 = `
 	<div class="bmd-rating-grid">
 		<input 
 			name="rating"
-			id="id_rating-1"
+			id="form3:id_rating-1"
 			type="radio"
 			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="1"
 		>
-		<label class="bmd-form-rating-label" for="id_rating-1">
+		<label class="bmd-form-rating-label" for="form3:id_rating-1">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
 				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="bmd-form-rating-svg-path-inner"/>
 				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="bmd-form-rating-svg-path-outer"/>
@@ -142,13 +143,13 @@ const expectedTemplate2 = `
 		</label>
 		<input 
 			name="rating"
-			id="id_rating-2"
+			id="form3:id_rating-2"
 			type="radio"
 			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="2"
 			checked
 		>
-		<label class="bmd-form-rating-label" for="id_rating-2">
+		<label class="bmd-form-rating-label" for="form3:id_rating-2">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
 				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="bmd-form-rating-svg-path-inner"/>
 				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="bmd-form-rating-svg-path-outer"/>
@@ -157,12 +158,12 @@ const expectedTemplate2 = `
 		</label>
 		<input 
 			name="rating"
-			id="id_rating-3"
+			id="form3:id_rating-3"
 			type="radio"
 			class="bmd-form-num-check-input bmd-form-rating-input"
 			value="3"
 		>
-		<label class="bmd-form-rating-label" for="id_rating-3">
+		<label class="bmd-form-rating-label" for="form3:id_rating-3">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
 				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="bmd-form-rating-svg-path-inner"/>
 				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="bmd-form-rating-svg-path-outer"/>
@@ -173,7 +174,7 @@ const expectedTemplate2 = `
 </fieldset>
 `;
 
-test("Case 2 (not required, out of 3, hearts, value)", () => {
+test("Case 2 (not required, out of 3, hearts, value, different id)", () => {
 	expect(
 		beautify(
 			createRatingField(
@@ -188,6 +189,7 @@ test("Case 2 (not required, out of 3, hearts, value)", () => {
 					| value = 2
 				`,
 				"|",
+				"form3",
 				"en",
 			),
 			{ format: "html" },
@@ -308,6 +310,7 @@ test("Case 3 (out of 5 or more, hide labels, different form delimiter)", () => {
 					hideLabels
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -372,6 +375,7 @@ test("Case 4 (out of 2, heart, different localization)", () => {
 					| icon = HEART
 				`,
 				"|",
+				"",
 				"bn",
 			),
 			{ format: "html" },
@@ -485,6 +489,7 @@ test("Case 5 (out of more than 10)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -576,7 +581,7 @@ const expectedTemplate6 = `
 
 test("Case 6 (no params)", () => {
 	expect(
-		beautify(createRatingField("rating", true, "", "", "|", "en"), {
+		beautify(createRatingField("rating", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate6, { format: "html" }));

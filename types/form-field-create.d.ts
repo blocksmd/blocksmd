@@ -33,6 +33,7 @@ export function formFieldSetup(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} text input form field as HTML string
  */
@@ -43,6 +44,7 @@ export function createTextField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -53,6 +55,7 @@ export function createTextField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} number input form field as HTML string
  */
@@ -62,6 +65,7 @@ export function createNumberField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -72,6 +76,7 @@ export function createNumberField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} select box form field as HTML string
  */
@@ -81,6 +86,7 @@ export function createSelectField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -92,6 +98,7 @@ export function createSelectField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} choice input form field as HTML string
  */
@@ -102,6 +109,7 @@ export function createChoiceField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -112,6 +120,7 @@ export function createChoiceField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} rating input form field as HTML string
  */
@@ -121,6 +130,7 @@ export function createRatingField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -131,6 +141,7 @@ export function createRatingField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} opinion scale form field as HTML string
  */
@@ -140,5 +151,6 @@ export function createOpinionScaleField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;

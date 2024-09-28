@@ -81,6 +81,7 @@ test("Case 1 (radio)", () => {
 					| subfield
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -167,6 +168,7 @@ test("Case 2 (radio, not required, checked value, horizontal)", () => {
 					| horizontal
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -265,6 +267,7 @@ test("Case 3 (radio, multiple checked values)", () => {
 					| hidelabels
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -371,6 +374,7 @@ test("Case 4 (radio, picture choice, multiple checked values)", () => {
 					| supersize
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -467,6 +471,7 @@ test("Case 5 (radio, picture choice, hide labels, different form delimiter)", ()
 					hidelabels
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -556,6 +561,7 @@ test("Case 6 (checkbox)", () => {
 					| subfield
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -563,7 +569,7 @@ test("Case 6 (checkbox)", () => {
 	).toBe(beautify(expectedTemplate6, { format: "html" }));
 });
 
-// Case 7 (checkbox, not required, checked values, horizontal, different localization)
+// Case 7 (checkbox, not required, checked values, horizontal, different id and localization)
 
 const expectedTemplate7 = `
 <fieldset data-bmd-name="choice" data-bmd-type="checkbox" class="bmd-form-field">
@@ -581,12 +587,12 @@ const expectedTemplate7 = `
 			<div class="bmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-1"
+					id="page_123456:id_choice-1"
 					type="checkbox"
 					class="bmd-form-check-input"
 					value="choice-a"
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="bmd-form-check-label" for="page_123456:id_choice-1">
 					Choice A
 					<span class="bmd-form-check-mark">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
@@ -596,13 +602,13 @@ const expectedTemplate7 = `
 			<div class="bmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-2"
+					id="page_123456:id_choice-2"
 					type="checkbox"
 					class="bmd-form-check-input"
 					value="choice-b"
 					checked
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="bmd-form-check-label" for="page_123456:id_choice-2">
 					Choice B
 					<span class="bmd-form-check-mark">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
@@ -612,13 +618,13 @@ const expectedTemplate7 = `
 			<div class="bmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-3"
+					id="page_123456:id_choice-3"
 					type="checkbox"
 					class="bmd-form-check-input"
 					value="Choice C"
 					checked
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="bmd-form-check-label" for="page_123456:id_choice-3">
 					Choice C
 					<span class="bmd-form-check-mark">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
@@ -630,7 +636,7 @@ const expectedTemplate7 = `
 </fieldset>
 `;
 
-test("Case 7 (checkbox, not required, checked values, horizontal, different localization)", () => {
+test("Case 7 (checkbox, not required, checked values, horizontal, different id and localization)", () => {
 	expect(
 		beautify(
 			createChoiceField(
@@ -647,6 +653,7 @@ test("Case 7 (checkbox, not required, checked values, horizontal, different loca
 					| multiple
 				`,
 				"|",
+				"page_123456",
 				"bn",
 			),
 			{ format: "html" },
@@ -757,6 +764,7 @@ test("Case 8 (checkbox, picture choice)", () => {
 					| multiple
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -780,7 +788,7 @@ const expectedTemplate9 = `
 
 test("Case 9 (no params)", () => {
 	expect(
-		beautify(createChoiceField("choice", false, true, "", "", "|", "en"), {
+		beautify(createChoiceField("choice", false, true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate9, { format: "html" }));
@@ -802,7 +810,7 @@ const expectedTemplate10 = `
 
 test("Case 10 (picture choice, no params)", () => {
 	expect(
-		beautify(createChoiceField("choice", true, true, "", "", "|", "en"), {
+		beautify(createChoiceField("choice", true, true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate10, { format: "html" }));

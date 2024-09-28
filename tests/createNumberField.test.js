@@ -53,6 +53,7 @@ test("Case 1", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -100,6 +101,7 @@ test("Case 2 (unit and unit end)", () => {
 					| unitend = kg
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -144,6 +146,7 @@ test("Case 3 (unit, not required)", () => {
 					| unit = $
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -151,11 +154,11 @@ test("Case 3 (unit, not required)", () => {
 	).toBe(beautify(expectedTemplate3, { format: "html" }));
 });
 
-// Case 4 (unit end, different localization)
+// Case 4 (unit end, different id and localization)
 
 const expectedTemplate4 = `
 <div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_number">
+	<label class="bmd-form-question" for="form1:id_number">
 		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (প্রয়োজন)</span>
 	</label>
 	<p class="bmd-form-description">
@@ -164,19 +167,19 @@ const expectedTemplate4 = `
 	<div class="bmd-input-group">
 		<input
 			name="number"
-			id="id_number"
+			id="form1:id_number"
 			type="number"
 			class="bmd-form-control"
 			placeholder="এখানে একটি সংখ্যা টাইপ করুন..."
 			required
-			aria-describedby="id_number-unit-end"
+			aria-describedby="form1:id_number-unit-end"
 		>
-		<span id="id_number-unit-end" class="bmd-input-group-text">kg</span>
+		<span id="form1:id_number-unit-end" class="bmd-input-group-text">kg</span>
 	</div>
 </div>
 `;
 
-test("Case 4 (unit end, different localization)", () => {
+test("Case 4 (unit end, different id and localization)", () => {
 	expect(
 		beautify(
 			createNumberField(
@@ -189,6 +192,7 @@ test("Case 4 (unit end, different localization)", () => {
 					| unitEnd = kg
 				`,
 				"|",
+				"form1",
 				"bn",
 			),
 			{ format: "html" },
@@ -235,6 +239,7 @@ test("Case 5 (invalid value, min, max, and step)", () => {
 					| step = step
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -284,6 +289,7 @@ test("Case 6 (different form delimiter)", () => {
 					unit = $
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -320,6 +326,7 @@ test("Case 7 (no params)", () => {
 				'id="some-id" class="bmd-col-8"',
 				"",
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },

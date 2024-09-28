@@ -163,6 +163,7 @@ const multilineTextFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} text input form field as HTML string
  */
@@ -173,6 +174,7 @@ function createTextField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -252,7 +254,7 @@ function createTextField(
 	return nunjucks.renderString(template, {
 		startTag: startTag,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		inputType: inputType,
 		required: required,
 		validParams: validParams,
@@ -312,6 +314,7 @@ const numberFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} number input form field as HTML string
  */
@@ -321,6 +324,7 @@ function createNumberField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -374,7 +378,7 @@ function createNumberField(
 	return nunjucks.renderString(numberFieldTemplate, {
 		startTag: startTag,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		required: required,
 		validParams: validParams,
 		translations: translations,
@@ -428,6 +432,7 @@ const selectFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} select box form field as HTML string
  */
@@ -437,6 +442,7 @@ function createSelectField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -504,7 +510,7 @@ function createSelectField(
 	return nunjucks.renderString(selectFieldTemplate, {
 		startTag: startTag,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		required: required,
 		validParams: validParams,
 		translations: translations,
@@ -571,6 +577,7 @@ const choiceFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} choice input form field as HTML string
  */
@@ -581,6 +588,7 @@ function createChoiceField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -673,7 +681,7 @@ function createChoiceField(
 	return nunjucks.renderString(choiceFieldTemplate, {
 		startTag: `${startTag.slice(0, 9)} ${validationAttrs} ${startTag.slice(9)}`,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		isPictureChoice: isPictureChoice,
 		required: required,
 		validParams: validParams,
@@ -736,6 +744,7 @@ const ratingFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} rating input form field as HTML string
  */
@@ -745,6 +754,7 @@ function createRatingField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -802,7 +812,7 @@ function createRatingField(
 	return nunjucks.renderString(ratingFieldTemplate, {
 		startTag: `${startTag.slice(0, 9)} ${validationAttrs} ${startTag.slice(9)}`,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		required: required,
 		validParams: validParams,
 		translations: translations,
@@ -869,6 +879,7 @@ const opinionScaleFieldTemplate = `
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} opinion scale form field as HTML string
  */
@@ -878,6 +889,7 @@ function createOpinionScaleField(
 	parsedAttrs,
 	params,
 	formDelimiter,
+	id,
 	localization,
 ) {
 	// Set up the start tag, valid params, the rest, and translations
@@ -941,7 +953,7 @@ function createOpinionScaleField(
 	return nunjucks.renderString(opinionScaleFieldTemplate, {
 		startTag: `${startTag.slice(0, 9)} ${validationAttrs} ${startTag.slice(9)}`,
 		name: name,
-		inputId: `id_${name}`,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
 		required: required,
 		validParams: validParams,
 		translations: translations,

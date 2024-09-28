@@ -48,6 +48,7 @@ test("Case 1", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -96,6 +97,7 @@ test("Case 2 (not required)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -141,6 +143,7 @@ test("Case 3 (different localization)", () => {
 					| selected = Red
 				`,
 				"|",
+				"",
 				"bn",
 			),
 			{ format: "html" },
@@ -148,11 +151,11 @@ test("Case 3 (different localization)", () => {
 	).toBe(beautify(expectedTemplate3, { format: "html" }));
 });
 
-// Case 4 (options with specific values)
+// Case 4 (options with specific values, different id)
 
 const expectedTemplate4 = `
 <div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_color">
+	<label class="bmd-form-question" for="some-id:id_color">
 		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
 	<p class="bmd-form-description">
@@ -160,7 +163,7 @@ const expectedTemplate4 = `
 	</p>
 	<select
 		name="color"
-		id="id_color"
+		id="some-id:id_color"
 		class="bmd-form-select"
 		required
 	>
@@ -172,7 +175,7 @@ const expectedTemplate4 = `
 </div>
 `;
 
-test("Case 4 (options with specific values)", () => {
+test("Case 4 (options with specific values, different id)", () => {
 	expect(
 		beautify(
 			createSelectField(
@@ -186,6 +189,7 @@ test("Case 4 (options with specific values)", () => {
 					| selected = red
 				`,
 				"|",
+				"some-id",
 				"en",
 			),
 			{ format: "html" },
@@ -231,6 +235,7 @@ test("Case 5 (option with empty value)", () => {
 					| selected =    
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -277,6 +282,7 @@ test("Case 6 (nothing selected, different form delimiter)", () => {
 					options =Red,Green,Blue,Yellow,Orange"orange" 
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -304,7 +310,7 @@ const expectedTemplate7 = `
 
 test("Case 7 (no params)", () => {
 	expect(
-		beautify(createSelectField("choice", true, "", "", "|", "en"), {
+		beautify(createSelectField("choice", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate7, { format: "html" }));

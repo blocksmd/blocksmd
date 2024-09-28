@@ -51,6 +51,7 @@ test("Case 1", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -94,6 +95,7 @@ test("Case 2 (email)", () => {
 					| value = john@example.com
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -140,6 +142,7 @@ test("Case 3 (url)", () => {
 					|
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -147,11 +150,11 @@ test("Case 3 (url)", () => {
 	).toBe(beautify(expectedTemplate3, { format: "html" }));
 });
 
-// Case 4 (form delimiter changed to new line, and different localization)
+// Case 4 (form delimiter changed to new line, different id and localization)
 
 const expectedTemplate4 = `
 <div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_name">
+	<label class="bmd-form-question" for="form1:id_name">
 		আপনার নাম <span class="bmd-text-nowrap" aria-hidden="true">কি?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">কি? (প্রয়োজন)</span>
 	</label>
 	<p class="bmd-form-description">
@@ -159,7 +162,7 @@ const expectedTemplate4 = `
 	</p>
 	<input
 		name="name"
-		id="id_name"
+		id="form1:id_name"
 		type="text"
 		class="bmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
@@ -168,7 +171,7 @@ const expectedTemplate4 = `
 </div>
 `;
 
-test("Case 4 (form delimiter changed to new line, and different localization)", () => {
+test("Case 4 (form delimiter changed to new line, different id and localization)", () => {
 	expect(
 		beautify(
 			createTextField(
@@ -181,6 +184,7 @@ test("Case 4 (form delimiter changed to new line, and different localization)", 
 					description = আপনার সম্পূর্ণ নাম লিখুন
 				`,
 				"\n",
+				"form1",
 				"bn",
 			),
 			{ format: "html" },
@@ -208,7 +212,7 @@ const expectedTemplate5 = `
 
 test("Case 5 (no params)", () => {
 	expect(
-		beautify(createTextField("name", "text", true, "", "", "|", "en"), {
+		beautify(createTextField("name", "text", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate5, { format: "html" }));
@@ -254,6 +258,7 @@ test("Case 6 (multiline)", () => {
 					| multiline
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -304,6 +309,7 @@ test("Case 7 (multiline with value)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -349,6 +355,7 @@ test("Case 8 (email with value)", () => {
 					| pattern = .+@example\.com
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -397,6 +404,7 @@ test("Case 9 (url with value)", () => {
 					|
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -428,7 +436,16 @@ const expectedTemplate10 = `
 test("Case 10 (multiline with different localization)", () => {
 	expect(
 		beautify(
-			createTextField("description", "text", false, "", "multiline", "|", "bn"),
+			createTextField(
+				"description",
+				"text",
+				false,
+				"",
+				"multiline",
+				"|",
+				"",
+				"bn",
+			),
 			{ format: "html" },
 		),
 	).toBe(beautify(expectedTemplate10, { format: "html" }));
@@ -477,6 +494,7 @@ test("Case 11 (telephone number)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -504,7 +522,7 @@ const expectedTemplate12 = `
 test("Case 12 (telephone number with different country)", () => {
 	expect(
 		beautify(
-			createTextField("phone", "tel", false, "", "country=bd", "|", "bn"),
+			createTextField("phone", "tel", false, "", "country=bd", "|", "", "bn"),
 			{
 				format: "html",
 			},
