@@ -209,6 +209,7 @@ function createBodyTemplate(settings) {
 		markedSettings: {
 			"css-prefix": settings["css-prefix"],
 			"form-delimiter": settings["form-delimiter"],
+			"id": settings["id"],
 			"localization": settings["localization"],
 		},
 	});
@@ -335,6 +336,7 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 		markedSettings: {
 			"css-prefix": settings["css-prefix"],
 			"form-delimiter": settings["form-delimiter"],
+			"id": settings["id"],
 			"localization": settings["localization"],
 		},
 	});

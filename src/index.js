@@ -193,6 +193,7 @@ function reRenderBindElems(name) {
 			markedSettings: {
 				"css-prefix": state["settings"]["css-prefix"],
 				"form-delimiter": state["settings"]["form-delimiter"],
+				"id": state["settings"]["id"],
 				"localization": state["settings"]["localization"],
 			},
 		});

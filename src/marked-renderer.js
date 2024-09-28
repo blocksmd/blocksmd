@@ -26,6 +26,7 @@ function getMarkedSettings(options) {
 	let markedSettings = {
 		"css-prefix": "bmd-",
 		"form-delimiter": "|",
+		"id": "",
 		"localization": "en",
 	};
 
@@ -38,6 +39,8 @@ function getMarkedSettings(options) {
 	if (options["markedSettings"]["form-delimiter"] !== undefined)
 		markedSettings["form-delimiter"] =
 			options["markedSettings"]["form-delimiter"];
+	if (options["markedSettings"]["id"] !== undefined)
+		markedSettings["id"] = options["markedSettings"]["id"];
 	if (options["markedSettings"]["localization"] !== undefined)
 		markedSettings["localization"] = options["markedSettings"]["localization"];
 

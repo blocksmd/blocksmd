@@ -71,6 +71,7 @@ const template2 = `
 #! get-url = https://example.com/api/examples/
 #! header = align
 #! headings = anchored
+#! id = form1
 #! localization = bn
 
 # Heading
@@ -101,6 +102,7 @@ const expectedSettings2 = {
 	"get-url": "https://example.com/api/examples/",
 	"header": "align",
 	"headings": "anchored",
+	"id": "form1",
 	"localization": "bn",
 };
 
