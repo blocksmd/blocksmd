@@ -63,6 +63,7 @@ test("Case 1", () => {
 				"color-scheme": "light",
 				"font-family": '"Inter", sans-serif',
 				"font-import-url": "https://example.com/font/",
+				"id": "",
 			}),
 			{ format: "css" },
 		),
@@ -129,6 +130,7 @@ test("Case 2 (dark color scheme)", () => {
 				"color-scheme": "dark",
 				"font-family": '"Inter", sans-serif',
 				"font-import-url": "https://example.com/font/",
+				"id": "",
 			}),
 			{ format: "css" },
 		),
@@ -171,6 +173,7 @@ test("Case 3 (only light color scheme)", () => {
 				"color": "0, 0, 0",
 				"color-scheme": "light",
 				"font-family": '"Inter", sans-serif',
+				"id": "",
 			}),
 			{ format: "css" },
 		),
@@ -213,6 +216,7 @@ test("Case 4 (only dark color scheme)", () => {
 				"color": "255, 255, 255",
 				"color-scheme": "dark",
 				"font-family": '"Inter", sans-serif',
+				"id": "",
 			}),
 			{ format: "css" },
 		),
@@ -241,20 +245,156 @@ test("Case 5 (only base styles)", () => {
 				"background-image-alt-scheme": 'url("https://example.com/bg-dm.jpg")',
 				"color-scheme": "light",
 				"font-family": '"Inter", sans-serif',
+				"id": "",
 			}),
 			{ format: "css" },
 		),
 	).toBe(beautify(expectedStyles5, { format: "css" }));
 });
 
-// Case 6 (empty settings)
+// Case 6 (different id)
 
-const expectedStyles6 = "";
+const expectedStyles6 = `
+@import url("https://example.com/font/");
+.bmd-root[data-bmd-id="form1"] {
+	--bmd-body-font-family: "Inter", sans-serif;
+	--bmd-backdrop-opacity-lm: 0.075;
+	--bmd-backdrop-opacity-dm: 0.05;
+	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+}
+.bmd-root[data-bmd-id="form1"] {
+	--bmd-accent-r: 0;
+	--bmd-accent-g: 0;
+	--bmd-accent-b: 139;
+	--bmd-accent-foreground-r: 255;
+	--bmd-accent-foreground-g: 255;
+	--bmd-accent-foreground-b: 255;
+	--bmd-body-bg-r: 255;
+	--bmd-body-bg-g: 255;
+	--bmd-body-bg-b: 255;
+	--bmd-body-color-r: 0;
+	--bmd-body-color-g: 0;
+	--bmd-body-color-b: 0;
+}
+.bmd-root[data-bmd-id="form1"][data-bmd-color-scheme="dark"] {
+	--bmd-accent-r: 179;
+	--bmd-accent-g: 206;
+	--bmd-accent-b: 229;
+	--bmd-accent-foreground-r: 0;
+	--bmd-accent-foreground-g: 0;
+	--bmd-accent-foreground-b: 0;
+	--bmd-body-bg-r: 0;
+	--bmd-body-bg-g: 0;
+	--bmd-body-bg-b: 0;
+	--bmd-body-color-r: 255;
+	--bmd-body-color-g: 255;
+	--bmd-body-color-b: 255;
+}
+`;
 
-test("Case 6 (empty settings)", () => {
+test("Case 6 (different id)", () => {
+	expect(
+		beautify(
+			createStyles({
+				"accent": "0, 0, 139",
+				"accent-alt-scheme": "179, 206, 229",
+				"accent-foreground": "255, 255, 255",
+				"accent-foreground-alt-scheme": "0, 0, 0",
+				"backdrop-opacity": "0.075",
+				"backdrop-opacity-alt-scheme": "0.05",
+				"background-image": 'url("https://example.com/bg-lm.jpg")',
+				"background-image-alt-scheme": 'url("https://example.com/bg-dm.jpg")',
+				"background-color": "255, 255, 255",
+				"background-color-alt-scheme": "0, 0, 0",
+				"color": "0, 0, 0",
+				"color-alt-scheme": "255, 255, 255",
+				"color-scheme": "light",
+				"font-family": '"Inter", sans-serif',
+				"font-import-url": "https://example.com/font/",
+				"id": "form1",
+			}),
+			{ format: "css" },
+		),
+	).toBe(beautify(expectedStyles6, { format: "css" }));
+});
+
+// Case 7 (dark color scheme, different id)
+
+const expectedStyles7 = `
+@import url("https://example.com/font/");
+.bmd-root[data-bmd-id="mypage"] {
+	--bmd-body-font-family: "Inter", sans-serif;
+	--bmd-backdrop-opacity-dm: 0.05;
+	--bmd-backdrop-opacity-lm: 0.075;
+	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+}
+.bmd-root[data-bmd-id="mypage"][data-bmd-color-scheme="dark"] {
+	--bmd-accent-r: 179;
+	--bmd-accent-g: 206;
+	--bmd-accent-b: 229;
+	--bmd-accent-foreground-r: 0;
+	--bmd-accent-foreground-g: 0;
+	--bmd-accent-foreground-b: 0;
+	--bmd-body-bg-r: 0;
+	--bmd-body-bg-g: 0;
+	--bmd-body-bg-b: 0;
+	--bmd-body-color-r: 255;
+	--bmd-body-color-g: 255;
+	--bmd-body-color-b: 255;
+}
+.bmd-root[data-bmd-id="mypage"] {
+	--bmd-accent-r: 0;
+	--bmd-accent-g: 0;
+	--bmd-accent-b: 139;
+	--bmd-accent-foreground-r: 255;
+	--bmd-accent-foreground-g: 255;
+	--bmd-accent-foreground-b: 255;
+	--bmd-body-bg-r: 255;
+	--bmd-body-bg-g: 255;
+	--bmd-body-bg-b: 255;
+	--bmd-body-color-r: 0;
+	--bmd-body-color-g: 0;
+	--bmd-body-color-b: 0;
+}
+`;
+
+test("Case 7 (dark color scheme, different id)", () => {
+	expect(
+		beautify(
+			createStyles({
+				"accent": "179, 206, 229",
+				"accent-alt-scheme": "0, 0, 139",
+				"accent-foreground": "0, 0, 0",
+				"accent-foreground-alt-scheme": "255, 255, 255",
+				"backdrop-opacity": "0.05",
+				"backdrop-opacity-alt-scheme": "0.075",
+				"background-image": 'url("https://example.com/bg-dm.jpg")',
+				"background-image-alt-scheme": 'url("https://example.com/bg-lm.jpg")',
+				"background-color": "0, 0, 0",
+				"background-color-alt-scheme": "255, 255, 255",
+				"color": "255, 255, 255",
+				"color-alt-scheme": "0, 0, 0",
+				"color-scheme": "dark",
+				"font-family": '"Inter", sans-serif',
+				"font-import-url": "https://example.com/font/",
+				"id": "mypage",
+			}),
+			{ format: "css" },
+		),
+	).toBe(beautify(expectedStyles7, { format: "css" }));
+});
+
+// Case 8 (empty settings)
+
+const expectedStyles8 = "";
+
+test("Case 8 (empty settings)", () => {
 	expect(
 		createStyles({
 			"color-scheme": "light",
+			"id": "",
 		}),
-	).toBe(expectedStyles6);
+	).toBe(expectedStyles8);
 });

@@ -79,17 +79,23 @@ function createStyles(settings) {
 		}
 	}
 
+	// Create the selector using the id
+	const selector =
+		settings["id"] !== ""
+			? `.bmd-root[data-bmd-id="${settings["id"]}"]`
+			: ".bmd-root";
+
 	// Add the base styles block
 	if (baseStyles.length > 0)
-		styleBlocks.push(`.bmd-root {${baseStyles.join("")}}`);
+		styleBlocks.push(`${selector} {${baseStyles.join("")}}`);
 
 	// Add the color styles block (default color scheme)
 	if (colorStyles.length > 0) {
 		if (settings["color-scheme"] === "light") {
-			styleBlocks.push(`.bmd-root {${colorStyles.join("")}}`);
+			styleBlocks.push(`${selector} {${colorStyles.join("")}}`);
 		} else {
 			styleBlocks.push(
-				`.bmd-root[data-bmd-color-scheme="dark"] {${colorStyles.join("")}}`,
+				`${selector}[data-bmd-color-scheme="dark"] {${colorStyles.join("")}}`,
 			);
 		}
 	}
@@ -98,10 +104,10 @@ function createStyles(settings) {
 	if (colorStylesAltScheme.length > 0) {
 		if (settings["color-scheme"] === "light") {
 			styleBlocks.push(
-				`.bmd-root[data-bmd-color-scheme="dark"] {${colorStylesAltScheme.join("")}}`,
+				`${selector}[data-bmd-color-scheme="dark"] {${colorStylesAltScheme.join("")}}`,
 			);
 		} else {
-			styleBlocks.push(`.bmd-root {${colorStylesAltScheme.join("")}\n}`);
+			styleBlocks.push(`${selector} {${colorStylesAltScheme.join("")}\n}`);
 		}
 	}
 
