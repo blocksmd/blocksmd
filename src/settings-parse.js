@@ -461,10 +461,6 @@ function parseSettings(template) {
 			pattern: /^start$/,
 			accepted: "start",
 		},
-		"vertical-padding": {
-			pattern: /^(static|sm-and-up:static)$/,
-			accepted: "static || sm-and-up:static",
-		},
 	};
 
 	// Go through each line to extract settings
