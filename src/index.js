@@ -1541,33 +1541,6 @@ class blocksmd {
 				.setAttribute("style", `width: ${slidePageProgress}`);
 		}
 
-		// Handle the display and state of the footer slide control buttons
-		const footerBtnGroup = instance.container.querySelector(
-			".bmd-footer .bmd-btn-group",
-		);
-		if (footerBtnGroup) {
-			const footerPreviousBtn =
-				footerBtnGroup.querySelector(".bmd-previous-btn");
-			const footerNextBtn = footerBtnGroup.querySelector(".bmd-next-btn");
-
-			// Reset first
-			footerBtnGroup.classList.remove("bmd-d-none");
-			footerPreviousBtn.disabled = false;
-			footerNextBtn.disabled = false;
-
-			// Disable previous button for first slide
-			// Hide both for end slide
-			if (slide.classList.contains("bmd-first-slide")) {
-				footerPreviousBtn.disabled = true;
-			} else if (slide.classList.contains("bmd-end-slide")) {
-				footerBtnGroup.classList.add("bmd-d-none");
-			}
-
-			// Also disable previous button if slide contains the specific attribute
-			if (slide.hasAttribute("data-bmd-disable-prev-btn"))
-				footerPreviousBtn.disabled = true;
-		}
-
 		// The timeout makes sure that the slide animation has completed
 		setTimeout(function () {
 			// Scroll
@@ -1576,6 +1549,33 @@ class blocksmd {
 			} else {
 				if (!fromInit) instance.container.scrollIntoView();
 				instance.container.scroll({ top: 0 });
+			}
+
+			// Handle the display and state of the footer slide control buttons
+			const footerBtnGroup = instance.container.querySelector(
+				".bmd-footer .bmd-btn-group",
+			);
+			if (footerBtnGroup) {
+				const footerPreviousBtn =
+					footerBtnGroup.querySelector(".bmd-previous-btn");
+				const footerNextBtn = footerBtnGroup.querySelector(".bmd-next-btn");
+
+				// Reset first
+				footerBtnGroup.classList.remove("bmd-d-none");
+				footerPreviousBtn.disabled = false;
+				footerNextBtn.disabled = false;
+
+				// Disable previous button for first slide
+				// Hide both for end slide
+				if (slide.classList.contains("bmd-first-slide")) {
+					footerPreviousBtn.disabled = true;
+				} else if (slide.classList.contains("bmd-end-slide")) {
+					footerBtnGroup.classList.add("bmd-d-none");
+				}
+
+				// Also disable previous button if slide contains the specific attribute
+				if (slide.hasAttribute("data-bmd-disable-prev-btn"))
+					footerPreviousBtn.disabled = true;
 			}
 
 			// Autofocus (if applicable)
