@@ -20,7 +20,7 @@ const expectedTemplate1 = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 				>
 				<label class="bmd-form-check-label" for="id_choice-1">
@@ -35,7 +35,7 @@ const expectedTemplate1 = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice B"
 				>
 				<label class="bmd-form-check-label" for="id_choice-2">
@@ -50,7 +50,7 @@ const expectedTemplate1 = `
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 				>
 				<label class="bmd-form-check-label" for="id_choice-3">
@@ -106,7 +106,7 @@ const expectedTemplate2 = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-a"
 				>
 				<label class="bmd-form-check-label" for="id_choice-1">
@@ -121,7 +121,7 @@ const expectedTemplate2 = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					checked
 				>
@@ -137,7 +137,7 @@ const expectedTemplate2 = `
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 				>
 				<label class="bmd-form-check-label" for="id_choice-3">
@@ -193,7 +193,7 @@ const expectedTemplate3 = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
@@ -211,7 +211,7 @@ const expectedTemplate3 = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					disabled
 					data-bmd-autofocus
@@ -228,7 +228,7 @@ const expectedTemplate3 = `
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 					disabled
 					data-bmd-autofocus
@@ -292,7 +292,7 @@ const expectedTemplate4 = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
@@ -313,7 +313,7 @@ const expectedTemplate4 = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					disabled
 					data-bmd-autofocus
@@ -333,7 +333,7 @@ const expectedTemplate4 = `
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 					disabled
 					data-bmd-autofocus
@@ -399,7 +399,7 @@ const expectedTemplate5 = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 					data-bmd-autofocus
 				>
@@ -417,7 +417,7 @@ const expectedTemplate5 = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					checked
 					data-bmd-autofocus
@@ -436,7 +436,7 @@ const expectedTemplate5 = `
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 					data-bmd-autofocus
 				>
@@ -499,7 +499,7 @@ const expectedTemplate6 = `
 					name="choice"
 					id="id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 				>
 				<label class="bmd-form-check-label" for="id_choice-1">
@@ -514,7 +514,7 @@ const expectedTemplate6 = `
 					name="choice"
 					id="id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice B"
 				>
 				<label class="bmd-form-check-label" for="id_choice-2">
@@ -529,7 +529,7 @@ const expectedTemplate6 = `
 					name="choice"
 					id="id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 				>
 				<label class="bmd-form-check-label" for="id_choice-3">
@@ -589,7 +589,7 @@ const expectedTemplate7 = `
 					name="choice"
 					id="page_123456:id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-a"
 				>
 				<label class="bmd-form-check-label" for="page_123456:id_choice-1">
@@ -604,7 +604,7 @@ const expectedTemplate7 = `
 					name="choice"
 					id="page_123456:id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					checked
 				>
@@ -620,7 +620,7 @@ const expectedTemplate7 = `
 					name="choice"
 					id="page_123456:id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 					checked
 				>
@@ -681,7 +681,7 @@ const expectedTemplate8 = `
 					name="choice"
 					id="id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
@@ -702,7 +702,7 @@ const expectedTemplate8 = `
 					name="choice"
 					id="id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="choice-b"
 					disabled
 					data-bmd-autofocus
@@ -722,7 +722,7 @@ const expectedTemplate8 = `
 					name="choice"
 					id="id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="Choice C"
 					disabled
 					data-bmd-autofocus

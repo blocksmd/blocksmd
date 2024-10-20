@@ -41,7 +41,7 @@ const expectedTemplate1 = `
 				name="name"
 				id="id_name"
 				type="text"
-				class="bmd-form-control"
+				class="bmd-form-str-input bmd-form-control"
 				placeholder="Type your answer here..."
 				required
 			>
@@ -144,7 +144,7 @@ const expectedTemplate2 = `
 				name="name"
 				id="id_name"
 				type="text"
-				class="bmd-form-control"
+				class="bmd-form-str-input bmd-form-control"
 				placeholder="Type your answer here..."
 				required
 			>

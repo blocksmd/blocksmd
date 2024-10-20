@@ -18,7 +18,7 @@ const expectedTemplate1 = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type in your favorite number here..."
 			required
 			value="7"
@@ -77,7 +77,7 @@ const expectedTemplate2 = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			required
 			aria-describedby="id_number-unit id_number-unit-end"
@@ -125,7 +125,7 @@ const expectedTemplate3 = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			aria-describedby="id_number-unit"
 		>
@@ -169,7 +169,7 @@ const expectedTemplate4 = `
 			name="number"
 			id="form1:id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="এখানে একটি সংখ্যা টাইপ করুন..."
 			required
 			aria-describedby="form1:id_number-unit-end"
@@ -215,7 +215,7 @@ const expectedTemplate5 = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			required
 		>
@@ -260,7 +260,7 @@ const expectedTemplate6 = `
 			name="amount"
 			id="id_amount"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			required
 			value="5.0"
@@ -309,7 +309,7 @@ const expectedTemplate7 = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			required
 		>

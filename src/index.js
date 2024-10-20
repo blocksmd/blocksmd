@@ -589,7 +589,7 @@ class blocksmd {
 		// Text fields
 		instance.container
 			.querySelectorAll(
-				'input.bmd-form-control[type="text"], input.bmd-form-control[type="email"], input.bmd-form-control[type="url"], input.bmd-form-control[type="tel"], textarea.bmd-form-control',
+				'input.bmd-form-str-input[type="text"], input.bmd-form-str-input[type="email"], input.bmd-form-str-input[type="url"], input.bmd-form-str-input[type="tel"], textarea.bmd-form-str-input',
 			)
 			.forEach((elem) => {
 				let name = elem.getAttribute("name");
@@ -610,7 +610,7 @@ class blocksmd {
 
 		// Number fields
 		instance.container
-			.querySelectorAll('input.bmd-form-control[type="number"]')
+			.querySelectorAll('input.bmd-form-num-input[type="number"]')
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = isNumeric(elem.value) ? Number(elem.value) : null;
@@ -621,7 +621,7 @@ class blocksmd {
 
 		// Select fields
 		instance.container
-			.querySelectorAll("select.bmd-form-select")
+			.querySelectorAll("select.bmd-form-str-select")
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = elem.value;
@@ -633,14 +633,14 @@ class blocksmd {
 		// Choice fields
 		instance.container
 			.querySelectorAll(
-				".bmd-form-check:first-child input.bmd-form-check-input",
+				".bmd-form-check:first-child input.bmd-form-str-check-input",
 			)
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const type = elem.getAttribute("type");
 				const value = instance.getRadioCheckboxValue(
 					name,
-					"bmd-form-check-input",
+					"bmd-form-str-check-input",
 					type,
 				);
 				instance.state["formData"][name] = value;
@@ -698,7 +698,7 @@ class blocksmd {
 				instance.state["fieldTypes"][name] === "tel"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-control[name="${name}"]`,
+					`.bmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -711,7 +711,7 @@ class blocksmd {
 			// Number field
 			if (instance.state["fieldTypes"][name] === "number") {
 				const input = instance.container.querySelector(
-					`.bmd-form-control[name="${name}"]`,
+					`.bmd-form-num-input[name="${name}"]`,
 				);
 				if (input && isNumeric(value)) {
 					value = Number(value);
@@ -725,7 +725,7 @@ class blocksmd {
 			// Select field
 			if (instance.state["fieldTypes"][name] === "select") {
 				const select = instance.container.querySelector(
-					`.bmd-form-select[name="${name}"]`,
+					`.bmd-form-str-select[name="${name}"]`,
 				);
 				if (select) {
 					const options = select.querySelectorAll("option");
@@ -744,7 +744,7 @@ class blocksmd {
 			// Choice field
 			if (instance.state["fieldTypes"][name] === "choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-check-input[name="${name}"]`,
+					`.bmd-form-str-check-input[name="${name}"]`,
 				);
 				if (input) {
 					const type = input.getAttribute("type");
@@ -753,7 +753,7 @@ class blocksmd {
 					if (type === "checkbox") value = value.split(",");
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-check-input",
+						"bmd-form-str-check-input",
 						type,
 						value,
 					);
@@ -761,7 +761,7 @@ class blocksmd {
 					// Get value again, set to state, etc.
 					value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-check-input",
+						"bmd-form-str-check-input",
 						type,
 					);
 					instance.state["formData"][name] = value;
@@ -817,7 +817,7 @@ class blocksmd {
 				instance.state["fieldTypes"][name] === "tel"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-control[name="${name}"]`,
+					`.bmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -829,7 +829,7 @@ class blocksmd {
 			// Number field
 			if (instance.state["fieldTypes"][name] === "number") {
 				const input = instance.container.querySelector(
-					`.bmd-form-control[name="${name}"]`,
+					`.bmd-form-num-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -841,7 +841,7 @@ class blocksmd {
 			// Select field
 			if (instance.state["fieldTypes"][name] === "select") {
 				const select = instance.container.querySelector(
-					`.bmd-form-select[name="${name}"]`,
+					`.bmd-form-str-select[name="${name}"]`,
 				);
 				if (select) {
 					const options = select.querySelectorAll("option");
@@ -859,19 +859,19 @@ class blocksmd {
 			// Choice field
 			if (instance.state["fieldTypes"][name] === "choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-check-input[name="${name}"]`,
+					`.bmd-form-str-check-input[name="${name}"]`,
 				);
 				if (input) {
 					const type = input.getAttribute("type");
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-check-input",
+						"bmd-form-str-check-input",
 						type,
 						value,
 					);
 					instance.state["formData"][name] = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-check-input",
+						"bmd-form-str-check-input",
 						type,
 					);
 					instance.reRenderBindElems(name);
@@ -920,10 +920,12 @@ class blocksmd {
 		// Remove WAI-ARIA tags
 		// Choice field
 		if (type === "radio" || type === "checkbox") {
-			formField.querySelectorAll(".bmd-form-check-input").forEach((input) => {
-				input.removeAttribute("aria-invalid");
-				input.removeAttribute("aria-describedby");
-			});
+			formField
+				.querySelectorAll(".bmd-form-str-check-input")
+				.forEach((input) => {
+					input.removeAttribute("aria-invalid");
+					input.removeAttribute("aria-describedby");
+				});
 		}
 		// Number choice field
 		else if (type === "num-radio") {
@@ -1009,7 +1011,7 @@ class blocksmd {
 		const type = e.target.getAttribute("type");
 		const value = instance.getRadioCheckboxValue(
 			name,
-			"bmd-form-check-input",
+			"bmd-form-str-check-input",
 			type,
 		);
 		instance.state["formData"][name] = value;
@@ -1169,7 +1171,7 @@ class blocksmd {
 				if (type === "radio" || type === "checkbox") {
 					const value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-check-input",
+						"bmd-form-str-check-input",
 						type,
 					);
 					if (value.length === 0) {
@@ -1186,7 +1188,7 @@ class blocksmd {
 
 						// Add WAI-ARIA tags to the inputs
 						formField
-							.querySelectorAll(".bmd-form-check-input")
+							.querySelectorAll(".bmd-form-str-check-input")
 							.forEach((input) => {
 								input.setAttribute("aria-invalid", "true");
 								input.setAttribute("aria-describedby", errorId);
@@ -1226,7 +1228,7 @@ class blocksmd {
 		// Focus on the first form field with error
 		if (formFieldsWithError.length > 0) {
 			const inputToFocus = formFieldsWithError[0].querySelector(
-				".bmd-form-check-input, .bmd-form-num-check-input",
+				".bmd-form-str-check-input, .bmd-form-num-check-input",
 			);
 			if (inputToFocus) inputToFocus.focus();
 		}
@@ -1582,7 +1584,7 @@ class blocksmd {
 			if (!fromInit || (fromInit && instance.options["isFullPage"])) {
 				if (instance.state["settings"]["autofocus"] === "all-slides") {
 					const elemToAutofocus = slide.querySelector(
-						"input.bmd-form-control, textarea.bmd-form-control, select.bmd-form-select, input.bmd-form-check-input, input.bmd-form-num-check-input",
+						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input",
 					);
 					if (elemToAutofocus) elemToAutofocus.focus();
 				} else {
@@ -1992,7 +1994,7 @@ class blocksmd {
 		// <input> elements
 		container
 			.querySelectorAll(
-				"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-num-check-input",
+				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input",
 			)
 			.forEach((input) => {
 				if (
@@ -2008,7 +2010,7 @@ class blocksmd {
 					input.getAttribute("type") === "radio" ||
 					input.getAttribute("type") === "checkbox"
 				) {
-					if (input.classList.contains("bmd-form-check-input")) {
+					if (input.classList.contains("bmd-form-str-check-input")) {
 						input.addEventListener("input", instance.choiceFieldOnInput);
 					} else if (input.classList.contains("bmd-form-num-check-input")) {
 						input.addEventListener("input", instance.numChoiceFieldOnInput);
@@ -2018,16 +2020,18 @@ class blocksmd {
 
 		// <textarea> elements
 		container
-			.querySelectorAll("textarea.bmd-form-control")
+			.querySelectorAll("textarea.bmd-form-str-input")
 			.forEach((textarea) => {
 				textarea.addEventListener("input", instance.textFieldOnInput);
 				textarea.addEventListener("input", instance.setTextareaHeightOnInput);
 			});
 
 		// <select> elements
-		container.querySelectorAll("select.bmd-form-select").forEach((select) => {
-			select.addEventListener("input", instance.selectFieldOnInput);
-		});
+		container
+			.querySelectorAll("select.bmd-form-str-select")
+			.forEach((select) => {
+				select.addEventListener("input", instance.selectFieldOnInput);
+			});
 	};
 
 	/**

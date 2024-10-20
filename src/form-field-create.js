@@ -113,7 +113,7 @@ const textFieldTemplate = `
 		name="{{ name }}"
 		id="{{ inputId }}"
 		type="{{ inputType }}"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
@@ -138,7 +138,7 @@ const multilineTextFieldTemplate = `
 	<textarea
 		name="{{ name }}"
 		id="{{ inputId }}"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
@@ -282,7 +282,7 @@ const numberFieldTemplate = `
 			name="{{ name }}"
 			id="{{ inputId }}"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="{{ validParams.placeholder }}"
 			{% if required %}required{% endif %}
 			{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
@@ -400,7 +400,7 @@ const selectFieldTemplate = `
 	<select
 		name="{{ name }}"
 		id="{{ inputId }}"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		{% if required %}required{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
 		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
@@ -542,7 +542,7 @@ const choiceFieldTemplate = `
 					name="{{ name }}"
 					id="{{ inputId }}-{{ loop.index }}"
 					type="{% if validParams.multiple %}checkbox{% else %}radio{% endif %}"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="{{ choice.value }}"
 					{% if validParams.checked %}{% if choice.value in validParams.checked %}checked{% endif %}{% endif %}
 					{% if validParams.disabled %}disabled{% endif %}

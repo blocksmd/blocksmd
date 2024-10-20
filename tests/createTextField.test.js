@@ -17,7 +17,7 @@ const expectedTemplate1 = `
 		name="name"
 		id="id_name"
 		type="text"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type in your name here..."
 		required
 		value="John Doe"
@@ -73,7 +73,7 @@ const expectedTemplate2 = `
 		name="email"
 		id="id_email"
 		type="email"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="name@example.com"
 		required
 		value="john@example.com"
@@ -117,7 +117,7 @@ const expectedTemplate3 = `
 		name="website"
 		id="id_website"
 		type="url"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="https://example.com"
 		maxlength="255"
 	>
@@ -164,7 +164,7 @@ const expectedTemplate4 = `
 		name="name"
 		id="form1:id_name"
 		type="text"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
 		required
 	>
@@ -203,7 +203,7 @@ const expectedTemplate5 = `
 		name="name"
 		id="id_name"
 		type="text"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		required
 	>
@@ -231,7 +231,7 @@ const expectedTemplate6 = `
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type in your description here..."
 		required
 		aria-details="id_description-form-text"
@@ -279,7 +279,7 @@ const expectedTemplate7 = `
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		data-bmd-autofocus
 		aria-details="id_description-form-text"
@@ -331,7 +331,7 @@ const expectedTemplate8 = `
 		name="email"
 		id="id_email"
 		type="email"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="name@example.com"
 		required
 		value="john@example.com"
@@ -377,7 +377,7 @@ const expectedTemplate9 = `
 		name="website"
 		id="id_website"
 		type="url"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="https://example.com"
 		value="https://"
 		maxlength="255"
@@ -422,7 +422,7 @@ const expectedTemplate10 = `
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
 		aria-details="id_description-form-text"
 	></textarea>
@@ -465,7 +465,7 @@ const expectedTemplate11 = `
 		name="phone"
 		id="id_phone"
 		type="tel"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="(201) 555-0123"
 		required
 		maxlength="255"
@@ -513,7 +513,7 @@ const expectedTemplate12 = `
 		name="phone"
 		id="id_phone"
 		type="tel"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="01812-345678"
 	>
 </div>

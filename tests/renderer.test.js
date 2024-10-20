@@ -268,7 +268,7 @@ const expectedTemplate = `
 		name="name"
 		id="id_name"
 		type="text"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		required
 	>
@@ -282,7 +282,7 @@ const expectedTemplate = `
 		name="text"
 		id="id_text"
 		type="text"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		required
 	>
@@ -296,7 +296,7 @@ const expectedTemplate = `
 		name="email"
 		id="id_email"
 		type="email"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="name@example.com"
 		maxlength="255"
 	>
@@ -310,7 +310,7 @@ const expectedTemplate = `
 		name="website"
 		id="id_website"
 		type="url"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Keep this empty if you do not have one."
 		value="https://mysite.com"
 	>
@@ -323,7 +323,7 @@ const expectedTemplate = `
 	<textarea
 		name="shortBio"
 		id="id_shortBio"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		aria-details="id_shortBio-form-text"
 	></textarea>
@@ -341,7 +341,7 @@ const expectedTemplate = `
 		name="phone"
 		id="id_phone"
 		type="tel"
-		class="bmd-form-control"
+		class="bmd-form-str-input bmd-form-control"
 		placeholder="(201) 555-0123"
 	>
 </div>
@@ -355,7 +355,7 @@ const expectedTemplate = `
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-control"
+			class="bmd-form-num-input bmd-form-control"
 			placeholder="Type a number here..."
 			required
 		>
@@ -369,7 +369,7 @@ const expectedTemplate = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 	>
 		<option value="" selected>Select an option</option>
 		<option value="red">red</option>
@@ -389,7 +389,7 @@ const expectedTemplate = `
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="A"
 				>
 				<label class="bmd-form-check-label" for="id_choice-1">
@@ -404,7 +404,7 @@ const expectedTemplate = `
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="B"
 				>
 				<label class="bmd-form-check-label" for="id_choice-2">
@@ -432,7 +432,7 @@ const expectedTemplate = `
 					name="pictureChoice"
 					id="id_pictureChoice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="A"
 				>
 				<label class="bmd-form-check-label" for="id_pictureChoice-1">
@@ -450,7 +450,7 @@ const expectedTemplate = `
 					name="pictureChoice"
 					id="id_pictureChoice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="bmd-form-str-check-input bmd-form-check-input"
 					value="B"
 					checked
 				>

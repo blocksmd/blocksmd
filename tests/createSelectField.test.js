@@ -16,7 +16,7 @@ const expectedTemplate1 = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 		disabled
 		data-bmd-autofocus
@@ -69,7 +69,7 @@ const expectedTemplate2 = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		data-bmd-autofocus
 	>
 		<option value="">Select an option</option>
@@ -118,7 +118,7 @@ const expectedTemplate3 = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 	>
 		<option value="" disabled>যেকোনো একটি নির্বাচন করুন</option>
@@ -164,7 +164,7 @@ const expectedTemplate4 = `
 	<select
 		name="color"
 		id="some-id:id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 	>
 		<option value="" disabled>Select an option</option>
@@ -210,7 +210,7 @@ const expectedTemplate5 = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 	>
 		<option value="" disabled selected>Select an option</option>
@@ -256,7 +256,7 @@ const expectedTemplate6 = `
 	<select
 		name="color"
 		id="id_color"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 	>
 		<option value="" disabled selected>Select an option</option>
@@ -300,7 +300,7 @@ const expectedTemplate7 = `
 	<select
 		name="choice"
 		id="id_choice"
-		class="bmd-form-select"
+		class="bmd-form-str-select bmd-form-select"
 		required
 	>
 		<option value="" disabled selected>Select an option</option>
