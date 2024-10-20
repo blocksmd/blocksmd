@@ -1,5 +1,5 @@
 /*!
- * blocksmd
+ * blocks.md
  * @author Tahmid Khan Nafee <tahmid.hm.dev@gmail.com>
  * @license BUSL-1.1
  * Copyright (c) 2024 Tahmid Khan Nafee
@@ -25,1802 +25,2283 @@ const { marked } = require("marked");
 var nunjucks = require("nunjucks");
 const { v4: uuidv4 } = require("uuid");
 
-// Initialize state and options (overridden in the init function)
-var state = {
-	bindDivTemplates: {},
-	data: {},
-	fieldTypes: {},
-	formData: {},
-	settings: getDefaultSettings(),
-	slideData: {
-		currentIndex: 0,
-	},
-};
-var options = {
-	getHeaders: {},
-	postData: {},
-	postHeaders: {},
-	prioritizeURLFormData: false,
-	sanitize: false,
-	setColorSchemeAttrsAgain: true,
-};
+class blocksmd {
+	options = {
+		colorScheme: "light",
+		getHeaders: {},
+		id: "",
+		isFullPage: false,
+		paddingInline: null,
+		postData: {},
+		postHeaders: {},
+		prioritizeURLFormData: false,
+		removePaddingInline: true,
+		sanitize: false,
+		setColorSchemeAttrsAgain: true,
+		themeDark: {
+			accent: "rgb(138, 180, 248)",
+			accentForeground: "rgb(0, 0, 0)",
+			backgroundColor: "rgb(18, 18, 18)",
+			color: "rgb(240, 240, 240)",
+		},
+		themeLight: {
+			accent: "rgb(30, 55, 153)",
+			accentForeground: "rgb(255, 255, 255)",
+			backgroundColor: "rgb(255, 255, 255)",
+			color: "rgb(0, 0, 0)",
+		},
+	};
 
-/**
- * Add a single attribute value to an HTML element.
- *
- * @param {HTMLElement} elem
- * @param {string} name
- * @param {string} value
- */
-function setSingleAttribute(elem, name, value) {
-	const attrs = elem.getAttribute(name) || "";
-	const attrsArr = attrs
-		.replace(/\s\s+/g, " ")
-		.split(" ")
-		.filter(function (v) {
-			return v !== "";
-		});
-	attrsArr.push(value);
-	elem.setAttribute(name, attrsArr.join(" "));
-}
+	/**
+	 * Create an instance of the class.
+	 *
+	 * @param {string} template
+	 * @param {Document|HTMLElement} container
+	 * @param {{
+	 *   colorScheme?: "light" | "dark",
+	 *   getHeaders?: Object,
+	 *   id?: string,
+	 *   isFullPage?: boolean,
+	 *   paddingInline?: number,
+	 *   postData?: Object,
+	 *   postHeaders?: Object,
+	 *   prioritizeURLFormData?: boolean,
+	 *   removePaddingInline?: boolean,
+	 *   sanitize?: boolean,
+	 *   setColorSchemeAttrsAgain?: boolean,
+	 *   themeDark?: {
+	 *     accent?: string,
+	 *     accentForeground?: string,
+	 *     backgroundColor?: string,
+	 *     color?: string
+	 *   },
+	 *   themeLight?: {
+	 *     accent?: string,
+	 *     accentForeground?: string,
+	 *     backgroundColor?: string,
+	 *     color?: string
+	 *   }
+	 * }} [options]
+	 */
+	constructor(template, container, options) {
+		this.container = container;
 
-/**
- * Remove a single attribute value from an HTML element.
- *
- * @param {HTMLElement} elem
- * @param {string} name
- * @param {string} value
- */
-function removeSingleAttribute(elem, name, value) {
-	const attrs = elem.getAttribute(name) || "";
-	const attrsArr = attrs
-		.replace(/\s\s+/g, " ")
-		.split(" ")
-		.filter(function (v) {
-			return v !== "";
-		});
-	const index = attrsArr.indexOf(value);
-	if (index > -1) attrsArr.splice(index, 1);
-	if (attrsArr.length > 0) {
-		elem.setAttribute(name, attrsArr.join(" "));
-	} else {
-		elem.removeAttribute(name);
-	}
-}
-
-/**
- * Set the preferred color scheme (if one is found in the local storage).
- * Depending on the preference from settings, either the domain-wide or the
- * page-specific value is used.
- */
-function setPreferredColorScheme() {
-	const rootElem = document.querySelector(".bmd-root");
-	const localStorageKey =
-		rootElem.getAttribute("data-bmd-color-scheme-scope") === "isolate"
-			? `blocksmd:${window.location.hostname}${window.location.pathname}color-scheme`
-			: "blocksmd:color-scheme";
-	const preferredColorScheme = localStorage.getItem(localStorageKey);
-	if (preferredColorScheme)
-		rootElem.setAttribute("data-bmd-color-scheme", preferredColorScheme);
-}
-
-/**
- * Toggle color scheme. If the preferred color scheme (from settings) is set
- * to "isolate", the preference is saved (and used) only for that page.
- * Otherwise, it is saved (and used) domain-wide.
- *
- * @param {MouseEvent} e
- */
-function toggleColorScheme(e) {
-	e.preventDefault();
-	const rootElem = document.querySelector(".bmd-root");
-	const localStorageKey =
-		state["settings"]["color-scheme-scope"] === "isolate"
-			? `blocksmd:${window.location.hostname}${window.location.pathname}color-scheme`
-			: "blocksmd:color-scheme";
-	const currentColorScheme = rootElem.getAttribute("data-bmd-color-scheme");
-	if (currentColorScheme === "light") {
-		rootElem.setAttribute("data-bmd-color-scheme", "dark");
-		localStorage.setItem(localStorageKey, "dark");
-	} else if (currentColorScheme === "dark") {
-		rootElem.setAttribute("data-bmd-color-scheme", "light");
-		localStorage.setItem(localStorageKey, "light");
-	}
-}
-
-/**
- * Get or create response id. This uniquely identifies one single form
- * response. The id is created on page load (unless one already exists), and
- * it is removed when the user reaches the end slide.
- *
- * @returns {string}
- */
-function getOrCreateResponseId() {
-	const localStorageKey = `blocksmd:${window.location.hostname}${window.location.pathname}response-id`;
-	let responseId = localStorage.getItem(localStorageKey);
-	if (!responseId) {
-		responseId = uuidv4();
-		localStorage.setItem(localStorageKey, responseId);
-	}
-	return responseId;
-}
-
-/**
- * Remove response id. This is called when the user reaches the end slide.
- */
-function removeResponseId() {
-	localStorage.removeItem(
-		`blocksmd:${window.location.hostname}${window.location.pathname}response-id`,
-	);
-}
-
-/**
- * Save form field value in local storage.
- *
- * @param {string} name
- * @param {*} value
- */
-function saveFieldValue(name, value) {
-	const localStorageKey = `blocksmd:${window.location.hostname}${window.location.pathname}form-data`;
-	let savedFormData = localStorage.getItem(localStorageKey) || "{}";
-	savedFormData = JSON.parse(savedFormData);
-	savedFormData[name] = value;
-	localStorage.setItem(localStorageKey, JSON.stringify(savedFormData));
-}
-
-/**
- * Remove form data from local storage. This is called when the user reaches
- * the end slide.
- */
-function removeSavedFormData() {
-	localStorage.removeItem(
-		`blocksmd:${window.location.hostname}${window.location.pathname}form-data`,
-	);
-}
-
-/**
- * Re-render the bind <div> and <span> elements.
- *
- * @param {string} name
- */
-function reRenderBindElems(name) {
-	// Re-render the bind <div> elements
-	document.querySelectorAll(`div[data-bmd-bind-${name}]`).forEach((div) => {
-		const template =
-			state["bindDivTemplates"][div.getAttribute("data-bmd-bind-template-ref")];
-		marked.use({
-			renderer: renderer,
-			markedSettings: {
-				"css-prefix": state["settings"]["css-prefix"],
-				"form-delimiter": state["settings"]["form-delimiter"],
-				"id": state["settings"]["id"],
-				"localization": state["settings"]["localization"],
-			},
-		});
-		let parsedTemplate = marked.parse(
-			nunjucks.renderString(template, {
-				...state["data"],
-				...state["formData"],
-			}),
-		);
-		if (options["sanitize"]) {
-			const DOMPurify = createDOMPurify(window);
-			parsedTemplate = DOMPurify.sanitize(parsedTemplate);
-		}
-		div.innerHTML = parsedTemplate;
-
-		// Highlight code blocks again
-		div.querySelectorAll("pre code").forEach((codeBlock) => {
-			hljs.highlightElement(codeBlock);
-		});
-
-		// Add event listeners again
-		addEventListeners(div);
-	});
-
-	// Re-render the bind <span> elements
-	document.querySelectorAll(`span[data-bmd-bind-${name}]`).forEach((span) => {
-		span.innerHTML = state["formData"][name];
-	});
-}
-
-/**
- * Get value of a set of radio buttons or checkboxes.
- *
- * @param {string} name
- * @param {string} inputClass
- * @param {"radio"|"checkbox"} type
- * @returns {string|Array.<string>}
- */
-function getRadioCheckboxValue(name, inputClass, type) {
-	// For radio buttons, the single checked value is returned
-	if (type === "radio") {
-		let value = "";
-		const input = document.querySelector(
-			`.${inputClass}[type="radio"][name="${name}"]:checked`,
-		);
-		if (input) value = input.value;
-		return value;
-	}
-	// For checkboxes, an array of checked values is returned
-	else if (type === "checkbox") {
-		const value = [];
-		document
-			.querySelectorAll(
-				`.${inputClass}[type="checkbox"][name="${name}"]:checked`,
+		// Set the options for use
+		if (options) {
+			// Color Scheme
+			if (
+				options["colorScheme"] === "light" ||
+				options["colorScheme"] === "dark"
+			) {
+				this.options["colorScheme"] = options["colorScheme"];
+			}
+			// GET headers
+			if (
+				options["getHeaders"] !== undefined &&
+				typeof options["getHeaders"] === "object"
+			) {
+				this.options["getHeaders"] = {
+					...this.options["getHeaders"],
+					...options["getHeaders"],
+				};
+			}
+			// Id
+			if (options["id"] !== undefined && typeof options["id"] === "string")
+				this.options["id"] = options["id"];
+			// Is full page
+			if (
+				options["isFullPage"] !== undefined &&
+				typeof options["isFullPage"] === "boolean"
 			)
-			.forEach((input) => {
-				value.push(input.value);
-			});
-		return value;
-	}
-}
-
-/**
- * Set value of a set of radio buttons or checkboxes.
- *
- * @param {string} name
- * @param {string} inputClass
- * @param {"radio"|"checkbox"} type
- * @param {string|Array.<string>} value
- */
-function setRadioCheckboxValue(name, inputClass, type, value) {
-	// For radio buttons, the value is a single string
-	if (type === "radio") {
-		if (typeof value === "string") value = value.trim();
-		const input = document.querySelector(
-			`.${inputClass}[type="radio"][name="${name}"][value="${value}"]`,
-		);
-		if (input) input.checked = true;
-	}
-	// For checkboxes, the value is an array of strings
-	else if (type === "checkbox") {
-		const values = {};
-		for (const item of value) {
-			values[item.trim()] = true;
-		}
-		document
-			.querySelectorAll(`.${inputClass}[type="checkbox"][name="${name}"]`)
-			.forEach((input) => {
-				input.checked = false;
-				if (values[input.value]) input.checked = true;
-			});
-	}
-}
-
-/**
- * Set form data to state (value and type). Also re-render the bind <div> and
- * <span> elements.
- */
-function setFormDataToState() {
-	// Text fields
-	document
-		.querySelectorAll(
-			'input.bmd-form-control[type="text"], input.bmd-form-control[type="email"], input.bmd-form-control[type="url"], input.bmd-form-control[type="tel"], textarea.bmd-form-control',
-		)
-		.forEach((elem) => {
-			let name = elem.getAttribute("name");
-			const value = elem.value;
-			const type = elem.getAttribute("type") || "text";
-
-			// Issue-fix with DOMPurify (in case of sanitization)
-			// https://github.com/cure53/DOMPurify/issues/952
-			if (elem.getAttribute("id") === "id_name") {
-				elem.setAttribute("name", "name");
-				name = "name";
+				this.options["isFullPage"] = options["isFullPage"];
+			// Padding inline
+			if (
+				options["paddingInline"] !== undefined &&
+				typeof options["paddingInline"] === "number"
+			)
+				this.options["paddingInline"] = options["paddingInline"];
+			// POST data
+			if (
+				options["postData"] !== undefined &&
+				typeof options["postData"] === "object"
+			) {
+				this.options["postData"] = {
+					...this.options["postData"],
+					...options["postData"],
+				};
 			}
-
-			state["formData"][name] = value;
-			state["fieldTypes"][name] = type;
-			reRenderBindElems(name);
-		});
-
-	// Number fields
-	document
-		.querySelectorAll('input.bmd-form-control[type="number"]')
-		.forEach((elem) => {
-			const name = elem.getAttribute("name");
-			const value = isNumeric(elem.value) ? Number(elem.value) : null;
-			state["formData"][name] = value;
-			state["fieldTypes"][name] = "number";
-			reRenderBindElems(name);
-		});
-
-	// Select fields
-	document.querySelectorAll("select.bmd-form-select").forEach((elem) => {
-		const name = elem.getAttribute("name");
-		const value = elem.value;
-		state["formData"][name] = value;
-		state["fieldTypes"][name] = "select";
-		reRenderBindElems(name);
-	});
-
-	// Choice fields
-	document
-		.querySelectorAll(".bmd-form-check:first-child input.bmd-form-check-input")
-		.forEach((elem) => {
-			const name = elem.getAttribute("name");
-			const type = elem.getAttribute("type");
-			const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
-			state["formData"][name] = value;
-			state["fieldTypes"][name] = "choice";
-			reRenderBindElems(name);
-		});
-
-	// Number choice fields
-	document
-		.querySelectorAll("input.bmd-form-num-check-input:first-child")
-		.forEach((elem) => {
-			const name = elem.getAttribute("name");
-			let value = getRadioCheckboxValue(
-				name,
-				"bmd-form-num-check-input",
-				"radio",
-			);
-			value = value ? parseInt(value) : null;
-			state["formData"][name] = value;
-			state["fieldTypes"][name] = "num-choice";
-			reRenderBindElems(name);
-		});
-}
-
-/**
- * Set form data from URL parameters: set value in the DOM, update state,
- * conditionally update local storage, and re-render the bind <div> and <span>
- * elements. The local storage is updated if this function is called AFTER
- * setting the saved form data (in local storage).
- *
- * @param {boolean} updateLocalStorage
- */
-function setFormDataFromURL(updateLocalStorage) {
-	const urlParams = new URLSearchParams(window.location.search);
-	for (const urlParam of urlParams) {
-		const name = urlParam[0];
-		let value = urlParam[1];
-
-		// Text field
-		if (
-			state["fieldTypes"][name] === "text" ||
-			state["fieldTypes"][name] === "email" ||
-			state["fieldTypes"][name] === "url" ||
-			state["fieldTypes"][name] === "tel"
-		) {
-			const input = document.querySelector(`.bmd-form-control[name="${name}"]`);
-			if (input) {
-				input.value = value;
-				state["formData"][name] = value;
-				if (updateLocalStorage) saveFieldValue(name, value);
-				reRenderBindElems(name);
+			// POST headers
+			if (
+				options["postHeaders"] !== undefined &&
+				typeof options["postHeaders"] === "object"
+			) {
+				this.options["postHeaders"] = {
+					...this.options["postHeaders"],
+					...options["postHeaders"],
+				};
 			}
-		}
-
-		// Number field
-		if (state["fieldTypes"][name] === "number") {
-			const input = document.querySelector(`.bmd-form-control[name="${name}"]`);
-			if (input && isNumeric(value)) {
-				value = Number(value);
-				input.value = value;
-				state["formData"][name] = value;
-				if (updateLocalStorage) saveFieldValue(name, value);
-				reRenderBindElems(name);
+			// Prioritize form data from URLs
+			if (
+				options["prioritizeURLFormData"] !== undefined &&
+				typeof options["prioritizeURLFormData"] === "boolean"
+			)
+				this.options["prioritizeURLFormData"] =
+					options["prioritizeURLFormData"];
+			// Remove padding inline
+			if (
+				options["removePaddingInline"] !== undefined &&
+				typeof options["removePaddingInline"] === "boolean"
+			)
+				this.options["removePaddingInline"] = options["removePaddingInline"];
+			// Sanitize
+			if (
+				options["sanitize"] !== undefined &&
+				typeof options["sanitize"] === "boolean"
+			)
+				this.options["sanitize"] = options["sanitize"];
+			// Set color scheme attributes again
+			if (
+				options["setColorSchemeAttrsAgain"] !== undefined &&
+				typeof options["setColorSchemeAttrsAgain"] === "boolean"
+			)
+				this.options["setColorSchemeAttrsAgain"] =
+					options["setColorSchemeAttrsAgain"];
+			else if (!this.options["isFullPage"]) {
+				this.options["setColorSchemeAttrsAgain"] = false;
 			}
-		}
-
-		// Select field
-		if (state["fieldTypes"][name] === "select") {
-			const select = document.querySelector(`.bmd-form-select[name="${name}"]`);
-			if (select) {
-				const options = select.querySelectorAll("option");
-				for (const option of options) {
-					if (option.getAttribute("value") === value) {
-						select.value = value;
-						state["formData"][name] = value;
-						if (updateLocalStorage) saveFieldValue(name, value);
-						reRenderBindElems(name);
-						break;
-					}
+			// Theme dark
+			if (
+				options["themeDark"] !== undefined &&
+				typeof options["themeDark"] === "object"
+			) {
+				if (
+					options["themeDark"]["accent"] !== undefined &&
+					typeof options["themeDark"]["accent"] === "string"
+				) {
+					this.options["themeDark"]["accent"] = options["themeDark"]["accent"];
+				}
+				if (
+					options["themeDark"]["accentForeground"] !== undefined &&
+					typeof options["themeDark"]["accentForeground"] === "string"
+				) {
+					this.options["themeDark"]["accentForeground"] =
+						options["themeDark"]["accentForeground"];
+				}
+				if (
+					options["themeDark"]["backgroundColor"] !== undefined &&
+					typeof options["themeDark"]["backgroundColor"] === "string"
+				) {
+					this.options["themeDark"]["backgroundColor"] =
+						options["themeDark"]["backgroundColor"];
+				}
+				if (
+					options["themeDark"]["color"] !== undefined &&
+					typeof options["themeDark"]["color"] === "string"
+				) {
+					this.options["themeDark"]["color"] = options["themeDark"]["color"];
+				}
+			}
+			// Theme light
+			if (
+				options["themeLight"] !== undefined &&
+				typeof options["themeLight"] === "object"
+			) {
+				if (
+					options["themeLight"]["accent"] !== undefined &&
+					typeof options["themeLight"]["accent"] === "string"
+				) {
+					this.options["themeLight"]["accent"] =
+						options["themeLight"]["accent"];
+				}
+				if (
+					options["themeLight"]["accentForeground"] !== undefined &&
+					typeof options["themeLight"]["accentForeground"] === "string"
+				) {
+					this.options["themeLight"]["accentForeground"] =
+						options["themeLight"]["accentForeground"];
+				}
+				if (
+					options["themeLight"]["backgroundColor"] !== undefined &&
+					typeof options["themeLight"]["backgroundColor"] === "string"
+				) {
+					this.options["themeLight"]["backgroundColor"] =
+						options["themeLight"]["backgroundColor"];
+				}
+				if (
+					options["themeLight"]["color"] !== undefined &&
+					typeof options["themeLight"]["color"] === "string"
+				) {
+					this.options["themeLight"]["color"] = options["themeLight"]["color"];
 				}
 			}
 		}
 
-		// Choice field
-		if (state["fieldTypes"][name] === "choice") {
-			const input = document.querySelector(
-				`.bmd-form-check-input[name="${name}"]`,
-			);
-			if (input) {
-				const type = input.getAttribute("type");
+		// Set up the settings from the options
+		const templateSettingsFromOptions = [];
+		if (this.options["id"] !== "")
+			templateSettingsFromOptions.push(`#! id = ${this.options["id"]}`);
 
-				// Set value, for checkbox, convert to array first
-				if (type === "checkbox") value = value.split(",");
-				setRadioCheckboxValue(name, "bmd-form-check-input", type, value);
+		let colorScheme = this.options["colorScheme"];
+		const templateContainsColorScheme = template.match(
+			/#!\s*color-scheme\s*=\s*(light|dark)/,
+		);
+		if (templateContainsColorScheme)
+			colorScheme = templateContainsColorScheme[1];
 
-				// Get value again, set to state, etc.
-				value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
-				state["formData"][name] = value;
-				if (updateLocalStorage) saveFieldValue(name, value);
-				reRenderBindElems(name);
-			}
+		let theme = this.options["themeLight"];
+		let themeAltScheme = this.options["themeDark"];
+		if (colorScheme === "dark") {
+			theme = this.options["themeDark"];
+			themeAltScheme = this.options["themeLight"];
 		}
+		templateSettingsFromOptions.push(
+			`#! accent = ${theme["accent"]} || ${themeAltScheme["accent"]}`,
+		);
+		templateSettingsFromOptions.push(
+			`#! accent-foreground = ${theme["accentForeground"]} || ${themeAltScheme["accentForeground"]}`,
+		);
+		templateSettingsFromOptions.push(
+			`#! background-color = ${theme["backgroundColor"]} || ${themeAltScheme["backgroundColor"]}`,
+		);
+		templateSettingsFromOptions.push(
+			`#! color = ${theme["color"]} || ${themeAltScheme["color"]}`,
+		);
 
-		// Number choice field
-		if (state["fieldTypes"][name] === "num-choice") {
-			const input = document.querySelector(
-				`.bmd-form-num-check-input[name="${name}"]`,
+		// Set the template
+		this._template = `${templateSettingsFromOptions.join("\n")}\n\n${template}`;
+	}
+
+	/**
+	 * Set the state to defaults.
+	 */
+	setStateToDefaults = () => {
+		const instance = this;
+
+		instance.state = {
+			bindDivTemplates: {},
+			data: {},
+			fieldTypes: {},
+			formData: {},
+			settings: getDefaultSettings(),
+			slideData: {
+				currentIndex: 0,
+			},
+		};
+	};
+
+	/**
+	 * Add a single attribute value to an HTML element.
+	 *
+	 * @param {HTMLElement} elem
+	 * @param {string} name
+	 * @param {string} value
+	 */
+	setSingleAttribute = (elem, name, value) => {
+		const attrs = elem.getAttribute(name) || "";
+		const attrsArr = attrs
+			.replace(/\s\s+/g, " ")
+			.split(" ")
+			.filter(function (v) {
+				return v !== "";
+			});
+		attrsArr.push(value);
+		elem.setAttribute(name, attrsArr.join(" "));
+	};
+
+	/**
+	 * Remove a single attribute value from an HTML element.
+	 *
+	 * @param {HTMLElement} elem
+	 * @param {string} name
+	 * @param {string} value
+	 */
+	removeSingleAttribute = (elem, name, value) => {
+		const attrs = elem.getAttribute(name) || "";
+		const attrsArr = attrs
+			.replace(/\s\s+/g, " ")
+			.split(" ")
+			.filter(function (v) {
+				return v !== "";
+			});
+		const index = attrsArr.indexOf(value);
+		if (index > -1) attrsArr.splice(index, 1);
+		if (attrsArr.length > 0) {
+			elem.setAttribute(name, attrsArr.join(" "));
+		} else {
+			elem.removeAttribute(name);
+		}
+	};
+
+	/**
+	 * Get the prefix for the page/form id.
+	 *
+	 * @returns {string}
+	 */
+	getIdPrefix = () => {
+		const instance = this;
+
+		return instance.state["settings"]["id"] !== ""
+			? `${instance.state["settings"]["id"]}:`
+			: "";
+	};
+
+	/**
+	 * Set the preferred color scheme (if one is found in the local storage).
+	 * Depending on the preference from settings, either the domain-wide or the
+	 * page-specific value is used.
+	 */
+	setPreferredColorScheme = () => {
+		const instance = this;
+
+		const rootElem = instance.container.querySelector(".bmd-root");
+		const localStorageKey =
+			rootElem.getAttribute("data-bmd-color-scheme-scope") === "isolate"
+				? `blocksmd:${instance.getIdPrefix()}${window.location.hostname}${
+						window.location.pathname
+					}color-scheme`
+				: "blocksmd:color-scheme";
+		const preferredColorScheme = localStorage.getItem(localStorageKey);
+		if (preferredColorScheme)
+			rootElem.setAttribute("data-bmd-color-scheme", preferredColorScheme);
+	};
+
+	/**
+	 * Toggle color scheme. If the preferred color scheme (from settings) is set
+	 * to "isolate", the preference is saved (and used) only for that page.
+	 * Otherwise, it is saved (and used) domain-wide.
+	 *
+	 * @param {MouseEvent} e
+	 */
+	toggleColorScheme = (e) => {
+		const instance = this;
+
+		e.preventDefault();
+		const rootElem = instance.container.querySelector(".bmd-root");
+		const localStorageKey =
+			instance.state["settings"]["color-scheme-scope"] === "isolate"
+				? `blocksmd:${instance.getIdPrefix()}${window.location.hostname}${
+						window.location.pathname
+					}color-scheme`
+				: "blocksmd:color-scheme";
+		const currentColorScheme = rootElem.getAttribute("data-bmd-color-scheme");
+		if (currentColorScheme === "light") {
+			rootElem.setAttribute("data-bmd-color-scheme", "dark");
+			localStorage.setItem(localStorageKey, "dark");
+		} else if (currentColorScheme === "dark") {
+			rootElem.setAttribute("data-bmd-color-scheme", "light");
+			localStorage.setItem(localStorageKey, "light");
+		}
+	};
+
+	/**
+	 * Get or create response id. This uniquely identifies one single form
+	 * response. The id is created on initialization (unless one already
+	 * exists), and it is removed when the user reaches the end slide.
+	 *
+	 * @returns {string}
+	 */
+	getOrCreateResponseId = () => {
+		const instance = this;
+
+		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+			window.location.hostname
+		}${window.location.pathname}response-id`;
+		let responseId = localStorage.getItem(localStorageKey);
+		if (!responseId) {
+			responseId = uuidv4();
+			localStorage.setItem(localStorageKey, responseId);
+		}
+		return responseId;
+	};
+
+	/**
+	 * Remove response id. This is called when the user reaches the end slide.
+	 */
+	removeResponseId = () => {
+		const instance = this;
+
+		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+			window.location.hostname
+		}${window.location.pathname}response-id`;
+		localStorage.removeItem(localStorageKey);
+	};
+
+	/**
+	 * Save form field value in local storage.
+	 *
+	 * @param {string} name
+	 * @param {*} value
+	 */
+	saveFieldValue = (name, value) => {
+		const instance = this;
+
+		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+			window.location.hostname
+		}${window.location.pathname}form-data`;
+		let savedFormData = localStorage.getItem(localStorageKey) || "{}";
+		savedFormData = JSON.parse(savedFormData);
+		savedFormData[name] = value;
+		localStorage.setItem(localStorageKey, JSON.stringify(savedFormData));
+	};
+
+	/**
+	 * Remove form data from local storage. This is called when the user reaches
+	 * the end slide.
+	 */
+	removeSavedFormData = () => {
+		const instance = this;
+
+		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+			window.location.hostname
+		}${window.location.pathname}form-data`;
+		localStorage.removeItem(localStorageKey);
+	};
+
+	/**
+	 * Re-render the bind <div> and <span> elements.
+	 *
+	 * @param {string} name
+	 */
+	reRenderBindElems = (name) => {
+		const instance = this;
+
+		// Re-render the bind <div> elements
+		instance.container
+			.querySelectorAll(`div[data-bmd-bind-${name}]`)
+			.forEach((div) => {
+				const template =
+					instance.state["bindDivTemplates"][
+						div.getAttribute("data-bmd-bind-template-ref")
+					];
+				marked.use({
+					renderer: renderer,
+					markedSettings: {
+						"css-prefix": instance.state["settings"]["css-prefix"],
+						"form-delimiter": instance.state["settings"]["form-delimiter"],
+						"id": instance.state["settings"]["id"],
+						"localization": instance.state["settings"]["localization"],
+					},
+				});
+				let parsedTemplate = marked.parse(
+					nunjucks.renderString(template, {
+						...instance.state["data"],
+						...instance.state["formData"],
+					}),
+				);
+				if (instance.options["sanitize"]) {
+					const DOMPurify = createDOMPurify(window);
+					parsedTemplate = DOMPurify.sanitize(parsedTemplate);
+				}
+				div.innerHTML = parsedTemplate;
+
+				// Highlight code blocks again
+				div.querySelectorAll("pre code").forEach((codeBlock) => {
+					hljs.highlightElement(codeBlock);
+				});
+
+				// Add event listeners again
+				instance.addEventListeners(div, false);
+			});
+
+		// Re-render the bind <span> elements
+		instance.container
+			.querySelectorAll(`span[data-bmd-bind-${name}]`)
+			.forEach((span) => {
+				span.innerHTML = instance.state["formData"][name];
+			});
+	};
+
+	/**
+	 * Get value of a set of radio buttons or checkboxes.
+	 *
+	 * @param {string} name
+	 * @param {string} inputClass
+	 * @param {"radio"|"checkbox"} type
+	 * @returns {string|Array.<string>}
+	 */
+	getRadioCheckboxValue = (name, inputClass, type) => {
+		const instance = this;
+
+		// For radio buttons, the single checked value is returned
+		if (type === "radio") {
+			let value = "";
+			const input = instance.container.querySelector(
+				`.${inputClass}[type="radio"][name="${name}"]:checked`,
 			);
-			if (input) {
-				setRadioCheckboxValue(name, "bmd-form-num-check-input", "radio", value);
-				value = getRadioCheckboxValue(
+			if (input) value = input.value;
+			return value;
+		}
+		// For checkboxes, an array of checked values is returned
+		else if (type === "checkbox") {
+			const value = [];
+			instance.container
+				.querySelectorAll(
+					`.${inputClass}[type="checkbox"][name="${name}"]:checked`,
+				)
+				.forEach((input) => {
+					value.push(input.value);
+				});
+			return value;
+		}
+	};
+
+	/**
+	 * Set value of a set of radio buttons or checkboxes.
+	 *
+	 * @param {string} name
+	 * @param {string} inputClass
+	 * @param {"radio"|"checkbox"} type
+	 * @param {string|Array.<string>} value
+	 */
+	setRadioCheckboxValue = (name, inputClass, type, value) => {
+		const instance = this;
+
+		// For radio buttons, the value is a single string
+		if (type === "radio") {
+			if (typeof value === "string") value = value.trim();
+			const input = instance.container.querySelector(
+				`.${inputClass}[type="radio"][name="${name}"][value="${value}"]`,
+			);
+			if (input) input.checked = true;
+		}
+		// For checkboxes, the value is an array of strings
+		else if (type === "checkbox") {
+			const values = {};
+			for (const item of value) {
+				values[item.trim()] = true;
+			}
+			instance.container
+				.querySelectorAll(`.${inputClass}[type="checkbox"][name="${name}"]`)
+				.forEach((input) => {
+					input.checked = false;
+					if (values[input.value]) input.checked = true;
+				});
+		}
+	};
+
+	/**
+	 * Set form data to state (value and type). Also re-render the bind <div>
+	 * and <span> elements.
+	 */
+	setFormDataToState = () => {
+		const instance = this;
+
+		// Text fields
+		instance.container
+			.querySelectorAll(
+				'input.bmd-form-control[type="text"], input.bmd-form-control[type="email"], input.bmd-form-control[type="url"], input.bmd-form-control[type="tel"], textarea.bmd-form-control',
+			)
+			.forEach((elem) => {
+				let name = elem.getAttribute("name");
+				const value = elem.value;
+				const type = elem.getAttribute("type") || "text";
+
+				// Issue-fix with DOMPurify (in case of sanitization)
+				// https://github.com/cure53/DOMPurify/issues/952
+				if (elem.getAttribute("id") === `${instance.getIdPrefix()}id_name`) {
+					elem.setAttribute("name", "name");
+					name = "name";
+				}
+
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = type;
+				instance.reRenderBindElems(name);
+			});
+
+		// Number fields
+		instance.container
+			.querySelectorAll('input.bmd-form-control[type="number"]')
+			.forEach((elem) => {
+				const name = elem.getAttribute("name");
+				const value = isNumeric(elem.value) ? Number(elem.value) : null;
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = "number";
+				instance.reRenderBindElems(name);
+			});
+
+		// Select fields
+		instance.container
+			.querySelectorAll("select.bmd-form-select")
+			.forEach((elem) => {
+				const name = elem.getAttribute("name");
+				const value = elem.value;
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = "select";
+				instance.reRenderBindElems(name);
+			});
+
+		// Choice fields
+		instance.container
+			.querySelectorAll(
+				".bmd-form-check:first-child input.bmd-form-check-input",
+			)
+			.forEach((elem) => {
+				const name = elem.getAttribute("name");
+				const type = elem.getAttribute("type");
+				const value = instance.getRadioCheckboxValue(
+					name,
+					"bmd-form-check-input",
+					type,
+				);
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = "choice";
+				instance.reRenderBindElems(name);
+			});
+
+		// Number choice fields
+		instance.container
+			.querySelectorAll("input.bmd-form-num-check-input:first-child")
+			.forEach((elem) => {
+				const name = elem.getAttribute("name");
+				let value = instance.getRadioCheckboxValue(
 					name,
 					"bmd-form-num-check-input",
 					"radio",
 				);
 				value = value ? parseInt(value) : null;
-				state["formData"][name] = value;
-				if (updateLocalStorage) saveFieldValue(name, value);
-				reRenderBindElems(name);
-			}
-		}
-	}
-}
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = "num-choice";
+				instance.reRenderBindElems(name);
+			});
+	};
 
-/**
- * Set form data saved in local storage: set value in the DOM, update state,
- * and re-render the bind <div> and <span> elements.
- */
-function setSavedFormData() {
-	const localStorageKey = `blocksmd:${window.location.hostname}${window.location.pathname}form-data`;
-	const savedFormData = localStorage.getItem(localStorageKey);
-	if (!savedFormData) return;
-	for (const [name, value] of Object.entries(JSON.parse(savedFormData))) {
-		// Text field
-		if (
-			state["fieldTypes"][name] === "text" ||
-			state["fieldTypes"][name] === "email" ||
-			state["fieldTypes"][name] === "url" ||
-			state["fieldTypes"][name] === "tel"
-		) {
-			const input = document.querySelector(`.bmd-form-control[name="${name}"]`);
-			if (input) {
-				input.value = value;
-				state["formData"][name] = value;
-				reRenderBindElems(name);
-			}
-		}
+	/**
+	 * Set form data from URL parameters: set value in the DOM, update state,
+	 * conditionally update local storage, and re-render the bind <div> and
+	 * <span> elements. The local storage is updated if this function is called
+	 * AFTER setting the saved form data (in local storage).
+	 *
+	 * @param {boolean} updateLocalStorage
+	 */
+	setFormDataFromURL = (updateLocalStorage) => {
+		const instance = this;
 
-		// Number field
-		if (state["fieldTypes"][name] === "number") {
-			const input = document.querySelector(`.bmd-form-control[name="${name}"]`);
-			if (input) {
-				input.value = value;
-				state["formData"][name] = value;
-				reRenderBindElems(name);
-			}
-		}
+		const urlParams = new URLSearchParams(window.location.search);
+		for (const urlParam of urlParams) {
+			let name = urlParam[0];
+			let value = urlParam[1];
 
-		// Select field
-		if (state["fieldTypes"][name] === "select") {
-			const select = document.querySelector(`.bmd-form-select[name="${name}"]`);
-			if (select) {
-				const options = select.querySelectorAll("option");
-				for (const option of options) {
-					if (option.getAttribute("value") === value) {
-						select.value = value;
-						state["formData"][name] = value;
-						reRenderBindElems(name);
-						break;
+			// Make sure URL parameters are id-scoped
+			if (instance.state["settings"]["id"] !== "") {
+				if (name.startsWith(`${instance.state["settings"]["id"]}:`)) {
+					name = name.replace(`${instance.state["settings"]["id"]}:`, "");
+				} else {
+					continue;
+				}
+			}
+
+			// Text field
+			if (
+				instance.state["fieldTypes"][name] === "text" ||
+				instance.state["fieldTypes"][name] === "email" ||
+				instance.state["fieldTypes"][name] === "url" ||
+				instance.state["fieldTypes"][name] === "tel"
+			) {
+				const input = instance.container.querySelector(
+					`.bmd-form-control[name="${name}"]`,
+				);
+				if (input) {
+					input.value = value;
+					instance.state["formData"][name] = value;
+					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Number field
+			if (instance.state["fieldTypes"][name] === "number") {
+				const input = instance.container.querySelector(
+					`.bmd-form-control[name="${name}"]`,
+				);
+				if (input && isNumeric(value)) {
+					value = Number(value);
+					input.value = value;
+					instance.state["formData"][name] = value;
+					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Select field
+			if (instance.state["fieldTypes"][name] === "select") {
+				const select = instance.container.querySelector(
+					`.bmd-form-select[name="${name}"]`,
+				);
+				if (select) {
+					const options = select.querySelectorAll("option");
+					for (const option of options) {
+						if (option.getAttribute("value") === value) {
+							select.value = value;
+							instance.state["formData"][name] = value;
+							if (updateLocalStorage) instance.saveFieldValue(name, value);
+							instance.reRenderBindElems(name);
+							break;
+						}
 					}
 				}
 			}
-		}
 
+			// Choice field
+			if (instance.state["fieldTypes"][name] === "choice") {
+				const input = instance.container.querySelector(
+					`.bmd-form-check-input[name="${name}"]`,
+				);
+				if (input) {
+					const type = input.getAttribute("type");
+
+					// Set value, for checkbox, convert to array first
+					if (type === "checkbox") value = value.split(",");
+					instance.setRadioCheckboxValue(
+						name,
+						"bmd-form-check-input",
+						type,
+						value,
+					);
+
+					// Get value again, set to state, etc.
+					value = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-check-input",
+						type,
+					);
+					instance.state["formData"][name] = value;
+					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Number choice field
+			if (instance.state["fieldTypes"][name] === "num-choice") {
+				const input = instance.container.querySelector(
+					`.bmd-form-num-check-input[name="${name}"]`,
+				);
+				if (input) {
+					instance.setRadioCheckboxValue(
+						name,
+						"bmd-form-num-check-input",
+						"radio",
+						value,
+					);
+					value = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-num-check-input",
+						"radio",
+					);
+					value = value ? parseInt(value) : null;
+					instance.state["formData"][name] = value;
+					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					instance.reRenderBindElems(name);
+				}
+			}
+		}
+	};
+
+	/**
+	 * Set form data saved in local storage: set value in the DOM, update state,
+	 * and re-render the bind <div> and <span> elements.
+	 */
+	setSavedFormData = () => {
+		const instance = this;
+
+		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+			window.location.hostname
+		}${window.location.pathname}form-data`;
+		const savedFormData = localStorage.getItem(localStorageKey);
+		if (!savedFormData) return;
+		for (const [name, value] of Object.entries(JSON.parse(savedFormData))) {
+			// Text field
+			if (
+				instance.state["fieldTypes"][name] === "text" ||
+				instance.state["fieldTypes"][name] === "email" ||
+				instance.state["fieldTypes"][name] === "url" ||
+				instance.state["fieldTypes"][name] === "tel"
+			) {
+				const input = instance.container.querySelector(
+					`.bmd-form-control[name="${name}"]`,
+				);
+				if (input) {
+					input.value = value;
+					instance.state["formData"][name] = value;
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Number field
+			if (instance.state["fieldTypes"][name] === "number") {
+				const input = instance.container.querySelector(
+					`.bmd-form-control[name="${name}"]`,
+				);
+				if (input) {
+					input.value = value;
+					instance.state["formData"][name] = value;
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Select field
+			if (instance.state["fieldTypes"][name] === "select") {
+				const select = instance.container.querySelector(
+					`.bmd-form-select[name="${name}"]`,
+				);
+				if (select) {
+					const options = select.querySelectorAll("option");
+					for (const option of options) {
+						if (option.getAttribute("value") === value) {
+							select.value = value;
+							instance.state["formData"][name] = value;
+							instance.reRenderBindElems(name);
+							break;
+						}
+					}
+				}
+			}
+
+			// Choice field
+			if (instance.state["fieldTypes"][name] === "choice") {
+				const input = instance.container.querySelector(
+					`.bmd-form-check-input[name="${name}"]`,
+				);
+				if (input) {
+					const type = input.getAttribute("type");
+					instance.setRadioCheckboxValue(
+						name,
+						"bmd-form-check-input",
+						type,
+						value,
+					);
+					instance.state["formData"][name] = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-check-input",
+						type,
+					);
+					instance.reRenderBindElems(name);
+				}
+			}
+
+			// Number choice field
+			if (instance.state["fieldTypes"][name] === "num-choice") {
+				const input = instance.container.querySelector(
+					`.bmd-form-num-check-input[name="${name}"]`,
+				);
+				if (input) {
+					instance.setRadioCheckboxValue(
+						name,
+						"bmd-form-num-check-input",
+						"radio",
+						String(value),
+					);
+					instance.state["formData"][name] = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-num-check-input",
+						"radio",
+					);
+					instance.reRenderBindElems(name);
+				}
+			}
+		}
+	};
+
+	/**
+	 * Given a form field element, remove all errors (and everything related).
+	 *
+	 * @param {HTMLElement} formField
+	 */
+	removeFieldErrors = (formField) => {
+		const instance = this;
+
+		// Remove all errors
+		formField.querySelectorAll(".bmd-error").forEach((error) => {
+			error.remove();
+		});
+
+		// Form fields with errors will have a type attribute
+		const type = formField.getAttribute("data-bmd-type");
+
+		// Remove WAI-ARIA tags
 		// Choice field
-		if (state["fieldTypes"][name] === "choice") {
-			const input = document.querySelector(
-				`.bmd-form-check-input[name="${name}"]`,
-			);
-			if (input) {
-				const type = input.getAttribute("type");
-				setRadioCheckboxValue(name, "bmd-form-check-input", type, value);
-				state["formData"][name] = getRadioCheckboxValue(
-					name,
-					"bmd-form-check-input",
-					type,
-				);
-				reRenderBindElems(name);
-			}
+		if (type === "radio" || type === "checkbox") {
+			formField.querySelectorAll(".bmd-form-check-input").forEach((input) => {
+				input.removeAttribute("aria-invalid");
+				input.removeAttribute("aria-describedby");
+			});
 		}
-
 		// Number choice field
-		if (state["fieldTypes"][name] === "num-choice") {
-			const input = document.querySelector(
-				`.bmd-form-num-check-input[name="${name}"]`,
-			);
-			if (input) {
-				setRadioCheckboxValue(
-					name,
-					"bmd-form-num-check-input",
-					"radio",
-					String(value),
-				);
-				state["formData"][name] = getRadioCheckboxValue(
-					name,
-					"bmd-form-num-check-input",
-					"radio",
-				);
-				reRenderBindElems(name);
-			}
-		}
-	}
-}
-
-/**
- * Given a form field element, remove all errors (and everything related).
- *
- * @param {HTMLElement} formField
- */
-function removeFieldErrors(formField) {
-	// Remove all errors
-	formField.querySelectorAll(".bmd-error").forEach((error) => {
-		error.remove();
-	});
-
-	// Form fields with errors will have a type attribute
-	const type = formField.getAttribute("data-bmd-type");
-
-	// Remove WAI-ARIA tags
-	// Choice field
-	if (type === "radio" || type === "checkbox") {
-		formField.querySelectorAll(".bmd-form-check-input").forEach((input) => {
-			input.removeAttribute("aria-invalid");
-			input.removeAttribute("aria-describedby");
-		});
-	}
-	// Number choice field
-	else if (type === "num-radio") {
-		formField.querySelectorAll(".bmd-form-num-check-input").forEach((input) => {
-			input.removeAttribute("aria-invalid");
-			const name = input.getAttribute("name");
-			removeSingleAttribute(input, "aria-describedby", `id_${name}-error`);
-		});
-	}
-}
-
-/**
- * Handle the inputs of text form fields: update value in the state, save
- * value in local storage, remove errors and re-render the bind <div> and
- * <span> elements.
- *
- * @param {InputEvent} e
- */
-function textFieldOnInput(e) {
-	const name = e.target.getAttribute("name");
-	const value = e.target.value;
-	state["formData"][name] = value;
-	saveFieldValue(name, value);
-	removeFieldErrors(e.target.closest(".bmd-form-field"));
-	reRenderBindElems(name);
-}
-
-/**
- * Handle the inputs of number form fields: update value in the state, save
- * value in local storage, remove errors and re-render the bind <div> and
- * <span> elements.
- *
- * @param {InputEvent} e
- */
-function numberFieldOnInput(e) {
-	const name = e.target.getAttribute("name");
-	const value = isNumeric(e.target.value) ? Number(e.target.value) : null;
-	state["formData"][name] = value;
-	saveFieldValue(name, value);
-	removeFieldErrors(e.target.closest(".bmd-form-field"));
-	reRenderBindElems(name);
-}
-
-/**
- * Handle the inputs of select form fields: update value in the state, save
- * value in local storage, remove errors and re-render the bind <div> and
- * <span> elements.
- *
- * @param {InputEvent} e
- */
-function selectFieldOnInput(e) {
-	const name = e.target.getAttribute("name");
-	const value = e.target.value;
-	state["formData"][name] = value;
-	saveFieldValue(name, value);
-	removeFieldErrors(e.target.closest(".bmd-form-field"));
-	reRenderBindElems(name);
-}
-
-/**
- * Handle the inputs of choice form fields: update value in the state, save
- * value in local storage, remove errors and re-render the bind <div> and
- * <span> elements.
- *
- * @param {InputEvent} e
- */
-function choiceFieldOnInput(e) {
-	const name = e.target.getAttribute("name");
-	const type = e.target.getAttribute("type");
-	const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
-	state["formData"][name] = value;
-	saveFieldValue(name, value);
-	removeFieldErrors(e.target.closest(".bmd-form-field"));
-	reRenderBindElems(name);
-}
-
-/**
- * Handle the inputs of number choice form fields: update value in the state,
- * save value in local storage, remove errors and re-render the bind <div> and
- * <span> elements.
- *
- * @param {InputEvent} e
- */
-function numChoiceFieldOnInput(e) {
-	const name = e.target.getAttribute("name");
-	const value = parseInt(
-		getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
-	);
-	state["formData"][name] = value;
-	saveFieldValue(name, value);
-	removeFieldErrors(e.target.closest(".bmd-form-field"));
-	reRenderBindElems(name);
-}
-
-/**
- * Set the height of a <textrea> element on input.
- *
- * @param {InputEvent} e
- */
-function setTextareaHeightOnInput(e) {
-	const textarea = e.target;
-	textarea.style.height = "";
-	textarea.style.height = textarea.scrollHeight + "px";
-}
-
-/**
- * Given a <button> element, set it to the processing state.
- *
- * @param {HTMLButtonElement} btn
- */
-function setBtnProcessing(btn) {
-	btn.classList.add("bmd-btn-processing");
-	const localization = state["settings"]["localization"];
-	btn.setAttribute("aria-label", getTranslation(localization, "loading"));
-}
-
-/**
- * Given a <button> element, remove its processing state.
- *
- * @param {HTMLButtonElement} btn
- */
-function removeBtnProcessing(btn) {
-	btn.classList.remove("bmd-btn-processing");
-	btn.removeAttribute("aria-label");
-	const localization = state["settings"]["localization"];
-	const footerPreviousBtn = document.querySelector(
-		".bmd-footer .bmd-previous-btn",
-	);
-	const footerNextBtn = document.querySelector(".bmd-footer .bmd-next-btn");
-	if (btn === footerPreviousBtn) {
-		btn.setAttribute(
-			"aria-label",
-			getTranslation(localization, "previous-btn"),
-		);
-	} else if (btn === footerNextBtn) {
-		btn.setAttribute("aria-label", getTranslation(localization, "next-btn"));
-	}
-}
-
-/**
- * Given a slide element, remove all errors (and everything related).
- *
- * @param {HTMLElement} slide
- */
-function removeSlideErrors(slide) {
-	// Remove all field errors
-	slide.querySelectorAll(".bmd-form-field").forEach((formField) => {
-		removeFieldErrors(formField);
-	});
-
-	// Remove all slide errors
-	slide.querySelectorAll(".bmd-error").forEach((error) => {
-		error.remove();
-	});
-
-	// Remove WAI-ARIA tag from CTA button
-	const ctaBtn =
-		slide.querySelector(".bmd-submit-btn") ||
-		slide.querySelector(".bmd-next-btn");
-	ctaBtn.removeAttribute("aria-describedby");
-}
-
-/**
- * Add an error inside the given form field element.
- *
- * @param {HTMLElement} formField
- * @param {string} errorId
- * @param {string} message
- */
-function addFieldError(formField, errorId, message) {
-	const error = document.createElement("div");
-	error.setAttribute("id", errorId);
-	error.innerHTML = [
-		`<div class="bmd-error">`,
-		`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
-		`	${message}`,
-		`</div>`,
-	].join("\n");
-	formField.insertAdjacentElement("beforeend", error);
-}
-
-/**
- * Given a <form> element, validate and add errors if necessary. By default,
- * most form fields rely entirely on built-in client-side validation that is
- * found in browsers.
- *
- * @param {HTMLFormElement} form
- * @returns {boolean} form is valid or not
- */
-function formValid(form) {
-	const localization = state["settings"]["localization"];
-
-	// Remove all form errors (reset)
-	removeSlideErrors(form);
-
-	// By default, form is valid
-	let isFormValid = true;
-	const formFieldsWithError = [];
-
-	// Go through form fields to validate
-	// These fields will have a type attribute
-	form
-		.querySelectorAll(
-			'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required]',
-		)
-		.forEach((formField) => {
-			const name = formField.getAttribute("data-bmd-name");
-			const type = formField.getAttribute("data-bmd-type");
-
-			// Required choice fields
-			if (type === "radio" || type === "checkbox") {
-				const value = getRadioCheckboxValue(name, "bmd-form-check-input", type);
-				if (value.length === 0) {
-					isFormValid = false;
-					formFieldsWithError.push(formField);
-
-					// Add error
-					const errorId = `id_${name}-error`;
-					addFieldError(
-						formField,
-						errorId,
-						getTranslation(localization, "choice-field-required"),
+		else if (type === "num-radio") {
+			formField
+				.querySelectorAll(".bmd-form-num-check-input")
+				.forEach((input) => {
+					input.removeAttribute("aria-invalid");
+					const name = input.getAttribute("name");
+					instance.removeSingleAttribute(
+						input,
+						"aria-describedby",
+						`${instance.getIdPrefix()}id_${name}-error`,
 					);
-
-					// Add WAI-ARIA tags to the inputs
-					formField
-						.querySelectorAll(".bmd-form-check-input")
-						.forEach((input) => {
-							input.setAttribute("aria-invalid", "true");
-							input.setAttribute("aria-describedby", errorId);
-						});
-				}
-			}
-			// Required number choice fields
-			else if (type === "num-radio") {
-				const value = getRadioCheckboxValue(
-					name,
-					"bmd-form-num-check-input",
-					"radio",
-				);
-				if (value.length === 0) {
-					isFormValid = false;
-					formFieldsWithError.push(formField);
-
-					// Add error
-					const errorId = `id_${name}-error`;
-					addFieldError(
-						formField,
-						errorId,
-						getTranslation(localization, "number-choice-field-required"),
-					);
-
-					// Add WAI-ARIA tags to the inputs
-					formField
-						.querySelectorAll(".bmd-form-num-check-input")
-						.forEach((input) => {
-							input.setAttribute("aria-invalid", "true");
-							setSingleAttribute(input, "aria-describedby", errorId);
-						});
-				}
-			}
-		});
-
-	// Focus on the first form field with error
-	if (formFieldsWithError.length > 0) {
-		const inputToFocus = formFieldsWithError[0].querySelector(
-			".bmd-form-check-input, .bmd-form-num-check-input",
-		);
-		if (inputToFocus) inputToFocus.focus();
-	}
-
-	return isFormValid;
-}
-
-/**
- * When an error occurs during form submission or slide transition, add an
- * error inside the slide element.
- *
- * @param {HTMLElement} slide
- * @param {HTMLButtonElement} ctaBtn
- */
-function addSlideError(slide, ctaBtn) {
-	const localization = state["settings"]["localization"];
-	const error = document.createElement("div");
-	const errorId = `id_slide-${state["slideData"]["currentIndex"]}-error`;
-	error.setAttribute("id", errorId);
-	error.innerHTML = [
-		`<div class="bmd-error">`,
-		`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
-		`	${getTranslation(localization, "slide-error")}`,
-		`</div>`,
-	].join("\n");
-	ctaBtn.setAttribute("aria-describedby", errorId);
-	slide.insertAdjacentElement("beforeend", error);
-}
-
-/**
- * GET data from remote source. A remote source here is anything outside of
- * the actual template.
- *
- * @returns {Promise<string>}
- */
-function getRemoteData() {
-	// If the page is a file, return resolved promise
-	// This way, the page can load quickly (useful when drafting)
-	if (window.location.protocol === "file:") {
-		console.warn("Remote data not loaded: HTML page is a file (CORS issue).");
-		return Promise.resolve("").then((result) => {
-			return result;
-		});
-	}
-
-	// GET url not provided in settings (return resolved promise)
-	if (state["settings"]["get-url"] === undefined) {
-		return Promise.resolve("").then((result) => {
-			return result;
-		});
-	}
-
-	// Fetch data using GET url
-	return fetch(state["settings"]["get-url"], {
-		method: "GET",
-		headers: options["getHeaders"],
-	})
-		.then((response) => {
-			if (response.ok) {
-				return response.text();
-			} else {
-				console.error("Network response not ok.");
-				return "";
-			}
-		})
-		.catch((error) => {
-			console.error(error);
-			return "";
-		});
-}
-
-/**
- * POST form data.
- *
- * @param {boolean} postCondition
- * @param {boolean} end
- * @returns {Promise<boolean>}
- */
-function postFormData(postCondition, end) {
-	// If the post condition is false, return resolved promise
-	if (!postCondition) {
-		return Promise.resolve(true).then((result) => {
-			return result;
-		});
-	}
-
-	// If the page is a file, return resolved promise
-	// This way, the form can continue working (useful when drafting)
-	if (window.location.protocol === "file:") {
-		console.warn("Form data not sent: HTML page is a file (CORS issue).");
-		return Promise.resolve(true).then((result) => {
-			return result;
-		});
-	}
-
-	// POST url not provided in settings (return resolved promise)
-	// True is returned with a console warning
-	// Again, this way, the form can continue working (useful when drafting)
-	if (state["settings"]["post-url"] === undefined) {
-		console.warn('Form data not sent: "post-url" setting not found.');
-		return Promise.resolve(true).then((result) => {
-			return result;
-		});
-	}
-
-	// Send data using POST url
-	return fetch(state["settings"]["post-url"], {
-		method: "POST",
-		headers: options["postHeaders"],
-		body: JSON.stringify({
-			...options["postData"],
-			...state["formData"],
-			...{
-				_end: end ? end : "",
-				_rid: getOrCreateResponseId(),
-				_sheetName: state["settings"]["post-sheet-name"] || "",
-				_submitted: new Date().toUTCString(),
-			},
-		}),
-	})
-		.then((response) => {
-			if (response.ok) {
-				console.log("Form data sent successfully!");
-				return true;
-			} else {
-				console.error("Network response not ok.");
-				return false;
-			}
-		})
-		.catch((error) => {
-			console.error(error);
-			return false;
-		});
-}
-
-/**
- * Go through each slide (before the current one) to get the previous one to
- * make active (depending on the jump condition).
- *
- * @returns {{slide: HTMLElement, index: number}} the previous slide and its
- * index
- */
-function getPrevSlide() {
-	const currentIndex = state["slideData"]["currentIndex"];
-	const slides = document.querySelectorAll(".bmd-slide");
-	let prevSlide = slides[currentIndex];
-	let prevSlideIndex = currentIndex;
-
-	// Go through each slide (before the current one)
-	for (let i = currentIndex - 1; i >= 0; i--) {
-		const slide = slides[i];
-
-		// If jump condition not present, this is automatically the previous slide
-		if (!slide.hasAttribute("data-bmd-jump")) {
-			prevSlide = slide;
-			prevSlideIndex = i;
-			break;
+				});
 		}
-
-		// Use Nunjucks to check jump condition
-		nunjucks.configure({ autoescape: false });
-		const jumpCondition = nunjucks.renderString(
-			`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
-			{
-				...state["data"],
-				...state["formData"],
-			},
-		);
-		if (jumpCondition === "true") {
-			prevSlide = slide;
-			prevSlideIndex = i;
-			break;
-		}
-	}
-
-	return {
-		slide: prevSlide,
-		index: prevSlideIndex,
 	};
-}
 
-/**
- * Go through each slide (after the current one) to get the next one to make
- * active (depending on the jump condition).
- *
- * @returns {{slide: HTMLElement, index: number}} the next slide and its index
- */
-function getNextSlide() {
-	const currentIndex = state["slideData"]["currentIndex"];
-	const slides = document.querySelectorAll(".bmd-slide");
-	let nextSlide = slides[currentIndex];
-	let nextSlideIndex = currentIndex;
+	/**
+	 * Handle the inputs of text form fields: update value in the state, save
+	 * value in local storage, remove errors and re-render the bind <div> and
+	 * <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	textFieldOnInput = (e) => {
+		const instance = this;
 
-	// Go through each slide (after the current one)
-	for (let i = currentIndex + 1; i < slides.length; i++) {
-		const slide = slides[i];
-
-		// If jump condition not present, this is automatically the next slide
-		if (!slide.hasAttribute("data-bmd-jump")) {
-			nextSlide = slide;
-			nextSlideIndex = i;
-			break;
-		}
-
-		// Use Nunjucks to check jump condition
-		nunjucks.configure({ autoescape: false });
-		const jumpCondition = nunjucks.renderString(
-			`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
-			{
-				...state["data"],
-				...state["formData"],
-			},
-		);
-		if (jumpCondition === "true") {
-			nextSlide = slide;
-			nextSlideIndex = i;
-			break;
-		}
-	}
-
-	return {
-		slide: nextSlide,
-		index: nextSlideIndex,
+		const name = e.target.getAttribute("name");
+		const value = e.target.value;
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
 	};
-}
 
-/**
- * Get the CSS slide transition duration (in milliseconds).
- *
- * @returns {number}
- */
-function getSlideTransitionDuration() {
-	const rootElem = document.querySelector(".bmd-root");
+	/**
+	 * Handle the inputs of number form fields: update value in the state, save
+	 * value in local storage, remove errors and re-render the bind <div> and
+	 * <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	numberFieldOnInput = (e) => {
+		const instance = this;
 
-	// If the duration is saved on the root element, return saved duration
-	if (rootElem.hasAttribute("data-bmd-slide-transition-duration")) {
-		return Number(rootElem.getAttribute("data-bmd-slide-transition-duration"));
-	}
-	// Otherwise, calculate duration from CSS, save on root element, and return
-	else {
-		let duration =
-			window
-				.getComputedStyle(rootElem)
-				.getPropertyValue("--bmd-slide-transition-duration") || "200ms";
-		duration = Number(duration.slice(0, -2));
-		rootElem.setAttribute("data-bmd-slide-transition-duration", duration);
-		return duration;
-	}
-}
+		const name = e.target.getAttribute("name");
+		const value = isNumeric(e.target.value) ? Number(e.target.value) : null;
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
+	};
 
-/**
- * When a new slide becomes active, do the following: update state, handle
- * page progress (if applicable), handle the display and state of the footer
- * slide control buttons, scroll to top and autofocus (if applicable).
- *
- * @param {HTMLElement} slide
- * @param {number} index
- */
-function hasNewActiveSlide(slide, index) {
-	// Update state
-	state["slideData"]["currentIndex"] = index;
+	/**
+	 * Handle the inputs of select form fields: update value in the state, save
+	 * value in local storage, remove errors and re-render the bind <div> and
+	 * <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	selectFieldOnInput = (e) => {
+		const instance = this;
 
-	// Handle page progress (if applicable)
-	const pageProgress = document.querySelector(".bmd-page-progress");
-	let slidePageProgress;
-	if (slide.classList.contains("bmd-first-slide")) {
-		slidePageProgress = "0%";
-	} else if (slide.classList.contains("bmd-end-slide")) {
-		slidePageProgress = "100%";
-	} else if (slide.hasAttribute("data-bmd-page-progress")) {
-		slidePageProgress = slide.getAttribute("data-bmd-page-progress");
-	}
-	if (
-		pageProgress &&
-		slidePageProgress !== undefined &&
-		state["settings"]["page-progress"] !== "decorative"
-	) {
-		const localization = state["settings"]["localization"];
-		pageProgress.setAttribute("role", "progressbar");
-		pageProgress.setAttribute(
-			"aria-label",
-			getTranslation(localization, "page-progress"),
+		const name = e.target.getAttribute("name");
+		const value = e.target.value;
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
+	};
+
+	/**
+	 * Handle the inputs of choice form fields: update value in the state, save
+	 * value in local storage, remove errors and re-render the bind <div> and
+	 * <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	choiceFieldOnInput = (e) => {
+		const instance = this;
+
+		const name = e.target.getAttribute("name");
+		const type = e.target.getAttribute("type");
+		const value = instance.getRadioCheckboxValue(
+			name,
+			"bmd-form-check-input",
+			type,
 		);
-		pageProgress.setAttribute("aria-valuemin", "0");
-		pageProgress.setAttribute("aria-valuemax", "100");
-		pageProgress.setAttribute(
-			"aria-valuenow",
-			slidePageProgress.replace("%", ""),
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
+	};
+
+	/**
+	 * Handle the inputs of number choice form fields: update value in the
+	 * state, save value in local storage, remove errors and re-render the bind
+	 * <div> and <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	numChoiceFieldOnInput = (e) => {
+		const instance = this;
+
+		const name = e.target.getAttribute("name");
+		const value = parseInt(
+			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 		);
-		pageProgress
-			.querySelector(".bmd-progress-bar")
-			.setAttribute("style", `width: ${slidePageProgress}`);
-	}
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
+	};
 
-	// Handle the display and state of the footer slide control buttons
-	const footerBtnGroup = document.querySelector(".bmd-footer .bmd-btn-group");
-	if (footerBtnGroup) {
-		const footerPreviousBtn = footerBtnGroup.querySelector(".bmd-previous-btn");
-		const footerNextBtn = footerBtnGroup.querySelector(".bmd-next-btn");
+	/**
+	 * Set the height of a <textrea> element on input.
+	 *
+	 * @param {InputEvent} e
+	 */
+	setTextareaHeightOnInput = (e) => {
+		const textarea = e.target;
+		textarea.style.height = "";
+		textarea.style.height = textarea.scrollHeight + "px";
+	};
 
-		// Reset first
-		footerBtnGroup.classList.remove("bmd-d-none");
-		footerPreviousBtn.disabled = false;
-		footerNextBtn.disabled = false;
+	/**
+	 * Given a <button> element, set it to the processing state.
+	 *
+	 * @param {HTMLButtonElement} btn
+	 */
+	setBtnProcessing = (btn) => {
+		const instance = this;
 
-		// Disable previous button for first slide
-		// Hide both for end slide
-		if (slide.classList.contains("bmd-first-slide")) {
-			footerPreviousBtn.disabled = true;
-		} else if (slide.classList.contains("bmd-end-slide")) {
-			footerBtnGroup.classList.add("bmd-d-none");
-		}
+		btn.classList.add("bmd-btn-processing");
+		const localization = instance.state["settings"]["localization"];
+		btn.setAttribute("aria-label", getTranslation(localization, "loading"));
+	};
 
-		// Also disable previous button if slide contains the specific attribute
-		if (slide.hasAttribute("data-bmd-disable-prev-btn"))
-			footerPreviousBtn.disabled = true;
-	}
+	/**
+	 * Given a <button> element, remove its processing state.
+	 *
+	 * @param {HTMLButtonElement} btn
+	 */
+	removeBtnProcessing = (btn) => {
+		const instance = this;
 
-	// The timeout makes sure that the slide animation has completed
-	setTimeout(function () {
-		// Scroll to top
-		window.scrollTo({ top: 0 });
-
-		// Autofocus (if applicable)
-		if (state["settings"]["autofocus"] === "all-slides") {
-			const elemToAutofocus = slide.querySelector(
-				"input.bmd-form-control, textarea.bmd-form-control, select.bmd-form-select, input.bmd-form-check-input, input.bmd-form-num-check-input",
+		btn.classList.remove("bmd-btn-processing");
+		btn.removeAttribute("aria-label");
+		const localization = instance.state["settings"]["localization"];
+		const footerPreviousBtn = instance.container.querySelector(
+			".bmd-footer .bmd-previous-btn",
+		);
+		const footerNextBtn = instance.container.querySelector(
+			".bmd-footer .bmd-next-btn",
+		);
+		if (btn === footerPreviousBtn) {
+			btn.setAttribute(
+				"aria-label",
+				getTranslation(localization, "previous-btn"),
 			);
-			if (elemToAutofocus) elemToAutofocus.focus();
-		} else {
-			const elemToAutofocus = slide.querySelector("[data-bmd-autofocus]");
-			if (elemToAutofocus) elemToAutofocus.focus();
+		} else if (btn === footerNextBtn) {
+			btn.setAttribute("aria-label", getTranslation(localization, "next-btn"));
 		}
-	}, getSlideTransitionDuration() * 2);
-}
+	};
 
-/**
- * Fade out active slide and fade in next slide. The timeouts make sure that
- * the animations work properly.
- *
- * @param {HTMLElement} activeSlide
- * @param {HTMLElement} nextSlide
- */
-function fadeInNextSlide(activeSlide, nextSlide) {
-	activeSlide.classList.add("bmd-fade-out-to-top");
-	setTimeout(function () {
-		activeSlide.classList.remove("bmd-slide-active");
-		nextSlide.classList.add("bmd-fade-in-from-bottom");
-		nextSlide.classList.add("bmd-slide-active");
-		setTimeout(function () {
-			nextSlide.classList.remove("bmd-fade-in-from-bottom");
-			activeSlide.classList.remove("bmd-fade-out-to-top");
-		}, getSlideTransitionDuration());
-	}, getSlideTransitionDuration());
-}
+	/**
+	 * Given a slide element, remove all errors (and everything related).
+	 *
+	 * @param {HTMLElement} slide
+	 */
+	removeSlideErrors = (slide) => {
+		const instance = this;
 
-/**
- * Fade out active slide and fade in previous slide. The timeouts make sure
- * that the animations work properly.
- *
- * @param {HTMLElement} activeSlide
- * @param {HTMLElement} prevSlide
- */
-function fadeInPrevSlide(activeSlide, prevSlide) {
-	activeSlide.classList.add("bmd-fade-out-to-bottom");
-	setTimeout(function () {
-		activeSlide.classList.remove("bmd-slide-active");
-		prevSlide.classList.add("bmd-fade-in-from-top");
-		prevSlide.classList.add("bmd-slide-active");
-		setTimeout(function () {
-			prevSlide.classList.remove("bmd-fade-in-from-top");
-			activeSlide.classList.remove("bmd-fade-out-to-bottom");
-		}, getSlideTransitionDuration());
-	}, getSlideTransitionDuration());
-}
+		// Remove all field errors
+		slide.querySelectorAll(".bmd-form-field").forEach((formField) => {
+			instance.removeFieldErrors(formField);
+		});
 
-/**
- * Disable all clicks. This is added when the slide transition starts, and
- * removed after the slide transition has ended (or if there is an error).
- *
- * @param {MouseEvent} e
- */
-function disableAllClicks(e) {
-	e.stopPropagation();
-	e.preventDefault();
-	return false;
-}
+		// Remove all slide errors
+		slide.querySelectorAll(".bmd-error").forEach((error) => {
+			error.remove();
+		});
 
-/**
- * Go to the next slide.
- *
- * @param {HTMLElement} activeSlide
- */
-function nextSlide(activeSlide) {
-	// Disable all clicks on root element
-	const rootElem = document.querySelector(".bmd-root");
-	rootElem.addEventListener("click", disableAllClicks, true);
+		// Remove WAI-ARIA tag from CTA button
+		const ctaBtn =
+			slide.querySelector(".bmd-submit-btn") ||
+			slide.querySelector(".bmd-next-btn");
+		ctaBtn.removeAttribute("aria-describedby");
+	};
 
-	// Set CTA button and footer previous and next buttons to processing
-	const ctaBtn =
-		activeSlide.querySelector(".bmd-submit-btn") ||
-		activeSlide.querySelector(".bmd-next-btn");
-	setBtnProcessing(ctaBtn);
-	const footerPreviousBtn = document.querySelector(
-		".bmd-footer .bmd-previous-btn",
-	);
-	if (footerPreviousBtn) setBtnProcessing(footerPreviousBtn);
-	const footerNextBtn = document.querySelector(".bmd-footer .bmd-next-btn");
-	if (footerNextBtn) setBtnProcessing(footerNextBtn);
+	/**
+	 * Add an error inside the given form field element.
+	 *
+	 * @param {HTMLElement} formField
+	 * @param {string} errorId
+	 * @param {string} message
+	 */
+	addFieldError = (formField, errorId, message) => {
+		const instance = this;
 
-	// Validate form (if active slide is <form> element)
-	if (activeSlide.tagName === "FORM") {
-		// Form is not valid
-		if (!formValid(activeSlide)) {
-			// Remove all buttons from their processing states
-			document.querySelectorAll(".bmd-btn-processing").forEach((btn) => {
-				removeBtnProcessing(btn);
+		const error = document.createElement("div");
+		error.setAttribute("id", errorId);
+		error.innerHTML = [
+			`<div class="bmd-error">`,
+			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`	${message}`,
+			`</div>`,
+		].join("\n");
+		formField.insertAdjacentElement("beforeend", error);
+	};
+
+	/**
+	 * Given a <form> element, validate and add errors if necessary. By default,
+	 * most form fields rely entirely on built-in client-side validation that is
+	 * found in browsers.
+	 *
+	 * @param {HTMLFormElement} form
+	 * @returns {boolean} form is valid or not
+	 */
+	formValid = (form) => {
+		const instance = this;
+
+		const localization = instance.state["settings"]["localization"];
+
+		// Remove all form errors (reset)
+		instance.removeSlideErrors(form);
+
+		// By default, form is valid
+		let isFormValid = true;
+		const formFieldsWithError = [];
+
+		// Go through form fields to validate
+		// These fields will have a type attribute
+		form
+			.querySelectorAll(
+				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required]',
+			)
+			.forEach((formField) => {
+				const name = formField.getAttribute("data-bmd-name");
+				const type = formField.getAttribute("data-bmd-type");
+
+				// Required choice fields
+				if (type === "radio" || type === "checkbox") {
+					const value = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-check-input",
+						type,
+					);
+					if (value.length === 0) {
+						isFormValid = false;
+						formFieldsWithError.push(formField);
+
+						// Add error
+						const errorId = `${instance.getIdPrefix()}id_${name}-error`;
+						instance.addFieldError(
+							formField,
+							errorId,
+							getTranslation(localization, "choice-field-required"),
+						);
+
+						// Add WAI-ARIA tags to the inputs
+						formField
+							.querySelectorAll(".bmd-form-check-input")
+							.forEach((input) => {
+								input.setAttribute("aria-invalid", "true");
+								input.setAttribute("aria-describedby", errorId);
+							});
+					}
+				}
+				// Required number choice fields
+				else if (type === "num-radio") {
+					const value = instance.getRadioCheckboxValue(
+						name,
+						"bmd-form-num-check-input",
+						"radio",
+					);
+					if (value.length === 0) {
+						isFormValid = false;
+						formFieldsWithError.push(formField);
+
+						// Add error
+						const errorId = `${instance.getIdPrefix()}id_${name}-error`;
+						instance.addFieldError(
+							formField,
+							errorId,
+							getTranslation(localization, "number-choice-field-required"),
+						);
+
+						// Add WAI-ARIA tags to the inputs
+						formField
+							.querySelectorAll(".bmd-form-num-check-input")
+							.forEach((input) => {
+								input.setAttribute("aria-invalid", "true");
+								instance.setSingleAttribute(input, "aria-describedby", errorId);
+							});
+					}
+				}
 			});
 
+		// Focus on the first form field with error
+		if (formFieldsWithError.length > 0) {
+			const inputToFocus = formFieldsWithError[0].querySelector(
+				".bmd-form-check-input, .bmd-form-num-check-input",
+			);
+			if (inputToFocus) inputToFocus.focus();
+		}
+
+		return isFormValid;
+	};
+
+	/**
+	 * When an error occurs during form submission or slide transition, add an
+	 * error inside the slide element.
+	 *
+	 * @param {HTMLElement} slide
+	 * @param {HTMLButtonElement} ctaBtn
+	 */
+	addSlideError = (slide, ctaBtn) => {
+		const instance = this;
+
+		const localization = instance.state["settings"]["localization"];
+		const error = document.createElement("div");
+		const errorId = `${instance.getIdPrefix()}id_slide-${
+			instance.state["slideData"]["currentIndex"]
+		}-error`;
+		error.setAttribute("id", errorId);
+		error.innerHTML = [
+			`<div class="bmd-error">`,
+			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`	${getTranslation(localization, "slide-error")}`,
+			`</div>`,
+		].join("\n");
+		ctaBtn.setAttribute("aria-describedby", errorId);
+		slide.insertAdjacentElement("beforeend", error);
+	};
+
+	/**
+	 * GET data from remote source. A remote source here is anything outside of
+	 * the actual template.
+	 *
+	 * @returns {Promise<string>}
+	 */
+	getRemoteData = () => {
+		const instance = this;
+
+		// If the page is a file, return resolved promise
+		// This way, the page can load quickly (useful when drafting)
+		if (window.location.protocol === "file:") {
+			console.warn("Remote data not loaded: HTML page is a file (CORS issue).");
+			return Promise.resolve("").then((result) => {
+				return result;
+			});
+		}
+
+		// GET url not provided in settings (return resolved promise)
+		if (instance.state["settings"]["get-url"] === undefined) {
+			return Promise.resolve("").then((result) => {
+				return result;
+			});
+		}
+
+		// Fetch data using GET url
+		return fetch(instance.state["settings"]["get-url"], {
+			method: "GET",
+			headers: instance.options["getHeaders"],
+		})
+			.then((response) => {
+				if (response.ok) {
+					return response.text();
+				} else {
+					console.error("Network response not ok.");
+					return "";
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+				return "";
+			});
+	};
+
+	/**
+	 * POST form data.
+	 *
+	 * @param {boolean} postCondition
+	 * @param {boolean} end
+	 * @returns {Promise<boolean>}
+	 */
+	postFormData = (postCondition, end) => {
+		const instance = this;
+
+		// If the post condition is false, return resolved promise
+		if (!postCondition) {
+			return Promise.resolve(true).then((result) => {
+				return result;
+			});
+		}
+
+		// If the page is a file, return resolved promise
+		// This way, the form can continue working (useful when drafting)
+		if (window.location.protocol === "file:") {
+			console.warn("Form data not sent: HTML page is a file (CORS issue).");
+			return Promise.resolve(true).then((result) => {
+				return result;
+			});
+		}
+
+		// POST url not provided in settings (return resolved promise)
+		// True is returned with a console warning
+		// Again, this way, the form can continue working (useful when drafting)
+		if (instance.state["settings"]["post-url"] === undefined) {
+			console.warn('Form data not sent: "post-url" setting not found.');
+			return Promise.resolve(true).then((result) => {
+				return result;
+			});
+		}
+
+		// Send data using POST url
+		return fetch(instance.state["settings"]["post-url"], {
+			method: "POST",
+			headers: instance.options["postHeaders"],
+			body: JSON.stringify({
+				...instance.options["postData"],
+				...instance.state["formData"],
+				...{
+					_end: end ? end : "",
+					_rid: instance.getOrCreateResponseId(),
+					_sheetName: instance.state["settings"]["post-sheet-name"] || "",
+					_submitted: new Date().toUTCString(),
+				},
+			}),
+		})
+			.then((response) => {
+				if (response.ok) {
+					console.log("Form data sent successfully!");
+					return true;
+				} else {
+					console.error("Network response not ok.");
+					return false;
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+				return false;
+			});
+	};
+
+	/**
+	 * Go through each slide (before the current one) to get the previous one to
+	 * make active (depending on the jump condition).
+	 *
+	 * @returns {{slide: HTMLElement, index: number}} the previous slide and its
+	 * index
+	 */
+	getPrevSlide = () => {
+		const instance = this;
+
+		const currentIndex = instance.state["slideData"]["currentIndex"];
+		const slides = instance.container.querySelectorAll(".bmd-slide");
+		let prevSlide = slides[currentIndex];
+		let prevSlideIndex = currentIndex;
+
+		// Go through each slide (before the current one)
+		for (let i = currentIndex - 1; i >= 0; i--) {
+			const slide = slides[i];
+
+			// If jump condition not present, this is the previous slide
+			if (!slide.hasAttribute("data-bmd-jump")) {
+				prevSlide = slide;
+				prevSlideIndex = i;
+				break;
+			}
+
+			// Use Nunjucks to check jump condition
+			nunjucks.configure({ autoescape: false });
+			const jumpCondition = nunjucks.renderString(
+				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
+				{
+					...instance.state["data"],
+					...instance.state["formData"],
+				},
+			);
+			if (jumpCondition === "true") {
+				prevSlide = slide;
+				prevSlideIndex = i;
+				break;
+			}
+		}
+
+		return {
+			slide: prevSlide,
+			index: prevSlideIndex,
+		};
+	};
+
+	/**
+	 * Go through each slide (after the current one) to get the next one to make
+	 * active (depending on the jump condition).
+	 *
+	 * @returns {{slide: HTMLElement, index: number}} the next slide and its
+	 * index
+	 */
+	getNextSlide = () => {
+		const instance = this;
+
+		const currentIndex = instance.state["slideData"]["currentIndex"];
+		const slides = instance.container.querySelectorAll(".bmd-slide");
+		let nextSlide = slides[currentIndex];
+		let nextSlideIndex = currentIndex;
+
+		// Go through each slide (after the current one)
+		for (let i = currentIndex + 1; i < slides.length; i++) {
+			const slide = slides[i];
+
+			// If jump condition not present, this is the next slide
+			if (!slide.hasAttribute("data-bmd-jump")) {
+				nextSlide = slide;
+				nextSlideIndex = i;
+				break;
+			}
+
+			// Use Nunjucks to check jump condition
+			nunjucks.configure({ autoescape: false });
+			const jumpCondition = nunjucks.renderString(
+				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
+				{
+					...instance.state["data"],
+					...instance.state["formData"],
+				},
+			);
+			if (jumpCondition === "true") {
+				nextSlide = slide;
+				nextSlideIndex = i;
+				break;
+			}
+		}
+
+		return {
+			slide: nextSlide,
+			index: nextSlideIndex,
+		};
+	};
+
+	/**
+	 * Get the CSS slide transition duration (in milliseconds).
+	 *
+	 * @returns {number}
+	 */
+	getSlideTransitionDuration = () => {
+		const instance = this;
+
+		const rootElem = instance.container.querySelector(".bmd-root");
+
+		// If the duration is saved on the root element, return saved duration
+		if (rootElem.hasAttribute("data-bmd-slide-transition-duration")) {
+			return Number(
+				rootElem.getAttribute("data-bmd-slide-transition-duration"),
+			);
+		}
+		// Otherwise, calculate duration from CSS, save on root element, and return
+		else {
+			let duration =
+				window
+					.getComputedStyle(rootElem)
+					.getPropertyValue("--bmd-slide-transition-duration") || "200ms";
+			duration = Number(duration.slice(0, -2));
+			rootElem.setAttribute("data-bmd-slide-transition-duration", duration);
+			return duration;
+		}
+	};
+
+	/**
+	 * When a new slide becomes active, do the following: update state, handle
+	 * page progress (if applicable), handle the display and state of the footer
+	 * slide control buttons, scroll to top and autofocus (if applicable).
+	 *
+	 * @param {HTMLElement} slide
+	 * @param {number} index
+	 * @param {boolean} fromInit
+	 */
+	hasNewActiveSlide = (slide, index, fromInit) => {
+		const instance = this;
+
+		// Update state
+		instance.state["slideData"]["currentIndex"] = index;
+
+		// Handle page progress (if applicable)
+		const pageProgress = instance.container.querySelector(".bmd-page-progress");
+		let slidePageProgress;
+		if (slide.classList.contains("bmd-first-slide")) {
+			slidePageProgress = "0%";
+		} else if (slide.classList.contains("bmd-end-slide")) {
+			slidePageProgress = "100%";
+		} else if (slide.hasAttribute("data-bmd-page-progress")) {
+			slidePageProgress = slide.getAttribute("data-bmd-page-progress");
+		}
+		if (
+			pageProgress &&
+			slidePageProgress !== undefined &&
+			instance.state["settings"]["page-progress"] !== "decorative"
+		) {
+			const localization = instance.state["settings"]["localization"];
+			pageProgress.setAttribute("role", "progressbar");
+			pageProgress.setAttribute(
+				"aria-label",
+				getTranslation(localization, "page-progress"),
+			);
+			pageProgress.setAttribute("aria-valuemin", "0");
+			pageProgress.setAttribute("aria-valuemax", "100");
+			pageProgress.setAttribute(
+				"aria-valuenow",
+				slidePageProgress.replace("%", ""),
+			);
+			pageProgress
+				.querySelector(".bmd-progress-bar")
+				.setAttribute("style", `width: ${slidePageProgress}`);
+		}
+
+		// Handle the display and state of the footer slide control buttons
+		const footerBtnGroup = instance.container.querySelector(
+			".bmd-footer .bmd-btn-group",
+		);
+		if (footerBtnGroup) {
+			const footerPreviousBtn =
+				footerBtnGroup.querySelector(".bmd-previous-btn");
+			const footerNextBtn = footerBtnGroup.querySelector(".bmd-next-btn");
+
+			// Reset first
+			footerBtnGroup.classList.remove("bmd-d-none");
+			footerPreviousBtn.disabled = false;
+			footerNextBtn.disabled = false;
+
+			// Disable previous button for first slide
+			// Hide both for end slide
+			if (slide.classList.contains("bmd-first-slide")) {
+				footerPreviousBtn.disabled = true;
+			} else if (slide.classList.contains("bmd-end-slide")) {
+				footerBtnGroup.classList.add("bmd-d-none");
+			}
+
+			// Also disable previous button if slide contains the specific attribute
+			if (slide.hasAttribute("data-bmd-disable-prev-btn"))
+				footerPreviousBtn.disabled = true;
+		}
+
+		// The timeout makes sure that the slide animation has completed
+		setTimeout(function () {
+			// Scroll
+			if (instance.options["isFullPage"]) {
+				window.scroll({ top: 0 });
+			} else {
+				if (!fromInit) instance.container.scrollIntoView();
+				instance.container.scroll({ top: 0 });
+			}
+
+			// Autofocus (if applicable)
+			if (!fromInit || (fromInit && instance.options["isFullPage"])) {
+				if (instance.state["settings"]["autofocus"] === "all-slides") {
+					const elemToAutofocus = slide.querySelector(
+						"input.bmd-form-control, textarea.bmd-form-control, select.bmd-form-select, input.bmd-form-check-input, input.bmd-form-num-check-input",
+					);
+					if (elemToAutofocus) elemToAutofocus.focus();
+				} else {
+					const elemToAutofocus = slide.querySelector("[data-bmd-autofocus]");
+					if (elemToAutofocus) elemToAutofocus.focus();
+				}
+			}
+		}, instance.getSlideTransitionDuration() * 2);
+	};
+
+	/**
+	 * Fade out active slide and fade in next slide. The timeouts make sure that
+	 * the animations work properly.
+	 *
+	 * @param {HTMLElement} activeSlide
+	 * @param {HTMLElement} nextSlide
+	 */
+	fadeInNextSlide = (activeSlide, nextSlide) => {
+		const instance = this;
+
+		activeSlide.classList.add("bmd-fade-out-to-top");
+		setTimeout(function () {
+			activeSlide.classList.remove("bmd-slide-active");
+			nextSlide.classList.add("bmd-fade-in-from-bottom");
+			nextSlide.classList.add("bmd-slide-active");
+			setTimeout(function () {
+				nextSlide.classList.remove("bmd-fade-in-from-bottom");
+				activeSlide.classList.remove("bmd-fade-out-to-top");
+			}, instance.getSlideTransitionDuration());
+		}, instance.getSlideTransitionDuration());
+	};
+
+	/**
+	 * Fade out active slide and fade in previous slide. The timeouts make sure
+	 * that the animations work properly.
+	 *
+	 * @param {HTMLElement} activeSlide
+	 * @param {HTMLElement} prevSlide
+	 */
+	fadeInPrevSlide = (activeSlide, prevSlide) => {
+		const instance = this;
+
+		activeSlide.classList.add("bmd-fade-out-to-bottom");
+		setTimeout(function () {
+			activeSlide.classList.remove("bmd-slide-active");
+			prevSlide.classList.add("bmd-fade-in-from-top");
+			prevSlide.classList.add("bmd-slide-active");
+			setTimeout(function () {
+				prevSlide.classList.remove("bmd-fade-in-from-top");
+				activeSlide.classList.remove("bmd-fade-out-to-bottom");
+			}, instance.getSlideTransitionDuration());
+		}, instance.getSlideTransitionDuration());
+	};
+
+	/**
+	 * Disable all clicks. This is added when the slide transition starts, and
+	 * removed after the slide transition has ended (or if there is an error).
+	 *
+	 * @param {MouseEvent} e
+	 */
+	disableAllClicks = (e) => {
+		e.stopPropagation();
+		e.preventDefault();
+		return false;
+	};
+
+	/**
+	 * Go to the next slide.
+	 *
+	 * @param {HTMLElement} activeSlide
+	 */
+	nextSlide = (activeSlide) => {
+		const instance = this;
+
+		// Disable all clicks on root element
+		const rootElem = instance.container.querySelector(".bmd-root");
+		rootElem.addEventListener("click", instance.disableAllClicks, true);
+
+		// Set CTA button and footer previous and next buttons to processing
+		const ctaBtn =
+			activeSlide.querySelector(".bmd-submit-btn") ||
+			activeSlide.querySelector(".bmd-next-btn");
+		instance.setBtnProcessing(ctaBtn);
+		const footerPreviousBtn = instance.container.querySelector(
+			".bmd-footer .bmd-previous-btn",
+		);
+		if (footerPreviousBtn) instance.setBtnProcessing(footerPreviousBtn);
+		const footerNextBtn = instance.container.querySelector(
+			".bmd-footer .bmd-next-btn",
+		);
+		if (footerNextBtn) instance.setBtnProcessing(footerNextBtn);
+
+		// Validate form (if active slide is <form> element)
+		if (activeSlide.tagName === "FORM") {
+			// Form is not valid
+			if (!instance.formValid(activeSlide)) {
+				// Remove all buttons from their processing states
+				instance.container
+					.querySelectorAll(".bmd-btn-processing")
+					.forEach((btn) => {
+						instance.removeBtnProcessing(btn);
+					});
+
+				// Enable all clicks on root element
+				rootElem.removeEventListener("click", instance.disableAllClicks, true);
+
+				return;
+			}
+		} else {
+			// Remove all slide errors (reset)
+			instance.removeSlideErrors(activeSlide);
+		}
+
+		// Get the next slide
+		// If it is the same as the active slide, add (and show) error
+		const nextSlideAndIndex = instance.getNextSlide();
+		if (activeSlide === nextSlideAndIndex["slide"]) {
+			// Add error
+			instance.addSlideError(activeSlide, ctaBtn);
+
+			// Remove all buttons from their processing states
+			instance.container
+				.querySelectorAll(".bmd-btn-processing")
+				.forEach((btn) => {
+					instance.removeBtnProcessing(btn);
+				});
+
 			// Enable all clicks on root element
-			rootElem.removeEventListener("click", disableAllClicks, true);
+			rootElem.removeEventListener("click", instance.disableAllClicks, true);
 
 			return;
 		}
-	} else {
-		// Remove all slide errors (reset)
-		removeSlideErrors(activeSlide);
-	}
 
-	// Get the next slide
-	// If it is the same as the active slide, add (and show) error
-	const nextSlideAndIndex = getNextSlide();
-	if (activeSlide === nextSlideAndIndex["slide"]) {
-		// Add error
-		addSlideError(activeSlide, nextBtn);
+		// POST form data
+		const postCondition =
+			instance.state["settings"]["page"] === "form-slides" &&
+			(activeSlide.hasAttribute("data-bmd-post") ||
+				nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"))
+				? true
+				: false;
+		instance
+			.postFormData(
+				postCondition,
+				nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"),
+			)
+			.then((promiseResult) => {
+				// Success
+				if (promiseResult) {
+					// If next slide is the end slide: remove response id, remove form
+					// data from local storage, and redirect (if applicable)
+					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
+						instance.removeResponseId();
+						instance.removeSavedFormData();
+						const redirect =
+							nextSlideAndIndex["slide"].getAttribute("data-bmd-redirect");
+						if (redirect) {
+							window.location.href = redirect;
+							return;
+						}
+					}
 
-		// Remove all buttons from their processing states
-		document.querySelectorAll(".bmd-btn-processing").forEach((btn) => {
-			removeBtnProcessing(btn);
-		});
+					// Fade in next slide
+					instance.fadeInNextSlide(activeSlide, nextSlideAndIndex["slide"]);
 
-		// Enable all clicks on root element
-		rootElem.removeEventListener("click", disableAllClicks, true);
-
-		return;
-	}
-
-	// POST form data
-	const postCondition =
-		state["settings"]["page"] === "form-slides" &&
-		(activeSlide.hasAttribute("data-bmd-post") ||
-			nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"))
-			? true
-			: false;
-	postFormData(
-		postCondition,
-		nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"),
-	).then((promiseResult) => {
-		// Success
-		if (promiseResult) {
-			// If next slide is the end slide: remove response id, remove form data
-			// from local storage, and redirect (if applicable)
-			if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
-				removeResponseId();
-				removeSavedFormData();
-				const redirect =
-					nextSlideAndIndex["slide"].getAttribute("data-bmd-redirect");
-				if (redirect) {
-					window.location.href = redirect;
-					return;
+					// Handle the new active slide
+					instance.hasNewActiveSlide(
+						nextSlideAndIndex["slide"],
+						nextSlideAndIndex["index"],
+						false,
+					);
 				}
-			}
+				// Error
+				else {
+					// Add error
+					instance.addSlideError(activeSlide, ctaBtn);
+				}
 
-			// Fade in next slide
-			fadeInNextSlide(activeSlide, nextSlideAndIndex["slide"]);
+				// Remove all buttons from their processing states
+				instance.container
+					.querySelectorAll(".bmd-btn-processing")
+					.forEach((btn) => {
+						instance.removeBtnProcessing(btn);
+					});
 
-			// Handle the new active slide
-			hasNewActiveSlide(nextSlideAndIndex["slide"], nextSlideAndIndex["index"]);
+				// Enable all clicks on root element
+				// Timeout makes sure that the slide animation has completed
+				setTimeout(function () {
+					rootElem.removeEventListener(
+						"click",
+						instance.disableAllClicks,
+						true,
+					);
+				}, instance.getSlideTransitionDuration() * 3);
+			});
+	};
+
+	/**
+	 * Go to the previous slide.
+	 *
+	 * @param {HTMLElement} activeSlide
+	 */
+	prevSlide = (activeSlide) => {
+		const instance = this;
+
+		// Disable all clicks on root element
+		const rootElem = instance.container.querySelector(".bmd-root");
+		rootElem.addEventListener("click", instance.disableAllClicks, true);
+
+		// Set CTA button and footer previous and next buttons to processing
+		const ctaBtn =
+			activeSlide.querySelector(".bmd-submit-btn") ||
+			activeSlide.querySelector(".bmd-next-btn");
+		instance.setBtnProcessing(ctaBtn);
+		const footerPreviousBtn = instance.container.querySelector(
+			".bmd-footer .bmd-previous-btn",
+		);
+		if (footerPreviousBtn) instance.setBtnProcessing(footerPreviousBtn);
+		const footerNextBtn = instance.container.querySelector(
+			".bmd-footer .bmd-next-btn",
+		);
+		if (footerNextBtn) instance.setBtnProcessing(footerNextBtn);
+
+		// Get the previous slide
+		// If it is the same as the active slide, log error
+		const prevSlideAndIndex = instance.getPrevSlide();
+		if (activeSlide === prevSlideAndIndex["slide"]) {
+			// Log error
+			console.error("Something went wrong. Please try again.");
+
+			// Remove all buttons from their processing states
+			instance.container
+				.querySelectorAll(".bmd-btn-processing")
+				.forEach((btn) => {
+					instance.removeBtnProcessing(btn);
+				});
+
+			// Enable all clicks on root element
+			rootElem.removeEventListener("click", instance.disableAllClicks, true);
+
+			return;
 		}
-		// Error
-		else {
-			// Add error
-			addSlideError(activeSlide, ctaBtn);
-		}
+
+		// Fade in previous slide
+		instance.fadeInPrevSlide(activeSlide, prevSlideAndIndex["slide"]);
+
+		// Handle the new active slide
+		instance.hasNewActiveSlide(
+			prevSlideAndIndex["slide"],
+			prevSlideAndIndex["index"],
+			false,
+		);
 
 		// Remove all buttons from their processing states
-		document.querySelectorAll(".bmd-btn-processing").forEach((btn) => {
-			removeBtnProcessing(btn);
-		});
+		instance.container
+			.querySelectorAll(".bmd-btn-processing")
+			.forEach((btn) => {
+				instance.removeBtnProcessing(btn);
+			});
 
 		// Enable all clicks on root element
 		// Timeout makes sure that the slide animation has completed
 		setTimeout(function () {
-			rootElem.removeEventListener("click", disableAllClicks, true);
-		}, getSlideTransitionDuration() * 3);
-	});
-}
+			rootElem.removeEventListener("click", instance.disableAllClicks, true);
+		}, instance.getSlideTransitionDuration() * 3);
+	};
 
-/**
- * Go to the previous slide.
- *
- * @param {HTMLElement} activeSlide
- */
-function prevSlide(activeSlide) {
-	// Disable all clicks on root element
-	const rootElem = document.querySelector(".bmd-root");
-	rootElem.addEventListener("click", disableAllClicks, true);
+	/**
+	 * Copy code to clipboard. The code block (<pre> element) closest to the
+	 * copy button is the target.
+	 *
+	 * @param {MouseEvent} e
+	 */
+	copyCode = (e) => {
+		const instance = this;
 
-	// Set CTA button and footer previous and next buttons to processing
-	const ctaBtn =
-		activeSlide.querySelector(".bmd-submit-btn") ||
-		activeSlide.querySelector(".bmd-next-btn");
-	setBtnProcessing(ctaBtn);
-	const footerPreviousBtn = document.querySelector(
-		".bmd-footer .bmd-previous-btn",
-	);
-	if (footerPreviousBtn) setBtnProcessing(footerPreviousBtn);
-	const footerNextBtn = document.querySelector(".bmd-footer .bmd-next-btn");
-	if (footerNextBtn) setBtnProcessing(footerNextBtn);
+		e.preventDefault();
+		const copyBtn = e.target;
+		const codeBlock = copyBtn.closest(".bmd-code-wrapper").querySelector("pre");
 
-	// Get the previous slide
-	// If it is the same as the active slide, log error
-	const prevSlideAndIndex = getPrevSlide();
-	if (activeSlide === prevSlideAndIndex["slide"]) {
-		// Log error
-		console.error("Something went wrong. Please try again.");
+		// Copy code to clipboard
+		const range = document.createRange();
+		range.selectNode(codeBlock);
+		window.getSelection().removeAllRanges();
+		window.getSelection().addRange(range);
+		document.execCommand("copy");
+		window.getSelection().removeAllRanges();
 
-		// Remove all buttons from their processing states
-		document.querySelectorAll(".bmd-btn-processing").forEach((btn) => {
-			removeBtnProcessing(btn);
-		});
-
-		// Enable all clicks on root element
-		rootElem.removeEventListener("click", disableAllClicks, true);
-
-		return;
-	}
-
-	// Fade in previous slide
-	fadeInPrevSlide(activeSlide, prevSlideAndIndex["slide"]);
-
-	// Handle the new active slide
-	hasNewActiveSlide(prevSlideAndIndex["slide"], prevSlideAndIndex["index"]);
-
-	// Remove all buttons from their processing states
-	document.querySelectorAll(".bmd-btn-processing").forEach((btn) => {
-		removeBtnProcessing(btn);
-	});
-
-	// Enable all clicks on root element
-	// Timeout makes sure that the slide animation has completed
-	setTimeout(function () {
-		rootElem.removeEventListener("click", disableAllClicks, true);
-	}, getSlideTransitionDuration() * 3);
-}
-
-/**
- * Copy code to clipboard. The code block (<pre> element) closest to the copy
- * button is the target.
- *
- * @param {MouseEvent} e
- */
-function copyCode(e) {
-	e.preventDefault();
-	const copyBtn = e.target;
-	const codeBlock = copyBtn.closest(".bmd-code-wrapper").querySelector("pre");
-
-	// Copy code to clipboard
-	const range = document.createRange();
-	range.selectNode(codeBlock);
-	window.getSelection().removeAllRanges();
-	window.getSelection().addRange(range);
-	document.execCommand("copy");
-	window.getSelection().removeAllRanges();
-
-	// Show confirmation
-	copyBtn.innerHTML = getTranslation(
-		state["settings"]["localization"],
-		"copy-btn-success",
-	);
-
-	// Hide confirmation after 2 seconds
-	setTimeout(function () {
+		// Show confirmation
 		copyBtn.innerHTML = getTranslation(
-			state["settings"]["localization"],
-			"copy-btn",
+			instance.state["settings"]["localization"],
+			"copy-btn-success",
 		);
-	}, 2000);
-}
 
-/**
- * Add all the event listeners.
- *
- * @param {HTMLElement} container
- */
-function addEventListeners(container) {
-	if (container === document) {
-		// Blur header when scrolling over content
-		const header = document.querySelector(".bmd-header");
-		if (header) {
-			const pageProgress = document.querySelector(".bmd-page-progress");
-			const pageProgressHeight = pageProgress ? pageProgress.offsetHeight : 0;
-			const heightToBlur = (pageProgressHeight + header.offsetHeight) / 3;
-			window.addEventListener(
-				"scroll",
-				function () {
-					if (window.scrollY > heightToBlur) {
-						header.classList.add("bmd-header-bg-blur");
-					} else {
-						header.classList.remove("bmd-header-bg-blur");
-					}
-				},
-				false,
+		// Hide confirmation after 2 seconds
+		setTimeout(function () {
+			copyBtn.innerHTML = getTranslation(
+				instance.state["settings"]["localization"],
+				"copy-btn",
 			);
-		}
+		}, 2000);
+	};
 
-		// Toggle color scheme button
-		document.querySelectorAll(".bmd-toggle-color-scheme-btn").forEach((btn) => {
-			btn.addEventListener("click", toggleColorScheme);
-		});
+	/**
+	 * Add all the event listeners.
+	 *
+	 * @param {HTMLElement} container
+	 * @param {boolean} fromInit
+	 */
+	addEventListeners = (container, fromInit) => {
+		const instance = this;
 
-		// <form> submit
-		document.querySelectorAll("form.bmd-slide").forEach((form) => {
-			form.addEventListener("submit", function (e) {
-				nextSlide(e.target);
-			});
-		});
+		if (fromInit) {
+			// Blur header when scrolling over content
+			// This is done only for full page (header is always blurred inline)
+			const header = instance.container.querySelector(".bmd-header");
+			if (header && instance.options["isFullPage"]) {
+				const pageProgress =
+					instance.container.querySelector(".bmd-page-progress");
+				const pageProgressHeight = pageProgress ? pageProgress.offsetHeight : 0;
+				const heightToBlur = (pageProgressHeight + header.offsetHeight) / 3;
+				window.addEventListener(
+					"scroll",
+					function () {
+						if (window.scrollY > heightToBlur) {
+							header.classList.add("bmd-header-bg-blur");
+						} else {
+							header.classList.remove("bmd-header-bg-blur");
+						}
+					},
+					false,
+				);
+			}
 
-		// Slide next buttons
-		document.querySelectorAll(".bmd-slide .bmd-next-btn").forEach((btn) => {
-			btn.addEventListener("click", function (e) {
-				if (!btn.classList.contains("bmd-btn-processing")) {
-					const parentSlide = btn.closest(".bmd-slide");
-					nextSlide(parentSlide);
-				}
-			});
-		});
+			// Toggle color scheme button
+			instance.container
+				.querySelectorAll(".bmd-toggle-color-scheme-btn")
+				.forEach((btn) => {
+					btn.addEventListener("click", instance.toggleColorScheme);
+				});
 
-		// Footer previous button
-		document
-			.querySelectorAll(".bmd-footer .bmd-previous-btn")
-			.forEach((btn) => {
-				btn.addEventListener("click", function (e) {
-					if (!btn.classList.contains("bmd-btn-processing")) {
-						const activeSlide = document.querySelector(".bmd-slide-active");
-						prevSlide(activeSlide);
-					}
+			// <form> submit
+			instance.container.querySelectorAll("form.bmd-slide").forEach((form) => {
+				form.addEventListener("submit", function (e) {
+					instance.nextSlide(e.target);
 				});
 			});
 
-		// Footer next button
-		document.querySelectorAll(".bmd-footer .bmd-next-btn").forEach((btn) => {
-			btn.addEventListener("click", function (e) {
-				if (!btn.classList.contains("bmd-btn-processing")) {
-					const activeSlide = document.querySelector(".bmd-slide-active");
-					if (activeSlide.tagName === "FORM") {
-						activeSlide.querySelector(".bmd-submit-btn").click();
+			// Slide next buttons
+			instance.container
+				.querySelectorAll(".bmd-slide .bmd-next-btn")
+				.forEach((btn) => {
+					btn.addEventListener("click", function (e) {
+						if (!btn.classList.contains("bmd-btn-processing")) {
+							const parentSlide = btn.closest(".bmd-slide");
+							instance.nextSlide(parentSlide);
+						}
+					});
+				});
+
+			// Footer previous button
+			instance.container
+				.querySelectorAll(".bmd-footer .bmd-previous-btn")
+				.forEach((btn) => {
+					btn.addEventListener("click", function (e) {
+						if (!btn.classList.contains("bmd-btn-processing")) {
+							const activeSlide =
+								instance.container.querySelector(".bmd-slide-active");
+							instance.prevSlide(activeSlide);
+						}
+					});
+				});
+
+			// Footer next button
+			instance.container
+				.querySelectorAll(".bmd-footer .bmd-next-btn")
+				.forEach((btn) => {
+					btn.addEventListener("click", function (e) {
+						if (!btn.classList.contains("bmd-btn-processing")) {
+							const activeSlide =
+								instance.container.querySelector(".bmd-slide-active");
+							if (activeSlide.tagName === "FORM") {
+								activeSlide.querySelector(".bmd-submit-btn").click();
+							} else {
+								instance.nextSlide(activeSlide);
+							}
+						}
+					});
+				});
+
+			// Restart buttons
+			instance.container.querySelectorAll(".bmd-restart-btn").forEach((btn) => {
+				btn.addEventListener("click", function (e) {
+					if (instance.options["isFullPage"]) {
+						window.location.reload();
 					} else {
-						nextSlide(activeSlide);
+						instance._init(false);
+					}
+				});
+			});
+		}
+
+		// Copy buttons
+		container.querySelectorAll(".bmd-copy-btn").forEach((btn) => {
+			btn.addEventListener("click", instance.copyCode);
+		});
+
+		// <input> elements
+		container
+			.querySelectorAll(
+				"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-num-check-input",
+			)
+			.forEach((input) => {
+				if (
+					input.getAttribute("type") === "text" ||
+					input.getAttribute("type") === "email" ||
+					input.getAttribute("type") === "url" ||
+					input.getAttribute("type") === "tel"
+				) {
+					input.addEventListener("input", instance.textFieldOnInput);
+				} else if (input.getAttribute("type") === "number") {
+					input.addEventListener("input", instance.numberFieldOnInput);
+				} else if (
+					input.getAttribute("type") === "radio" ||
+					input.getAttribute("type") === "checkbox"
+				) {
+					if (input.classList.contains("bmd-form-check-input")) {
+						input.addEventListener("input", instance.choiceFieldOnInput);
+					} else if (input.classList.contains("bmd-form-num-check-input")) {
+						input.addEventListener("input", instance.numChoiceFieldOnInput);
 					}
 				}
 			});
-		});
 
-		// Restart buttons
-		document.querySelectorAll(".bmd-restart-btn").forEach((btn) => {
-			btn.addEventListener("click", function (e) {
-				window.location.reload();
+		// <textarea> elements
+		container
+			.querySelectorAll("textarea.bmd-form-control")
+			.forEach((textarea) => {
+				textarea.addEventListener("input", instance.textFieldOnInput);
+				textarea.addEventListener("input", instance.setTextareaHeightOnInput);
 			});
+
+		// <select> elements
+		container.querySelectorAll("select.bmd-form-select").forEach((select) => {
+			select.addEventListener("input", instance.selectFieldOnInput);
 		});
-	}
-
-	// Copy buttons
-	container.querySelectorAll(".bmd-copy-btn").forEach((btn) => {
-		btn.addEventListener("click", copyCode);
-	});
-
-	// <input> elements
-	container
-		.querySelectorAll(
-			"input.bmd-form-control, input.bmd-form-check-input, input.bmd-form-num-check-input",
-		)
-		.forEach((input) => {
-			if (
-				input.getAttribute("type") === "text" ||
-				input.getAttribute("type") === "email" ||
-				input.getAttribute("type") === "url" ||
-				input.getAttribute("type") === "tel"
-			) {
-				input.addEventListener("input", textFieldOnInput);
-			} else if (input.getAttribute("type") === "number") {
-				input.addEventListener("input", numberFieldOnInput);
-			} else if (
-				input.getAttribute("type") === "radio" ||
-				input.getAttribute("type") === "checkbox"
-			) {
-				if (input.classList.contains("bmd-form-check-input")) {
-					input.addEventListener("input", choiceFieldOnInput);
-				} else if (input.classList.contains("bmd-form-num-check-input")) {
-					input.addEventListener("input", numChoiceFieldOnInput);
-				}
-			}
-		});
-
-	// <textarea> elements
-	container
-		.querySelectorAll("textarea.bmd-form-control")
-		.forEach((textarea) => {
-			textarea.addEventListener("input", textFieldOnInput);
-			textarea.addEventListener("input", setTextareaHeightOnInput);
-		});
-
-	// <select> elements
-	container.querySelectorAll("select.bmd-form-select").forEach((select) => {
-		select.addEventListener("input", selectFieldOnInput);
-	});
-}
-
-/**
- * Initialize settings, set data defined in the template, fetch and set data
- * from remote source, and create the templates.
- *
- * @param {string} template
- * @param {{getHeaders: Object, postHeaders: Object, sanitize: boolean}} opts
- */
-function init(template, opts) {
-	// Ping the server
-	if (window.location.protocol !== "file:")
-		fetch("https://blocks.md/ping/", { method: "GET" });
-
-	// Set the options for use
-	if (opts) {
-		// GET headers
-		if (
-			opts["getHeaders"] !== undefined &&
-			typeof opts["getHeaders"] === "object"
-		) {
-			options["getHeaders"] = {
-				...options["getHeaders"],
-				...opts["getHeaders"],
-			};
-		}
-		// POST data
-		if (
-			opts["postData"] !== undefined &&
-			typeof opts["postData"] === "object"
-		) {
-			options["postData"] = {
-				...options["postData"],
-				...opts["postData"],
-			};
-		}
-		// POST headers
-		if (
-			opts["postHeaders"] !== undefined &&
-			typeof opts["postHeaders"] === "object"
-		) {
-			options["postHeaders"] = {
-				...options["postHeaders"],
-				...opts["postHeaders"],
-			};
-		}
-		// Prioritize form data from URLs
-		if (
-			opts["prioritizeURLFormData"] !== undefined &&
-			typeof opts["prioritizeURLFormData"] === "boolean"
-		)
-			options["prioritizeURLFormData"] = opts["prioritizeURLFormData"];
-		// Sanitize
-		if (opts["sanitize"] !== undefined && typeof opts["sanitize"] === "boolean")
-			options["sanitize"] = opts["sanitize"];
-		// Set color scheme attributes again
-		if (
-			opts["setColorSchemeAttrsAgain"] !== undefined &&
-			typeof opts["setColorSchemeAttrsAgain"] === "boolean"
-		)
-			options["setColorSchemeAttrsAgain"] = opts["setColorSchemeAttrsAgain"];
-	}
-
-	// Initialize settings
-	const parsedTemplateAndSettings = parseSettings(template);
-	template = parsedTemplateAndSettings["template"];
-	state["settings"] = {
-		...state["settings"],
-		...parsedTemplateAndSettings["settings"],
 	};
 
-	// Get or create response id
-	if (state["settings"]["page"] === "form-slides") getOrCreateResponseId();
+	/**
+	 * Initialize settings, set data defined in the template, fetch and set data
+	 * from remote source, and create the templates.
+	 *
+	 * @param {boolean} isFirstInit
+	 */
+	_init = (isFirstInit) => {
+		const instance = this;
 
-	// Set title and favicon
-	if (state["settings"]["title"] !== undefined)
-		document.title = state["settings"]["title"];
-	if (state["settings"]["favicon"] !== undefined) {
-		let faviconLink = document.querySelector('link[rel~="icon"]');
-		if (!faviconLink) {
-			faviconLink = document.createElement("link");
-			faviconLink.rel = "icon";
-			document.head.appendChild(faviconLink);
-		}
-		faviconLink.href = state["settings"]["favicon"];
-	}
+		// Ping the server
+		if (window.location.protocol !== "file:")
+			fetch("https://blocks.md/ping/", { method: "GET" });
 
-	// Create and add the stylesheet to the <head>
-	const stylesheet = document.createElement("style");
-	stylesheet.setAttribute("type", "text/css");
-	stylesheet.innerText = createStyles(state["settings"]);
-	document.head.appendChild(stylesheet);
+		// Set the state to defaults
+		instance.setStateToDefaults();
 
-	// Swap out the main CSS stylesheet in case of RTL
-	const mainStylesheetLink = document.querySelector(
-		'link[href$="blocksmd.min.css"]',
-	);
-	if (state["settings"]["dir"] === "rtl" && mainStylesheetLink) {
-		mainStylesheetLink.setAttribute(
-			"href",
-			mainStylesheetLink
-				.getAttribute("href")
-				.replace("blocksmd.min.css", "blocksmd.rtl.min.css"),
-		);
-	}
+		// Initialize settings
+		const parsedTemplateAndSettings = parseSettings(instance._template);
+		instance.template = parsedTemplateAndSettings["template"];
+		instance.state["settings"] = {
+			...instance.state["settings"],
+			...parsedTemplateAndSettings["settings"],
+		};
 
-	// Add the necessary attributes from the settings to the root
-	const rootElem = document.querySelector(".bmd-root");
-	const rootSettingsAttributesMap = {
-		"dir": "dir",
-		"field-size": "data-bmd-field-size",
-		"font-size": "data-bmd-font-size",
-		"header": "data-bmd-header",
-		"headings": "data-bmd-headings",
-		"localization": "lang",
-		"rounded": "data-bmd-rounded",
-		"vertical-alignment": "data-bmd-vertical-alignment",
-		"vertical-padding": "data-bmd-vertical-padding",
-	};
-	if (options["setColorSchemeAttrsAgain"]) {
-		rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";
-		rootSettingsAttributesMap["color-scheme-scope"] =
-			"data-bmd-color-scheme-scope";
-		rootSettingsAttributesMap["color-scheme-toggle"] =
-			"data-bmd-color-scheme-toggle";
-	}
-	for (const [key, value] of Object.entries(state["settings"])) {
-		if (rootSettingsAttributesMap[key] !== undefined) {
-			const attribute = rootSettingsAttributesMap[key];
-			rootElem.setAttribute(attribute, value);
-		}
-	}
-
-	// Set the preferred color scheme
-	// This is done here again in case we are re-setting the "color-scheme"
-	// attribute to the root
-	if (
-		options["setColorSchemeAttrsAgain"] &&
-		state["settings"]["color-scheme-toggle"] === "show"
-	)
-		setPreferredColorScheme();
-
-	// Add the made in loader to the DOM body
-	const localization = state["settings"]["localization"];
-	nunjucks.configure({ autoescape: false });
-	document.querySelector(".bmd-body").innerHTML = nunjucks.renderString(
-		madeInLoaderTemplate,
-		{
-			settings: state["settings"],
-			translations: {
-				loading: getTranslation(localization, "loading"),
-				madeInLoader: getTranslation(localization, "made-in-loader"),
-			},
-		},
-	);
-
-	// Set data defined in the template
-	const parsedTemplateAndData = parseDataBlocks(template);
-	template = parsedTemplateAndData["template"];
-	state["data"] = { ...state["data"], ...parsedTemplateAndData["data"] };
-
-	// Fetch data from remote source
-	// Then set to state and create the templates
-	getRemoteData().then((promiseResult) => {
-		// Set fetched data to state
-		if (promiseResult !== "") {
-			// Create variables for settings needed (for better readability)
-			const getFormat = state["settings"]["get-format"];
-			const getObjectsName = state["settings"]["get-objects-name"];
-
-			// JSON (set response data depending on the format)
-			if (getFormat === "json") {
-				const promiseResultJSON = JSON.parse(promiseResult);
-				if (Array.isArray(promiseResultJSON)) {
-					state["data"][getObjectsName] = promiseResultJSON;
-				} else {
-					state["data"] = { ...state["data"], ...promiseResultJSON };
-				}
+		// Add the root and body in case of inline
+		if (!instance.options["isFullPage"]) {
+			let rootElemClass = "bmd-root bmd-root-inline";
+			let rootElemStyle = "";
+			if (instance.options["paddingInline"] !== null) {
+				rootElemClass += " bmd-px-custom";
+				rootElemStyle = `--bmd-content-padding-x-custom: ${instance.options["paddingInline"]}px;`;
+			} else {
+				if (instance.options["removePaddingInline"])
+					rootElemClass += " bmd-px-0";
 			}
-			// CSV or TSV
-			else {
-				// Delimeter is comma by default (as CSV is the default format)
-				let delimeter = ",";
-				if (getFormat === "tsv") delimeter = "\t";
+			instance.container.innerHTML = [
+				"<div",
+				'	spellcheck="false"',
+				`	class="${rootElemClass}"`,
+				`	style="${rootElemStyle}"`,
+				`	data-bmd-color-scheme="${instance.state["settings"]["color-scheme"]}"`,
+				`	data-bmd-id="${instance.state["settings"]["id"]}"`,
+				">",
+				'	<div class="bmd-body">',
+				"		<noscript>Please turn on JavaScript to see this page.</noscript>",
+				'		<main class="bmd-main">',
+				'			<div class="bmd-loader-container">',
+				'				<div class="bmd-loader-spinner" role="status" aria-label="Loading"></div>',
+				"			</div>",
+				"		</main>",
+				"	</div>",
+				"</div>\n",
+			].join("\n");
+		}
 
-				// Parse and set response data
-				const parsedSpreadsheetData = parseSpreadsheetData(
-					promiseResult,
-					delimeter,
+		// Get or create response id
+		if (instance.state["settings"]["page"] === "form-slides")
+			instance.getOrCreateResponseId();
+
+		// The following is done only for full page (not inline)
+		if (instance.options["isFullPage"]) {
+			// Set title and favicon
+			if (instance.state["settings"]["title"] !== undefined)
+				document.title = instance.state["settings"]["title"];
+			if (instance.state["settings"]["favicon"] !== undefined) {
+				let faviconLink = document.querySelector('link[rel~="icon"]');
+				if (!faviconLink) {
+					faviconLink = document.createElement("link");
+					faviconLink.rel = "icon";
+					document.head.appendChild(faviconLink);
+				}
+				faviconLink.href = instance.state["settings"]["favicon"];
+			}
+
+			// Swap out the main CSS stylesheet in case of RTL
+			const mainStylesheetLink = document.querySelector(
+				'link[href$="blocksmd.min.css"]',
+			);
+			if (instance.state["settings"]["dir"] === "rtl" && mainStylesheetLink) {
+				mainStylesheetLink.setAttribute(
+					"href",
+					mainStylesheetLink
+						.getAttribute("href")
+						.replace("blocksmd.min.css", "blocksmd.rtl.min.css"),
 				);
-				state["data"] = {
-					...state["data"],
-					...parsedSpreadsheetData["dataSpreadsheet"],
-				};
-				state["data"][getObjectsName] = parsedSpreadsheetData["dataNormalized"];
 			}
 		}
 
-		// Create the body template and add to the DOM
-		// The "header-render" and "footer-render" settings are also set here (in
-		// the function being called)
-		const bodyTemplateAndSettings = createBodyTemplate(state["settings"]);
-		const bodyTemplate = bodyTemplateAndSettings["template"];
-		state["settings"] = bodyTemplateAndSettings["settings"];
-		document.querySelector(".bmd-body").innerHTML = bodyTemplate;
-
-		// Hide page progress, header and/or footer (if applicable)
-		if (state["settings"]["page-progress"] === "hide")
-			rootElem.setAttribute("data-bmd-page-progress", "hide");
-		if (!state["settings"]["header-render"])
-			rootElem.setAttribute("data-bmd-header", "hide");
-		if (!state["settings"]["footer-render"])
-			rootElem.setAttribute("data-bmd-footer", "hide");
-
-		// Create the content template and add to the DOM
-		const contentTemplateAndBindDivs = createContentTemplate(
-			template,
-			state["settings"],
-			{
-				...state["data"],
-				...state["formData"],
-			},
-			options["sanitize"],
-		);
-		template = contentTemplateAndBindDivs["template"];
-		state["bindDivTemplates"] = contentTemplateAndBindDivs["bindDivTemplates"];
-		document
-			.querySelector(".bmd-main-container")
-			.insertAdjacentHTML("beforeend", template);
-
-		// Highlight code blocks
-		hljs.highlightAll();
-
-		// Add all the event listeners
-		addEventListeners(document);
-
-		// Set form data to state
-		setFormDataToState();
-
-		// Set form data from URL parameters BEFORE local storage
-		if (!options["prioritizeURLFormData"]) setFormDataFromURL(false);
-
-		// Set form data saved in local storage
-		setSavedFormData();
-
-		// Set form data from URL parameters AFTER local storage
-		if (options["prioritizeURLFormData"]) setFormDataFromURL(true);
-
-		// Hide loader and show content
-		document.querySelector(".bmd-loader-container").classList.add("bmd-d-none");
-		if (state["settings"]["page"] !== "single") {
-			const firstSlide = document.querySelector(".bmd-slide");
-			firstSlide.classList.add("bmd-slide-active");
-			hasNewActiveSlide(firstSlide, 0);
-		} else {
-			document.querySelector(".bmd-single").classList.add("bmd-single-active");
+		// Create and add the stylesheet to the <head>
+		if (isFirstInit) {
+			const stylesheet = document.createElement("style");
+			stylesheet.setAttribute("type", "text/css");
+			stylesheet.innerText = createStyles(instance.state["settings"]);
+			document.head.appendChild(stylesheet);
 		}
-	});
+
+		// Add the necessary attributes from the settings to the root
+		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootSettingsAttributesMap = {
+			"dir": "dir",
+			"field-size": "data-bmd-field-size",
+			"font-size": "data-bmd-font-size",
+			"header": "data-bmd-header",
+			"headings": "data-bmd-headings",
+			"id": "data-bmd-id",
+			"localization": "lang",
+			"rounded": "data-bmd-rounded",
+			"vertical-alignment": "data-bmd-vertical-alignment",
+		};
+		if (instance.options["setColorSchemeAttrsAgain"]) {
+			rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";
+			rootSettingsAttributesMap["color-scheme-scope"] =
+				"data-bmd-color-scheme-scope";
+			rootSettingsAttributesMap["color-scheme-toggle"] =
+				"data-bmd-color-scheme-toggle";
+		}
+		for (const [key, value] of Object.entries(instance.state["settings"])) {
+			if (rootSettingsAttributesMap[key] !== undefined) {
+				const attribute = rootSettingsAttributesMap[key];
+				rootElem.setAttribute(attribute, value);
+			}
+		}
+
+		// Set the preferred color scheme
+		// This is done here again in case we are re-setting the "color-scheme"
+		// attribute to the root
+		if (
+			instance.options["setColorSchemeAttrsAgain"] &&
+			instance.state["settings"]["color-scheme-toggle"] === "show"
+		)
+			instance.setPreferredColorScheme();
+
+		// Add the made in loader to the DOM body
+		const localization = instance.state["settings"]["localization"];
+		nunjucks.configure({ autoescape: false });
+		instance.container.querySelector(".bmd-body").innerHTML =
+			nunjucks.renderString(madeInLoaderTemplate, {
+				settings: instance.state["settings"],
+				translations: {
+					loading: getTranslation(localization, "loading"),
+					madeInLoader: getTranslation(localization, "made-in-loader"),
+				},
+			});
+
+		// Set data defined in the template
+		const parsedTemplateAndData = parseDataBlocks(instance.template);
+		instance.template = parsedTemplateAndData["template"];
+		instance.state["data"] = {
+			...instance.state["data"],
+			...parsedTemplateAndData["data"],
+		};
+
+		// Fetch data from remote source
+		// Then set to state and create the templates
+		instance.getRemoteData().then((promiseResult) => {
+			// Set fetched data to state
+			if (promiseResult !== "") {
+				// Create variables for settings needed (for better readability)
+				const getFormat = instance.state["settings"]["get-format"];
+				const getObjectsName = instance.state["settings"]["get-objects-name"];
+
+				// JSON (set response data depending on the format)
+				if (getFormat === "json") {
+					const promiseResultJSON = JSON.parse(promiseResult);
+					if (Array.isArray(promiseResultJSON)) {
+						instance.state["data"][getObjectsName] = promiseResultJSON;
+					} else {
+						instance.state["data"] = {
+							...instance.state["data"],
+							...promiseResultJSON,
+						};
+					}
+				}
+				// CSV or TSV
+				else {
+					// Delimeter is comma by default (as CSV is the default format)
+					let delimeter = ",";
+					if (getFormat === "tsv") delimeter = "\t";
+
+					// Parse and set response data
+					const parsedSpreadsheetData = parseSpreadsheetData(
+						promiseResult,
+						delimeter,
+					);
+					instance.state["data"] = {
+						...instance.state["data"],
+						...parsedSpreadsheetData["dataSpreadsheet"],
+					};
+					instance.state["data"][getObjectsName] =
+						parsedSpreadsheetData["dataNormalized"];
+				}
+			}
+
+			// Create the body template and add to the DOM
+			// The "header-render" and "footer-render" settings are also set here
+			// (in the function being called)
+			const bodyTemplateAndSettings = createBodyTemplate(
+				instance.state["settings"],
+			);
+			const bodyTemplate = bodyTemplateAndSettings["template"];
+			instance.state["settings"] = bodyTemplateAndSettings["settings"];
+			instance.container.querySelector(".bmd-body").innerHTML = bodyTemplate;
+
+			// Hide page progress, header and/or footer (if applicable)
+			if (instance.state["settings"]["page-progress"] === "hide")
+				rootElem.setAttribute("data-bmd-page-progress", "hide");
+			if (!instance.state["settings"]["header-render"])
+				rootElem.setAttribute("data-bmd-header", "hide");
+			if (!instance.state["settings"]["footer-render"])
+				rootElem.setAttribute("data-bmd-footer", "hide");
+
+			// Create the content template and add to the DOM
+			const contentTemplateAndBindDivs = createContentTemplate(
+				instance.template,
+				instance.state["settings"],
+				{
+					...instance.state["data"],
+					...instance.state["formData"],
+				},
+				instance.options["sanitize"],
+			);
+			instance.template = contentTemplateAndBindDivs["template"];
+			instance.state["bindDivTemplates"] =
+				contentTemplateAndBindDivs["bindDivTemplates"];
+			instance.container
+				.querySelector(".bmd-main-container")
+				.insertAdjacentHTML("beforeend", instance.template);
+
+			// Highlight code blocks
+			hljs.highlightAll();
+
+			// Add all the event listeners
+			instance.addEventListeners(instance.container, true);
+
+			// Set form data to state
+			instance.setFormDataToState();
+
+			// Set form data from URL parameters BEFORE local storage
+			if (!instance.options["prioritizeURLFormData"])
+				instance.setFormDataFromURL(false);
+
+			// Set form data saved in local storage
+			instance.setSavedFormData();
+
+			// Set form data from URL parameters AFTER local storage
+			if (instance.options["prioritizeURLFormData"])
+				instance.setFormDataFromURL(true);
+
+			// Hide loader and show content
+			instance.container
+				.querySelector(".bmd-loader-container")
+				.classList.add("bmd-d-none");
+			if (instance.state["settings"]["page"] !== "single") {
+				const firstSlide = instance.container.querySelector(".bmd-slide");
+				firstSlide.classList.add("bmd-slide-active");
+				instance.hasNewActiveSlide(firstSlide, 0, true);
+			} else {
+				instance.container
+					.querySelector(".bmd-single")
+					.classList.add("bmd-single-active");
+			}
+		});
+	};
+
+	/**
+	 * Initialize for the first time.
+	 */
+	init = () => {
+		const instance = this;
+
+		instance._init(true);
+	};
 }
 
-exports.blocksmd = {
-	init: init,
-	options: options,
-	setPreferredColorScheme: setPreferredColorScheme,
-	state: state,
-};
+exports.blocksmd = blocksmd;

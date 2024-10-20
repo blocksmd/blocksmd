@@ -19,8 +19,12 @@ const { marked } = require("marked");
  * the template.
  *
  * @param {Object} options
- * @returns {{"css-prefix": string, "form-delimiter": string, "localization":
- * string}}
+ * @returns {{
+ *   "css-prefix": string,
+ *   "form-delimiter": string,
+ *   "id": string,
+ *   "localization": string
+ * }}
  */
 function getMarkedSettings(options) {
 	let markedSettings = {

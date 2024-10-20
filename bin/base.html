@@ -70,14 +70,32 @@
 		<!-- Content -->
 		<script type="text/javascript">
 			String.prototype.blocksmd = function () {
-				blocksmd.init(this, {
+				const instance = new blocksmd(this, document, {
+					// colorScheme: "light",
 					// getHeaders: {},
+					// id: "",
+					isFullPage: true,
+					// paddingInline: null,
 					// postData: {},
 					// postHeaders: {},
 					// prioritizeURLFormData: false,
+					// removePaddingInline: true,
 					// sanitize: false,
 					// setColorSchemeAttrsAgain: true,
+					// themeDark: {
+					// accent: "rgb(138, 180, 248)",
+					// accentForeground: "rgb(0, 0, 0)",
+					// backgroundColor: "rgb(18, 18, 18)",
+					// color: "rgb(240, 240, 240)",
+					// },
+					// themeLight: {
+					// accent: "rgb(30, 55, 153)",
+					// accentForeground: "rgb(255, 255, 255)",
+					// backgroundColor: "rgb(255, 255, 255)",
+					// color: "rgb(0, 0, 0)",
+					//},
 				});
+				instance.init();
 			};
 		</script>
 		<script src="./content/{{ route }}.md.js"></script>
