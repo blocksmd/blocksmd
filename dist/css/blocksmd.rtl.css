@@ -148,6 +148,7 @@
 	--bmd-kbd-font-size: var(--bmd-font-size-sm);
 	--bmd-kbd-font-weight: var(--bmd-font-weight-bold);
 	--bmd-kbd-color: inherit;
+	--bmd-kbd-bg: transparent;
 
 	/* Background images */
 
@@ -680,6 +681,7 @@
 	font-size: var(--bmd-kbd-font-size);
 	font-weight: var(--bmd-kbd-font-weight);
 	color: var(--bmd-kbd-color);
+	background-color: var(--bmd-kbd-bg);
 }
 
 .bmd-root kbd kbd {
