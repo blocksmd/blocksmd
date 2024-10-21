@@ -144,6 +144,7 @@
 
 	/* Keyboard input */
 
+	--bmd-kbd-padding: 0;
 	--bmd-kbd-margin: 0 1px;
 	--bmd-kbd-font-size: var(--bmd-font-size-sm);
 	--bmd-kbd-font-weight: var(--bmd-font-weight-bold);
@@ -677,6 +678,7 @@
 
 .bmd-root kbd {
 	font-family: var(--bmd-body-font-family);
+	padding: var(--bmd-kbd-padding);
 	margin: var(--bmd-kbd-margin);
 	font-size: var(--bmd-kbd-font-size);
 	font-weight: var(--bmd-kbd-font-weight);
