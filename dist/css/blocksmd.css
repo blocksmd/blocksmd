@@ -224,6 +224,11 @@
 		calc((var(--bmd-body-bg-g) * 2 + var(--bmd-accent-g)) / 3),
 		calc((var(--bmd-body-bg-b) * 2 + var(--bmd-accent-b)) / 3)
 	);
+	--bmd-input-datetime-placeholder-color: rgb(
+		calc((var(--bmd-body-bg-r) + var(--bmd-accent-r) * 2) / 3),
+		calc((var(--bmd-body-bg-g) + var(--bmd-accent-g) * 2) / 3),
+		calc((var(--bmd-body-bg-b) + var(--bmd-accent-b) * 2) / 3)
+	);
 
 	--bmd-check-padding-x: 12px;
 	--bmd-check-padding-y: var(--bmd-action-padding-y);
@@ -1362,6 +1367,29 @@
 
 .bmd-root .bmd-form-control[type="number"] {
 	-moz-appearance: textfield;
+}
+
+.bmd-root .bmd-form-control[type="datetime-local"]::-webkit-datetime-edit,
+.bmd-root .bmd-form-control[type="date"]::-webkit-datetime-edit,
+.bmd-root .bmd-form-control[type="time"]::-webkit-datetime-edit {
+	display: block;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+/* Safari only */
+
+.bmd-root[data-bmd-browser="safari"] .bmd-form-control[type="datetime-local"],
+.bmd-root[data-bmd-browser="safari"] .bmd-form-control[type="date"],
+.bmd-root[data-bmd-browser="safari"] .bmd-form-control[type="time"] {
+	-webkit-text-fill-color: var(--bmd-input-datetime-placeholder-color);
+}
+
+.bmd-root[data-bmd-browser="safari"]
+	.bmd-form-control[type="datetime-local"]:valid,
+.bmd-root[data-bmd-browser="safari"] .bmd-form-control[type="date"]:valid,
+.bmd-root[data-bmd-browser="safari"] .bmd-form-control[type="time"]:valid {
+	-webkit-text-fill-color: var(--bmd-input-color);
 }
 
 /* Form select */

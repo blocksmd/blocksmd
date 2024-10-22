@@ -2130,9 +2130,18 @@ class blocksmd {
 			document.head.appendChild(stylesheet);
 		}
 
+		// Add setting if browser is Safari
+		try {
+			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
+				instance.state["settings"]["browser"] = "safari";
+		} catch (error) {
+			console.error(error);
+		}
+
 		// Add the necessary attributes from the settings to the root
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const rootSettingsAttributesMap = {
+			"browser": "data-bmd-browser",
 			"dir": "dir",
 			"field-size": "data-bmd-field-size",
 			"font-size": "data-bmd-font-size",
