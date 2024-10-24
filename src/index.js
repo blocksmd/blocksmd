@@ -245,8 +245,11 @@ class blocksmd {
 		const templateContainsColorScheme = template.match(
 			/#!\s*color-scheme\s*=\s*(light|dark)/,
 		);
-		if (templateContainsColorScheme)
+		if (templateContainsColorScheme) {
 			colorScheme = templateContainsColorScheme[1];
+		} else {
+			templateSettingsFromOptions.push(`#! color-scheme = ${colorScheme}`);
+		}
 
 		let theme = this.options["themeLight"];
 		let themeAltScheme = this.options["themeDark"];
