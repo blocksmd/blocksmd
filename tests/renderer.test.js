@@ -115,6 +115,20 @@ opinion* = OpinionScale(
 	| description = Please choose.
 )
 
+joined* = DateTimeInput(
+	| question = When did you join?
+)
+
+[#some-date-field .col-6]
+joinedDate = dateinput(
+	| question = What date did you join?
+	| description = Please specify.
+	| max = 2025-01-01
+	| subfield
+)
+
+joinTime = TIMEINPUT()
+
 
 <!-- Headings -->
 
@@ -656,6 +670,50 @@ const expectedTemplate = `
         </div>
     </div>
 </fieldset>
+
+<div data-bmd-name="joined" data-bmd-type="datetime-local" class="bmd-form-field">
+	<label class="bmd-form-question" for="id_joined">
+		When did you <span class="bmd-text-nowrap" aria-hidden="true">join?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">join? (required)</span>
+	</label>
+	<input
+		name="joined"
+		id="id_joined"
+		type="datetime-local"
+		class="bmd-form-datetime-input bmd-form-control"
+		placeholder="YYYY-MM-DDTHH:mm"
+		required
+	>
+</div>
+
+<div data-bmd-name="joinedDate" data-bmd-type="date" id="some-date-field" class="bmd-col-6 bmd-form-field bmd-form-subfield">
+	<label class="bmd-form-question" for="id_joinedDate">
+		What date did you join?
+	</label>
+	<p class="bmd-form-description">
+		Please specify.
+	</p>
+	<input
+		name="joinedDate"
+		id="id_joinedDate"
+		type="date"
+		class="bmd-form-datetime-input bmd-form-control"
+		placeholder="YYYY-MM-DD"
+		max="2025-01-01"
+	>
+</div>
+
+<div data-bmd-name="joinTime" data-bmd-type="time" class="bmd-form-field">
+	<label class="bmd-form-question" for="id_joinTime">
+		...
+	</label>
+	<input
+		name="joinTime"
+		id="id_joinTime"
+		type="time"
+		class="bmd-form-datetime-input bmd-form-control"
+		placeholder="HH:mm"
+	>
+</div>
 
 
 <!-- Headings -->
