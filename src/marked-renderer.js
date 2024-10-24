@@ -9,6 +9,7 @@ const {
 	createChoiceField,
 	createRatingField,
 	createOpinionScaleField,
+	createDateTimeField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
 const { getTranslation } = require("./translations");
@@ -289,6 +290,21 @@ renderer.paragraph = function (text) {
 			} else if (fieldInputType === "opinionscale") {
 				return createOpinionScaleField(
 					fieldName,
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings["id"],
+					markedSettings["localization"],
+				);
+			} else if (
+				fieldInputType === "datetimeinput" ||
+				fieldInputType === "dateinput" ||
+				fieldInputType === "timeinput"
+			) {
+				return createDateTimeField(
+					fieldName,
+					fieldInputType.replace("input", ""),
 					fieldRequired,
 					parsedAttrs,
 					fieldParams,

@@ -7,7 +7,7 @@ const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
 const formFieldPattern = new RegExp(
-	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale)\((.*)\)/,
+	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale|datetimeinput|dateinput|timeinput)\((.*)\)/,
 	"is",
 );
 
@@ -960,6 +960,126 @@ function createOpinionScaleField(
 	});
 }
 
+/* Datetime field */
+
+const dateTimeFieldTemplate = `
+{{ startTag }}
+	<label class="bmd-form-question" for="{{ inputId }}">
+		{{ validParams.question | safe }}
+	</label>
+	{% if validParams.description %}
+	<p class="bmd-form-description">
+		{{ validParams.description }}
+	</p>
+	{% endif %}
+	<input
+		name="{{ name }}"
+		id="{{ inputId }}"
+		type="{{ inputType }}"
+		class="bmd-form-datetime-input bmd-form-control"
+		placeholder="{{ validParams.placeholder }}"
+		{% if required %}required{% endif %}
+		{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
+		{% if validParams.min %}min="{{ validParams.min }}"{% endif %}
+		{% if validParams.max %}max="{{ validParams.max }}"{% endif %}
+		{% if validParams.step %}step="{{ validParams.step }}"{% endif %}
+		{% if validParams.disabled %}disabled{% endif %}
+		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+	>
+</div>
+`;
+
+/**
+ * Create a datetime, date, or time form field.
+ *
+ * @param {string} name
+ * @param {"datetime"|"date"|"time"} inputType
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} datetime, date, or time input form field as HTML string
+ */
+function createDateTimeField(
+	name,
+	inputType,
+	required,
+	parsedAttrs,
+	params,
+	formDelimiter,
+	id,
+	localization,
+) {
+	// Set up the start tag, valid params, the rest, and translations
+	const {
+		startTag: startTag,
+		validParams: validParams,
+		restParams: restParams,
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		false,
+	);
+	const translations = {};
+
+	// Update the input type
+	if (inputType === "datetime") inputType = "datetime-local";
+
+	// Add the default placeholder based on input type
+	// The placeholder is useful on browsers that don't support the input types
+	// Also set up the pattern
+	let pattern = /.*/;
+	if (inputType === "datetime-local") {
+		validParams["placeholder"] = "YYYY-MM-DDTHH:mm";
+		pattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+	} else if (inputType === "date") {
+		validParams["placeholder"] = "YYYY-MM-DD";
+		pattern = /^\d{4}-\d{2}-\d{2}$/;
+	} else if (inputType === "time") {
+		validParams["placeholder"] = "HH:mm";
+		pattern = /^\d{2}:\d{2}$/;
+	}
+
+	// Go through the rest of the params and validate
+	for (let [key, value] of Object.entries(restParams)) {
+		if (key === "disabled" && value) {
+			validParams[key] = value;
+		} else if (key === "max" && value && value.match(pattern)) {
+			validParams[key] = value;
+		} else if (key === "min" && value && value.match(pattern)) {
+			validParams[key] = value;
+		} else if (key === "step" && value && typeof value === "string") {
+			validParams[key] = value;
+		} else if (key === "value" && value && value.match(pattern)) {
+			validParams[key] = value;
+		} else {
+			console.warn(
+				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
+			);
+		}
+	}
+
+	// Create the validation attributes (to be added to the start tag)
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="${inputType}"`;
+
+	// Use Nunjucks to create the form field
+	nunjucks.configure({ autoescape: false });
+	return nunjucks.renderString(dateTimeFieldTemplate, {
+		startTag: `${startTag.slice(0, 4)} ${validationAttrs} ${startTag.slice(4)}`,
+		name: name,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
+		inputType: inputType,
+		required: required,
+		validParams: validParams,
+		translations: translations,
+	});
+}
+
 exports.formFieldPattern = formFieldPattern;
 exports.formFieldSetup = formFieldSetup;
 exports.createTextField = createTextField;
@@ -968,3 +1088,4 @@ exports.createSelectField = createSelectField;
 exports.createChoiceField = createChoiceField;
 exports.createRatingField = createRatingField;
 exports.createOpinionScaleField = createOpinionScaleField;
+exports.createDateTimeField = createDateTimeField;
