@@ -1484,7 +1484,7 @@ class blocksmd {
 		}
 
 		// Add user timezone offset to local datetimes before sending data
-		const formData = JSON.parse(JSON.stringify(instance.state["formData"]));
+		const formData = {};
 		let timezoneOffset = "";
 		try {
 			timezoneOffset = instance.convertTimezoneOffset(
@@ -1496,6 +1496,8 @@ class blocksmd {
 		for (const [key, value] of Object.entries(instance.state["formData"])) {
 			if (instance.state["fieldTypes"][key] === "datetime-local") {
 				formData[key] = `${value}${timezoneOffset}`;
+			} else {
+				formData[key] = value;
 			}
 		}
 
