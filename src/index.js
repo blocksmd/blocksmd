@@ -663,6 +663,20 @@ class blocksmd {
 				instance.state["fieldTypes"][name] = "num-choice";
 				instance.reRenderBindElems(name);
 			});
+
+		// Datetime fields
+		instance.container
+			.querySelectorAll(
+				'input.bmd-form-datetime-input[type="datetime-local"], input.bmd-form-datetime-input[type="date"], input.bmd-form-datetime-input[type="time"]',
+			)
+			.forEach((elem) => {
+				let name = elem.getAttribute("name");
+				const value = elem.value;
+				const type = elem.getAttribute("type");
+				instance.state["formData"][name] = value;
+				instance.state["fieldTypes"][name] = type;
+				instance.reRenderBindElems(name);
+			});
 	};
 
 	/**
@@ -793,6 +807,23 @@ class blocksmd {
 					instance.reRenderBindElems(name);
 				}
 			}
+
+			// Datetime field
+			if (
+				instance.state["fieldTypes"][name] === "datetime-local" ||
+				instance.state["fieldTypes"][name] === "date" ||
+				instance.state["fieldTypes"][name] === "time"
+			) {
+				const input = instance.container.querySelector(
+					`.bmd-form-datetime-input[name="${name}"]`,
+				);
+				if (input) {
+					input.value = value;
+					instance.state["formData"][name] = value;
+					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					instance.reRenderBindElems(name);
+				}
+			}
 		}
 	};
 
@@ -898,6 +929,22 @@ class blocksmd {
 					instance.reRenderBindElems(name);
 				}
 			}
+
+			// Datetime field
+			if (
+				instance.state["fieldTypes"][name] === "datetime-local" ||
+				instance.state["fieldTypes"][name] === "date" ||
+				instance.state["fieldTypes"][name] === "time"
+			) {
+				const input = instance.container.querySelector(
+					`.bmd-form-datetime-input[name="${name}"]`,
+				);
+				if (input) {
+					input.value = value;
+					instance.state["formData"][name] = value;
+					instance.reRenderBindElems(name);
+				}
+			}
 		}
 	};
 
@@ -939,6 +986,15 @@ class blocksmd {
 						"aria-describedby",
 						`${instance.getIdPrefix()}id_${name}-error`,
 					);
+				});
+		}
+		// Datetime field
+		else if (type === "datetime-local" || type === "date" || type === "time") {
+			formField
+				.querySelectorAll(".bmd-form-datetime-input")
+				.forEach((input) => {
+					input.removeAttribute("aria-invalid");
+					input.removeAttribute("aria-describedby");
 				});
 		}
 	};
@@ -1034,6 +1090,24 @@ class blocksmd {
 		const value = parseInt(
 			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 		);
+		instance.state["formData"][name] = value;
+		instance.saveFieldValue(name, value);
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.reRenderBindElems(name);
+	};
+
+	/**
+	 * Handle the inputs of datetime form fields: update value in the state,
+	 * save value in local storage, remove errors and re-render the bind <div>
+	 * and <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	dateTimeFieldOnInput = (e) => {
+		const instance = this;
+
+		const name = e.target.getAttribute("name");
+		const value = e.target.value;
 		instance.state["formData"][name] = value;
 		instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
@@ -1161,7 +1235,7 @@ class blocksmd {
 		// These fields will have a type attribute
 		form
 			.querySelectorAll(
-				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required]',
+				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required], .bmd-form-field[data-bmd-type="datetime-local"], .bmd-form-field[data-bmd-type="date"], .bmd-form-field[data-bmd-type="time"]',
 			)
 			.forEach((formField) => {
 				const name = formField.getAttribute("data-bmd-name");
@@ -1223,12 +1297,57 @@ class blocksmd {
 							});
 					}
 				}
+				// Datetime fields
+				else if (
+					type === "datetime-local" ||
+					type === "date" ||
+					type === "time"
+				) {
+					const value = formField.querySelector(
+						`.bmd-form-datetime-input[name="${name}"]`,
+					).value;
+
+					// Set up the pattern and error translation key
+					let pattern = /.*/;
+					let errorTranslationKey = "";
+					if (type === "datetime-local") {
+						pattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+						errorTranslationKey = "datetime-input-error";
+					} else if (type === "date") {
+						pattern = /^\d{4}-\d{2}-\d{2}$/;
+						errorTranslationKey = "date-input-error";
+					} else if (type === "time") {
+						pattern = /^\d{2}:\d{2}$/;
+						errorTranslationKey = "time-input-error";
+					}
+
+					if (value !== "" && !value.match(pattern)) {
+						isFormValid = false;
+						formFieldsWithError.push(formField);
+
+						// Add error
+						const errorId = `${instance.getIdPrefix()}id_${name}-error`;
+						instance.addFieldError(
+							formField,
+							errorId,
+							getTranslation(localization, errorTranslationKey),
+						);
+
+						// Add WAI-ARIA tags to the input
+						formField
+							.querySelectorAll(".bmd-form-datetime-input")
+							.forEach((input) => {
+								input.setAttribute("aria-invalid", "true");
+								input.setAttribute("aria-describedby", errorId);
+							});
+					}
+				}
 			});
 
 		// Focus on the first form field with error
 		if (formFieldsWithError.length > 0) {
 			const inputToFocus = formFieldsWithError[0].querySelector(
-				".bmd-form-str-check-input, .bmd-form-num-check-input",
+				".bmd-form-str-check-input, .bmd-form-num-check-input, .bmd-form-datetime-input",
 			);
 			if (inputToFocus) inputToFocus.focus();
 		}
@@ -1307,6 +1426,25 @@ class blocksmd {
 	};
 
 	/**
+	 * Convert timezone offset (in minutes) to the +HH:mm or -HH:mm format.
+	 *
+	 * @param {number} minutes
+	 * @returns {String}
+	 */
+	convertTimezoneOffset = (minutes) => {
+		const sign = minutes > 0 ? "-" : "+";
+		const absoluteMinutes = Math.abs(minutes);
+		const hours = Math.floor(absoluteMinutes / 60);
+		const mins = absoluteMinutes % 60;
+
+		// Pad hours and minutes with leading zeros if necessary
+		const HH = String(hours).padStart(2, "0");
+		const mm = String(mins).padStart(2, "0");
+
+		return `${sign}${HH}:${mm}`;
+	};
+
+	/**
 	 * POST form data.
 	 *
 	 * @param {boolean} postCondition
@@ -1342,13 +1480,29 @@ class blocksmd {
 			});
 		}
 
+		// Add user timezone offset to local datetimes before sending data
+		const formData = JSON.parse(JSON.stringify(instance.state["formData"]));
+		let timezoneOffset = "";
+		try {
+			timezoneOffset = instance.convertTimezoneOffset(
+				new Date().getTimezoneOffset(),
+			);
+		} catch (error) {
+			console.error(error);
+		}
+		for (const [key, value] of Object.entries(instance.state["formData"])) {
+			if (instance.state["fieldTypes"][key] === "datetime-local") {
+				formData[key] = `${value}${timezoneOffset}`;
+			}
+		}
+
 		// Send data using POST url
 		return fetch(instance.state["settings"]["post-url"], {
 			method: "POST",
 			headers: instance.options["postHeaders"],
 			body: JSON.stringify({
 				...instance.options["postData"],
-				...instance.state["formData"],
+				...formData,
 				...{
 					_end: end ? end : "",
 					_rid: instance.getOrCreateResponseId(),
@@ -1584,7 +1738,7 @@ class blocksmd {
 			if (!fromInit || (fromInit && instance.options["isFullPage"])) {
 				if (instance.state["settings"]["autofocus"] === "all-slides") {
 					const elemToAutofocus = slide.querySelector(
-						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input",
+						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input",
 					);
 					if (elemToAutofocus) elemToAutofocus.focus();
 				} else {
@@ -1994,7 +2148,7 @@ class blocksmd {
 		// <input> elements
 		container
 			.querySelectorAll(
-				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input",
+				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input",
 			)
 			.forEach((input) => {
 				if (
@@ -2015,6 +2169,12 @@ class blocksmd {
 					} else if (input.classList.contains("bmd-form-num-check-input")) {
 						input.addEventListener("input", instance.numChoiceFieldOnInput);
 					}
+				} else if (
+					input.getAttribute("type") === "datetime-local" ||
+					input.getAttribute("type") === "date" ||
+					input.getAttribute("type") === "time"
+				) {
+					input.addEventListener("input", instance.dateTimeFieldOnInput);
 				}
 			});
 

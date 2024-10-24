@@ -154,3 +154,26 @@ export function createOpinionScaleField(
 	id: string,
 	localization: string,
 ): string;
+/**
+ * Create a datetime, date, or time form field.
+ *
+ * @param {string} name
+ * @param {"datetime"|"date"|"time"} inputType
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} datetime, date, or time input form field as HTML string
+ */
+export function createDateTimeField(
+	name: string,
+	inputType: "datetime" | "date" | "time",
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	id: string,
+	localization: string,
+): string;

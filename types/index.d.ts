@@ -263,6 +263,14 @@ export class blocksmd {
 	 */
 	numChoiceFieldOnInput: (e: InputEvent) => void;
 	/**
+	 * Handle the inputs of datetime form fields: update value in the state,
+	 * save value in local storage, remove errors and re-render the bind <div>
+	 * and <span> elements.
+	 *
+	 * @param {InputEvent} e
+	 */
+	dateTimeFieldOnInput: (e: InputEvent) => void;
+	/**
 	 * Set the height of a <textrea> element on input.
 	 *
 	 * @param {InputEvent} e
@@ -322,6 +330,13 @@ export class blocksmd {
 	 * @returns {Promise<string>}
 	 */
 	getRemoteData: () => Promise<string>;
+	/**
+	 * Convert timezone offset (in minutes) to the +HH:mm or -HH:mm format.
+	 *
+	 * @param {number} minutes
+	 * @returns {String}
+	 */
+	convertTimezoneOffset: (minutes: number) => string;
 	/**
 	 * POST form data.
 	 *
