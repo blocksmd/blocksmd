@@ -510,7 +510,7 @@ class blocksmd {
 		instance.container
 			.querySelectorAll(`span[data-bmd-bind-${name}]`)
 			.forEach((span) => {
-				span.innerHTML = instance.state["formData"][name];
+				span.innerText = instance.state["formData"][name];
 			});
 	};
 
