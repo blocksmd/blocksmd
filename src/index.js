@@ -1708,8 +1708,13 @@ class blocksmd {
 			if (instance.options["isFullPage"]) {
 				window.scroll({ top: 0 });
 			} else {
-				if (!fromInit) instance.container.scrollIntoView();
 				instance.container.scroll({ top: 0 });
+
+				// Scroll into view if no part of the container is within the viewport
+				const rect = instance.container.getBoundingClientRect();
+				if (!fromInit && !(rect.top < window.innerHeight && rect.bottom > 0)) {
+					instance.container.scrollIntoView();
+				}
 			}
 
 			// Handle the display and state of the footer slide control buttons
