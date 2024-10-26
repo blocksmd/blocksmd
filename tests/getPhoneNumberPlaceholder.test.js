@@ -7,7 +7,7 @@ test("Case 1", () => {
 });
 
 test("Case 2 (lower case country code)", () => {
-	expect(getPhoneNumberPlaceholder("bd")).toBe("1812-345678");
+	expect(getPhoneNumberPlaceholder("bd")).toBe("01812-345678");
 });
 
 test("Case 3 (non-existent country code)", () => {
