@@ -583,6 +583,25 @@ class blocksmd {
 	};
 
 	/**
+	 * Given a country calling code <select>, update placeholder of the
+	 * corresponding telephone input.
+	 *
+	 * @param {HTMLSelectElement} countryCodeSelect
+	 */
+	setTelInputPlaceholder = (countryCodeSelect) => {
+		const telInput = countryCodeSelect
+			.closest(".bmd-form-field")
+			.querySelector('.bmd-form-str-input[type="tel"]');
+		const selected = countryCodeSelect.selectedOptions[0];
+		if (telInput && selected) {
+			telInput.setAttribute(
+				"placeholder",
+				selected.getAttribute("data-bmd-placeholder"),
+			);
+		}
+	};
+
+	/**
 	 * Set form data to state (value and type). Also re-render the bind <div>
 	 * and <span> elements.
 	 */
@@ -755,6 +774,8 @@ class blocksmd {
 							break;
 						}
 					}
+					if (select.classList.contains("bmd-form-countrycode-select"))
+						instance.setTelInputPlaceholder(select);
 				}
 			}
 
@@ -887,6 +908,8 @@ class blocksmd {
 							break;
 						}
 					}
+					if (select.classList.contains("bmd-form-countrycode-select"))
+						instance.setTelInputPlaceholder(select);
 				}
 			}
 
@@ -1056,13 +1079,9 @@ class blocksmd {
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 
-		// Update placeholder of telephone input if country calling code select
-		if (e.target.classList.contains("bmd-form-countrycode-select")) {
-			e.target.nextSibling.setAttribute(
-				"placeholder",
-				e.target.getAttribute("data-bmd-placeholder"),
-			);
-		}
+		// Update placeholder of telephone input if country calling code <select>
+		if (e.target.classList.contains("bmd-form-countrycode-select"))
+			instance.setTelInputPlaceholder(e.target);
 	};
 
 	/**
@@ -1505,8 +1524,9 @@ class blocksmd {
 		}
 		for (const [key, value] of Object.entries(instance.state["formData"])) {
 			if (instance.state["fieldTypes"][key] === "tel") {
-				const countryCallingCode =
+				let countryCallingCode =
 					instance.state["formData"][`${key}CountryCode`] || "";
+				countryCallingCode = countryCallingCode.substring(3);
 				formData[key] = `${countryCallingCode} ${value}`;
 			} else if (instance.state["fieldTypes"][key] === "datetime-local") {
 				formData[key] = `${value}${timezoneOffset}`;

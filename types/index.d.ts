@@ -198,6 +198,13 @@ export class blocksmd {
 		value: string | Array<string>,
 	) => void;
 	/**
+	 * Given a country calling code <select>, update placeholder of the
+	 * corresponding telephone input.
+	 *
+	 * @param {HTMLSelectElement} countryCodeSelect
+	 */
+	setTelInputPlaceholder: (countryCodeSelect: HTMLSelectElement) => void;
+	/**
 	 * Set form data to state (value and type). Also re-render the bind <div>
 	 * and <span> elements.
 	 */
@@ -241,7 +248,8 @@ export class blocksmd {
 	/**
 	 * Handle the inputs of select form fields: update value in the state, save
 	 * value in local storage, remove errors and re-render the bind <div> and
-	 * <span> elements.
+	 * <span> elements. If the select box is a country calling code select, then
+	 * also update the placeholder of the corresponding telephone input.
 	 *
 	 * @param {InputEvent} e
 	 */
