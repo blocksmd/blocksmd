@@ -583,6 +583,25 @@ class blocksmd {
 	};
 
 	/**
+	 * Given a country calling code <select>, update placeholder of the
+	 * corresponding telephone input using the selected <option>.
+	 *
+	 * @param {HTMLSelectElement} countryCodeSelect
+	 */
+	setTelInputPlaceholder = (countryCodeSelect) => {
+		const telInput = countryCodeSelect
+			.closest(".bmd-form-field")
+			.querySelector('.bmd-form-str-input[type="tel"]');
+		const selected = countryCodeSelect.selectedOptions[0];
+		if (telInput && selected) {
+			telInput.setAttribute(
+				"placeholder",
+				selected.getAttribute("data-bmd-placeholder"),
+			);
+		}
+	};
+
+	/**
 	 * Set form data to state (value and type). Also re-render the bind <div>
 	 * and <span> elements.
 	 */
@@ -755,6 +774,8 @@ class blocksmd {
 							break;
 						}
 					}
+					if (select.classList.contains("bmd-form-countrycode-select"))
+						instance.setTelInputPlaceholder(select);
 				}
 			}
 
@@ -887,6 +908,8 @@ class blocksmd {
 							break;
 						}
 					}
+					if (select.classList.contains("bmd-form-countrycode-select"))
+						instance.setTelInputPlaceholder(select);
 				}
 			}
 
@@ -1041,7 +1064,8 @@ class blocksmd {
 	/**
 	 * Handle the inputs of select form fields: update value in the state, save
 	 * value in local storage, remove errors and re-render the bind <div> and
-	 * <span> elements.
+	 * <span> elements. If the select box is a country calling code select, then
+	 * also update the placeholder of the corresponding telephone input.
 	 *
 	 * @param {InputEvent} e
 	 */
@@ -1054,6 +1078,10 @@ class blocksmd {
 		instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
+
+		// Update placeholder of telephone input if country calling code <select>
+		if (e.target.classList.contains("bmd-form-countrycode-select"))
+			instance.setTelInputPlaceholder(e.target);
 	};
 
 	/**
@@ -1483,7 +1511,7 @@ class blocksmd {
 			});
 		}
 
-		// Add user timezone offset to local datetimes before sending data
+		// Add user timezone offset to local datetime inputs before sending data
 		const formData = {};
 		let timezoneOffset = "";
 		try {

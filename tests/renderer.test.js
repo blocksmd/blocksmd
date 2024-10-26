@@ -1,6 +1,7 @@
 ("use strict");
 
 const { renderer } = require("../src/marked-renderer");
+const { createCountryCallingCodeOptions } = require("../src/phone-numbers");
 const beautify = require("beautify");
 const { marked } = require("marked");
 
@@ -347,18 +348,30 @@ const expectedTemplate = `
 	</div>
 </div>
 
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_phone">
+<fieldset class="bmd-form-field">
+	<legend class="bmd-form-question">
 		...
-	</label>
-	<input
-		name="phone"
-		id="id_phone"
-		type="tel"
-		class="bmd-form-str-input bmd-form-control"
-		placeholder="(201) 555-0123"
-	>
-</div>
+	</legend>
+	<div class="bmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			required
+			aria-label="Country calling code"
+		>
+			${createCountryCallingCodeOptions("US", [])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="bmd-form-str-input bmd-form-control"
+			placeholder="(201) 555-0123"
+			aria-label="Phone number"
+		>
+	</div>
+</fieldset>
 
 <div class="bmd-form-field">
 	<label class="bmd-form-question" for="id_number">

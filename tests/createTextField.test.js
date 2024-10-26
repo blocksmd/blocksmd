@@ -1,6 +1,7 @@
 ("use strict");
 
 const { createTextField } = require("../src/form-field-create");
+const { createCountryCallingCodeOptions } = require("../src/phone-numbers");
 const beautify = require("beautify");
 
 // Case 1
@@ -454,25 +455,39 @@ test("Case 10 (multiline with different localization)", () => {
 // Case 11 (telephone number)
 
 const expectedTemplate11 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<label class="bmd-form-question" for="id_phone">
+<fieldset id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+	<legend class="bmd-form-question">
 		What is your phone <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
-	</label>
+	</legend>
 	<p class="bmd-form-description">
 		Please enter a number where we can reach you.
 	</p>
-	<input
-		name="phone"
-		id="id_phone"
-		type="tel"
-		class="bmd-form-str-input bmd-form-control"
-		placeholder="(201) 555-0123"
-		required
-		maxlength="255"
-		disabled
-		data-bmd-autofocus
-	>
-</div>
+	<div class="bmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			required
+			disabled
+			data-bmd-autofocus
+			aria-label="Country calling code"
+		>
+			${createCountryCallingCodeOptions("US", [])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="bmd-form-str-input bmd-form-control"
+			placeholder="(201) 555-0123"
+			required
+			maxlength="255"
+			disabled
+			data-bmd-autofocus
+			aria-label="Phone number"
+		>
+	</div>
+</fieldset>
 `;
 
 test("Case 11 (telephone number)", () => {
@@ -505,18 +520,30 @@ test("Case 11 (telephone number)", () => {
 // Case 12 (telephone number with different country)
 
 const expectedTemplate12 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_phone">
+<fieldset class="bmd-form-field">
+	<legend class="bmd-form-question">
 		...
-	</label>
-	<input
-		name="phone"
-		id="id_phone"
-		type="tel"
-		class="bmd-form-str-input bmd-form-control"
-		placeholder="01812-345678"
-	>
-</div>
+	</legend>
+	<div class="bmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			required
+			aria-label="দেশের কলিং কোড"
+		>
+			${createCountryCallingCodeOptions("BD", [])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="bmd-form-str-input bmd-form-control"
+			placeholder="01812-345678"
+			aria-label="ফোন নম্বর"
+		>
+	</div>
+</fieldset>
 `;
 
 test("Case 12 (telephone number with different country)", () => {
@@ -528,4 +555,60 @@ test("Case 12 (telephone number with different country)", () => {
 			},
 		),
 	).toBe(beautify(expectedTemplate12, { format: "html" }));
+});
+
+// Case 13 (telephone number with restricted available countries)
+
+const expectedTemplate13 = `
+<fieldset class="bmd-form-field">
+	<legend class="bmd-form-question">
+		What is your phone <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
+	</legend>
+	<p class="bmd-form-description">
+		Please enter a number where we can reach you.
+	</p>
+	<div class="bmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			required
+			aria-label="Country calling code"
+		>
+			${createCountryCallingCodeOptions("SG", ["GB", "BD", "US"])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="bmd-form-str-input bmd-form-control"
+			placeholder="8123 4567"
+			required
+			aria-label="Phone number"
+		>
+	</div>
+</fieldset>
+`;
+
+test("Case 13 (telephone number with restricted available countries)", () => {
+	expect(
+		beautify(
+			createTextField(
+				"phone",
+				"tel",
+				true,
+				"",
+				`
+					| question = What is your phone number?
+					| description = Please enter a number where we can reach you.
+					| country =     sg
+					| availableCountries =   GB,bD,       US  
+				`,
+				"|",
+				"",
+				"en",
+			),
+			{ format: "html" },
+		),
+	).toBe(beautify(expectedTemplate13, { format: "html" }));
 });

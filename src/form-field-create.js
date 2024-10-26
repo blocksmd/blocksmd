@@ -2,7 +2,10 @@
 
 const { addReservedClass } = require("./attrs-parse");
 const { isNumeric, unescape } = require("./helpers");
-const { getPhoneNumberPlaceholder } = require("./phone-number-placeholders");
+const {
+	getPhoneNumberPlaceholder,
+	createCountryCallingCodeOptions,
+} = require("./phone-numbers");
 const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
@@ -153,6 +156,46 @@ const multilineTextFieldTemplate = `
 </div>
 `;
 
+const telFieldTemplate = `
+{{ startTag }}
+	<legend class="bmd-form-question">
+		{{ validParams.question | safe }}
+	</legend>
+	{% if validParams.description %}
+	<p class="bmd-form-description">
+		{{ validParams.description }}
+	</p>
+	{% endif %}
+	<div class="bmd-input-group">
+		<select
+			name="{{ name }}CountryCode"
+			id="{{ inputId }}CountryCode"
+			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			required
+			{% if validParams.disabled %}disabled{% endif %}
+			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			aria-label="{{ translations.countryCallingCodeLabel }}"
+		>
+			{{ availableCountryOptions | safe }}
+		</select>
+		<input
+			name="{{ name }}"
+			id="{{ inputId }}"
+			type="{{ inputType }}"
+			class="bmd-form-str-input bmd-form-control"
+			placeholder="{{ validParams.placeholder }}"
+			{% if required %}required{% endif %}
+			{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
+			{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
+			{% if validParams.pattern %}pattern="{{ validParams.pattern }}"{% endif %}
+			{% if validParams.disabled %}disabled{% endif %}
+			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			aria-label="{{ translations.phoneNumberLabel }}"
+		>
+	</div>
+</fieldset>
+`;
+
 /**
  * Create a text form field. Supported types are "text", "email", "url", and
  * "tel". For the multiline "text" type, the <textarea> element is used.
@@ -188,7 +231,7 @@ function createTextField(
 		params,
 		formDelimiter,
 		localization,
-		false,
+		inputType === "tel" ? true : false,
 	);
 	const translations = {};
 
@@ -223,6 +266,12 @@ function createTextField(
 			validParams[key] = value;
 		} else if (key === "country" && value && typeof value === "string") {
 			validParams[key] = value;
+		} else if (
+			key === "availablecountries" &&
+			value &&
+			typeof value === "string"
+		) {
+			validParams[key] = value;
 		} else {
 			console.warn(
 				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
@@ -231,21 +280,41 @@ function createTextField(
 	}
 
 	// Add the telephone input placeholder using the country (if applicable)
+	// Also set the available countries as an array
 	if (inputType === "tel") {
 		validParams["country"] = validParams["country"] || "US";
 		validParams["placeholder"] = getPhoneNumberPlaceholder(
 			validParams["country"],
 		);
+
+		validParams["availablecountries"] = validParams["availablecountries"] || "";
+		if (validParams["availablecountries"].trim() === "") {
+			validParams["availablecountries"] = [];
+		} else {
+			validParams["availablecountries"] =
+				validParams["availablecountries"].split(",");
+		}
 	}
 
 	// Set up template
 	// If multiline, template is switched to use the <textarea> element
+	// If telephone input, template is switched to include country code <select>
 	let template = textFieldTemplate;
 	if (inputType === "text" && validParams["multiline"] !== undefined) {
 		template = multilineTextFieldTemplate;
 		translations["newLineText"] = getTranslation(
 			localization,
 			"textarea-new-line-text",
+		);
+	} else if (inputType === "tel") {
+		template = telFieldTemplate;
+		translations["countryCallingCodeLabel"] = getTranslation(
+			localization,
+			"country-calling-code-label",
+		);
+		translations["phoneNumberLabel"] = getTranslation(
+			localization,
+			"phone-number-label",
 		);
 	}
 
@@ -259,6 +328,13 @@ function createTextField(
 		required: required,
 		validParams: validParams,
 		translations: translations,
+		availableCountryOptions:
+			inputType === "tel"
+				? createCountryCallingCodeOptions(
+						validParams["country"],
+						validParams["availablecountries"],
+					)
+				: "",
 	});
 }
 
