@@ -1041,7 +1041,8 @@ class blocksmd {
 	/**
 	 * Handle the inputs of select form fields: update value in the state, save
 	 * value in local storage, remove errors and re-render the bind <div> and
-	 * <span> elements.
+	 * <span> elements. If the select box is a country calling code select, then
+	 * also update the placeholder of the corresponding telephone input.
 	 *
 	 * @param {InputEvent} e
 	 */
@@ -1054,6 +1055,14 @@ class blocksmd {
 		instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
+
+		// Update placeholder of telephone input if country calling code select
+		if (e.target.classList.contains("bmd-form-countrycode-select")) {
+			e.target.nextSibling.setAttribute(
+				"placeholder",
+				e.target.getAttribute("data-bmd-placeholder"),
+			);
+		}
 	};
 
 	/**
@@ -1483,7 +1492,8 @@ class blocksmd {
 			});
 		}
 
-		// Add user timezone offset to local datetimes before sending data
+		// Add country calling code to the corresponding telephone inputs
+		// Also add user timezone offset to local datetime inputs
 		const formData = {};
 		let timezoneOffset = "";
 		try {
@@ -1494,7 +1504,11 @@ class blocksmd {
 			console.error(error);
 		}
 		for (const [key, value] of Object.entries(instance.state["formData"])) {
-			if (instance.state["fieldTypes"][key] === "datetime-local") {
+			if (instance.state["fieldTypes"][key] === "tel") {
+				const countryCallingCode =
+					instance.state["formData"][`${key}CountryCode`] || "";
+				formData[key] = `${countryCallingCode} ${value}`;
+			} else if (instance.state["fieldTypes"][key] === "datetime-local") {
 				formData[key] = `${value}${timezoneOffset}`;
 			} else {
 				formData[key] = value;
