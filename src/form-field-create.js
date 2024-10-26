@@ -2,7 +2,7 @@
 
 const { addReservedClass } = require("./attrs-parse");
 const { isNumeric, unescape } = require("./helpers");
-const { getPhoneNumberPlaceholder } = require("./phone-number-placeholders");
+const { getPhoneNumberPlaceholder } = require("./phone-numbers");
 const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
