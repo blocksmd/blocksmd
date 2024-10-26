@@ -1511,8 +1511,7 @@ class blocksmd {
 			});
 		}
 
-		// Add country calling code to the corresponding telephone inputs
-		// Also add user timezone offset to local datetime inputs
+		// Add user timezone offset to local datetime inputs before sending data
 		const formData = {};
 		let timezoneOffset = "";
 		try {
@@ -1523,12 +1522,7 @@ class blocksmd {
 			console.error(error);
 		}
 		for (const [key, value] of Object.entries(instance.state["formData"])) {
-			if (instance.state["fieldTypes"][key] === "tel") {
-				let countryCallingCode =
-					instance.state["formData"][`${key}CountryCode`] || "";
-				countryCallingCode = countryCallingCode.substring(3);
-				formData[key] = `${countryCallingCode} ${value}`;
-			} else if (instance.state["fieldTypes"][key] === "datetime-local") {
+			if (instance.state["fieldTypes"][key] === "datetime-local") {
 				formData[key] = `${value}${timezoneOffset}`;
 			} else {
 				formData[key] = value;
