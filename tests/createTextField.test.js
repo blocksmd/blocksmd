@@ -514,7 +514,7 @@ const expectedTemplate12 = `
 		id="id_phone"
 		type="tel"
 		class="bmd-form-str-input bmd-form-control"
-		placeholder="01812-345678"
+		placeholder="1812-345678"
 	>
 </div>
 `;
