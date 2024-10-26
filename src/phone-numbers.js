@@ -292,7 +292,7 @@ function createCountryCallingCodeOptions(
 		}
 	} else {
 		for (const key of availableCountryCodes) {
-			available.push(key.toUpperCase());
+			available.push(key.toUpperCase().trim());
 		}
 	}
 
