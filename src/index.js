@@ -584,7 +584,7 @@ class blocksmd {
 
 	/**
 	 * Given a country calling code <select>, update placeholder of the
-	 * corresponding telephone input.
+	 * corresponding telephone input using the selected <option>.
 	 *
 	 * @param {HTMLSelectElement} countryCodeSelect
 	 */
