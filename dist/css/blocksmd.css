@@ -1857,7 +1857,7 @@
 .bmd-root .bmd-input-group > .bmd-form-countrycode-select {
 	flex-grow: 0;
 	flex-shrink: 0;
-	width: 72px;
+	width: 64px;
 	padding-right: 16px;
 }
 
