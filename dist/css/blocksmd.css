@@ -1898,7 +1898,7 @@
 	box-shadow: var(--bmd-check-checked-focus-shadow);
 }
 
-.bmd-root .bmd-form-file-label:has(.bmd-form-file-input:disabled) {
+.bmd-root .bmd-form-file-label.bmd-disabled {
 	pointer-events: none;
 	opacity: 0.5;
 }
