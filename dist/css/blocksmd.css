@@ -1839,6 +1839,10 @@
 
 /* Form file */
 
+.bmd-root .bmd-form-file {
+	position: relative;
+}
+
 .bmd-root .bmd-form-file-input {
 	position: absolute;
 	height: 0;
@@ -1949,6 +1953,10 @@
 }
 
 .bmd-root .bmd-form-file-label + .bmd-form-file-reset-btn-container {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
 	display: none;
 }
 
@@ -1960,10 +1968,9 @@
 
 .bmd-root .bmd-form-file-reset-btn {
 	display: inline-block;
-	padding: 0;
-	font-size: var(--bmd-font-size-sm);
-	font-weight: var(--bmd-font-weight-normal);
-	line-height: inherit;
+	padding: 6px;
+	font-size: 24px;
+	line-height: 1;
 	text-align: center;
 	text-decoration: none;
 	vertical-align: middle;
@@ -1978,9 +1985,13 @@
 .bmd-root .bmd-form-file-reset-btn,
 .bmd-root .bmd-form-file-reset-btn:hover,
 .bmd-root .bmd-form-file-reset-btn:active {
-	color: inherit;
+	color: rgb(var(--bmd-accent-rgb));
 	background-color: transparent;
 	border: 0;
+}
+
+.bmd-root .bmd-form-file-reset-btn > .bmd-icon path {
+	fill: rgb(var(--bmd-accent-rgb));
 }
 
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-file-label,
