@@ -242,7 +242,7 @@ function getDefaultSettings() {
 		"css-prefix": "bmd-",
 		"dir": "ltr",
 		"form-delimiter": "|",
-		"get-format": "csv",
+		"get-format": "json",
 		"get-objects-name": "objects",
 		"id": "",
 		"localization": "en",
@@ -374,8 +374,8 @@ function parseSettings(template) {
 			accepted: "hide",
 		},
 		"get-format": {
-			pattern: /^(csv|json|tsv)$/,
-			accepted: "csv (default) || json || tsv",
+			pattern: /^(json|csv|tsv)$/,
+			accepted: "json (default) || csv || tsv",
 		},
 		"get-objects-name": {
 			pattern: /^.*$/,
