@@ -1023,6 +1023,13 @@ class blocksmd {
 					input.removeAttribute("aria-describedby");
 				});
 		}
+		// File field
+		else if (type === "file") {
+			formField.querySelectorAll(".bmd-form-file-input").forEach((input) => {
+				input.removeAttribute("aria-invalid");
+				input.removeAttribute("aria-describedby");
+			});
+		}
 	};
 
 	/**
@@ -1146,6 +1153,61 @@ class blocksmd {
 	};
 
 	/**
+	 * Handle the inputs of file form fields.
+	 *
+	 * @param {InputEvent} e
+	 */
+	fileFieldOnInput = (e) => {
+		const instance = this;
+
+		// Get the wrapper and inner section
+		const label = e.target.closest(".bmd-form-file-label");
+		const fileExistsSection = label.querySelector(".bmd-file-exists-section");
+
+		// Reset first
+		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		label.classList.remove("bmd-file-exists");
+		fileExistsSection.innerHTML = "";
+
+		// Get the file and update wrapper depending on type
+		const imageFileTypes = [
+			"image/apng",
+			"image/bmp",
+			"image/gif",
+			"image/jpeg",
+			"image/pjpeg",
+			"image/png",
+			"image/svg+xml",
+			"image/tiff",
+			"image/webp",
+			"image/x-icon",
+		];
+		const file = e.target.files[0];
+		if (file) {
+			if (imageFileTypes.includes(file.type)) {
+				fileExistsSection.innerHTML = [
+					`<span class="bmd-form-file-img-container">`,
+					`	<img src="${URL.createObjectURL(file)}" alt="${file.name}">`,
+					`</span>`,
+					`<span class="bmd-d-block bmd-mt-3">`,
+					`	<strong class="bmd-text-accent">${file.name}</strong>`,
+					`</span>\n`,
+				].join("\n");
+			} else {
+				fileExistsSection.innerHTML = [
+					`<span class="bmd-form-file-img-container">`,
+					`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M352 448l0-256-112 0c-26.5 0-48-21.5-48-48l0-112L64 32C46.3 32 32 46.3 32 64l0 384c0 17.7 14.3 32 32 32l256 0c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2L224 144c0 8.8 7.2 16 16 16l111.5 0zM0 64C0 28.7 28.7 0 64 0L220.1 0c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z"/></svg>`,
+					`</span>`,
+					`<span class="bmd-d-block bmd-mt-3">`,
+					`	<strong class="bmd-text-accent">${file.name}</strong>`,
+					`</span>\n`,
+				].join("\n");
+			}
+			label.classList.add("bmd-file-exists");
+		}
+	};
+
+	/**
 	 * Set the height of a <textrea> element on input.
 	 *
 	 * @param {InputEvent} e
@@ -1154,6 +1216,32 @@ class blocksmd {
 		const textarea = e.target;
 		textarea.style.height = "";
 		textarea.style.height = textarea.scrollHeight + "px";
+	};
+
+	/**
+	 * Reset file input when the corresponding reset button is clicked.
+	 *
+	 * @param {MouseEvent} e
+	 */
+	formFileResetBtnOnClick = (e) => {
+		const instance = this;
+
+		// Get the input, wrapper and inner section
+		const fileInput = e.target
+			.closest(".bmd-form-field")
+			.querySelector('.bmd-form-file-input[type="file"]');
+		const label = e.target
+			.closest(".bmd-form-field")
+			.querySelector(".bmd-form-file-label");
+		const fileExistsSection = label.querySelector(".bmd-file-exists-section");
+
+		// Reset
+		if (fileInput && label && fileExistsSection) {
+			fileInput.value = "";
+			instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+			label.classList.remove("bmd-file-exists");
+			fileExistsSection.innerHTML = "";
+		}
 	};
 
 	/**
@@ -1266,7 +1354,7 @@ class blocksmd {
 		// These fields will have a type attribute
 		form
 			.querySelectorAll(
-				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required], .bmd-form-field[data-bmd-type="datetime-local"], .bmd-form-field[data-bmd-type="date"], .bmd-form-field[data-bmd-type="time"]',
+				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required], .bmd-form-field[data-bmd-type="datetime-local"], .bmd-form-field[data-bmd-type="date"], .bmd-form-field[data-bmd-type="time"], .bmd-form-field[data-bmd-type="file"]',
 			)
 			.forEach((formField) => {
 				const name = formField.getAttribute("data-bmd-name");
@@ -1373,12 +1461,42 @@ class blocksmd {
 							});
 					}
 				}
+				// File fields
+				else if (type === "file") {
+					const sizeLimit = Number(
+						formField.getAttribute("data-bmd-size-limit"),
+					);
+					const file = formField.querySelector(".bmd-form-file-input").files[0];
+					if (file) {
+						const fileSize = (file.size / 1024 / 1024).toFixed(4);
+						if (fileSize > sizeLimit) {
+							isFormValid = false;
+							formFieldsWithError.push(formField);
+
+							// Add error
+							const errorId = `${instance.getIdPrefix()}id_${name}-error`;
+							instance.addFieldError(
+								formField,
+								errorId,
+								getTranslation(localization, "file-input-size-error"),
+							);
+
+							// Add WAI-ARIA tags to the input
+							formField
+								.querySelectorAll(".bmd-form-file-input")
+								.forEach((input) => {
+									input.setAttribute("aria-invalid", "true");
+									input.setAttribute("aria-describedby", errorId);
+								});
+						}
+					}
+				}
 			});
 
 		// Focus on the first form field with error
 		if (formFieldsWithError.length > 0) {
 			const inputToFocus = formFieldsWithError[0].querySelector(
-				".bmd-form-str-check-input, .bmd-form-num-check-input, .bmd-form-datetime-input",
+				".bmd-form-str-check-input, .bmd-form-num-check-input, .bmd-form-datetime-input, .bmd-form-file-input",
 			);
 			if (inputToFocus) inputToFocus.focus();
 		}
@@ -1776,7 +1894,7 @@ class blocksmd {
 			if (!fromInit || (fromInit && instance.options["isFullPage"])) {
 				if (instance.state["settings"]["autofocus"] === "all-slides") {
 					const elemToAutofocus = slide.querySelector(
-						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input",
+						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
 					);
 					if (elemToAutofocus) elemToAutofocus.focus();
 				} else {
@@ -2186,7 +2304,7 @@ class blocksmd {
 		// <input> elements
 		container
 			.querySelectorAll(
-				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input",
+				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
 			)
 			.forEach((input) => {
 				if (
@@ -2213,6 +2331,8 @@ class blocksmd {
 					input.getAttribute("type") === "time"
 				) {
 					input.addEventListener("input", instance.dateTimeFieldOnInput);
+				} else if (input.getAttribute("type") === "file") {
+					input.addEventListener("change", instance.fileFieldOnInput);
 				}
 			});
 
@@ -2230,6 +2350,11 @@ class blocksmd {
 			.forEach((select) => {
 				select.addEventListener("input", instance.selectFieldOnInput);
 			});
+
+		// File input reset buttons
+		container.querySelectorAll(".bmd-form-file-reset-btn").forEach((btn) => {
+			btn.addEventListener("click", instance.formFileResetBtnOnClick);
+		});
 	};
 
 	/**

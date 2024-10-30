@@ -1857,6 +1857,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 	min-height: 264px;
 	padding: var(--bmd-spacer);
 	font-size: var(--bmd-font-size-base);
@@ -3309,6 +3310,10 @@
 }
 
 /* Sizing */
+
+.bmd-root .bmd-w-auto {
+	width: auto !important;
+}
 
 .bmd-root .bmd-specific-mw-400 {
 	max-width: 400px !important;
