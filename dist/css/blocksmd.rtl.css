@@ -1925,8 +1925,10 @@
 
 .bmd-root .bmd-form-file-img-container > img {
 	display: block;
+	width: auto;
 	max-width: 100%;
 	height: auto;
+	max-height: 100%;
 	border-radius: var(--bmd-border-radius);
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -1987,9 +1989,12 @@
 	fill: rgb(var(--bmd-accent-rgb));
 }
 
-.bmd-root[data-bmd-rounded="pill"] .bmd-form-file-label,
-.bmd-root[data-bmd-rounded="pill"] .bmd-form-file-img-container > img {
+.bmd-root[data-bmd-rounded="pill"] .bmd-form-file-label {
 	border-radius: var(--bmd-border-radius-lg);
+}
+
+.bmd-root[data-bmd-rounded="pill"] .bmd-form-file-img-container > img {
+	border-radius: var(--bmd-border-radius-base);
 }
 
 /* Input group */
