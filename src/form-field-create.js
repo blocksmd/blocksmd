@@ -10,7 +10,7 @@ const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
 const formFieldPattern = new RegExp(
-	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale|datetimeinput|dateinput|timeinput)\((.*)\)/,
+	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale|datetimeinput|dateinput|timeinput|fileinput)\((.*)\)/,
 	"is",
 );
 
@@ -1156,6 +1156,127 @@ function createDateTimeField(
 	});
 }
 
+/* File field */
+
+const fileFieldTemplate = `
+{{ startTag }}
+	<label class="bmd-form-question">
+		{{ validParams.question | safe }}
+	</label>
+	{% if validParams.description %}
+	<p class="bmd-form-description">
+		{{ validParams.description }}
+	</p>
+	{% endif %}
+	<div class="bmd-form-file">
+		<label class="bmd-form-file-label{% if validParams.disabled %} bmd-disabled{% endif %}">
+			<input
+				name="{{ name }}"
+				id="{{ inputId }}"
+				type="file"
+				class="bmd-form-file-input"
+				{% if required %}required{% endif %}
+				{% if validParams.imageonly %}accept="image/*"{% endif %}
+				{% if validParams.disabled %}disabled{% endif %}
+				{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			>
+			<span class="bmd-d-block">
+				<span class="bmd-file-empty-section">
+					<span class="bmd-form-file-img-container">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M389.8 125.2C363.7 88.1 320.7 64 272 64c-77.4 0-140.5 61-143.9 137.5c-.6 13-9 24.4-21.3 28.8C63.2 245.7 32 287.2 32 336c0 61.9 50.1 112 112 112l368 0c53 0 96-43 96-96c0-36.8-20.7-68.8-51.2-84.9c-13.4-7.1-20-22.5-15.8-37.1c2-6.9 3-14.3 3-22c0-44.2-35.8-80-80-80c-12.3 0-23.9 2.8-34.3 7.7c-14.1 6.7-30.9 2.3-39.9-10.5zM272 32c59.5 0 112.1 29.5 144 74.8C430.5 99.9 446.8 96 464 96c61.9 0 112 50.1 112 112c0 10.7-1.5 21-4.3 30.8C612.3 260.2 640 302.9 640 352c0 70.7-57.3 128-128 128l-368 0C64.5 480 0 415.5 0 336c0-62.8 40.2-116.1 96.2-135.9C100.3 106.6 177.4 32 272 32zM228.7 244.7l80-80c6.2-6.2 16.4-6.2 22.6 0l80 80c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L336 214.6 336 368c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-153.4-52.7 52.7c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6z"/></svg>
+					</span>
+					<span class="bmd-d-block bmd-mt-3">
+						{{ translations.fileInputChoose | safe }}
+					</span>
+				</span>
+				<span class="bmd-file-exists-section"></span>
+				<span class="bmd-d-block bmd-specific-fs-12 bmd-text-center bmd-mt-1">
+					{{ translations.fileInputSizeLimit }}: {{ validParams.sizelimit }}MB
+				</span>
+			</span>
+		</label>
+		<div class="bmd-form-file-reset-btn-container">
+			<button type="button" class="bmd-form-file-reset-btn" aria-label="{{ translations.fileInputResetBtn }}">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/></svg>
+			</button>
+		</div>
+	</div>
+</div>
+`;
+
+/**
+ * Create a file form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} file input form field as HTML string
+ */
+function createFileField(
+	name,
+	required,
+	parsedAttrs,
+	params,
+	formDelimiter,
+	id,
+	localization,
+) {
+	// Set up the start tag, valid params, the rest, and translations
+	const {
+		startTag: startTag,
+		validParams: validParams,
+		restParams: restParams,
+	} = formFieldSetup(
+		required,
+		parsedAttrs,
+		params,
+		formDelimiter,
+		localization,
+		false,
+	);
+	const translations = {
+		fileInputChoose: getTranslation(localization, "file-input-choose"),
+		fileInputResetBtn: getTranslation(localization, "file-input-reset-btn"),
+		fileInputSizeLimit: getTranslation(localization, "file-input-size-limit"),
+	};
+
+	// Go through the rest of the params and validate
+	for (let [key, value] of Object.entries(restParams)) {
+		if (key === "disabled" && value) {
+			validParams[key] = value;
+		} else if (key === "sizelimit" && isNumeric(value)) {
+			validParams[key] = Math.ceil(Math.abs(Number(value)));
+		} else if (key === "imageonly" && value) {
+			validParams[key] = value;
+		} else {
+			console.warn(
+				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,
+			);
+		}
+	}
+
+	// Set default size limit
+	validParams["sizelimit"] = validParams["sizelimit"] || 10;
+
+	// Create the validation attributes (to be added to the start tag)
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="file" data-bmd-size-limit="${validParams["sizelimit"]}"`;
+
+	// Use Nunjucks to create the form field
+	nunjucks.configure({ autoescape: false });
+	return nunjucks.renderString(fileFieldTemplate, {
+		startTag: `${startTag.slice(0, 4)} ${validationAttrs} ${startTag.slice(4)}`,
+		name: name,
+		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
+		required: required,
+		validParams: validParams,
+		translations: translations,
+	});
+}
+
 exports.formFieldPattern = formFieldPattern;
 exports.formFieldSetup = formFieldSetup;
 exports.createTextField = createTextField;
@@ -1165,3 +1286,4 @@ exports.createChoiceField = createChoiceField;
 exports.createRatingField = createRatingField;
 exports.createOpinionScaleField = createOpinionScaleField;
 exports.createDateTimeField = createDateTimeField;
+exports.createFileField = createFileField;
