@@ -1639,7 +1639,7 @@ class blocksmd {
 		}
 
 		// Set the form data from the state
-		// Make sure to add user the timezone offset to local datetime inputs
+		// Make sure to add the user timezone offset to the local datetime inputs
 		let timezoneOffset = "";
 		try {
 			timezoneOffset = instance.convertTimezoneOffset(
