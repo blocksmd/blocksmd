@@ -177,3 +177,24 @@ export function createDateTimeField(
 	id: string,
 	localization: string,
 ): string;
+/**
+ * Create a file form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} file input form field as HTML string
+ */
+export function createFileField(
+	name: string,
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	id: string,
+	localization: string,
+): string;
