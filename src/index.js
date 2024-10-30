@@ -1630,8 +1630,16 @@ class blocksmd {
 			});
 		}
 
-		// Add user timezone offset to local datetime inputs before sending data
-		const formData = {};
+		// Create the form data to send
+		const formData = new FormData();
+
+		// Set the POST data from the options
+		for (const [key, value] of Object.entries(instance.options["postData"])) {
+			formData.append(key, value);
+		}
+
+		// Set the form data from the state
+		// Make sure to add user the timezone offset to local datetime inputs
 		let timezoneOffset = "";
 		try {
 			timezoneOffset = instance.convertTimezoneOffset(
@@ -1642,26 +1650,37 @@ class blocksmd {
 		}
 		for (const [key, value] of Object.entries(instance.state["formData"])) {
 			if (instance.state["fieldTypes"][key] === "datetime-local") {
-				formData[key] = `${value}${timezoneOffset}`;
+				formData.append(key, `${value}${timezoneOffset}`);
 			} else {
-				formData[key] = value;
+				formData.append(key, value);
 			}
 		}
+
+		// Add the chosen files from the inputs (these are not in the state)
+		instance.container
+			.querySelectorAll('.bmd-form-file-input[type="file"]')
+			.forEach((input) => {
+				const name = input.getAttribute("name");
+				const file = input.files[0];
+				if (file) {
+					formData.append(name, file);
+				}
+			});
+
+		// Set the extra fields
+		formData.append("_end", end ? end : "");
+		formData.append("_rid", instance.getOrCreateResponseId());
+		formData.append(
+			"_sheetName",
+			instance.state["settings"]["post-sheet-name"] || "",
+		);
+		formData.append("_submitted", new Date().toUTCString());
 
 		// Send data using POST url
 		return fetch(instance.state["settings"]["post-url"], {
 			method: "POST",
 			headers: instance.options["postHeaders"],
-			body: JSON.stringify({
-				...instance.options["postData"],
-				...formData,
-				...{
-					_end: end ? end : "",
-					_rid: instance.getOrCreateResponseId(),
-					_sheetName: instance.state["settings"]["post-sheet-name"] || "",
-					_submitted: new Date().toUTCString(),
-				},
-			}),
+			body: formData,
 		})
 			.then((response) => {
 				if (response.ok) {
