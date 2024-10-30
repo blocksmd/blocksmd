@@ -279,7 +279,8 @@ export class blocksmd {
 	 */
 	dateTimeFieldOnInput: (e: InputEvent) => void;
 	/**
-	 * Handle the inputs of file form fields.
+	 * Handle the inputs of file form fields: reset and update the wrapping
+	 * <label> depending on the file chosen.
 	 *
 	 * @param {InputEvent} e
 	 */
@@ -295,7 +296,7 @@ export class blocksmd {
 	 *
 	 * @param {MouseEvent} e
 	 */
-	formFileResetBtnOnClick: (e: MouseEvent) => void;
+	fileInputResetBtnOnClick: (e: MouseEvent) => void;
 	/**
 	 * Given a <button> element, set it to the processing state.
 	 *

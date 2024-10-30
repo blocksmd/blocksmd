@@ -1153,7 +1153,8 @@ class blocksmd {
 	};
 
 	/**
-	 * Handle the inputs of file form fields.
+	 * Handle the inputs of file form fields: reset and update the wrapping
+	 * <label> depending on the file chosen.
 	 *
 	 * @param {InputEvent} e
 	 */
@@ -1223,7 +1224,7 @@ class blocksmd {
 	 *
 	 * @param {MouseEvent} e
 	 */
-	formFileResetBtnOnClick = (e) => {
+	fileInputResetBtnOnClick = (e) => {
 		const instance = this;
 
 		// Get the input, wrapper and inner section
@@ -2353,7 +2354,7 @@ class blocksmd {
 
 		// File input reset buttons
 		container.querySelectorAll(".bmd-form-file-reset-btn").forEach((btn) => {
-			btn.addEventListener("click", instance.formFileResetBtnOnClick);
+			btn.addEventListener("click", instance.fileInputResetBtnOnClick);
 		});
 	};
 
