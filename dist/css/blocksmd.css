@@ -1895,12 +1895,6 @@
 .bmd-root .bmd-form-file-label.bmd-file-exists {
 	border-style: solid;
 	border-color: var(--bmd-check-checked-border-color);
-	box-shadow: var(--bmd-check-checked-shadow);
-}
-
-.bmd-root
-	.bmd-form-file-label.bmd-file-exists:has(.bmd-form-file-input:focus-visible) {
-	box-shadow: var(--bmd-check-checked-focus-shadow);
 }
 
 .bmd-root .bmd-form-file-label.bmd-disabled {
