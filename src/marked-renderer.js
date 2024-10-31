@@ -10,6 +10,7 @@ const {
 	createRatingField,
 	createOpinionScaleField,
 	createDateTimeField,
+	createFileField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
 const { getTranslation } = require("./translations");
@@ -305,6 +306,16 @@ renderer.paragraph = function (text) {
 				return createDateTimeField(
 					fieldName,
 					fieldInputType.replace("input", ""),
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings["id"],
+					markedSettings["localization"],
+				);
+			} else if (fieldInputType === "fileinput") {
+				return createFileField(
+					fieldName,
 					fieldRequired,
 					parsedAttrs,
 					fieldParams,

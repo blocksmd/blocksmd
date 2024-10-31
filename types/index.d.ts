@@ -279,11 +279,24 @@ export class blocksmd {
 	 */
 	dateTimeFieldOnInput: (e: InputEvent) => void;
 	/**
+	 * Handle the inputs of file form fields: reset and update the wrapping
+	 * <label> depending on the file chosen.
+	 *
+	 * @param {InputEvent} e
+	 */
+	fileFieldOnInput: (e: InputEvent) => void;
+	/**
 	 * Set the height of a <textrea> element on input.
 	 *
 	 * @param {InputEvent} e
 	 */
 	setTextareaHeightOnInput: (e: InputEvent) => void;
+	/**
+	 * Reset file input when the corresponding reset button is clicked.
+	 *
+	 * @param {MouseEvent} e
+	 */
+	fileInputResetBtnOnClick: (e: MouseEvent) => void;
 	/**
 	 * Given a <button> element, set it to the processing state.
 	 *
