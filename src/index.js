@@ -2638,14 +2638,26 @@ class blocksmd {
 
 			// Set form data from URL parameters BEFORE local storage
 			if (!instance.options["prioritizeURLFormData"])
-				instance.setFormDataFromURL(false);
+				try {
+					instance.setFormDataFromURL(false);
+				} catch (error) {
+					console.error(error);
+				}
 
 			// Set form data saved in local storage
-			instance.setSavedFormData();
+			try {
+				instance.setSavedFormData();
+			} catch (error) {
+				console.error(error);
+			}
 
 			// Set form data from URL parameters AFTER local storage
 			if (instance.options["prioritizeURLFormData"])
-				instance.setFormDataFromURL(true);
+				try {
+					instance.setFormDataFromURL(true);
+				} catch (error) {
+					console.error(error);
+				}
 
 			// Hide loader and show content
 			instance.container
