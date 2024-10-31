@@ -31,6 +31,7 @@
 	/* Font size */
 
 	--bmd-font-size-base: 16px;
+	--bmd-font-size-xs: 12px;
 	--bmd-font-size-sm: 14px;
 	--bmd-font-size-lg: 18px;
 	--bmd-body-font-size: var(--bmd-font-size-base);
@@ -262,6 +263,10 @@
 	--bmd-scale-check-size: 48px;
 	--bmd-scale-check-size-md: 44px;
 	--bmd-scale-check-size-xs: 40px;
+
+	--bmd-file-input-min-height: 264px;
+	--bmd-file-input-font-size: var(--bmd-font-size-base);
+	--bmd-file-input-size-limit-font-size: var(--bmd-font-size-sm);
 }
 
 .bmd-root[data-bmd-font-size="sm"] {
@@ -402,6 +407,10 @@
 	--bmd-scale-check-size: 40px;
 	--bmd-scale-check-size-md: 40px;
 	--bmd-scale-check-size-xs: 40px;
+
+	--bmd-file-input-min-height: 200px;
+	--bmd-file-input-font-size: var(--bmd-font-size-sm);
+	--bmd-file-input-size-limit-font-size: var(--bmd-font-size-xs);
 }
 
 /**
@@ -1223,7 +1232,7 @@
 }
 
 .bmd-root .bmd-form-subfield .bmd-form-question {
-	margin-bottom: calc(var(--bmd-spacer) * 0.25);
+	margin-bottom: calc(var(--bmd-spacer) * 0.5);
 	font-size: var(--bmd-font-size-base);
 	color: rgb(var(--bmd-accent-rgb));
 }
@@ -1243,7 +1252,7 @@
 }
 
 .bmd-root .bmd-form-subfield .bmd-form-description {
-	margin-bottom: calc(var(--bmd-spacer) * 0.25);
+	margin-bottom: calc(var(--bmd-spacer) * 0.5);
 	font-size: var(--bmd-font-size-sm);
 }
 
@@ -1858,9 +1867,9 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	min-height: 264px;
+	min-height: var(--bmd-file-input-min-height);
 	padding: var(--bmd-spacer);
-	font-size: var(--bmd-font-size-base);
+	font-size: var(--bmd-file-input-font-size);
 	font-weight: var(--bmd-font-weight-normal);
 	line-height: var(--bmd-line-height-base);
 	white-space: normal;
@@ -1945,6 +1954,12 @@
 
 .bmd-root .bmd-form-file-img-container > .bmd-icon path {
 	fill: rgb(var(--bmd-accent-rgb));
+}
+
+.bmd-root .bmd-form-file-size-limit {
+	display: block;
+	text-align: center;
+	font-size: var(--bmd-file-input-size-limit-font-size);
 }
 
 .bmd-root .bmd-form-file-label + .bmd-form-file-reset-btn-container {

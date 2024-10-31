@@ -1190,7 +1190,7 @@ const fileFieldTemplate = `
 					</span>
 				</span>
 				<span class="bmd-file-exists-section"></span>
-				<span class="bmd-d-block bmd-specific-fs-14 bmd-text-center bmd-mt-1">
+				<span class="bmd-form-file-size-limit bmd-mt-1">
 					{{ translations.fileInputSizeLimit }}: {{ validParams.sizelimit }}MB
 				</span>
 			</span>
