@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div data-bmd-name="portfolio" data-bmd-type="file" data-bmd-size-limit="50" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div data-bmd-name="portfolio" data-bmd-type="file" data-bmd-size-limit="50" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question">
 		Upload your <span class="bmd-text-nowrap" aria-hidden="true">portfolio<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">portfolio (required)</span>
 	</label>
@@ -203,7 +203,7 @@ test("Case 3 (different localization)", () => {
 // Case 4 (different id, different form delimiter, image only)
 
 const expectedTemplate4 = `
-<div data-bmd-name="image" data-bmd-type="file" data-bmd-size-limit="10" class="bmd-form-field">
+<div data-bmd-name="image" data-bmd-type="file" data-bmd-size-limit="10" class="bmd-form-field bmd-form-field-classic-labels">
 	<label class="bmd-form-question">
 		Upload your <span class="bmd-text-nowrap" aria-hidden="true">image<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">image (required)</span>
 	</label>
@@ -255,6 +255,7 @@ test("Case 4 (different id, different form delimiter, image only)", () => {
 					question = Upload your image
 					description = Please make sure the file is an image.
 					ImageOnly
+					LABELstyle = classic
 				`,
 				"\n",
 				"form1",

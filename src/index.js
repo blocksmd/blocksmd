@@ -2504,6 +2504,7 @@ class blocksmd {
 			"header": "data-bmd-header",
 			"headings": "data-bmd-headings",
 			"id": "data-bmd-id",
+			"label-style": "data-bmd-label-style",
 			"localization": "lang",
 			"rounded": "data-bmd-rounded",
 			"vertical-alignment": "data-bmd-vertical-alignment",

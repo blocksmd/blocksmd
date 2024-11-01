@@ -397,6 +397,10 @@ function parseSettings(template) {
 			pattern: /^[a-zA-Z][\w:.-]*$/,
 			accepted: "valid HTML id",
 		},
+		"label-style": {
+			pattern: /^classic$/,
+			accepted: "classic",
+		},
 		"localization": {
 			pattern: /^.*$/,
 			accepted: "valid string",

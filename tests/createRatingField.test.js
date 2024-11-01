@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<fieldset data-bmd-name="rating" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="rating" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">rating?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">rating? (required)</span>
 	</legend>
@@ -386,7 +386,7 @@ test("Case 4 (out of 2, heart, different localization)", () => {
 // Case 5 (out of more than 10)
 
 const expectedTemplate5 = `
-<fieldset data-bmd-name="rating" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="rating" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">rating?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">rating? (required)</span>
 	</legend>

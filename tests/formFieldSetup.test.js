@@ -21,7 +21,7 @@ test("Case 1", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">',
+			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
 				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',
@@ -85,7 +85,7 @@ test("Case 3 (form delimiter set to new line)", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">',
+			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question: "What is your name?",
 			description: "Please enter your full name.",
@@ -111,7 +111,7 @@ test("Case 4", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-8 bmd-form-field bmd-form-subfield">',
+			'<div id="some-id" class="bmd-col-8 bmd-form-field bmd-form-field-classic-labels">',
 		validParams: {
 			question: "Address Line 1",
 			subfield: true,
@@ -139,7 +139,7 @@ test("Case 5 (use fieldset)", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<fieldset id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">',
+			'<fieldset id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
 				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',

@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div data-bmd-name="joined" data-bmd-type="datetime-local" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div data-bmd-name="joined" data-bmd-type="datetime-local" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_joined">
 		When did you <span class="bmd-text-nowrap" aria-hidden="true">join?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">join? (required)</span>
 	</label>
@@ -104,7 +104,7 @@ test("Case 2 (date)", () => {
 // Case 3 (time)
 
 const expectedTemplate3 = `
-<div data-bmd-name="when" data-bmd-type="time" id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield">
+<div data-bmd-name="when" data-bmd-type="time" id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_when">
 		When did you come in yesterday?
 	</label>
@@ -153,7 +153,7 @@ test("Case 3 (time)", () => {
 // Case 4 (form delimiter changed to new line, different id and localization)
 
 const expectedTemplate4 = `
-<div data-bmd-name="joined" data-bmd-type="datetime-local" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div data-bmd-name="joined" data-bmd-type="datetime-local" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="form1:id_joined">
 		আপনি কখন জয়েন <span class="bmd-text-nowrap" aria-hidden="true">করলেন?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">করলেন? (প্রয়োজন)</span>
 	</label>

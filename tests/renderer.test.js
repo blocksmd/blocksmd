@@ -309,7 +309,7 @@ const expectedTemplate = `
 	>
 </div>
 
-<div id="some-email-field" class="bmd-col-6 bmd-form-field bmd-form-subfield">
+<div id="some-email-field" class="bmd-col-6 bmd-form-field bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_email">
 		What is your email address?
 	</label>
@@ -704,7 +704,7 @@ const expectedTemplate = `
 	>
 </div>
 
-<div data-bmd-name="joinedDate" data-bmd-type="date" id="some-date-field" class="bmd-col-6 bmd-form-field bmd-form-subfield">
+<div data-bmd-name="joinedDate" data-bmd-type="date" id="some-date-field" class="bmd-col-6 bmd-form-field bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_joinedDate">
 		What date did you join?
 	</label>

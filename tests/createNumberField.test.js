@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_number">
 		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</label>

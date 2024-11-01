@@ -76,6 +76,8 @@ function formFieldSetup(
 			validParams[key] = value;
 		} else if (key === "subfield" && value) {
 			validParams[key] = value;
+		} else if (key === "labelstyle" && value && value === "classic") {
+			validParams[key] = value;
 		} else if (key === "autofocus" && value) {
 			validParams[key] = value;
 		} else {
@@ -88,10 +90,13 @@ function formFieldSetup(
 	let startTag = `<${startTagName}>`;
 	if (parsedAttrs) startTag = `<${startTagName} ${parsedAttrs}>`;
 	startTag = addReservedClass(startTag, "bmd-form-field");
-	if (validParams["fieldsize"] !== undefined)
+	if (validParams["fieldsize"] === "sm")
 		startTag = addReservedClass(startTag, "bmd-form-field-sm");
-	if (validParams["subfield"] !== undefined)
-		startTag = addReservedClass(startTag, "bmd-form-subfield");
+	if (
+		validParams["subfield"] !== undefined ||
+		validParams["labelstyle"] === "classic"
+	)
+		startTag = addReservedClass(startTag, "bmd-form-field-classic-labels");
 
 	return {
 		startTag: startTag,

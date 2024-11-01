@@ -7,7 +7,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_name">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
 	</label>
@@ -107,7 +107,7 @@ test("Case 2 (email)", () => {
 // Case 3 (url)
 
 const expectedTemplate3 = `
-<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield">
+<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_website">
 		What is your website address?
 	</label>
@@ -321,7 +321,7 @@ test("Case 7 (multiline with value)", () => {
 // Case 8 (email with value)
 
 const expectedTemplate8 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
+<div id="some-id" class="bmd-col-8 bmd-form-field bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_email">
 		What is your email <span class="bmd-text-nowrap" aria-hidden="true">address?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">address? (required)</span>
 	</label>
@@ -354,6 +354,7 @@ test("Case 8 (email with value)", () => {
 					| description = We'll reach you directly.
 					| value = john@example.com
 					| pattern = .+@example\.com
+					| labelStyle = classic
 				`,
 				"|",
 				"",
@@ -367,7 +368,7 @@ test("Case 8 (email with value)", () => {
 // Case 9 (url with value)
 
 const expectedTemplate9 = `
-<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield">
+<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels">
 	<label class="bmd-form-question" for="id_website">
 		What is your website address?
 	</label>
@@ -455,7 +456,7 @@ test("Case 10 (multiline with different localization)", () => {
 // Case 11 (telephone number)
 
 const expectedTemplate11 = `
-<fieldset id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your phone <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
 	</legend>

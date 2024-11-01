@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
 	</legend>
@@ -254,7 +254,7 @@ test("Case 2 (not required, start at 1, out of 5, value, disabled)", () => {
 // Case 3 (out of 6, different labels, different form delimiter)
 
 const expectedTemplate3 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
+<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field bmd-form-field-classic-labels">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
 	</legend>
@@ -347,6 +347,7 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 					outof = 6
 					labelstart = Start
 					labelend = End
+					labelstyle =   classic
 				`,
 				"\n",
 				"",
@@ -360,7 +361,7 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 // Case 4 (different localization)
 
 const expectedTemplate4 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (প্রয়োজন)</span>
 	</legend>
@@ -511,7 +512,7 @@ test("Case 4 (different localization)", () => {
 // Case 5 (hide labels)
 
 const expectedTemplate5 = `
-<fieldset data-bmd-name="choice" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<fieldset data-bmd-name="choice" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<legend class="bmd-form-question">
 		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
 	</legend>

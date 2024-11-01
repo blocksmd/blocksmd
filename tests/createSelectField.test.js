@@ -6,7 +6,7 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_color">
 		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">color?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">color? (required)</span>
 	</label>
@@ -59,7 +59,7 @@ test("Case 1", () => {
 // Case 2 (not required)
 
 const expectedTemplate2 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
+<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
 	<label class="bmd-form-question" for="id_color">
 		What is your favorite color?
 	</label>

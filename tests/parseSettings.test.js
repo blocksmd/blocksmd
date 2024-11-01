@@ -72,6 +72,7 @@ const template2 = `
 #! header = align
 #! headings = anchored
 #! id = form1
+#! label-style = classic
 #! localization = bn
 
 # Heading
@@ -103,6 +104,7 @@ const expectedSettings2 = {
 	"header": "align",
 	"headings": "anchored",
 	"id": "form1",
+	"label-style": "classic",
 	"localization": "bn",
 };
 
