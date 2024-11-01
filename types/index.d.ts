@@ -15,6 +15,7 @@ export class blocksmd {
 	 *   prioritizeURLFormData?: boolean,
 	 *   removePaddingInline?: boolean,
 	 *   sanitize?: boolean,
+	 *   saveState?: boolean,
 	 *   setColorSchemeAttrsAgain?: boolean,
 	 *   themeDark?: {
 	 *     accent?: string,
@@ -44,6 +45,7 @@ export class blocksmd {
 			prioritizeURLFormData?: boolean;
 			removePaddingInline?: boolean;
 			sanitize?: boolean;
+			saveState?: boolean;
 			setColorSchemeAttrsAgain?: boolean;
 			themeDark?: {
 				accent?: string;
@@ -70,6 +72,7 @@ export class blocksmd {
 		prioritizeURLFormData: boolean;
 		removePaddingInline: boolean;
 		sanitize: boolean;
+		saveState: boolean;
 		setColorSchemeAttrsAgain: boolean;
 		themeDark: {
 			accent: string;
