@@ -37,6 +37,7 @@ class blocksmd {
 		prioritizeURLFormData: false,
 		removePaddingInline: true,
 		sanitize: false,
+		saveState: true,
 		setColorSchemeAttrsAgain: true,
 		themeDark: {
 			accent: "rgb(138, 180, 248)",
@@ -68,6 +69,7 @@ class blocksmd {
 	 *   prioritizeURLFormData?: boolean,
 	 *   removePaddingInline?: boolean,
 	 *   sanitize?: boolean,
+	 *   saveState?: boolean,
 	 *   setColorSchemeAttrsAgain?: boolean,
 	 *   themeDark?: {
 	 *     accent?: string,
@@ -159,6 +161,12 @@ class blocksmd {
 				typeof options["sanitize"] === "boolean"
 			)
 				this.options["sanitize"] = options["sanitize"];
+			// Save state
+			if (
+				options["saveState"] !== undefined &&
+				typeof options["saveState"] === "boolean"
+			)
+				this.options["saveState"] = options["saveState"];
 			// Set color scheme attributes again
 			if (
 				options["setColorSchemeAttrsAgain"] !== undefined &&
@@ -739,7 +747,8 @@ class blocksmd {
 				if (input) {
 					input.value = value;
 					instance.state["formData"][name] = value;
-					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					if (updateLocalStorage && instance.options["saveState"])
+						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -753,7 +762,8 @@ class blocksmd {
 					value = Number(value);
 					input.value = value;
 					instance.state["formData"][name] = value;
-					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					if (updateLocalStorage && instance.options["saveState"])
+						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -769,7 +779,8 @@ class blocksmd {
 						if (option.getAttribute("value") === value) {
 							select.value = value;
 							instance.state["formData"][name] = value;
-							if (updateLocalStorage) instance.saveFieldValue(name, value);
+							if (updateLocalStorage && instance.options["saveState"])
+								instance.saveFieldValue(name, value);
 							instance.reRenderBindElems(name);
 							break;
 						}
@@ -803,7 +814,8 @@ class blocksmd {
 						type,
 					);
 					instance.state["formData"][name] = value;
-					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					if (updateLocalStorage && instance.options["saveState"])
+						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -827,7 +839,8 @@ class blocksmd {
 					);
 					value = value ? parseInt(value) : null;
 					instance.state["formData"][name] = value;
-					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					if (updateLocalStorage && instance.options["saveState"])
+						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -844,7 +857,8 @@ class blocksmd {
 				if (input) {
 					input.value = value;
 					instance.state["formData"][name] = value;
-					if (updateLocalStorage) instance.saveFieldValue(name, value);
+					if (updateLocalStorage && instance.options["saveState"])
+						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -1045,7 +1059,7 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1063,7 +1077,7 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = isNumeric(e.target.value) ? Number(e.target.value) : null;
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1082,7 +1096,7 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 
@@ -1109,7 +1123,7 @@ class blocksmd {
 			type,
 		);
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1129,7 +1143,7 @@ class blocksmd {
 			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 		);
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1147,7 +1161,7 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state["formData"][name] = value;
-		instance.saveFieldValue(name, value);
+		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -2646,10 +2660,12 @@ class blocksmd {
 				}
 
 			// Set form data saved in local storage
-			try {
-				instance.setSavedFormData();
-			} catch (error) {
-				console.error(error);
+			if (instance.options["saveState"]) {
+				try {
+					instance.setSavedFormData();
+				} catch (error) {
+					console.error(error);
+				}
 			}
 
 			// Set form data from URL parameters AFTER local storage
