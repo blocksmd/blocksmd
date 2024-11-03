@@ -1155,7 +1155,7 @@ class blocksmd {
 	 *
 	 * @param {InputEvent} e
 	 */
-	dateTimeFieldOnInput = (e) => {
+	datetimeFieldOnInput = (e) => {
 		const instance = this;
 
 		const name = e.target.getAttribute("name");
@@ -2377,7 +2377,7 @@ class blocksmd {
 					input.getAttribute("type") === "date" ||
 					input.getAttribute("type") === "time"
 				) {
-					input.addEventListener("input", instance.dateTimeFieldOnInput);
+					input.addEventListener("input", instance.datetimeFieldOnInput);
 				} else if (input.getAttribute("type") === "file") {
 					input.addEventListener("change", instance.fileFieldOnInput);
 				}

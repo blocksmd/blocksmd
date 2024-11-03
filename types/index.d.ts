@@ -280,7 +280,7 @@ export class blocksmd {
 	 *
 	 * @param {InputEvent} e
 	 */
-	dateTimeFieldOnInput: (e: InputEvent) => void;
+	datetimeFieldOnInput: (e: InputEvent) => void;
 	/**
 	 * Handle the inputs of file form fields: reset and update the wrapping
 	 * <label> depending on the file chosen.

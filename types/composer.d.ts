@@ -21,21 +21,67 @@ export class Composer {
 	 * The page or form settings.
 	 *
 	 * @typedef {Object} SettingsType
+	 * @property {"all-slides"} [autofocus] - If set to `"all-slides"`, when a new slide becomes active (including the first slide on page load), the very first form field will be auto-focused.
 	 * @property {string} [accent] - The primary color (HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [accentForeground] - The text color used on `accent` background, for example, the text on buttons. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [backgroundColor] - The `background-color` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [backgroundImage] - The `background-image` of the page.
+	 * @property {string} [color] - The `color` of the text on the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {"light"|"dark"} [colorScheme] - The default or initial color scheme of the page.
+	 * @property {string} [formDelimiter] - The form delimiter is used to separate parameters when creating form fields. By default, this is `"|"`.
+	 * @property {string} [labelStyle] - If set to `"classic"`, the question and description of all form fields are made smaller.
+	 * @property {string} [] -
+	 * @property {string} [] -
 	 */
 	/**
 	 * Create an instance of the class.
 	 *
-	 * @param {SettingsType} [settings]
+	 * @param {SettingsType} settings
 	 */
-	constructor(settings?: {
+	constructor(settings: {
+		/**
+		 * - If set to `"all-slides"`, when a new slide becomes active (including the first slide on page load), the very first form field will be auto-focused.
+		 */
+		"autofocus"?: "all-slides";
 		/**
 		 * - The primary color (HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
-		accent?: string;
+		"accent"?: string;
+		/**
+		 * - The text color used on `accent` background, for example, the text on buttons. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 */
+		"accentForeground"?: string;
+		/**
+		 * - The `background-color` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 */
+		"backgroundColor"?: string;
+		/**
+		 * - The `background-image` of the page.
+		 */
+		"backgroundImage"?: string;
+		/**
+		 * - The `color` of the text on the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 */
+		"color"?: string;
+		/**
+		 * - The default or initial color scheme of the page.
+		 */
+		"colorScheme"?: "light" | "dark";
+		/**
+		 * - The form delimiter is used to separate parameters when creating form fields. By default, this is `"|"`.
+		 */
+		"formDelimiter"?: string;
+		/**
+		 * - If set to `"classic"`, the question and description of all form fields are made smaller.
+		 */
+		"labelStyle"?: string;
+		/**
+		 * -
+		 */
+		""?: string;
 	});
 	template: string;
-	settings: any;
+	settings: {};
 	passedSettings: {};
 	/**
 	 * HTML attribute.
@@ -50,8 +96,8 @@ export class Composer {
 	 * @typedef {Object} FormFieldSharedParamsType
 	 * @property {string} question - The main question of the form field.
 	 * @property {string} [description] - Any extra information that the user may need to fill out the form.
-	 * @property {"sm"} [fieldSize] - When set to `sm`, the font sizes of the question, description, and answer are made smaller.
-	 * @property {"classic"} [labelStyle] - When set to `classic`, the question and description of the form field are made smaller.
+	 * @property {"sm"} [fieldSize] - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+	 * @property {"classic"} [labelStyle] - When set to `"classic"`, the question and description of the form field are made smaller.
 	 * @property {true} [subfield] - When set, the question and description of the form field are made smaller.
 	 * @property {true} [disabled] - When set, the input is disabled.
 	 * @property {true} [autofocus] - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
@@ -90,11 +136,11 @@ export class Composer {
 			 */
 			description?: string;
 			/**
-			 * - When set to `sm`, the font sizes of the question, description, and answer are made smaller.
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
 			 */
 			fieldSize?: "sm";
 			/**
-			 * - When set to `classic`, the question and description of the form field are made smaller.
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
 			 */
 			labelStyle?: "classic";
 			/**
@@ -154,29 +200,1772 @@ export class Composer {
 		},
 	) => string;
 	/**
+	 * Email input params.
+	 *
+	 * @typedef {Object} EmailInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {number} [maxlength] - If set, this becomes the maximum number of allowed characters in the input.
+	 * @property {string} [pattern] - If set, the input value must match the given pattern.
+	 * @property {string} [value] - If set, this becomes the default value of the input.
+	 */
+	/**
 	 * Create an email input field.
 	 *
 	 * @param {string} name
 	 * @param {boolean} required
-	 * @param {any} params
+	 * @param {FormFieldSharedParamsType & EmailInputParamsType} params
+	 * @returns {string}
 	 */
-	emailInput: (name: string, required: boolean, params: any) => void;
+	emailInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - If set, this becomes the maximum number of allowed characters in the input.
+			 */
+			maxlength?: number;
+			/**
+			 * - If set, the input value must match the given pattern.
+			 */
+			pattern?: string;
+			/**
+			 * - If set, this becomes the default value of the input.
+			 */
+			value?: string;
+		},
+	) => string;
 	/**
-	 * Create a new slide.
+	 * URL input params.
 	 *
-	 * @param {{
-	 *   jumpCondition?: string,
-	 *   pageProgress?: number,
-	 *   partialSubmission?: true,
-	 *   alignCTA?: "center"|"end",
-	 *   disablePrev?: true,
-	 * }} params
+	 * @typedef {Object} URLInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {number} [maxlength] - If set, this becomes the maximum number of allowed characters in the input.
+	 * @property {string} [pattern] - If set, the input value must match the given pattern.
+	 * @property {string} [value] - If set, this becomes the default value of the input.
 	 */
-	slide: (params: {
-		jumpCondition?: string;
-		pageProgress?: number;
-		partialSubmission?: true;
-		alignCTA?: "center" | "end";
-		disablePrev?: true;
-	}) => void;
+	/**
+	 * Create a URL input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & URLInputParamsType} params
+	 * @returns {string}
+	 */
+	urlInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - If set, this becomes the maximum number of allowed characters in the input.
+			 */
+			maxlength?: number;
+			/**
+			 * - If set, the input value must match the given pattern.
+			 */
+			pattern?: string;
+			/**
+			 * - If set, this becomes the default value of the input.
+			 */
+			value?: string;
+		},
+	) => string;
+	/**
+	 * Country code.
+	 *
+	 * @typedef {keyof typeof placeholdersAndCallingCodes} CountryCodeType
+	 */
+	/**
+	 * Telephone input params.
+	 *
+	 * @typedef {Object} TelInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {number} [maxlength] - If set, this becomes the maximum number of allowed characters in the input.
+	 * @property {string} [pattern] - If set, the input value must match the given pattern.
+	 * @property {string} [value] - If set, this becomes the default value of the input.
+	 * @property {CountryCodeType} [country] - The default country code (e.g., `"US"`). Defaults to `"US"` if not specified.
+	 * @property {Array.<CountryCodeType>} [availableCountries] - Array of available country codes (e.g., `["US", "CA", "GB"]`).
+	 */
+	/**
+	 * Create a telephone input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & TelInputParamsType} params
+	 * @returns {string}
+	 */
+	telInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - If set, this becomes the maximum number of allowed characters in the input.
+			 */
+			maxlength?: number;
+			/**
+			 * - If set, the input value must match the given pattern.
+			 */
+			pattern?: string;
+			/**
+			 * - If set, this becomes the default value of the input.
+			 */
+			value?: string;
+			/**
+			 * - The default country code (e.g., `"US"`). Defaults to `"US"` if not specified.
+			 */
+			country?:
+				| "US"
+				| "AC"
+				| "AD"
+				| "AE"
+				| "AF"
+				| "AG"
+				| "AI"
+				| "AL"
+				| "AM"
+				| "AN"
+				| "AO"
+				| "AQ"
+				| "AR"
+				| "AS"
+				| "AT"
+				| "AU"
+				| "AW"
+				| "AX"
+				| "AZ"
+				| "BA"
+				| "BB"
+				| "BD"
+				| "BE"
+				| "BF"
+				| "BG"
+				| "BH"
+				| "BI"
+				| "BJ"
+				| "BL"
+				| "BM"
+				| "BN"
+				| "BO"
+				| "BQ"
+				| "BR"
+				| "BS"
+				| "BT"
+				| "BW"
+				| "BY"
+				| "BZ"
+				| "CA"
+				| "CC"
+				| "CD"
+				| "CF"
+				| "CG"
+				| "CH"
+				| "CI"
+				| "CK"
+				| "CL"
+				| "CM"
+				| "CN"
+				| "CO"
+				| "CR"
+				| "CU"
+				| "CV"
+				| "CW"
+				| "CX"
+				| "CY"
+				| "CZ"
+				| "DE"
+				| "DJ"
+				| "DK"
+				| "DM"
+				| "DO"
+				| "DZ"
+				| "EC"
+				| "EE"
+				| "EG"
+				| "EH"
+				| "ER"
+				| "ES"
+				| "ET"
+				| "FI"
+				| "FJ"
+				| "FK"
+				| "FM"
+				| "FO"
+				| "FR"
+				| "GA"
+				| "GB"
+				| "GD"
+				| "GE"
+				| "GF"
+				| "GG"
+				| "GH"
+				| "GI"
+				| "GL"
+				| "GM"
+				| "GN"
+				| "GP"
+				| "GQ"
+				| "GR"
+				| "GS"
+				| "GT"
+				| "GU"
+				| "GW"
+				| "GY"
+				| "HK"
+				| "HM"
+				| "HN"
+				| "HR"
+				| "HT"
+				| "HU"
+				| "ID"
+				| "IE"
+				| "IL"
+				| "IM"
+				| "IN"
+				| "IO"
+				| "IQ"
+				| "IR"
+				| "IS"
+				| "IT"
+				| "JE"
+				| "JM"
+				| "JO"
+				| "JP"
+				| "KE"
+				| "KG"
+				| "KH"
+				| "KI"
+				| "KM"
+				| "KN"
+				| "KP"
+				| "KR"
+				| "KW"
+				| "KY"
+				| "KZ"
+				| "LA"
+				| "LB"
+				| "LC"
+				| "LI"
+				| "LK"
+				| "LR"
+				| "LS"
+				| "LT"
+				| "LU"
+				| "LV"
+				| "LY"
+				| "MA"
+				| "MC"
+				| "MD"
+				| "ME"
+				| "MF"
+				| "MG"
+				| "MH"
+				| "MK"
+				| "ML"
+				| "MM"
+				| "MN"
+				| "MO"
+				| "MP"
+				| "MQ"
+				| "MR"
+				| "MS"
+				| "MT"
+				| "MU"
+				| "MV"
+				| "MW"
+				| "MX"
+				| "MY"
+				| "MZ"
+				| "NA"
+				| "NC"
+				| "NE"
+				| "NF"
+				| "NG"
+				| "NI"
+				| "NL"
+				| "NO"
+				| "NP"
+				| "NR"
+				| "NU"
+				| "NZ"
+				| "OM"
+				| "PA"
+				| "PE"
+				| "PF"
+				| "PG"
+				| "PH"
+				| "PK"
+				| "PL"
+				| "PM"
+				| "PN"
+				| "PR"
+				| "PS"
+				| "PT"
+				| "PW"
+				| "PY"
+				| "QA"
+				| "RE"
+				| "RO"
+				| "RS"
+				| "RU"
+				| "RW"
+				| "SA"
+				| "SB"
+				| "SC"
+				| "SD"
+				| "SE"
+				| "SG"
+				| "SH"
+				| "SI"
+				| "SJ"
+				| "SK"
+				| "SL"
+				| "SM"
+				| "SN"
+				| "SO"
+				| "SR"
+				| "SS"
+				| "ST"
+				| "SV"
+				| "SX"
+				| "SY"
+				| "SZ"
+				| "TA"
+				| "TC"
+				| "TD"
+				| "TF"
+				| "TG"
+				| "TH"
+				| "TJ"
+				| "TK"
+				| "TL"
+				| "TM"
+				| "TN"
+				| "TO"
+				| "TR"
+				| "TT"
+				| "TV"
+				| "TW"
+				| "TZ"
+				| "UA"
+				| "UG"
+				| "UY"
+				| "UZ"
+				| "VA"
+				| "VC"
+				| "VE"
+				| "VG"
+				| "VI"
+				| "VN"
+				| "VU"
+				| "WF"
+				| "WS"
+				| "XK"
+				| "YE"
+				| "YT"
+				| "ZA"
+				| "ZM"
+				| "ZW";
+			/**
+			 * - Array of available country codes (e.g., `["US", "CA", "GB"]`).
+			 */
+			availableCountries?: (
+				| "US"
+				| "AC"
+				| "AD"
+				| "AE"
+				| "AF"
+				| "AG"
+				| "AI"
+				| "AL"
+				| "AM"
+				| "AN"
+				| "AO"
+				| "AQ"
+				| "AR"
+				| "AS"
+				| "AT"
+				| "AU"
+				| "AW"
+				| "AX"
+				| "AZ"
+				| "BA"
+				| "BB"
+				| "BD"
+				| "BE"
+				| "BF"
+				| "BG"
+				| "BH"
+				| "BI"
+				| "BJ"
+				| "BL"
+				| "BM"
+				| "BN"
+				| "BO"
+				| "BQ"
+				| "BR"
+				| "BS"
+				| "BT"
+				| "BW"
+				| "BY"
+				| "BZ"
+				| "CA"
+				| "CC"
+				| "CD"
+				| "CF"
+				| "CG"
+				| "CH"
+				| "CI"
+				| "CK"
+				| "CL"
+				| "CM"
+				| "CN"
+				| "CO"
+				| "CR"
+				| "CU"
+				| "CV"
+				| "CW"
+				| "CX"
+				| "CY"
+				| "CZ"
+				| "DE"
+				| "DJ"
+				| "DK"
+				| "DM"
+				| "DO"
+				| "DZ"
+				| "EC"
+				| "EE"
+				| "EG"
+				| "EH"
+				| "ER"
+				| "ES"
+				| "ET"
+				| "FI"
+				| "FJ"
+				| "FK"
+				| "FM"
+				| "FO"
+				| "FR"
+				| "GA"
+				| "GB"
+				| "GD"
+				| "GE"
+				| "GF"
+				| "GG"
+				| "GH"
+				| "GI"
+				| "GL"
+				| "GM"
+				| "GN"
+				| "GP"
+				| "GQ"
+				| "GR"
+				| "GS"
+				| "GT"
+				| "GU"
+				| "GW"
+				| "GY"
+				| "HK"
+				| "HM"
+				| "HN"
+				| "HR"
+				| "HT"
+				| "HU"
+				| "ID"
+				| "IE"
+				| "IL"
+				| "IM"
+				| "IN"
+				| "IO"
+				| "IQ"
+				| "IR"
+				| "IS"
+				| "IT"
+				| "JE"
+				| "JM"
+				| "JO"
+				| "JP"
+				| "KE"
+				| "KG"
+				| "KH"
+				| "KI"
+				| "KM"
+				| "KN"
+				| "KP"
+				| "KR"
+				| "KW"
+				| "KY"
+				| "KZ"
+				| "LA"
+				| "LB"
+				| "LC"
+				| "LI"
+				| "LK"
+				| "LR"
+				| "LS"
+				| "LT"
+				| "LU"
+				| "LV"
+				| "LY"
+				| "MA"
+				| "MC"
+				| "MD"
+				| "ME"
+				| "MF"
+				| "MG"
+				| "MH"
+				| "MK"
+				| "ML"
+				| "MM"
+				| "MN"
+				| "MO"
+				| "MP"
+				| "MQ"
+				| "MR"
+				| "MS"
+				| "MT"
+				| "MU"
+				| "MV"
+				| "MW"
+				| "MX"
+				| "MY"
+				| "MZ"
+				| "NA"
+				| "NC"
+				| "NE"
+				| "NF"
+				| "NG"
+				| "NI"
+				| "NL"
+				| "NO"
+				| "NP"
+				| "NR"
+				| "NU"
+				| "NZ"
+				| "OM"
+				| "PA"
+				| "PE"
+				| "PF"
+				| "PG"
+				| "PH"
+				| "PK"
+				| "PL"
+				| "PM"
+				| "PN"
+				| "PR"
+				| "PS"
+				| "PT"
+				| "PW"
+				| "PY"
+				| "QA"
+				| "RE"
+				| "RO"
+				| "RS"
+				| "RU"
+				| "RW"
+				| "SA"
+				| "SB"
+				| "SC"
+				| "SD"
+				| "SE"
+				| "SG"
+				| "SH"
+				| "SI"
+				| "SJ"
+				| "SK"
+				| "SL"
+				| "SM"
+				| "SN"
+				| "SO"
+				| "SR"
+				| "SS"
+				| "ST"
+				| "SV"
+				| "SX"
+				| "SY"
+				| "SZ"
+				| "TA"
+				| "TC"
+				| "TD"
+				| "TF"
+				| "TG"
+				| "TH"
+				| "TJ"
+				| "TK"
+				| "TL"
+				| "TM"
+				| "TN"
+				| "TO"
+				| "TR"
+				| "TT"
+				| "TV"
+				| "TW"
+				| "TZ"
+				| "UA"
+				| "UG"
+				| "UY"
+				| "UZ"
+				| "VA"
+				| "VC"
+				| "VE"
+				| "VG"
+				| "VI"
+				| "VN"
+				| "VU"
+				| "WF"
+				| "WS"
+				| "XK"
+				| "YE"
+				| "YT"
+				| "ZA"
+				| "ZM"
+				| "ZW"
+			)[];
+		},
+	) => string;
+	/**
+	 * Number input params.
+	 *
+	 * @typedef {Object} NumberInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {number} [min] - Sets the minimum allowed value.
+	 * @property {number} [max] - Sets the maximum allowed value.
+	 * @property {number} [step] - Sets the stepping interval.
+	 * @property {string} [unit] - Text to display before the input as a unit (e.g., `"$"`, `"€"`).
+	 * @property {string} [unitEnd] - Text to display after the input as a unit (e.g., `"kg"`, `"%"`).
+	 * @property {number} [value] - If set, this becomes the default value of the input.
+	 */
+	/**
+	 * Create a number input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & NumberInputParamsType} params
+	 * @returns {string}
+	 */
+	numberInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - Sets the minimum allowed value.
+			 */
+			min?: number;
+			/**
+			 * - Sets the maximum allowed value.
+			 */
+			max?: number;
+			/**
+			 * - Sets the stepping interval.
+			 */
+			step?: number;
+			/**
+			 * - Text to display before the input as a unit (e.g., `"$"`, `"€"`).
+			 */
+			unit?: string;
+			/**
+			 * - Text to display after the input as a unit (e.g., `"kg"`, `"%"`).
+			 */
+			unitEnd?: string;
+			/**
+			 * - If set, this becomes the default value of the input.
+			 */
+			value?: number;
+		},
+	) => string;
+	/**
+	 * Select option.
+	 *
+	 * @typedef {Object} SelectOptionType
+	 * @property {string} label - The display text for the option.
+	 * @property {string} [value] - The value for the option. If not provided, label is used as value.
+	 */
+	/**
+	 * Select box params.
+	 *
+	 * @typedef {Object} SelectBoxParamsType
+	 * @property {string} [placeholder] - Sets the placeholder option of the select.
+	 * @property {Array<string|SelectOptionType>} options - Array of options as strings or SelectOptionType objects.
+	 * @property {string} [selected] - Pre-selected option value.
+	 */
+	/**
+	 * Create a select box field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & SelectBoxParamsType} params
+	 * @returns {string}
+	 */
+	selectBox: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the placeholder option of the select.
+			 */
+			placeholder?: string;
+			/**
+			 * - Array of options as strings or SelectOptionType objects.
+			 */
+			options: (
+				| string
+				| {
+						/**
+						 * - The display text for the option.
+						 */
+						label: string;
+						/**
+						 * - The value for the option. If not provided, label is used as value.
+						 */
+						value?: string;
+				  }
+			)[];
+			/**
+			 * - Pre-selected option value.
+			 */
+			selected?: string;
+		},
+	) => string;
+	/**
+	 * Choice option.
+	 *
+	 * @typedef {Object} ChoiceOptionType
+	 * @property {string} label - The display text for the choice.
+	 * @property {string} [value] - The value for the choice. If not provided, label is used as value.
+	 */
+	/**
+	 * Choice input params.
+	 *
+	 * @typedef {Object} ChoiceInputParamsType
+	 * @property {Array<string|ChoiceOptionType>} choices - Array of choices as strings or ChoiceOptionType objects.
+	 * @property {boolean} [multiple] - Allow multiple selections.
+	 * @property {boolean} [horizontal] - Display choices horizontally.
+	 * @property {Array<string>} [checked] - Array of pre-checked choice values.
+	 */
+	/**
+	 * Create a choice input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & ChoiceInputParamsType} params
+	 * @returns {string}
+	 */
+	choiceInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Array of choices as strings or ChoiceOptionType objects.
+			 */
+			choices: (
+				| string
+				| {
+						/**
+						 * - The display text for the choice.
+						 */
+						label: string;
+						/**
+						 * - The value for the choice. If not provided, label is used as value.
+						 */
+						value?: string;
+				  }
+			)[];
+			/**
+			 * - Allow multiple selections.
+			 */
+			multiple?: boolean;
+			/**
+			 * - Display choices horizontally.
+			 */
+			horizontal?: boolean;
+			/**
+			 * - Array of pre-checked choice values.
+			 */
+			checked?: Array<string>;
+		},
+	) => string;
+	/**
+	 * Picture choice option.
+	 *
+	 * @typedef {Object} PictureChoiceOptionType
+	 * @property {string} label - The display text for the choice.
+	 * @property {string} [value] - The value for the choice. If not provided, label is used as value.
+	 * @property {string} image - The URL of the image.
+	 */
+	/**
+	 * Picture choice params.
+	 *
+	 * @typedef {Object} PictureChoiceParamsType
+	 * @property {Array<PictureChoiceOptionType>} choices - Array of picture choices.
+	 * @property {boolean} [multiple] - Allow multiple selections.
+	 * @property {boolean} [supersize] - Make the pictures larger.
+	 * @property {boolean} [hideLabels] - Hide the text labels.
+	 * @property {Array<string>} [checked] - Array of pre-checked choice values.
+	 */
+	/**
+	 * Create a picture choice field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & PictureChoiceParamsType} params
+	 * @returns {string}
+	 */
+	pictureChoice: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Array of picture choices.
+			 */
+			choices: {
+				/**
+				 * - The display text for the choice.
+				 */
+				label: string;
+				/**
+				 * - The value for the choice. If not provided, label is used as value.
+				 */
+				value?: string;
+				/**
+				 * - The URL of the image.
+				 */
+				image: string;
+			}[];
+			/**
+			 * - Allow multiple selections.
+			 */
+			multiple?: boolean;
+			/**
+			 * - Make the pictures larger.
+			 */
+			supersize?: boolean;
+			/**
+			 * - Hide the text labels.
+			 */
+			hideLabels?: boolean;
+			/**
+			 * - Array of pre-checked choice values.
+			 */
+			checked?: Array<string>;
+		},
+	) => string;
+	/**
+	 * Rating input params.
+	 *
+	 * @typedef {Object} RatingInputParamsType
+	 * @property {number} [outOf] - Number of rating options (1-10). Defaults to `5`.
+	 * @property {"star"|"heart"|"hearts"} [icon] - Icon to use for rating. Defaults to `"star"`.
+	 * @property {number} [value] - Pre-selected rating value.
+	 * @property {true} [hideLabels] - Whether to hide the numeric labels.
+	 */
+	/**
+	 * Create a rating input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & RatingInputParamsType} params
+	 * @returns {string}
+	 */
+	ratingInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Number of rating options (1-10). Defaults to `5`.
+			 */
+			outOf?: number;
+			/**
+			 * - Icon to use for rating. Defaults to `"star"`.
+			 */
+			icon?: "star" | "heart" | "hearts";
+			/**
+			 * - Pre-selected rating value.
+			 */
+			value?: number;
+			/**
+			 * - Whether to hide the numeric labels.
+			 */
+			hideLabels?: true;
+		},
+	) => string;
+	/**
+	 * Opinion scale input params.
+	 *
+	 * @typedef {Object} OpinionScaleParamsType
+	 * @property {number} [startAt] - Starting number (`0` or `1`). Defaults to `0`.
+	 * @property {number} [outOf] - Maximum scale value (5-10). Defaults to `10`.
+	 * @property {string} [labelStart] - Label for the start of the scale.
+	 * @property {string} [labelEnd] - Label for the end of the scale.
+	 * @property {true} [hideLabelStart] - Whether to hide the start label.
+	 * @property {true} [hideLabelEnd] - Whether to hide the end label.
+	 * @property {number} [value] - Pre-selected value.
+	 */
+	/**
+	 * Create an opinion scale field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & OpinionScaleParamsType} params
+	 * @returns {string}
+	 */
+	opinionScale: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Starting number (`0` or `1`). Defaults to `0`.
+			 */
+			startAt?: number;
+			/**
+			 * - Maximum scale value (5-10). Defaults to `10`.
+			 */
+			outOf?: number;
+			/**
+			 * - Label for the start of the scale.
+			 */
+			labelStart?: string;
+			/**
+			 * - Label for the end of the scale.
+			 */
+			labelEnd?: string;
+			/**
+			 * - Whether to hide the start label.
+			 */
+			hideLabelStart?: true;
+			/**
+			 * - Whether to hide the end label.
+			 */
+			hideLabelEnd?: true;
+			/**
+			 * - Pre-selected value.
+			 */
+			value?: number;
+		},
+	) => string;
+	/**
+	 * Datetime input params.
+	 *
+	 * @typedef {Object} DatetimeInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {string} [min] - Sets the minimum allowed datetime value (`YYYY-MM-DDTHH:mm`).
+	 * @property {string} [max] - Sets the maximum allowed datetime value (`YYYY-MM-DDTHH:mm`).
+	 * @property {string} [step] - Sets the stepping interval.
+	 * @property {string} [value] - Pre-selected datetime value (`YYYY-MM-DDTHH:mm`).
+	 */
+	/**
+	 * Create a datetime input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & DatetimeInputParamsType} params
+	 * @returns {string}
+	 */
+	datetimeInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - Sets the minimum allowed datetime value (`YYYY-MM-DDTHH:mm`).
+			 */
+			min?: string;
+			/**
+			 * - Sets the maximum allowed datetime value (`YYYY-MM-DDTHH:mm`).
+			 */
+			max?: string;
+			/**
+			 * - Sets the stepping interval.
+			 */
+			step?: string;
+			/**
+			 * - Pre-selected datetime value (`YYYY-MM-DDTHH:mm`).
+			 */
+			value?: string;
+		},
+	) => string;
+	/**
+	 * Date input params.
+	 *
+	 * @typedef {Object} DateInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {string} [min] - Sets the minimum allowed date value (`YYYY-MM-DD`).
+	 * @property {string} [max] - Sets the maximum allowed date value (`YYYY-MM-DD`).
+	 * @property {string} [step] - Sets the stepping interval.
+	 * @property {string} [value] - Pre-selected date value (`YYYY-MM-DD`).
+	 */
+	/**
+	 * Create a date input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & DateInputParamsType} params
+	 * @returns {string}
+	 */
+	dateInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - Sets the minimum allowed date value (`YYYY-MM-DD`).
+			 */
+			min?: string;
+			/**
+			 * - Sets the maximum allowed date value (`YYYY-MM-DD`).
+			 */
+			max?: string;
+			/**
+			 * - Sets the stepping interval.
+			 */
+			step?: string;
+			/**
+			 * - Pre-selected date value (`YYYY-MM-DD`).
+			 */
+			value?: string;
+		},
+	) => string;
+	/**
+	 * Time input params.
+	 *
+	 * @typedef {Object} TimeInputParamsType
+	 * @property {string} [placeholder] - Sets the `placeholder` attribute of the input.
+	 * @property {string} [min] - Sets the minimum allowed time value (`HH:mm`).
+	 * @property {string} [max] - Sets the maximum allowed time value (`HH:mm`).
+	 * @property {string} [step] - Sets the stepping interval.
+	 * @property {string} [value] - Pre-selected time value (`HH:mm`).
+	 */
+	/**
+	 * Create a time input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & TimeInputParamsType} params
+	 * @returns {string}
+	 */
+	timeInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * - Sets the minimum allowed time value (`HH:mm`).
+			 */
+			min?: string;
+			/**
+			 * - Sets the maximum allowed time value (`HH:mm`).
+			 */
+			max?: string;
+			/**
+			 * - Sets the stepping interval.
+			 */
+			step?: string;
+			/**
+			 * - Pre-selected time value (`HH:mm`).
+			 */
+			value?: string;
+		},
+	) => string;
+	/**
+	 * File input params.
+	 *
+	 * @typedef {Object} FileInputParamsType
+	 * @property {number} [sizeLimit] - Maximum file size in MB. Defaults to `10`.
+	 * @property {true} [imageOnly] - When set, only image files are accepted.
+	 */
+	/**
+	 * Create a file input field.
+	 *
+	 * @param {string} name
+	 * @param {boolean} required
+	 * @param {FormFieldSharedParamsType & FileInputParamsType} params
+	 * @returns {string}
+	 */
+	fileInput: (
+		name: string,
+		required: boolean,
+		params: {
+			/**
+			 * - The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * - Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * - When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * - When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * - When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * - When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * - When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * - The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * - The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * - Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * - The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * - The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * - Maximum file size in MB. Defaults to `10`.
+			 */
+			sizeLimit?: number;
+			/**
+			 * - When set, only image files are accepted.
+			 */
+			imageOnly?: true;
+		},
+	) => string;
 }

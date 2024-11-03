@@ -9,7 +9,7 @@ const {
 	createChoiceField,
 	createRatingField,
 	createOpinionScaleField,
-	createDateTimeField,
+	createDatetimeField,
 	createFileField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
@@ -303,7 +303,7 @@ renderer.paragraph = function (text) {
 				fieldInputType === "dateinput" ||
 				fieldInputType === "timeinput"
 			) {
-				return createDateTimeField(
+				return createDatetimeField(
 					fieldName,
 					fieldInputType.replace("input", ""),
 					fieldRequired,

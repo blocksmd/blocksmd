@@ -1,6 +1,6 @@
 ("use strict");
 
-const { createDateTimeField } = require("../src/form-field-create");
+const { createDatetimeField } = require("../src/form-field-create");
 const beautify = require("beautify");
 
 // Case 1
@@ -33,7 +33,7 @@ const expectedTemplate1 = `
 test("Case 1", () => {
 	expect(
 		beautify(
-			createDateTimeField(
+			createDatetimeField(
 				"joined",
 				"datetime",
 				true,
@@ -82,7 +82,7 @@ const expectedTemplate2 = `
 test("Case 2 (date)", () => {
 	expect(
 		beautify(
-			createDateTimeField(
+			createDatetimeField(
 				"joined",
 				"date",
 				true,
@@ -126,7 +126,7 @@ const expectedTemplate3 = `
 test("Case 3 (time)", () => {
 	expect(
 		beautify(
-			createDateTimeField(
+			createDatetimeField(
 				"when",
 				"time",
 				false,
@@ -174,7 +174,7 @@ const expectedTemplate4 = `
 test("Case 4 (form delimiter changed to new line, different id and localization)", () => {
 	expect(
 		beautify(
-			createDateTimeField(
+			createDatetimeField(
 				"joined",
 				"datetime",
 				true,
@@ -217,7 +217,7 @@ const expectedTemplate5 = `
 test("Case 5 (no params)", () => {
 	expect(
 		beautify(
-			createDateTimeField("updated", "date", true, "", "", "|", "", "en"),
+			createDatetimeField("updated", "date", true, "", "", "|", "", "en"),
 			{
 				format: "html",
 			},
