@@ -2171,5 +2171,446 @@ export class Composer {
 			imageOnly?: true;
 		},
 	) => string;
+	/**
+	 * Create free-form content.
+	 *
+	 * @param {string} content
+	 * @returns {string}
+	 */
+	free: (content: string) => string;
+	/**
+	 * Block-level element params.
+	 *
+	 * @typedef {Object} BlockElemParamsType
+	 * @property {string} [id] The id attribute of the element.
+	 * @property {Array.<string>} [classNames] The CSS class names of the element.
+	 * @property {Array.<HTMLAttributeType>} [attrs] Other HTML attributes of the element.
+	 */
+	/**
+	 * Create a paragraph.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	p: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 1.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h1: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 2.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h2: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 3.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h3: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 4.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h4: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 5.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h5: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a heading 6.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h6: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create an unordered list.
+	 *
+	 * @param {Array.<string>} items
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	ul: (
+		items: Array<string>,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create an ordered list.
+	 *
+	 * @param {Array.<string>} items
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	ol: (
+		items: Array<string>,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Create a blockquote.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	blockquote: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		},
+	) => string;
+	/**
+	 * Code params.
+	 *
+	 * @typedef {Object} CodeParamsType
+	 * @property {string} [language] The language of the code.
+	 */
+	/**
+	 * Create a block-level code element.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType & CodeParamsType} [params]
+	 * @returns {string}
+	 */
+	code: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * The language of the code.
+			 */
+			language?: string;
+		},
+	) => string;
+	/**
+	 * Create a horizontal rule.
+	 *
+	 * @returns {string}
+	 */
+	hr: () => string;
+	/**
+	 * @typedef {Object} DivParamsType
+	 * @property {Array.<string>} [bind] Vue binding expressions
+	 */
+	/**
+	 * Create a division start tag.
+	 *
+	 * @param {BlockElemParamsType & DivParamsType} [params]
+	 * @returns {string}
+	 */
+	divStart: (
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * Vue binding expressions
+			 */
+			bind?: Array<string>;
+		},
+	) => string;
+	/**
+	 * Create a division end tag.
+	 *
+	 * @returns {string}
+	 */
+	divEnd: () => string;
 }
 import { translations } from "./translations";

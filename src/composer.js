@@ -1032,6 +1032,359 @@ class Composer {
 		instance.template += result;
 		return result;
 	};
+
+	/**
+	 * Create free-form content.
+	 *
+	 * @param {string} content
+	 * @returns {string}
+	 */
+	free = (content) => {
+		const instance = this;
+
+		const result = `\n${content}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Block-level element params.
+	 *
+	 * @typedef {Object} BlockElemParamsType
+	 * @property {string} [id] The id attribute of the element.
+	 * @property {Array.<string>} [classNames] The CSS class names of the element.
+	 * @property {Array.<HTMLAttributeType>} [attrs] Other HTML attributes of the element.
+	 */
+
+	/**
+	 * Create a paragraph.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	p = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n[${attrs.join(" ")}]\n${content}\n`;
+		} else {
+			result = `\n${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 1.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h1 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n# [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n# ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 2.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h2 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n## [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n## ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 3.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h3 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n### [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n### ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 4.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h4 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n#### [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n#### ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 5.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h5 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n##### [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n##### ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a heading 6.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	h6 = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			result = `\n###### [${attrs.join(" ")}] ${content}\n`;
+		} else {
+			result = `\n###### ${content}\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create an unordered list.
+	 *
+	 * @param {Array.<string>} items
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	ul = (items, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const templateChunks = [];
+		const attrs = composeAttrs(params);
+		if (attrs.length > 0) {
+			templateChunks.push(`- [${attrs.join(" ")}]`);
+		}
+		items.forEach((item) => {
+			templateChunks.push(`- ${item}`);
+		});
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create an ordered list.
+	 *
+	 * @param {Array.<string>} items
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	ol = (items, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const templateChunks = [];
+		const attrs = composeAttrs(params);
+		if (attrs.length > 0) {
+			templateChunks.push(`0. [${attrs.join(" ")}]`);
+		}
+		items.forEach((item, index) => {
+			templateChunks.push(`${index + 1}. ${item}`);
+		});
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a blockquote.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType} [params]
+	 * @returns {string}
+	 */
+	blockquote = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const templateChunks = [];
+		const attrs = composeAttrs(params);
+		if (attrs.length > 0) {
+			templateChunks.push(`> [${attrs.join(" ")}]`);
+		}
+		const lines = content.split("\n");
+		lines.forEach((line) => {
+			templateChunks.push(`> ${line}`);
+		});
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Code params.
+	 *
+	 * @typedef {Object} CodeParamsType
+	 * @property {string} [language] The language of the code.
+	 */
+
+	/**
+	 * Create a block-level code element.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType & CodeParamsType} [params]
+	 * @returns {string}
+	 */
+	code = (content, params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const attrs = composeAttrs(params);
+		let result = "";
+		if (attrs.length > 0) {
+			const language = params["language"] || "";
+			result = `\n\`\`\`${language} [${attrs.join(" ")}]\n${content}\n\`\`\`\n`;
+		} else {
+			const language = params["language"] || "";
+			result = `\n\`\`\`${language}\n${content}\n\`\`\`\n`;
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a horizontal rule.
+	 *
+	 * @returns {string}
+	 */
+	hr = () => {
+		const instance = this;
+
+		let result = "";
+		if (instance.settings["slideDelimiter"] === "---") {
+			result = "\n***\n";
+		} else {
+			result = "\n---\n";
+		}
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * @typedef {Object} DivParamsType
+	 * @property {Array.<string>} [bind] Vue binding expressions
+	 */
+
+	/**
+	 * Create a division start tag.
+	 *
+	 * @param {BlockElemParamsType & DivParamsType} [params]
+	 * @returns {string}
+	 */
+	divStart = (params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		if (!params["bind"]) params["bind"] = [];
+
+		const attrs = composeAttrs(params);
+		let result = "";
+
+		if (attrs.length > 0 || params["bind"].length > 0) {
+			const attrPart = attrs.length > 0 ? attrs.join(" ") : "";
+			const bindPart =
+				params["bind"].length > 0 ? `{$ ${params["bind"].join(" ")} $}` : "";
+
+			// Handle cases where we might have either attrs or bindings or both
+			if (attrPart && bindPart) {
+				result = `\n::: [${attrPart} ${bindPart}]\n`;
+			} else if (attrPart) {
+				result = `\n::: [${attrPart}]\n`;
+			} else if (bindPart) {
+				result = `\n::: [${bindPart}]\n`;
+			}
+		} else {
+			result = "\n:::\n";
+		}
+
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a division end tag.
+	 *
+	 * @returns {string}
+	 */
+	divEnd = () => {
+		const instance = this;
+
+		const result = "\n:::\n";
+		instance.template += result;
+		return result;
+	};
 }
 
 exports.composeSharedFieldParams = composeSharedFieldParams;

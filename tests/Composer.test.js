@@ -1046,3 +1046,561 @@ file = FileInput(
 		}),
 	).toBe(expectedFileSimple);
 });
+
+// Free-form test
+
+const expectedFreeTemplate = `
+# Heading
+
+[.col-6]
+Paragraph
+
+> Blockquote
+`;
+
+test("Free-form content", () => {
+	const composer = new Composer();
+	expect(
+		composer.free("# Heading\n\n[.col-6]\nParagraph\n\n> Blockquote"),
+	).toBe(expectedFreeTemplate);
+});
+
+// Paragraph tests
+
+const expectedParagraphTemplate = `
+[#paragraph .col-6 .xs:col-8 aria-label="Paragraph"]
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+`;
+
+test("Paragraph with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.p(
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+			{
+				id: "paragraph",
+				classNames: ["col-6", "xs:col-8"],
+				attrs: [{ name: "aria-label", value: "Paragraph" }],
+			},
+		),
+	).toBe(expectedParagraphTemplate);
+});
+
+const expectedParagraphSimple = `
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+`;
+
+test("Simple paragraph", () => {
+	const composer = new Composer();
+	expect(
+		composer.p(
+			"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+		),
+	).toBe(expectedParagraphSimple);
+});
+
+// Heading 1 tests
+
+const expectedHeading1Template = `
+# [#main-title .text-lg .font-bold aria-label="Main title"] Welcome to my website
+`;
+
+test("Heading 1 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h1("Welcome to my website", {
+			id: "main-title",
+			classNames: ["text-lg", "font-bold"],
+			attrs: [{ name: "aria-label", value: "Main title" }],
+		}),
+	).toBe(expectedHeading1Template);
+});
+
+const expectedHeading1Simple = `
+# Welcome to my website
+`;
+
+test("Simple heading 1", () => {
+	const composer = new Composer();
+	expect(composer.h1("Welcome to my website")).toBe(expectedHeading1Simple);
+});
+
+// Heading 2 tests
+
+const expectedHeading2Template = `
+## [#section-title .text-md .mb-4 aria-label="Section title"] About us
+`;
+
+test("Heading 2 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h2("About us", {
+			id: "section-title",
+			classNames: ["text-md", "mb-4"],
+			attrs: [{ name: "aria-label", value: "Section title" }],
+		}),
+	).toBe(expectedHeading2Template);
+});
+
+const expectedHeading2Simple = `
+## About us
+`;
+
+test("Simple heading 2", () => {
+	const composer = new Composer();
+	expect(composer.h2("About us")).toBe(expectedHeading2Simple);
+});
+
+// Heading 3 tests
+
+const expectedHeading3Template = `
+### [#subsection .text-sm .mt-6 aria-label="Subsection"] Our Services
+`;
+
+test("Heading 3 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h3("Our Services", {
+			id: "subsection",
+			classNames: ["text-sm", "mt-6"],
+			attrs: [{ name: "aria-label", value: "Subsection" }],
+		}),
+	).toBe(expectedHeading3Template);
+});
+
+const expectedHeading3Simple = `
+### Our Services
+`;
+
+test("Simple heading 3", () => {
+	const composer = new Composer();
+	expect(composer.h3("Our Services")).toBe(expectedHeading3Simple);
+});
+
+// Heading 4 tests
+
+const expectedHeading4Template = `
+#### [#feature-title .font-medium .my-2 aria-label="Feature title"] Key Features
+`;
+
+test("Heading 4 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h4("Key Features", {
+			id: "feature-title",
+			classNames: ["font-medium", "my-2"],
+			attrs: [{ name: "aria-label", value: "Feature title" }],
+		}),
+	).toBe(expectedHeading4Template);
+});
+
+const expectedHeading4Simple = `
+#### Key Features
+`;
+
+test("Simple heading 4", () => {
+	const composer = new Composer();
+	expect(composer.h4("Key Features")).toBe(expectedHeading4Simple);
+});
+
+// Heading 5 tests
+
+const expectedHeading5Template = `
+##### [#benefit-title .text-xs .py-1 aria-label="Benefit title"] Benefits
+`;
+
+test("Heading 5 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h5("Benefits", {
+			id: "benefit-title",
+			classNames: ["text-xs", "py-1"],
+			attrs: [{ name: "aria-label", value: "Benefit title" }],
+		}),
+	).toBe(expectedHeading5Template);
+});
+
+const expectedHeading5Simple = `
+##### Benefits
+`;
+
+test("Simple heading 5", () => {
+	const composer = new Composer();
+	expect(composer.h5("Benefits")).toBe(expectedHeading5Simple);
+});
+
+// Heading 6 tests
+
+const expectedHeading6Template = `
+###### [#note-title .text-xs .italic aria-label="Note title"] Important Note
+`;
+
+test("Heading 6 with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.h6("Important Note", {
+			id: "note-title",
+			classNames: ["text-xs", "italic"],
+			attrs: [{ name: "aria-label", value: "Note title" }],
+		}),
+	).toBe(expectedHeading6Template);
+});
+
+const expectedHeading6Simple = `
+###### Important Note
+`;
+
+test("Simple heading 6", () => {
+	const composer = new Composer();
+	expect(composer.h6("Important Note")).toBe(expectedHeading6Simple);
+});
+
+// Unordered list tests
+
+const expectedUnorderedListTemplate = `
+- [#feature-list .list-inside .space-y-2 aria-label="Feature list"]
+- First feature
+- Second feature with details
+- Third important point
+`;
+
+test("Unordered list with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.ul(
+			["First feature", "Second feature with details", "Third important point"],
+			{
+				id: "feature-list",
+				classNames: ["list-inside", "space-y-2"],
+				attrs: [{ name: "aria-label", value: "Feature list" }],
+			},
+		),
+	).toBe(expectedUnorderedListTemplate);
+});
+
+const expectedUnorderedListSimple = `
+- First feature
+- Second feature with details
+- Third important point
+`;
+
+test("Simple unordered list", () => {
+	const composer = new Composer();
+	expect(
+		composer.ul([
+			"First feature",
+			"Second feature with details",
+			"Third important point",
+		]),
+	).toBe(expectedUnorderedListSimple);
+});
+
+const expectedSingleUnorderedList = `
+- Single item
+`;
+
+test("Single item unordered list", () => {
+	const composer = new Composer();
+	expect(composer.ul(["Single item"], {})).toBe(expectedSingleUnorderedList);
+});
+
+test("Empty unordered list", () => {
+	const composer = new Composer();
+	expect(composer.ul([])).toBe("\n\n");
+});
+
+// Ordered list tests
+
+const expectedOrderedListTemplate = `
+0. [#steps-list .list-decimal .space-y-4 aria-label="Steps list"]
+1. Prepare your workspace
+2. Install dependencies
+3. Run the application
+`;
+
+test("Ordered list with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.ol(
+			["Prepare your workspace", "Install dependencies", "Run the application"],
+			{
+				id: "steps-list",
+				classNames: ["list-decimal", "space-y-4"],
+				attrs: [{ name: "aria-label", value: "Steps list" }],
+			},
+		),
+	).toBe(expectedOrderedListTemplate);
+});
+
+const expectedOrderedListSimple = `
+1. Prepare your workspace
+2. Install dependencies
+3. Run the application
+`;
+
+test("Simple ordered list", () => {
+	const composer = new Composer();
+	expect(
+		composer.ol([
+			"Prepare your workspace",
+			"Install dependencies",
+			"Run the application",
+		]),
+	).toBe(expectedOrderedListSimple);
+});
+
+const expectedSingleOrderedList = `
+1. Single item
+`;
+
+test("Single item ordered list", () => {
+	const composer = new Composer();
+	expect(composer.ol(["Single item"])).toBe(expectedSingleOrderedList);
+});
+
+test("Empty ordered list", () => {
+	const composer = new Composer();
+	expect(composer.ol([])).toBe("\n\n");
+});
+
+// Blockquote tests
+
+const expectedBlockquoteTemplate = `
+> [#testimonial .text-xl .italic aria-label="Customer testimonial"]
+> This product has completely transformed how we work. The efficiency gains are remarkable, and our team couldn't be happier with the results. I would highly recommend it to anyone looking to improve their workflow.
+`;
+
+test("Blockquote with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.blockquote(
+			"This product has completely transformed how we work. The efficiency gains are remarkable, and our team couldn't be happier with the results. I would highly recommend it to anyone looking to improve their workflow.",
+			{
+				id: "testimonial",
+				classNames: ["text-xl", "italic"],
+				attrs: [{ name: "aria-label", value: "Customer testimonial" }],
+			},
+		),
+	).toBe(expectedBlockquoteTemplate);
+});
+
+const expectedBlockquoteSimple = `
+> A simple blockquote with a profound message.
+`;
+
+test("Simple blockquote", () => {
+	const composer = new Composer();
+	expect(
+		composer.blockquote("A simple blockquote with a profound message."),
+	).toBe(expectedBlockquoteSimple);
+});
+
+const expectedBlockquoteMultiline = `
+> [#quote .text-lg aria-label="Multi-line quote"]
+> First line of the quote
+> Second line with more content
+> Third line concluding the thought
+`;
+
+test("Multiline blockquote with parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.blockquote(
+			"First line of the quote\nSecond line with more content\nThird line concluding the thought",
+			{
+				id: "quote",
+				classNames: ["text-lg"],
+				attrs: [{ name: "aria-label", value: "Multi-line quote" }],
+			},
+		),
+	).toBe(expectedBlockquoteMultiline);
+});
+
+test("Empty blockquote", () => {
+	const composer = new Composer();
+	expect(composer.blockquote("")).toBe("\n> \n");
+});
+
+// Code block tests
+
+const expectedCodeTemplate = `
+\`\`\`javascript [#example-code .syntax-highlighted .p-4 aria-label="Example code"]
+function hello() {
+	console.log("Hello, world!");
+}
+\`\`\`
+`;
+
+test("Code block with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.code('function hello() {\n\tconsole.log("Hello, world!");\n}', {
+			id: "example-code",
+			language: "javascript",
+			classNames: ["syntax-highlighted", "p-4"],
+			attrs: [{ name: "aria-label", value: "Example code" }],
+		}),
+	).toBe(expectedCodeTemplate);
+});
+
+const expectedCodeSimple = `
+\`\`\`
+const x = 42;
+\`\`\`
+`;
+
+test("Simple code block", () => {
+	const composer = new Composer();
+	expect(composer.code("const x = 42;")).toBe(expectedCodeSimple);
+});
+
+const expectedCodeWithLanguage = `
+\`\`\`python
+def greet():
+	print("Hello!")
+\`\`\`
+`;
+
+test("Code block with language", () => {
+	const composer = new Composer();
+	expect(
+		composer.code('def greet():\n\tprint("Hello!")', { language: "python" }),
+	).toBe(expectedCodeWithLanguage);
+});
+
+const expectedMultilineCode = `
+\`\`\`javascript [#multi .mb-4 aria-label="Multiline example"]
+const multiply = (a, b) => {
+	return a * b;
+};
+
+const result = multiply(5, 3);
+console.log(result);
+\`\`\`
+`;
+
+test("Multiline code block with parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.code(
+			"const multiply = (a, b) => {\n\treturn a * b;\n};\n\nconst result = multiply(5, 3);\nconsole.log(result);",
+			{
+				id: "multi",
+				language: "javascript",
+				classNames: ["mb-4"],
+				attrs: [{ name: "aria-label", value: "Multiline example" }],
+			},
+		),
+	).toBe(expectedMultilineCode);
+});
+
+test("Empty code block", () => {
+	const composer = new Composer();
+	expect(composer.code("")).toBe("\n```\n\n```\n");
+});
+
+// Horizontal rule tests
+
+const expectedHorizontalRuleDefault = `
+***
+`;
+
+test("Default horizontal rule", () => {
+	const composer = new Composer();
+	expect(composer.hr()).toBe(expectedHorizontalRuleDefault);
+});
+
+const expectedHorizontalRuleDashes = `
+---
+`;
+
+test("Horizontal rule with slide delimiter setting", () => {
+	const composer = new Composer({
+		slideDelimiter: "***",
+	});
+	expect(composer.hr()).toBe(expectedHorizontalRuleDashes);
+});
+
+// Division start tests
+
+const expectedDivStartTemplate = `
+::: [#container .flex .gap-4 aria-label="Main container" {$ name email $}]
+`;
+
+test("Division start with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.divStart({
+			id: "container",
+			classNames: ["flex", "gap-4"],
+			attrs: [{ name: "aria-label", value: "Main container" }],
+			bind: ["name", "email"],
+		}),
+	).toBe(expectedDivStartTemplate);
+});
+
+const expectedDivStartSimple = `
+:::
+`;
+
+test("Simple division start", () => {
+	const composer = new Composer();
+	expect(composer.divStart()).toBe(expectedDivStartSimple);
+});
+
+const expectedDivStartOnlyAttrs = `
+::: [#sidebar .w-64 aria-label="Sidebar"]
+`;
+
+test("Division start with only attributes", () => {
+	const composer = new Composer();
+	expect(
+		composer.divStart({
+			id: "sidebar",
+			classNames: ["w-64"],
+			attrs: [{ name: "aria-label", value: "Sidebar" }],
+			bind: [],
+		}),
+	).toBe(expectedDivStartOnlyAttrs);
+});
+
+const expectedDivStartOnlyBind = `
+::: [{$ birthday $}]
+`;
+
+test("Division start with only bindings", () => {
+	const composer = new Composer();
+	expect(
+		composer.divStart({
+			bind: ["birthday"],
+		}),
+	).toBe(expectedDivStartOnlyBind);
+});
+
+test("Empty params division start", () => {
+	const composer = new Composer();
+	expect(
+		composer.divStart({
+			classNames: [],
+			attrs: [],
+			bind: [],
+		}),
+	).toBe("\n:::\n");
+});
+
+test("Division start with empty bind", () => {
+	const composer = new Composer();
+	expect(
+		composer.divStart({
+			id: "test",
+			classNames: ["test-class"],
+		}),
+	).toBe("\n::: [#test .test-class]\n");
+});
+
+// Division end test
+
+test("Division end", () => {
+	const composer = new Composer();
+	expect(composer.divEnd()).toBe("\n:::\n");
+});
