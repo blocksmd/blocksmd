@@ -1049,25 +1049,25 @@ file = FileInput(
 
 // Slide tests
 
-const expectedBasicSlide = `
+const expectedSlideBasic = `
 ---
 `;
 
 test("Basic slide with no parameters", () => {
 	const composer = new Composer();
-	expect(composer.slide()).toBe(expectedBasicSlide);
+	expect(composer.slide()).toBe(expectedSlideBasic);
 });
 
-const expectedCustomDelimiter = `
+const expectedSlideCustomDelimiter = `
 ***
 `;
 
 test("Slide with custom delimiter", () => {
 	const composer = new Composer({ slideDelimiter: "***" });
-	expect(composer.slide()).toBe(expectedCustomDelimiter);
+	expect(composer.slide()).toBe(expectedSlideCustomDelimiter);
 });
 
-const expectedJumpCondition = `
+const expectedSlideJumpCondition = `
 ---
 -> age > 18
 `;
@@ -1078,10 +1078,10 @@ test("Slide with jump condition", () => {
 		composer.slide({
 			jumpCondition: "age > 18",
 		}),
-	).toBe(expectedJumpCondition);
+	).toBe(expectedSlideJumpCondition);
 });
 
-const expectedPageProgress = `
+const expectedSlidePageProgress = `
 ---
 |> 50%
 `;
@@ -1092,10 +1092,10 @@ test("Slide with page progress", () => {
 		composer.slide({
 			pageProgress: "50%",
 		}),
-	).toBe(expectedPageProgress);
+	).toBe(expectedSlidePageProgress);
 });
 
-const expectedPost = `
+const expectedSlidePost = `
 ---
 >> post
 `;
@@ -1106,10 +1106,10 @@ test("Slide with post parameter", () => {
 		composer.slide({
 			post: true,
 		}),
-	).toBe(expectedPost);
+	).toBe(expectedSlidePost);
 });
 
-const expectedButtonAlignCenter = `
+const expectedSlideButtonAlignCenter = `
 ---
 =| center
 `;
@@ -1120,10 +1120,10 @@ test("Slide with button alignment center", () => {
 		composer.slide({
 			buttonAlign: "center",
 		}),
-	).toBe(expectedButtonAlignCenter);
+	).toBe(expectedSlideButtonAlignCenter);
 });
 
-const expectedButtonAlignEnd = `
+const expectedSlideButtonAlignEnd = `
 ---
 =| end
 `;
@@ -1134,10 +1134,10 @@ test("Slide with button alignment end", () => {
 		composer.slide({
 			buttonAlign: "end",
 		}),
-	).toBe(expectedButtonAlignEnd);
+	).toBe(expectedSlideButtonAlignEnd);
 });
 
-const expectedDisablePrevious = `
+const expectedSlideDisablePrevious = `
 ---
 << disable
 `;
@@ -1148,10 +1148,10 @@ test("Slide with disabled previous button", () => {
 		composer.slide({
 			disablePrevious: true,
 		}),
-	).toBe(expectedDisablePrevious);
+	).toBe(expectedSlideDisablePrevious);
 });
 
-const expectedMultipleParams = `
+const expectedSlideMultipleParams = `
 ---
 -> age > 18
 |> 2/5
@@ -1170,16 +1170,16 @@ test("Slide with multiple parameters", () => {
 			buttonAlign: "center",
 			disablePrevious: true,
 		}),
-	).toBe(expectedMultipleParams);
+	).toBe(expectedSlideMultipleParams);
 });
 
-const expectedEmptyParams = `
+const expectedSlideEmptyParams = `
 ---
 `;
 
 test("Slide with empty parameters object", () => {
 	const composer = new Composer();
-	expect(composer.slide({})).toBe(expectedEmptyParams);
+	expect(composer.slide({})).toBe(expectedSlideEmptyParams);
 });
 
 // Start slide tests
