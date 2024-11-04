@@ -2568,7 +2568,7 @@ export class Composer {
 	hr: () => string;
 	/**
 	 * @typedef {Object} DivParamsType
-	 * @property {Array.<string>} [bind] Vue binding expressions
+	 * @property {Array.<string>} [bind] The data to bind to this division.
 	 */
 	/**
 	 * Create a division start tag.
@@ -2601,7 +2601,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * Vue binding expressions
+			 * The data to bind to this division.
 			 */
 			bind?: Array<string>;
 		},
@@ -2645,7 +2645,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * Vue binding expressions
+			 * The data to bind to this division.
 			 */
 			bind?: Array<string>;
 		},

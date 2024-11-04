@@ -1334,7 +1334,7 @@ class Composer {
 
 	/**
 	 * @typedef {Object} DivParamsType
-	 * @property {Array.<string>} [bind] Vue binding expressions
+	 * @property {Array.<string>} [bind] The data to bind to this division.
 	 */
 
 	/**
