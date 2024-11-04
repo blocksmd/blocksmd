@@ -2570,7 +2570,7 @@ export class Composer {
 	 * Division params.
 	 *
 	 * @typedef {Object} DivParamsType
-	 * @property {Array.<string>} [bind] The data to bind to the division.
+	 * @property {Array.<string>} [bind] The data to bind to the division, e.g., `["name", "email", "birthday"]`.
 	 */
 	/**
 	 * Create a division start tag.
@@ -2603,7 +2603,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * The data to bind to the division.
+			 * The data to bind to the division, e.g., `["name", "email", "birthday"]`.
 			 */
 			bind?: Array<string>;
 		},
@@ -2647,7 +2647,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * The data to bind to the division.
+			 * The data to bind to the division, e.g., `["name", "email", "birthday"]`.
 			 */
 			bind?: Array<string>;
 		},
