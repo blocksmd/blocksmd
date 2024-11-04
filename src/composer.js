@@ -1385,6 +1385,21 @@ class Composer {
 		instance.template += result;
 		return result;
 	};
+
+	/**
+	 * Create a division.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType & DivParamsType} [params]
+	 * @returns {string}
+	 */
+	div = (content, params) => {
+		const instance = this;
+
+		const result = `${instance.divStart(params)}${content}${instance.divEnd()}`;
+		instance.template += result;
+		return result;
+	};
 }
 
 exports.composeSharedFieldParams = composeSharedFieldParams;

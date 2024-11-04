@@ -1604,3 +1604,109 @@ test("Division end", () => {
 	const composer = new Composer();
 	expect(composer.divEnd()).toBe("\n:::\n");
 });
+
+// Division tests
+
+const expectedDivTemplate = `
+::: [#wrapper .container .mx-auto aria-label="Content wrapper" {$ title description $}]
+This is the main content
+:::
+`;
+
+test("Division with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.div("This is the main content", {
+			id: "wrapper",
+			classNames: ["container", "mx-auto"],
+			attrs: [{ name: "aria-label", value: "Content wrapper" }],
+			bind: ["title", "description"],
+		}),
+	).toBe(expectedDivTemplate);
+});
+
+const expectedDivSimple = `
+:::
+Simple content
+:::
+`;
+
+test("Simple division", () => {
+	const composer = new Composer();
+	expect(composer.div("Simple content")).toBe(expectedDivSimple);
+});
+
+const expectedDivMultiline = `
+::: [#content .p-4]
+First line of content
+Second line of content
+Third line with more text
+:::
+`;
+
+test("Multiline division with attributes", () => {
+	const composer = new Composer();
+	expect(
+		composer.div(
+			"First line of content\nSecond line of content\nThird line with more text",
+			{
+				id: "content",
+				classNames: ["p-4"],
+			},
+		),
+	).toBe(expectedDivMultiline);
+});
+
+const expectedDivOnlyBind = `
+::: [{$ userData $}]
+User profile content
+:::
+`;
+
+test("Division with only bindings", () => {
+	const composer = new Composer();
+	expect(
+		composer.div("User profile content", {
+			bind: ["userData"],
+		}),
+	).toBe(expectedDivOnlyBind);
+});
+
+test("Empty division", () => {
+	const composer = new Composer();
+	expect(composer.div("")).toBe("\n:::\n\n:::\n");
+});
+
+const expectedDivEmptyParams = `
+:::
+Content with empty parameters
+:::
+`;
+
+test("Division with empty parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.div("Content with empty parameters", {
+			classNames: [],
+			attrs: [],
+			bind: [],
+		}),
+	).toBe(expectedDivEmptyParams);
+});
+
+const expectedDivMixedAttributes = `
+::: [#section .bg-gray-100 data-testid="test-section"]
+Content with mixed attributes
+:::
+`;
+
+test("Division with mixed attributes", () => {
+	const composer = new Composer();
+	expect(
+		composer.div("Content with mixed attributes", {
+			id: "section",
+			classNames: ["bg-gray-100"],
+			attrs: [{ name: "data-testid", value: "test-section" }],
+		}),
+	).toBe(expectedDivMixedAttributes);
+});

@@ -2612,5 +2612,43 @@ export class Composer {
 	 * @returns {string}
 	 */
 	divEnd: () => string;
+	/**
+	 * Create a division.
+	 *
+	 * @param {string} content
+	 * @param {BlockElemParamsType & DivParamsType} [params]
+	 * @returns {string}
+	 */
+	div: (
+		content: string,
+		params?: {
+			/**
+			 * The id attribute of the element.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the element.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the element.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * Vue binding expressions
+			 */
+			bind?: Array<string>;
+		},
+	) => string;
 }
 import { translations } from "./translations";
