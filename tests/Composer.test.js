@@ -1047,6 +1047,397 @@ file = FileInput(
 	).toBe(expectedFileSimple);
 });
 
+// Slide tests
+
+const expectedBasicSlide = `
+---
+`;
+
+test("Basic slide with no parameters", () => {
+	const composer = new Composer();
+	expect(composer.slide()).toBe(expectedBasicSlide);
+});
+
+const expectedCustomDelimiter = `
+***
+`;
+
+test("Slide with custom delimiter", () => {
+	const composer = new Composer({ slideDelimiter: "***" });
+	expect(composer.slide()).toBe(expectedCustomDelimiter);
+});
+
+const expectedJumpCondition = `
+---
+-> age > 18
+`;
+
+test("Slide with jump condition", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			jumpCondition: "age > 18",
+		}),
+	).toBe(expectedJumpCondition);
+});
+
+const expectedPageProgress = `
+---
+|> 50%
+`;
+
+test("Slide with page progress", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			pageProgress: "50%",
+		}),
+	).toBe(expectedPageProgress);
+});
+
+const expectedPost = `
+---
+>> post
+`;
+
+test("Slide with post parameter", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			post: true,
+		}),
+	).toBe(expectedPost);
+});
+
+const expectedButtonAlignCenter = `
+---
+=| center
+`;
+
+test("Slide with button alignment center", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			buttonAlign: "center",
+		}),
+	).toBe(expectedButtonAlignCenter);
+});
+
+const expectedButtonAlignEnd = `
+---
+=| end
+`;
+
+test("Slide with button alignment end", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			buttonAlign: "end",
+		}),
+	).toBe(expectedButtonAlignEnd);
+});
+
+const expectedDisablePrevious = `
+---
+<< disable
+`;
+
+test("Slide with disabled previous button", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			disablePrevious: true,
+		}),
+	).toBe(expectedDisablePrevious);
+});
+
+const expectedMultipleParams = `
+---
+-> age > 18
+|> 2/5
+>> post
+=| center
+<< disable
+`;
+
+test("Slide with multiple parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.slide({
+			jumpCondition: "age > 18",
+			pageProgress: "2/5",
+			post: true,
+			buttonAlign: "center",
+			disablePrevious: true,
+		}),
+	).toBe(expectedMultipleParams);
+});
+
+const expectedEmptyParams = `
+---
+`;
+
+test("Slide with empty parameters object", () => {
+	const composer = new Composer();
+	expect(composer.slide({})).toBe(expectedEmptyParams);
+});
+
+// Start slide tests
+
+const expectedStartSlideBasic = `
+---
+-> start
+`;
+
+test("Basic start slide with no parameters", () => {
+	const composer = new Composer();
+	expect(composer.startSlide()).toBe(expectedStartSlideBasic);
+});
+
+const expectedStartSlideCustomText = `
+---
+-> start -> Get Started
+`;
+
+test("Start slide with custom button text", () => {
+	const composer = new Composer();
+	expect(
+		composer.startSlide({
+			buttonText: "Get Started",
+		}),
+	).toBe(expectedStartSlideCustomText);
+});
+
+const expectedStartSlideButtonAlignCenter = `
+---
+-> start
+=| center
+`;
+
+test("Start slide with center button alignment", () => {
+	const composer = new Composer();
+	expect(
+		composer.startSlide({
+			buttonAlign: "center",
+		}),
+	).toBe(expectedStartSlideButtonAlignCenter);
+});
+
+const expectedStartSlideButtonAlignEnd = `
+---
+-> start
+=| end
+`;
+
+test("Start slide with end button alignment", () => {
+	const composer = new Composer();
+	expect(
+		composer.startSlide({
+			buttonAlign: "end",
+		}),
+	).toBe(expectedStartSlideButtonAlignEnd);
+});
+
+const expectedStartSlideAllParams = `
+---
+-> start -> Begin Here
+=| center
+`;
+
+test("Start slide with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.startSlide({
+			buttonText: "Begin Here",
+			buttonAlign: "center",
+		}),
+	).toBe(expectedStartSlideAllParams);
+});
+
+const expectedStartSlideEmptyParams = `
+---
+-> start
+`;
+
+test("Start slide with empty parameters object", () => {
+	const composer = new Composer();
+	expect(composer.startSlide({})).toBe(expectedStartSlideEmptyParams);
+});
+
+const expectedStartSlideCustomDelimiter = `
+***
+-> start -> Custom Start
+=| end
+`;
+
+test("Start slide with custom delimiter", () => {
+	const composer = new Composer({ slideDelimiter: "***" });
+	expect(
+		composer.startSlide({
+			buttonText: "Custom Start",
+			buttonAlign: "end",
+		}),
+	).toBe(expectedStartSlideCustomDelimiter);
+});
+
+// End slide tests
+
+const expectedEndSlideBasic = `
+---
+-> end
+`;
+
+test("Basic end slide with no parameters", () => {
+	const composer = new Composer();
+	expect(composer.endSlide()).toBe(expectedEndSlideBasic);
+});
+
+const expectedEndSlideRedirect = `
+---
+-> end -> https://example.com/thank-you
+`;
+
+test("End slide with redirect URL", () => {
+	const composer = new Composer();
+	expect(
+		composer.endSlide({
+			redirectUrl: "https://example.com/thank-you",
+		}),
+	).toBe(expectedEndSlideRedirect);
+});
+
+const expectedEndSlideEmptyParams = `
+---
+-> end
+`;
+
+test("End slide with empty parameters object", () => {
+	const composer = new Composer();
+	expect(composer.endSlide({})).toBe(expectedEndSlideEmptyParams);
+});
+
+const expectedEndSlideCustomDelimiter = `
+***
+-> end -> https://example.com/finish
+`;
+
+test("End slide with custom delimiter", () => {
+	const composer = new Composer({ slideDelimiter: "***" });
+	expect(
+		composer.endSlide({
+			redirectUrl: "https://example.com/finish",
+		}),
+	).toBe(expectedEndSlideCustomDelimiter);
+});
+
+// Data-block tests
+
+const expectedDataBlockTemplate = `
+\`\`\`data
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john@example.com"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane@example.com"
+    }
+  ],
+  "metadata": {
+    "total": 2,
+    "page": 1
+  }
+}
+\`\`\`
+`;
+
+test("Data block with complex nested data", () => {
+	const composer = new Composer();
+	const data = {
+		users: [
+			{
+				id: 1,
+				name: "John Doe",
+				email: "john@example.com",
+			},
+			{
+				id: 2,
+				name: "Jane Smith",
+				email: "jane@example.com",
+			},
+		],
+		metadata: {
+			total: 2,
+			page: 1,
+		},
+	};
+	expect(composer.dataBlock(data)).toBe(expectedDataBlockTemplate);
+});
+
+const expectedSimpleDataBlock = `
+\`\`\`data
+{
+  "key": "value",
+  "number": 42,
+  "boolean": true
+}
+\`\`\`
+`;
+
+test("Data block with simple flat data", () => {
+	const composer = new Composer();
+	const data = {
+		key: "value",
+		number: 42,
+		boolean: true,
+	};
+	expect(composer.dataBlock(data)).toBe(expectedSimpleDataBlock);
+});
+
+const expectedEmptyDataBlock = `
+\`\`\`data
+{}
+\`\`\`
+`;
+
+test("Data block with empty object", () => {
+	const composer = new Composer();
+	const data = {};
+	expect(composer.dataBlock(data)).toBe(expectedEmptyDataBlock);
+});
+
+const expectedArrayDataBlock = `
+\`\`\`data
+[
+  "first",
+  "second",
+  "third"
+]
+\`\`\`
+`;
+
+test("Data block with array data", () => {
+	const composer = new Composer();
+	const data = ["first", "second", "third"];
+	expect(composer.dataBlock(data)).toBe(expectedArrayDataBlock);
+});
+
+const expectedNullDataBlock = `
+\`\`\`data
+null
+\`\`\`
+`;
+
+test("Data block with null data", () => {
+	const composer = new Composer();
+	const data = null;
+	expect(composer.dataBlock(data)).toBe(expectedNullDataBlock);
+});
+
 // Free-form test
 
 const expectedFreeTemplate = `

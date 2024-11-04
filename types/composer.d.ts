@@ -2172,6 +2172,92 @@ export class Composer {
 		},
 	) => string;
 	/**
+	 * Slide params.
+	 *
+	 * @typedef {Object} SlideParamsType
+	 * @property {string} [jumpCondition] Logic jump condition that must be `true` for slide to be shown.
+	 * @property {string} [pageProgress] Progress indicator shown on top (e.g. `"50%"` or `"1/2"`).
+	 * @property {true} [post] If set, posts form data up to this slide when going to the next one.
+	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
+	 * @property {true} [disablePrevious] If set, disables the previous button.
+	 */
+	/**
+	 * Create a slide.
+	 *
+	 * @param {SlideParamsType} [params]
+	 * @returns {string}
+	 */
+	slide: (params?: {
+		/**
+		 * Logic jump condition that must be `true` for slide to be shown.
+		 */
+		jumpCondition?: string;
+		/**
+		 * Progress indicator shown on top (e.g. `"50%"` or `"1/2"`).
+		 */
+		pageProgress?: string;
+		/**
+		 * If set, posts form data up to this slide when going to the next one.
+		 */
+		post?: true;
+		/**
+		 * Alignment of the slide action button.
+		 */
+		buttonAlign?: "center" | "end";
+		/**
+		 * If set, disables the previous button.
+		 */
+		disablePrevious?: true;
+	}) => string;
+	/**
+	 * Start slide params.
+	 *
+	 * @typedef {Object} StartSlideParamsType
+	 * @property {string} [buttonText] Custom text for the start button.
+	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
+	 */
+	/**
+	 * Create a start slide.
+	 *
+	 * @param {StartSlideParamsType} [params]
+	 * @returns {string}
+	 */
+	startSlide: (params?: {
+		/**
+		 * Custom text for the start button.
+		 */
+		buttonText?: string;
+		/**
+		 * Alignment of the slide action button.
+		 */
+		buttonAlign?: "center" | "end";
+	}) => string;
+	/**
+	 * End slide params.
+	 *
+	 * @typedef {Object} EndSlideParamsType
+	 * @property {string} [redirectUrl] URL to redirect to from the end slide.
+	 */
+	/**
+	 * Create an end slide.
+	 *
+	 * @param {EndSlideParamsType} [params]
+	 * @returns {string}
+	 */
+	endSlide: (params?: {
+		/**
+		 * URL to redirect to from the end slide.
+		 */
+		redirectUrl?: string;
+	}) => string;
+	/**
+	 * Create a data-block.
+	 *
+	 * @param {Object} data
+	 * @returns {string}
+	 */
+	dataBlock: (data: any) => string;
+	/**
 	 * Create free-form content.
 	 *
 	 * @param {string} content

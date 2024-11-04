@@ -1034,6 +1034,130 @@ class Composer {
 	};
 
 	/**
+	 * Slide params.
+	 *
+	 * @typedef {Object} SlideParamsType
+	 * @property {string} [jumpCondition] Logic jump condition that must be `true` for slide to be shown.
+	 * @property {string} [pageProgress] Progress indicator shown on top (e.g. `"50%"` or `"1/2"`).
+	 * @property {true} [post] If set, posts form data up to this slide when going to the next one.
+	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
+	 * @property {true} [disablePrevious] If set, disables the previous button.
+	 */
+
+	/**
+	 * Create a slide.
+	 *
+	 * @param {SlideParamsType} [params]
+	 * @returns {string}
+	 */
+	slide = (params) => {
+		var instance = this;
+
+		if (!params) params = {};
+		var templateChunks = [];
+
+		// Add the slide and params
+		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (params["jumpCondition"] !== undefined)
+			templateChunks.push(`-> ${params["jumpCondition"]}`);
+		if (params["pageProgress"] !== undefined)
+			templateChunks.push(`|> ${params["pageProgress"]}`);
+		if (params["post"] !== undefined) templateChunks.push(">> post");
+		if (params["buttonAlign"] !== undefined)
+			templateChunks.push(`=| ${params["buttonAlign"]}`);
+		if (params["disablePrevious"] !== undefined)
+			templateChunks.push("<< disable");
+
+		// Create the result, add it to the template and return
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Start slide params.
+	 *
+	 * @typedef {Object} StartSlideParamsType
+	 * @property {string} [buttonText] Custom text for the start button.
+	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
+	 */
+
+	/**
+	 * Create a start slide.
+	 *
+	 * @param {StartSlideParamsType} [params]
+	 * @returns {string}
+	 */
+	startSlide = (params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const templateChunks = [];
+
+		// Add the slide and params
+		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (params["buttonText"] !== undefined) {
+			templateChunks.push(`-> start -> ${params["buttonText"]}`);
+		} else {
+			templateChunks.push("-> start");
+		}
+		if (params["buttonAlign"] !== undefined)
+			templateChunks.push(`=| ${params["buttonAlign"]}`);
+
+		// Create the result, add it to the template and return
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * End slide params.
+	 *
+	 * @typedef {Object} EndSlideParamsType
+	 * @property {string} [redirectUrl] URL to redirect to from the end slide.
+	 */
+
+	/**
+	 * Create an end slide.
+	 *
+	 * @param {EndSlideParamsType} [params]
+	 * @returns {string}
+	 */
+	endSlide = (params) => {
+		const instance = this;
+
+		if (!params) params = {};
+		const templateChunks = [];
+
+		// Add the slide and params
+		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (params["redirectUrl"] !== undefined) {
+			templateChunks.push(`-> end -> ${params["redirectUrl"]}`);
+		} else {
+			templateChunks.push("-> end");
+		}
+
+		// Create the result, add it to the template and return
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Create a data-block.
+	 *
+	 * @param {Object} data
+	 * @returns {string}
+	 */
+	dataBlock = (data) => {
+		const instance = this;
+
+		const result = `\n\`\`\`data\n${JSON.stringify(data, null, 2)}\n\`\`\`\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
 	 * Create free-form content.
 	 *
 	 * @param {string} content
