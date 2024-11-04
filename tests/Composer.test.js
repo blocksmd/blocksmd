@@ -1,11 +1,131 @@
 ("use strict");
 
 const { Composer } = require("../src/composer");
+const { getDefaultSettings } = require("../src/settings-parse");
+
+// Constructor test
+
+const allSettings = {
+	autofocus: "all-slides",
+	accent: "#FF0000",
+	accentForeground: "#FFFFFF",
+	backdropOpacity: "0.5",
+	backgroundColor: "#F0F0F0",
+	backgroundImage: "url(bg.jpg)",
+	blocksmdBranding: "hide",
+	brand: "![Logo](logo.png)",
+	color: "#000000",
+	colorScheme: "dark",
+	colorSchemeScope: "isolate",
+	colorSchemeToggle: "show",
+	cssPrefix: "custom-",
+	cta: "[Click Here](https://example.com)",
+	dir: "rtl",
+	favicon: "favicon.ico",
+	fieldSize: "sm",
+	fontFamily: "Arial, sans-serif",
+	fontImportUrl: "https://fonts.googleapis.com/css2?family=Open+Sans",
+	fontSize: "sm",
+	formDelimiter: "|",
+	footer: "hide",
+	getFormat: "json",
+	getObjectsName: "data",
+	getUrl: "https://api.example.com/data",
+	header: "hide",
+	headings: "anchored",
+	id: "form-1",
+	labelStyle: "classic",
+	localization: "en",
+	metaAuthor: "John Doe",
+	metaDescription: "A test form",
+	metaImage: "og-image.jpg",
+	metaKeywords: "test, form",
+	metaType: "website",
+	metaUrl: "https://example.com",
+	page: "form-slides",
+	pageProgress: "hide",
+	postSheetName: "Responses",
+	postUrl: "https://api.example.com/submit",
+	rounded: "pill",
+	slideControls: "hide",
+	slideDelimiter: "---",
+	title: "Test Form",
+	verticalAlignment: "start",
+};
+
+const expectedTemplate = `
+#! autofocus = all-slides
+#! accent = #FF0000
+#! accent-foreground = #FFFFFF
+#! backdrop-opacity = 0.5
+#! background-color = #F0F0F0
+#! background-image = url(bg.jpg)
+#! blocksmd-branding = hide
+#! brand = ![Logo](logo.png)
+#! color = #000000
+#! color-scheme = dark
+#! color-scheme-scope = isolate
+#! color-scheme-toggle = show
+#! css-prefix = custom-
+#! cta = [Click Here](https://example.com)
+#! dir = rtl
+#! favicon = favicon.ico
+#! field-size = sm
+#! font-family = Arial, sans-serif
+#! font-import-url = https://fonts.googleapis.com/css2?family=Open+Sans
+#! font-size = sm
+#! form-delimiter = |
+#! footer = hide
+#! get-format = json
+#! get-objects-name = data
+#! get-url = https://api.example.com/data
+#! header = hide
+#! headings = anchored
+#! id = form-1
+#! label-style = classic
+#! localization = en
+#! meta-author = John Doe
+#! meta-description = A test form
+#! meta-image = og-image.jpg
+#! meta-keywords = test, form
+#! meta-type = website
+#! meta-url = https://example.com
+#! page = form-slides
+#! page-progress = hide
+#! post-sheet-name = Responses
+#! post-url = https://api.example.com/submit
+#! rounded = pill
+#! slide-controls = hide
+#! slide-delimiter = ---
+#! title = Test Form
+#! vertical-alignment = start
+`;
+
+test("Constructor with all settings", () => {
+	// Template
+	const composer = new Composer(allSettings);
+	expect(composer.constructor(allSettings)).toBe(expectedTemplate);
+
+	// Settings
+	const defaultSettings = {};
+	for (const [name, value] of Object.entries(getDefaultSettings())) {
+		defaultSettings[
+			name.replace(/-([a-z])/g, (match, letter) => letter.toUpperCase())
+		] = value;
+	}
+	expect(composer.settings).toEqual({
+		...defaultSettings,
+		...allSettings,
+	});
+
+	// Passed settings
+	expect(composer.passedSettings).toEqual(allSettings);
+});
 
 // Text input test
 
 const expectedTextTemplate = `
-[#text-field .col-6 aria-label="Text Input"]
+[#text-field .col-6 .xs:col-8 aria-label="Text Input"]
 text* = TextInput(
 	| question = Text
 	| description = Enter some text
@@ -25,8 +145,9 @@ text* = TextInput(
 test("Text input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.textInput("text", true, {
+		composer.textInput("text", {
 			question: "Text",
+			required: true,
 			description: "Enter some text",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -34,7 +155,7 @@ test("Text input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "text-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Text Input" }],
 			placeholder: "Placeholder",
 			multiline: true,
@@ -48,7 +169,7 @@ test("Text input with all parameters", () => {
 // Email input test
 
 const expectedEmailTemplate = `
-[#email-field .col-6 aria-label="Email input"]
+[#email-field .col-6 .xs:col-8 aria-label="Email input"]
 email* = EmailInput(
 	| question = Email Address
 	| description = Enter your email
@@ -67,8 +188,9 @@ email* = EmailInput(
 test("Email input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.emailInput("email", true, {
+		composer.emailInput("email", {
 			question: "Email Address",
+			required: true,
 			description: "Enter your email",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -76,7 +198,7 @@ test("Email input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "email-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Email input" }],
 			placeholder: "example@domain.com",
 			maxlength: 100,
@@ -89,7 +211,7 @@ test("Email input with all parameters", () => {
 // URL input test
 
 const expectedURLTemplate = `
-[#url-field .col-6 aria-label="URL input"]
+[#url-field .col-6 .xs:col-8 aria-label="URL input"]
 website* = URLInput(
 	| question = Website URL
 	| description = Enter your website
@@ -108,8 +230,9 @@ website* = URLInput(
 test("URL input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.urlInput("website", true, {
+		composer.urlInput("website", {
 			question: "Website URL",
+			required: true,
 			description: "Enter your website",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -117,7 +240,7 @@ test("URL input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "url-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "URL input" }],
 			placeholder: "https://example.com",
 			maxlength: 200,
@@ -130,7 +253,7 @@ test("URL input with all parameters", () => {
 // Telephone input test
 
 const expectedTelTemplate = `
-[#tel-field .col-6 .xs:col-6 aria-label="Phone input"]
+[#tel-field .col-6 .xs:col-8 aria-label="Phone input"]
 phone* = TelInput(
 	| question = Phone Number
 	| description = Enter your phone number
@@ -151,8 +274,9 @@ phone* = TelInput(
 test("Telephone input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.telInput("phone", true, {
+		composer.telInput("phone", {
 			question: "Phone Number",
+			required: true,
 			description: "Enter your phone number",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -160,7 +284,7 @@ test("Telephone input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "tel-field",
-			classNames: ["col-6", "xs:col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Phone input" }],
 			placeholder: "(555) 555-5555",
 			maxlength: 15,
@@ -175,7 +299,7 @@ test("Telephone input with all parameters", () => {
 // Number input test
 
 const expectedNumberTemplate = `
-[#number-field .col-6 aria-label="Number input"]
+[#number-field .col-6 .xs:col-8 aria-label="Number input"]
 amount* = NumberInput(
 	| question = Amount
 	| description = Enter the amount
@@ -197,8 +321,9 @@ amount* = NumberInput(
 test("Number input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.numberInput("amount", true, {
+		composer.numberInput("amount", {
 			question: "Amount",
+			required: true,
 			description: "Enter the amount",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -206,7 +331,7 @@ test("Number input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "number-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Number input" }],
 			placeholder: "Enter amount",
 			min: 0,
@@ -222,7 +347,7 @@ test("Number input with all parameters", () => {
 // Select box test
 
 const expectedSelectTemplate = `
-[#select-field .col-6 aria-label="Select input"]
+[#select-field .col-6 .xs:col-8 aria-label="Select input"]
 country* = SelectBox(
 	| question = Select Country
 	| description = Choose your country
@@ -232,7 +357,7 @@ country* = SelectBox(
 	| disabled
 	| autofocus
 	| placeholder = Choose a country
-	| options = "us" United States, "ca" Canada, "gb" United Kingdom
+	| options = "us" United States, Canada, "gb" United Kingdom
 	| selected = us
 )
 `;
@@ -240,8 +365,9 @@ country* = SelectBox(
 test("Select box with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.selectBox("country", true, {
+		composer.selectBox("country", {
 			question: "Select Country",
+			required: true,
 			description: "Choose your country",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -249,12 +375,12 @@ test("Select box with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "select-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Select input" }],
 			placeholder: "Choose a country",
 			options: [
 				{ label: "United States", value: "us" },
-				{ label: "Canada", value: "ca" },
+				"Canada",
 				{ label: "United Kingdom", value: "gb" },
 			],
 			selected: "us",
@@ -265,7 +391,7 @@ test("Select box with all parameters", () => {
 // Select box with simple string options
 
 const expectedSelectSimpleTemplate = `
-[#select-simple .col-6]
+[#select-simple .col-6 .xs:col-8]
 country* = SelectBox(
 	| question = Simple Select
 	| description = Choose an option
@@ -278,11 +404,12 @@ country* = SelectBox(
 test("Select box with simple string options", () => {
 	const composer = new Composer();
 	expect(
-		composer.selectBox("country", true, {
+		composer.selectBox("country", {
 			question: "Simple Select",
+			required: true,
 			description: "Choose an option",
 			id: "select-simple",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			placeholder: "Select country",
 			options: ["USA", "Canada", "UK"],
 			selected: "USA",
@@ -293,7 +420,7 @@ test("Select box with simple string options", () => {
 // Choice input test
 
 const expectedChoiceTemplate = `
-[#choice-field .col-6 aria-label="Choice input"]
+[#choice-field .col-6 .xs:col-8 aria-label="Choice input"]
 colors* = ChoiceInput(
 	| question = Select Colors
 	| description = Choose your favorite colors
@@ -312,8 +439,9 @@ colors* = ChoiceInput(
 test("Choice input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.choiceInput("colors", true, {
+		composer.choiceInput("colors", {
 			question: "Select Colors",
+			required: true,
 			description: "Choose your favorite colors",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -321,7 +449,7 @@ test("Choice input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "choice-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Choice input" }],
 			choices: [
 				{ label: "Red", value: "red" },
@@ -338,7 +466,7 @@ test("Choice input with all parameters", () => {
 // Choice input with simple string choices
 
 const expectedChoiceSimpleTemplate = `
-[#choice-simple .col-6]
+[#choice-simple .col-6 .xs:col-8]
 colors* = ChoiceInput(
 	| question = Simple Choice
 	| description = Pick colors
@@ -351,11 +479,12 @@ colors* = ChoiceInput(
 test("Choice input with simple string choices", () => {
 	const composer = new Composer();
 	expect(
-		composer.choiceInput("colors", true, {
+		composer.choiceInput("colors", {
 			question: "Simple Choice",
+			required: true,
 			description: "Pick colors",
 			id: "choice-simple",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			choices: ["Red", "Blue", "Green"],
 			multiple: true,
 			checked: ["Red", "Blue"],
@@ -366,7 +495,7 @@ test("Choice input with simple string choices", () => {
 // Picture choice test
 
 const expectedPictureTemplate = `
-[#picture-field .col-6 aria-label="Picture input" data-bmd-picture="Picture"]
+[#picture-field .col-6 .xs:col-8 aria-label="Picture input"]
 theme* = PictureChoice(
 	| question = Select Theme
 	| description = Choose your theme
@@ -386,8 +515,9 @@ theme* = PictureChoice(
 test("Picture choice with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.pictureChoice("theme", true, {
+		composer.pictureChoice("theme", {
 			question: "Select Theme",
+			required: true,
 			description: "Choose your theme",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -395,11 +525,8 @@ test("Picture choice with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "picture-field",
-			classNames: ["col-6"],
-			attrs: [
-				{ name: "aria-label", value: "Picture input" },
-				{ name: "data-bmd-picture", value: "Picture" },
-			],
+			classNames: ["col-6", "xs:col-8"],
+			attrs: [{ name: "aria-label", value: "Picture input" }],
 			choices: [
 				{ label: "Light", value: "light", image: "/light.png" },
 				{ label: "Dark", value: "dark", image: "/dark.png" },
@@ -415,7 +542,7 @@ test("Picture choice with all parameters", () => {
 // Picture choice with simple string choices and images
 
 const expectedPictureSimpleTemplate = `
-[#picture-simple .col-6]
+[#picture-simple .col-6 .xs:col-8]
 theme* = PictureChoice(
 	| question = Simple Picture Choice
 	| description = Pick a theme
@@ -427,11 +554,12 @@ theme* = PictureChoice(
 test("Picture choice with simple string choices and images", () => {
 	const composer = new Composer();
 	expect(
-		composer.pictureChoice("theme", true, {
+		composer.pictureChoice("theme", {
 			question: "Simple Picture Choice",
+			required: true,
 			description: "Pick a theme",
 			id: "picture-simple",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			choices: [
 				{ label: "Light", image: "/themes/light.jpg" },
 				{ label: "Dark", image: "/themes/dark.jpg" },
@@ -444,7 +572,7 @@ test("Picture choice with simple string choices and images", () => {
 // Rating input test
 
 const expectedRatingTemplate = `
-[#rating-field .col-6 aria-label="Rating input"]
+[#rating-field .col-6 .xs:col-8 aria-label="Rating input"]
 satisfaction* = RatingInput(
 	| question = Rate your satisfaction
 	| description = How satisfied are you?
@@ -463,8 +591,9 @@ satisfaction* = RatingInput(
 test("Rating input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.ratingInput("satisfaction", true, {
+		composer.ratingInput("satisfaction", {
 			question: "Rate your satisfaction",
+			required: true,
 			description: "How satisfied are you?",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -472,7 +601,7 @@ test("Rating input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "rating-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Rating input" }],
 			outOf: 10,
 			icon: "heart",
@@ -485,7 +614,7 @@ test("Rating input with all parameters", () => {
 // Opinion scale test
 
 const expectedOpinionTemplate = `
-[#opinion-field .col-6 aria-label="Opinion input"]
+[#opinion-field .col-6 .xs:col-8 aria-label="Opinion input"]
 agreement* = OpinionScale(
 	| question = Rate your agreement
 	| description = How much do you agree?
@@ -507,8 +636,9 @@ agreement* = OpinionScale(
 test("Opinion scale with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.opinionScale("agreement", true, {
+		composer.opinionScale("agreement", {
 			question: "Rate your agreement",
+			required: true,
 			description: "How much do you agree?",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -516,7 +646,7 @@ test("Opinion scale with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "opinion-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Opinion input" }],
 			startAt: 1,
 			outOf: 7,
@@ -532,7 +662,7 @@ test("Opinion scale with all parameters", () => {
 // Datetime input test
 
 const expectedDatetimeTemplate = `
-[#datetime-field .col-6 aria-label="Datetime input"]
+[#datetime-field .col-6 .xs:col-8 aria-label="Datetime input"]
 meeting* = DatetimeInput(
 	| question = Meeting Time
 	| description = Select meeting date and time
@@ -552,8 +682,9 @@ meeting* = DatetimeInput(
 test("Datetime input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.datetimeInput("meeting", true, {
+		composer.datetimeInput("meeting", {
 			question: "Meeting Time",
+			required: true,
 			description: "Select meeting date and time",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -561,7 +692,7 @@ test("Datetime input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "datetime-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Datetime input" }],
 			placeholder: "Select date and time",
 			min: "2024-01-01T09:00",
@@ -575,7 +706,7 @@ test("Datetime input with all parameters", () => {
 // Date input test
 
 const expectedDateTemplate = `
-[#date-field .col-6 aria-label="Date input"]
+[#date-field .col-6 .xs:col-8 aria-label="Date input"]
 birthday* = DateInput(
 	| question = Birth Date
 	| description = Enter your birth date
@@ -595,8 +726,9 @@ birthday* = DateInput(
 test("Date input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.dateInput("birthday", true, {
+		composer.dateInput("birthday", {
 			question: "Birth Date",
+			required: true,
 			description: "Enter your birth date",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -604,7 +736,7 @@ test("Date input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "date-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Date input" }],
 			placeholder: "Select date",
 			min: "1900-01-01",
@@ -618,7 +750,7 @@ test("Date input with all parameters", () => {
 // Time input test
 
 const expectedTimeTemplate = `
-[#time-field .col-6 aria-label="Time input"]
+[#time-field .col-6 .xs:col-8 aria-label="Time input"]
 startTime* = TimeInput(
 	| question = Start Time
 	| description = Select start time
@@ -638,8 +770,9 @@ startTime* = TimeInput(
 test("Time input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.timeInput("startTime", true, {
+		composer.timeInput("startTime", {
 			question: "Start Time",
+			required: true,
 			description: "Select start time",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -647,7 +780,7 @@ test("Time input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "time-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "Time input" }],
 			placeholder: "Select time",
 			min: "09:00",
@@ -661,7 +794,7 @@ test("Time input with all parameters", () => {
 // File input test
 
 const expectedFileTemplate = `
-[#file-field .col-6 aria-label="File input"]
+[#file-field .col-6 .xs:col-8 aria-label="File input"]
 attachment* = FileInput(
 	| question = Upload File
 	| description = Upload your document
@@ -678,8 +811,9 @@ attachment* = FileInput(
 test("File input with all parameters", () => {
 	const composer = new Composer();
 	expect(
-		composer.fileInput("attachment", true, {
+		composer.fileInput("attachment", {
 			question: "Upload File",
+			required: true,
 			description: "Upload your document",
 			fieldSize: "sm",
 			labelStyle: "classic",
@@ -687,7 +821,7 @@ test("File input with all parameters", () => {
 			disabled: true,
 			autofocus: true,
 			id: "file-field",
-			classNames: ["col-6"],
+			classNames: ["col-6", "xs:col-8"],
 			attrs: [{ name: "aria-label", value: "File input" }],
 			sizeLimit: 5,
 			imageOnly: true,
@@ -707,7 +841,7 @@ text = TextInput(
 )
 `;
 	expect(
-		composer.textInput("text", false, {
+		composer.textInput("text", {
 			question: "Text",
 			description: "Enter text",
 		}),
@@ -721,7 +855,7 @@ email = EmailInput(
 )
 `;
 	expect(
-		composer.emailInput("email", false, {
+		composer.emailInput("email", {
 			question: "Email",
 			description: "Enter email",
 		}),
@@ -735,7 +869,7 @@ url = URLInput(
 )
 `;
 	expect(
-		composer.urlInput("url", false, {
+		composer.urlInput("url", {
 			question: "Website",
 			description: "Enter website",
 		}),
@@ -749,7 +883,7 @@ tel = TelInput(
 )
 `;
 	expect(
-		composer.telInput("tel", false, {
+		composer.telInput("tel", {
 			question: "Phone",
 			description: "Enter phone",
 		}),
@@ -763,7 +897,7 @@ number = NumberInput(
 )
 `;
 	expect(
-		composer.numberInput("number", false, {
+		composer.numberInput("number", {
 			question: "Amount",
 			description: "Enter amount",
 		}),
@@ -778,7 +912,7 @@ select = SelectBox(
 )
 `;
 	expect(
-		composer.selectBox("select", false, {
+		composer.selectBox("select", {
 			question: "Select",
 			description: "Make selection",
 			options: ["Option 1", "Option 2"],
@@ -794,7 +928,7 @@ choice = ChoiceInput(
 )
 `;
 	expect(
-		composer.choiceInput("choice", false, {
+		composer.choiceInput("choice", {
 			question: "Choose",
 			description: "Make choice",
 			choices: ["Choice 1", "Choice 2"],
@@ -810,7 +944,7 @@ picture = PictureChoice(
 )
 `;
 	expect(
-		composer.pictureChoice("picture", false, {
+		composer.pictureChoice("picture", {
 			question: "Select Picture",
 			description: "Choose picture",
 			choices: [
@@ -829,7 +963,7 @@ rating = RatingInput(
 )
 `;
 	expect(
-		composer.ratingInput("rating", false, {
+		composer.ratingInput("rating", {
 			question: "Rate",
 			description: "Give rating",
 			outOf: 5,
@@ -847,7 +981,7 @@ opinion = OpinionScale(
 )
 `;
 	expect(
-		composer.opinionScale("opinion", false, {
+		composer.opinionScale("opinion", {
 			question: "Opinion",
 			description: "Share opinion",
 			outOf: 7,
@@ -864,7 +998,7 @@ datetime = DatetimeInput(
 )
 `;
 	expect(
-		composer.datetimeInput("datetime", false, {
+		composer.datetimeInput("datetime", {
 			question: "Date and Time",
 			description: "Select datetime",
 		}),
@@ -878,7 +1012,7 @@ date = DateInput(
 )
 `;
 	expect(
-		composer.dateInput("date", false, {
+		composer.dateInput("date", {
 			question: "Date",
 			description: "Select date",
 		}),
@@ -892,7 +1026,7 @@ time = TimeInput(
 )
 `;
 	expect(
-		composer.timeInput("time", false, {
+		composer.timeInput("time", {
 			question: "Time",
 			description: "Select time",
 		}),
@@ -906,7 +1040,7 @@ file = FileInput(
 )
 `;
 	expect(
-		composer.fileInput("file", false, {
+		composer.fileInput("file", {
 			question: "Upload",
 			description: "Select file",
 		}),

@@ -152,4 +152,5 @@ function getTranslation(localization, key) {
 	return translations[localization][key] || "";
 }
 
+exports.translations = translations;
 exports.getTranslation = getTranslation;
