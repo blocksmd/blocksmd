@@ -1710,7 +1710,7 @@
 }
 
 .bmd-root .bmd-form-rating-label:hover .bmd-form-rating-svg {
-	transform: scale(1.05);
+	transform: translateY(-2px);
 }
 
 .bmd-root
