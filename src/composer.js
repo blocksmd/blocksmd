@@ -1333,8 +1333,10 @@ class Composer {
 	};
 
 	/**
+	 * Division params.
+	 *
 	 * @typedef {Object} DivParamsType
-	 * @property {Array.<string>} [bind] The data to bind to this division.
+	 * @property {Array.<string>} [bind] The data to bind to the division.
 	 */
 
 	/**

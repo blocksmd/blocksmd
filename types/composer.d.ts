@@ -2567,8 +2567,10 @@ export class Composer {
 	 */
 	hr: () => string;
 	/**
+	 * Division params.
+	 *
 	 * @typedef {Object} DivParamsType
-	 * @property {Array.<string>} [bind] The data to bind to this division.
+	 * @property {Array.<string>} [bind] The data to bind to the division.
 	 */
 	/**
 	 * Create a division start tag.
@@ -2601,7 +2603,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * The data to bind to this division.
+			 * The data to bind to the division.
 			 */
 			bind?: Array<string>;
 		},
@@ -2645,7 +2647,7 @@ export class Composer {
 			}[];
 		} & {
 			/**
-			 * The data to bind to this division.
+			 * The data to bind to the division.
 			 */
 			bind?: Array<string>;
 		},
