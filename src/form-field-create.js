@@ -1043,7 +1043,7 @@ function createOpinionScaleField(
 
 /* Datetime field */
 
-const dateTimeFieldTemplate = `
+const datetimeFieldTemplate = `
 {{ startTag }}
 	<label class="bmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
@@ -1083,7 +1083,7 @@ const dateTimeFieldTemplate = `
  * @param {string} localization
  * @returns {string} datetime, date, or time input form field as HTML string
  */
-function createDateTimeField(
+function createDatetimeField(
 	name,
 	inputType,
 	required,
@@ -1150,7 +1150,7 @@ function createDateTimeField(
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
-	return nunjucks.renderString(dateTimeFieldTemplate, {
+	return nunjucks.renderString(datetimeFieldTemplate, {
 		startTag: `${startTag.slice(0, 4)} ${validationAttrs} ${startTag.slice(4)}`,
 		name: name,
 		inputId: id !== "" ? `${id}:id_${name}` : `id_${name}`,
@@ -1290,5 +1290,5 @@ exports.createSelectField = createSelectField;
 exports.createChoiceField = createChoiceField;
 exports.createRatingField = createRatingField;
 exports.createOpinionScaleField = createOpinionScaleField;
-exports.createDateTimeField = createDateTimeField;
+exports.createDatetimeField = createDatetimeField;
 exports.createFileField = createFileField;

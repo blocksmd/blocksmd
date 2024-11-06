@@ -167,7 +167,7 @@ export function createOpinionScaleField(
  * @param {string} localization
  * @returns {string} datetime, date, or time input form field as HTML string
  */
-export function createDateTimeField(
+export function createDatetimeField(
 	name: string,
 	inputType: "datetime" | "date" | "time",
 	required: boolean,

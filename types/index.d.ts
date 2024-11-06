@@ -1,62 +1,131 @@
 export class blocksmd {
 	/**
+	 * Theme for the page or form.
+	 *
+	 * @typedef {Object} ThemeType
+	 * @property {string} [accent] The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc.
+	 * @property {string} [accentForeground] The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons.
+	 * @property {string} [backgroundColor] The `background-color` of the page (must be HTML name, hex code, or RGB).
+	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB).
+	 */
+	/**
+	 * Options for the page or form.
+	 *
+	 * @typedef {Object} OptionsType
+	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
+	 * @property {Object} [getHeaders] Headers for GET requests.
+	 * @property {string} [id] Identifier for the page or form.
+	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
+	 * @property {number} [paddingInline] Padding for inline pages or forms.
+	 * @property {Object} [postData] Extra data sent with POST requests.
+	 * @property {Object} [postHeaders] Headers for POST requests.
+	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
+	 * @property {boolean} [removePaddingInline] Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
+	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `false`.
+	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
+	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
+	 * @property {ThemeType} [themeDark] Dark theme.
+	 * @property {ThemeType} [themeLight] Light theme.
+	 */
+	/**
 	 * Create an instance of the class.
 	 *
 	 * @param {string} template
 	 * @param {Document|HTMLElement} container
-	 * @param {{
-	 *   colorScheme?: "light" | "dark",
-	 *   getHeaders?: Object,
-	 *   id?: string,
-	 *   isFullPage?: boolean,
-	 *   paddingInline?: number,
-	 *   postData?: Object,
-	 *   postHeaders?: Object,
-	 *   prioritizeURLFormData?: boolean,
-	 *   removePaddingInline?: boolean,
-	 *   sanitize?: boolean,
-	 *   saveState?: boolean,
-	 *   setColorSchemeAttrsAgain?: boolean,
-	 *   themeDark?: {
-	 *     accent?: string,
-	 *     accentForeground?: string,
-	 *     backgroundColor?: string,
-	 *     color?: string
-	 *   },
-	 *   themeLight?: {
-	 *     accent?: string,
-	 *     accentForeground?: string,
-	 *     backgroundColor?: string,
-	 *     color?: string
-	 *   }
-	 * }} [options]
+	 * @param {OptionsType} options
 	 */
 	constructor(
 		template: string,
 		container: Document | HTMLElement,
-		options?: {
+		options: {
+			/**
+			 * The default or initial color scheme of the page. Default is `"light"`.
+			 */
 			colorScheme?: "light" | "dark";
+			/**
+			 * Headers for GET requests.
+			 */
 			getHeaders?: any;
+			/**
+			 * Identifier for the page or form.
+			 */
 			id?: string;
+			/**
+			 * Whether to render in full page mode. Default is `false`.
+			 */
 			isFullPage?: boolean;
+			/**
+			 * Padding for inline pages or forms.
+			 */
 			paddingInline?: number;
+			/**
+			 * Extra data sent with POST requests.
+			 */
 			postData?: any;
+			/**
+			 * Headers for POST requests.
+			 */
 			postHeaders?: any;
+			/**
+			 * Whether to prioritize URL form data. Default is `false`.
+			 */
 			prioritizeURLFormData?: boolean;
+			/**
+			 * Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
+			 */
 			removePaddingInline?: boolean;
+			/**
+			 * Whether to sanitize template. Default is `false`.
+			 */
 			sanitize?: boolean;
+			/**
+			 * Whether to save form data in local storage. Default is `true`.
+			 */
 			saveState?: boolean;
+			/**
+			 * Whether to set color scheme attributes again.
+			 */
 			setColorSchemeAttrsAgain?: boolean;
+			/**
+			 * Dark theme.
+			 */
 			themeDark?: {
+				/**
+				 * The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc.
+				 */
 				accent?: string;
+				/**
+				 * The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons.
+				 */
 				accentForeground?: string;
+				/**
+				 * The `background-color` of the page (must be HTML name, hex code, or RGB).
+				 */
 				backgroundColor?: string;
+				/**
+				 * The `color` of the text on the page (must be HTML name, hex code, or RGB).
+				 */
 				color?: string;
 			};
+			/**
+			 * Light theme.
+			 */
 			themeLight?: {
+				/**
+				 * The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc.
+				 */
 				accent?: string;
+				/**
+				 * The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons.
+				 */
 				accentForeground?: string;
+				/**
+				 * The `background-color` of the page (must be HTML name, hex code, or RGB).
+				 */
 				backgroundColor?: string;
+				/**
+				 * The `color` of the text on the page (must be HTML name, hex code, or RGB).
+				 */
 				color?: string;
 			};
 		},
@@ -280,7 +349,7 @@ export class blocksmd {
 	 *
 	 * @param {InputEvent} e
 	 */
-	dateTimeFieldOnInput: (e: InputEvent) => void;
+	datetimeFieldOnInput: (e: InputEvent) => void;
 	/**
 	 * Handle the inputs of file form fields: reset and update the wrapping
 	 * <label> depending on the file chosen.

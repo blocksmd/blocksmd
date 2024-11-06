@@ -316,5 +316,6 @@ function createCountryCallingCodeOptions(
 	return options.join("\n");
 }
 
+exports.placeholdersAndCallingCodes = placeholdersAndCallingCodes;
 exports.getPhoneNumberPlaceholder = getPhoneNumberPlaceholder;
 exports.createCountryCallingCodeOptions = createCountryCallingCodeOptions;
