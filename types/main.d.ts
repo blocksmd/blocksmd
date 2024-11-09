@@ -31,12 +31,12 @@ export class blocksmd {
 	 * Create an instance of the class.
 	 *
 	 * @param {string} template
-	 * @param {Document|HTMLElement} container
+	 * @param {Document|HTMLElement|Element} container
 	 * @param {OptionsType} options
 	 */
 	constructor(
 		template: string,
-		container: Document | HTMLElement,
+		container: Document | HTMLElement | Element,
 		options: {
 			/**
 			 * The default or initial color scheme of the page. Default is `"light"`.
@@ -156,7 +156,7 @@ export class blocksmd {
 			color: string;
 		};
 	};
-	container: Document | HTMLElement;
+	container: Element | Document | HTMLElement;
 	_template: string;
 	/**
 	 * Set the state to defaults.

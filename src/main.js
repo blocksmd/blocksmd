@@ -87,7 +87,7 @@ class blocksmd {
 	 * Create an instance of the class.
 	 *
 	 * @param {string} template
-	 * @param {Document|HTMLElement} container
+	 * @param {Document|HTMLElement|Element} container
 	 * @param {OptionsType} options
 	 */
 	constructor(template, container, options) {
