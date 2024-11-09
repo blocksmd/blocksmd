@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-("use strict");
+"use strict";
 
 const { getDefaultSettings, parseSettings } = require("../src/settings-parse");
 const fs = require("fs-extra");

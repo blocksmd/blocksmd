@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { composeSharedFieldParams } = require("../src/composer");
 

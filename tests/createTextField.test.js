@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createTextField } = require("../src/form-field-create");
 const { createCountryCallingCodeOptions } = require("../src/phone-numbers");

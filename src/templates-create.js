@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { addReservedClass } = require("./attrs-parse");
 const { parseDivs, parseBindSpans } = require("./div-span-parse");

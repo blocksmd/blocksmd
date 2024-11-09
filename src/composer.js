@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { placeholdersAndCallingCodes } = require("./phone-numbers");
 const { getDefaultSettings } = require("./settings-parse");

@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createCountryCallingCodeOptions } = require("../src/phone-numbers");
 const beautify = require("beautify");

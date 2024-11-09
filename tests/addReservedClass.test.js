@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { addReservedClass } = require("../src/attrs-parse");
 

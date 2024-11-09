@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseSlides } = require("../src/slides-parse");
 const beautify = require("beautify");

@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { Composer } = require("../src/composer");
 const { getDefaultSettings } = require("../src/settings-parse");

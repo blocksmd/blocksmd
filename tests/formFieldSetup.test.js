@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { formFieldSetup } = require("../src/form-field-create");
 

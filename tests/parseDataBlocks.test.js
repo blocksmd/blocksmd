@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseDataBlocks } = require("../src/data-blocks-parse");
 

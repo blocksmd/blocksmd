@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseColor } = require("../src/settings-parse");
 

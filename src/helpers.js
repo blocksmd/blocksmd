@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 /**
  * Given a string, check if it is a valid number.

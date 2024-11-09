@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { formFieldPattern } = require("./form-field-create");
 const { unescape } = require("./helpers");

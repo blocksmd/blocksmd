@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createSelectField } = require("../src/form-field-create");
 const beautify = require("beautify");

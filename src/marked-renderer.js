@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseElemAttrs, addReservedClass } = require("./attrs-parse");
 const {

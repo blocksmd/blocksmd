@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseDivs } = require("../src/div-span-parse");
 

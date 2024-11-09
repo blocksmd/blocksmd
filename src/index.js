@@ -5,7 +5,7 @@
  * Copyright (c) 2024 Tahmid Khan Nafee
  */
 
-("use strict");
+"use strict";
 
 const { parseDataBlocks } = require("./data-blocks-parse");
 const { isNumeric } = require("./helpers");

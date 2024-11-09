@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createStyles } = require("../src/templates-create");
 const beautify = require("beautify");

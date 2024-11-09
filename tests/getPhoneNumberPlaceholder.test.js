@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { getPhoneNumberPlaceholder } = require("../src/phone-numbers");
 

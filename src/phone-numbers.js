@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const placeholdersAndCallingCodes = {
 	AC: { placeholder: "40123", callingCode: "+247" },

@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { renderer } = require("../src/marked-renderer");
 const { createCountryCallingCodeOptions } = require("../src/phone-numbers");
