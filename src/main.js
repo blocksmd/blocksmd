@@ -2418,10 +2418,6 @@ class blocksmd {
 	_init = (isFirstInit) => {
 		const instance = this;
 
-		// Ping the server
-		if (window.location.protocol !== "file:")
-			fetch("https://blocks.md/ping/", { method: "GET" });
-
 		// Set the state to defaults
 		instance.setStateToDefaults();
 
