@@ -23,7 +23,6 @@ const createDOMPurify = require("dompurify");
 const hljs = require("highlight.js/lib/common");
 const { marked } = require("marked");
 var nunjucks = require("nunjucks");
-const { v4: uuidv4 } = require("uuid");
 
 class blocksmd {
 	options = {
@@ -36,7 +35,7 @@ class blocksmd {
 		postHeaders: {},
 		prioritizeURLFormData: false,
 		removePaddingInline: true,
-		sanitize: false,
+		sanitize: true,
 		saveState: true,
 		setColorSchemeAttrsAgain: true,
 		themeDark: {
@@ -410,6 +409,21 @@ class blocksmd {
 	};
 
 	/**
+	 * Create a random 32 characters id separated by dashes.
+	 *
+	 * @returns {string}
+	 */
+	createRandomId = () => {
+		const characters =
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		let id = "";
+		for (let i = 0; i < 32; i++) {
+			id += characters.charAt(Math.floor(Math.random() * characters.length));
+		}
+		return `${id.slice(0, 8)}-${id.slice(8, 12)}-${id.slice(12, 16)}-${id.slice(16, 20)}-${id.slice(20)}`;
+	};
+
+	/**
 	 * Get or create response id. This uniquely identifies one single form
 	 * response. The id is created on initialization (unless one already
 	 * exists), and it is removed when the user reaches the end slide.
@@ -424,7 +438,7 @@ class blocksmd {
 		}${window.location.pathname}response-id`;
 		let responseId = localStorage.getItem(localStorageKey);
 		if (!responseId) {
-			responseId = uuidv4();
+			responseId = instance.createRandomId();
 			localStorage.setItem(localStorageKey, responseId);
 		}
 		return responseId;

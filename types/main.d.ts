@@ -213,6 +213,12 @@ export class blocksmd {
 	 */
 	toggleColorScheme: (e: MouseEvent) => void;
 	/**
+	 * Create a random 32 characters id separated by dashes.
+	 *
+	 * @returns {string}
+	 */
+	createRandomId: () => string;
+	/**
 	 * Get or create response id. This uniquely identifies one single form
 	 * response. The id is created on initialization (unless one already
 	 * exists), and it is removed when the user reaches the end slide.
