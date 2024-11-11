@@ -445,6 +445,10 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid URL",
 		},
+		"restart-button": {
+			pattern: /^hide$/,
+			accepted: "hide",
+		},
 		"rounded": {
 			pattern: /^(none|pill)$/,
 			accepted: "none || pill",
@@ -454,6 +458,10 @@ function parseSettings(template) {
 			accepted: "hide",
 		},
 		"slide-delimiter": {
+			pattern: /^.*$/,
+			accepted: "valid string",
+		},
+		"submit-button-text": {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},

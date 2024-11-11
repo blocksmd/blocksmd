@@ -46,9 +46,11 @@ const allSettings = {
 	pageProgress: "hide",
 	postSheetName: "Responses",
 	postUrl: "https://api.example.com/submit",
+	restartButton: "hide",
 	rounded: "pill",
 	slideControls: "hide",
 	slideDelimiter: "---",
+	submitButtonText: "Submit",
 	title: "Test Form",
 	verticalAlignment: "start",
 };
@@ -94,9 +96,11 @@ const expectedTemplate = `
 #! page-progress = hide
 #! post-sheet-name = Responses
 #! post-url = https://api.example.com/submit
+#! restart-button = hide
 #! rounded = pill
 #! slide-controls = hide
 #! slide-delimiter = ---
+#! submit-button-text = Submit
 #! title = Test Form
 #! vertical-alignment = start
 `;

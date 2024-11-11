@@ -127,9 +127,11 @@ const template3 = `
 	#! page-progress = hide
 #! post-sheet-name = Sheet2
 		#! post-url = https://example.com/api/examples/create/
+#! restart-button = hide
 		#! rounded = pill
 			#! slide-controls = hide
 	#! slide-delimiter = ***
+			#! submit-button-text = Submit
 #! title = Title
 #! vertical-alignment = start
 
@@ -166,9 +168,11 @@ const expectedSettings3 = {
 	"page-progress": "hide",
 	"post-sheet-name": "Sheet2",
 	"post-url": "https://example.com/api/examples/create/",
+	"restart-button": "hide",
 	"rounded": "pill",
 	"slide-controls": "hide",
 	"slide-delimiter": "***",
+	"submit-button-text": "Submit",
 	"title": "Title",
 	"vertical-alignment": "start",
 };

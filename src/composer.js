@@ -108,9 +108,11 @@ class Composer {
 	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
 	 * @property {string} [postSheetName] When sending responses directly to Google Sheets, this specifies which sheet to save responses to.
 	 * @property {string} [postUrl] URL to send form responses to using POST request.
+	 * @property {"hide"} [restartButton] If set to `"hide"`, the restart button will be hidden.
 	 * @property {"none"|"pill"} [rounded] Controls rounding of buttons and UI elements.
 	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
 	 * @property {string} [slideDelimiter] Specifies where new slides are created. Default is `"---"`.
+	 * @property {string} [submitButtonText] Custom text for submit buttons.
 	 * @property {string} [title] The title of the page.
 	 * @property {"start"} [verticalAlignment] If set to `"start"`, content is aligned to the top of the page vertically.
 	 */
