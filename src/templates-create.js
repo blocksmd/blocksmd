@@ -319,6 +319,13 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 		template = parseSlides(
 			template,
 			settings["page"] === "form-slides" ? true : false,
+			{
+				hideRestartBtn: settings["restart-button"] === "hide" ? true : false,
+				submitBtnText:
+					settings["submit-button-text"] !== undefined
+						? settings["submit-button-text"]
+						: "",
+			},
 			settings["localization"],
 			settings["slide-delimiter"],
 		);

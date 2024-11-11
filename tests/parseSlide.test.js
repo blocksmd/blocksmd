@@ -49,7 +49,13 @@ const expectedTemplate1 = `
 `;
 
 test("Case 1 (form, slide with form field)", () => {
-	const result1 = parseSlide(template1, true, false, "en");
+	const result1 = parseSlide(
+		template1,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result1["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate1, { format: "html" }),
 	);
@@ -96,7 +102,13 @@ const expectedTemplate2 = `
 `;
 
 test("Case 2 (form, slide with form field and incorrect page progress, different localization)", () => {
-	const result2 = parseSlide(template2, true, false, "bn");
+	const result2 = parseSlide(
+		template2,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+	);
 	expect(beautify(result2["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate2, { format: "html" }),
 	);
@@ -138,7 +150,13 @@ const expectedTemplate3 = `
 `;
 
 test("Case 3 (form, slide without form field)", () => {
-	const result3 = parseSlide(template3, true, false, "en");
+	const result3 = parseSlide(
+		template3,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result3["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate3, { format: "html" }),
 	);
@@ -185,7 +203,13 @@ const expectedTemplate4 = `
 `;
 
 test("Case 4 (form, slide without form field, different localization)", () => {
-	const result4 = parseSlide(template4, true, false, "bn");
+	const result4 = parseSlide(
+		template4,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+	);
 	expect(beautify(result4["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate4, { format: "html" }),
 	);
@@ -234,7 +258,13 @@ const expectedTemplate5 = `
 `;
 
 test("Case 5 (not form, slide with form field)", () => {
-	const result5 = parseSlide(template5, false, false, "en");
+	const result5 = parseSlide(
+		template5,
+		false,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result5["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate5, { format: "html" }),
 	);
@@ -278,7 +308,13 @@ const expectedTemplate6 = `
 `;
 
 test("Case 6 (not form, slide without form field)", () => {
-	const result6 = parseSlide(template6, false, false, "en");
+	const result6 = parseSlide(
+		template6,
+		false,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result6["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate6, { format: "html" }),
 	);
@@ -318,7 +354,13 @@ const expectedTemplate7 = `
 `;
 
 test("Case 7 (form, start slide without form field)", () => {
-	const result7 = parseSlide(template7, true, false, "en");
+	const result7 = parseSlide(
+		template7,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result7["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate7, { format: "html" }),
 	);
@@ -359,7 +401,13 @@ const expectedTemplate8 = `
 `;
 
 test("Case 8 (form, start slide without form field, different localization)", () => {
-	const result8 = parseSlide(template8, true, false, "bn");
+	const result8 = parseSlide(
+		template8,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+	);
 	expect(beautify(result8["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate8, { format: "html" }),
 	);
@@ -395,7 +443,13 @@ const expectedTemplate9 = `
 `;
 
 test("Case 9 (form, start slide with custom start button and without form field)", () => {
-	const result9 = parseSlide(template9, true, false, "en");
+	const result9 = parseSlide(
+		template9,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result9["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate9, { format: "html" }),
 	);
@@ -445,7 +499,13 @@ const expectedTemplate10 = `
 `;
 
 test("Case 10 (form, start slide with form field)", () => {
-	const result10 = parseSlide(template10, true, false, "en");
+	const result10 = parseSlide(
+		template10,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result10["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate10, { format: "html" }),
 	);
@@ -491,7 +551,13 @@ const expectedTemplate11 = `
 `;
 
 test("Case 11 (form, start slide with custom start button and form field)", () => {
-	const result11 = parseSlide(template11, true, false, "en");
+	const result11 = parseSlide(
+		template11,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result11["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate11, { format: "html" }),
 	);
@@ -531,7 +597,13 @@ const expectedTemplate12 = `
 `;
 
 test("Case 12 (not form, start slide with form field)", () => {
-	const result12 = parseSlide(template12, false, false, "en");
+	const result12 = parseSlide(
+		template12,
+		false,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result12["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate12, { format: "html" }),
 	);
@@ -571,7 +643,13 @@ const expectedTemplate13 = `
 `;
 
 test("Case 13 (not form, start slide with custom start button and form field)", () => {
-	const result13 = parseSlide(template13, false, false, "en");
+	const result13 = parseSlide(
+		template13,
+		false,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result13["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate13, { format: "html" }),
 	);
@@ -612,7 +690,13 @@ const expectedTemplate14 = `
 `;
 
 test("Case 14 (form, end slide)", () => {
-	const result14 = parseSlide(template14, true, false, "en");
+	const result14 = parseSlide(
+		template14,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result14["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate14, { format: "html" }),
 	);
@@ -655,7 +739,13 @@ const expectedTemplate15 = `
 `;
 
 test("Case 15 (not form, end slide with custom redirect)", () => {
-	const result15 = parseSlide(template15, false, false, "en");
+	const result15 = parseSlide(
+		template15,
+		false,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result15["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate15, { format: "html" }),
 	);
@@ -697,7 +787,13 @@ const expectedTemplate16 = `
 `;
 
 test("Case 16 (form, end slide with custom redirect, different localization)", () => {
-	const result16 = parseSlide(template16, true, false, "bn");
+	const result16 = parseSlide(
+		template16,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+	);
 	expect(beautify(result16["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate16, { format: "html" }),
 	);
@@ -727,7 +823,13 @@ const expectedTemplate17 = `
 `;
 
 test("Case 17 (form, empty template)", () => {
-	const result17 = parseSlide(template17, true, false, "en");
+	const result17 = parseSlide(
+		template17,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result17["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate17, { format: "html" }),
 	);
@@ -778,7 +880,13 @@ const expectedTemplate18 = `
 `;
 
 test("Case 18 (form, first slide with form field)", () => {
-	const result18 = parseSlide(template18, true, true, "en");
+	const result18 = parseSlide(
+		template18,
+		true,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result18["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate18, { format: "html" }),
 	);
@@ -817,7 +925,13 @@ const expectedTemplate19 = `
 `;
 
 test("Case 19 (form, start first slide without form field)", () => {
-	const result19 = parseSlide(template19, true, true, "en");
+	const result19 = parseSlide(
+		template19,
+		true,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result19["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate19, { format: "html" }),
 	);
@@ -863,7 +977,13 @@ const expectedTemplate20 = `
 `;
 
 test("Case 20 (not form, first slide with form field)", () => {
-	const result20 = parseSlide(template20, false, true, "en");
+	const result20 = parseSlide(
+		template20,
+		false,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+	);
 	expect(beautify(result20["template"], { format: "html" })).toBe(
 		beautify(expectedTemplate20, { format: "html" }),
 	);

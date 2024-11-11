@@ -76,7 +76,13 @@ const expectedTemplate1 = `
 `;
 
 test("Case 1 (form, two slides)", () => {
-	const result1 = parseSlides(template1, true, "en", "---");
+	const result1 = parseSlides(
+		template1,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result1, { format: "html" })).toBe(
 		beautify(expectedTemplate1, { format: "html" }),
 	);
@@ -155,7 +161,13 @@ const expectedTemplate2 = `
 `;
 
 test("Case 2 (form, two slides, different localization and slide delimiter)", () => {
-	const result2 = parseSlides(template2, true, "bn", "***");
+	const result2 = parseSlides(
+		template2,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+		"***",
+	);
 	expect(beautify(result2, { format: "html" })).toBe(
 		beautify(expectedTemplate2, { format: "html" }),
 	);
@@ -226,7 +238,13 @@ const expectedTemplate3 = `
 `;
 
 test("Case 3 (not form, two slides)", () => {
-	const result3 = parseSlides(template3, false, "en", "---");
+	const result3 = parseSlides(
+		template3,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result3, { format: "html" })).toBe(
 		beautify(expectedTemplate3, { format: "html" }),
 	);
@@ -295,7 +313,13 @@ const expectedTemplate4 = `
 `;
 
 test("Case 4 (not form, two slides, different localization and slide delimiter)", () => {
-	const result4 = parseSlides(template4, false, "bn", "===");
+	const result4 = parseSlides(
+		template4,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"bn",
+		"===",
+	);
 	expect(beautify(result4, { format: "html" })).toBe(
 		beautify(expectedTemplate4, { format: "html" }),
 	);
@@ -375,7 +399,13 @@ const expectedTemplate5 = `
 `;
 
 test("Case 5 (form, start slide, end slide)", () => {
-	const result5 = parseSlides(template5, true, "en", "---");
+	const result5 = parseSlides(
+		template5,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result5, { format: "html" })).toBe(
 		beautify(expectedTemplate5, { format: "html" }),
 	);
@@ -450,7 +480,13 @@ const expectedTemplate6 = `
 `;
 
 test("Case 6 (not form, start slide, end slide)", () => {
-	const result6 = parseSlides(template6, false, "en", "---");
+	const result6 = parseSlides(
+		template6,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result6, { format: "html" })).toBe(
 		beautify(expectedTemplate6, { format: "html" }),
 	);
@@ -553,7 +589,13 @@ const expectedTemplate7 = `
 `;
 
 test("Case 7 (form, two start slides, two end slides)", () => {
-	const result7 = parseSlides(template7, true, "en", "---");
+	const result7 = parseSlides(
+		template7,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result7, { format: "html" })).toBe(
 		beautify(expectedTemplate7, { format: "html" }),
 	);
@@ -607,7 +649,13 @@ const expectedTemplate8 = `
 `;
 
 test("Case 8 (single slide)", () => {
-	const result8 = parseSlides(template8, true, "en", "---");
+	const result8 = parseSlides(
+		template8,
+		true,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result8, { format: "html" })).toBe(
 		beautify(expectedTemplate8, { format: "html" }),
 	);
@@ -652,7 +700,13 @@ const expectedTemplate9 = `
 `;
 
 test("Case 9 (empty template)", () => {
-	const result9 = parseSlides(template9, false, "en", "---");
+	const result9 = parseSlides(
+		template9,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "" },
+		"en",
+		"---",
+	);
 	expect(beautify(result9, { format: "html" })).toBe(
 		beautify(expectedTemplate9, { format: "html" }),
 	);
