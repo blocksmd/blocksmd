@@ -384,7 +384,7 @@
 .bmd-root[data-bmd-button-alignment="end"]
 	.bmd-slide:not(.bmd-end-slide)
 	.bmd-next-controls {
-	justify-content: end;
+	justify-content: flex-end;
 }
 
 .bmd-root[data-bmd-button-alignment="stretch"]
