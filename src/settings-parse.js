@@ -237,7 +237,6 @@ function parseColor(colorString) {
  */
 function getDefaultSettings() {
 	return {
-		"button-alignment": "start",
 		"color-scheme": "light",
 		"color-scheme-scope": "domain-wide",
 		"css-prefix": "bmd-",
