@@ -13,6 +13,7 @@ const template1 = `
 #! background-image = https://example.com/bg.jpg
 #! blocksmd-branding = hide
 #! brand = ![Logo](https://example.com/logo.png "Logo")
+#! button-alignment = end
 #! color = black || white
 #! color-scheme = dark
 #! color-scheme-scope = isolate
@@ -40,6 +41,7 @@ const expectedSettings1 = {
 	"background-image": "https://example.com/bg.jpg",
 	"blocksmd-branding": "hide",
 	"brand": '![Logo](https://example.com/logo.png "Logo")',
+	"button-alignment": "end",
 	"color": "0, 0, 0",
 	"color-alt-scheme": "255, 255, 255",
 	"color-scheme": "dark",
@@ -127,9 +129,11 @@ const template3 = `
 	#! page-progress = hide
 #! post-sheet-name = Sheet2
 		#! post-url = https://example.com/api/examples/create/
+#! restart-button = hide
 		#! rounded = pill
 			#! slide-controls = hide
 	#! slide-delimiter = ***
+			#! submit-button-text = Submit
 #! title = Title
 #! vertical-alignment = start
 
@@ -166,9 +170,11 @@ const expectedSettings3 = {
 	"page-progress": "hide",
 	"post-sheet-name": "Sheet2",
 	"post-url": "https://example.com/api/examples/create/",
+	"restart-button": "hide",
 	"rounded": "pill",
 	"slide-controls": "hide",
 	"slide-delimiter": "***",
+	"submit-button-text": "Submit",
 	"title": "Title",
 	"vertical-alignment": "start",
 };

@@ -10,7 +10,7 @@ const { getTranslation } = require("./translations");
 var nunjucks = require("nunjucks");
 
 const formFieldPattern = new RegExp(
-	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale|datetimeinput|dateinput|timeinput|fileinput)\((.*)\)/,
+	/\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*(\*)?\s*=\s*(textinput|emailinput|urlinput|telinput|passwordinput|numberinput|selectbox|choiceinput|picturechoice|ratinginput|opinionscale|datetimeinput|dateinput|timeinput|fileinput)\((.*)\)/,
 	"is",
 );
 
@@ -121,7 +121,7 @@ const textFieldTemplate = `
 		name="{{ name }}"
 		id="{{ inputId }}"
 		type="{{ inputType }}"
-		class="bmd-form-str-input bmd-form-control"
+		class="{% if inputType == 'password' %}bmd-form-password-input{% else %}bmd-form-str-input{% endif %} bmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
@@ -202,11 +202,12 @@ const telFieldTemplate = `
 `;
 
 /**
- * Create a text form field. Supported types are "text", "email", "url", and
- * "tel". For the multiline "text" type, the <textarea> element is used.
+ * Create a text form field. Supported types are "text", "email", "url",
+ * "tel", and "password". For the multiline "text" type, the <textarea>
+ * element is used.
  *
  * @param {string} name
- * @param {"text"|"email"|"url"|"tel"} inputType
+ * @param {"text"|"email"|"url"|"tel"|"password"} inputType
  * @param {boolean} required
  * @param {string} parsedAttrs
  * @param {string} params
@@ -249,6 +250,9 @@ function createTextField(
 		validParams["placeholder"] = "name@example.com";
 	} else if (inputType === "url") {
 		validParams["placeholder"] = "https://example.com";
+	} else if (inputType === "password") {
+		validParams["placeholder"] =
+			"&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;";
 	}
 
 	// Go through the rest of the params and validate

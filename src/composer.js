@@ -76,6 +76,7 @@ class Composer {
 	 * @property {string} [backgroundImage] The `background-image` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
 	 * @property {string} [brand] An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of the slide CTA buttons.
 	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {"domain-wide"|"isolate"} [colorSchemeScope] Determines how color scheme preference is saved and applied. Default is `"domain-wide"`.
@@ -108,9 +109,11 @@ class Composer {
 	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
 	 * @property {string} [postSheetName] When sending responses directly to Google Sheets, this specifies which sheet to save responses to.
 	 * @property {string} [postUrl] URL to send form responses to using POST request.
+	 * @property {"hide"} [restartButton] If set to `"hide"`, the restart button will be hidden.
 	 * @property {"none"|"pill"} [rounded] Controls rounding of buttons and UI elements.
 	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
 	 * @property {string} [slideDelimiter] Specifies where new slides are created. Default is `"---"`.
+	 * @property {string} [submitButtonText] Custom text for submit buttons.
 	 * @property {string} [title] The title of the page.
 	 * @property {"start"} [verticalAlignment] If set to `"start"`, content is aligned to the top of the page vertically.
 	 */
@@ -1040,7 +1043,6 @@ class Composer {
 	 * @property {string} [jumpCondition] Logic jump condition that must be `true` for slide to be shown.
 	 * @property {string} [pageProgress] Progress indicator shown on top (e.g. `"50%"` or `"1/2"`).
 	 * @property {true} [post] If set, posts form data up to this slide when going to the next one.
-	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
 	 * @property {true} [disablePrevious] If set, disables the previous button.
 	 */
 
@@ -1057,14 +1059,19 @@ class Composer {
 		var templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["jumpCondition"] !== undefined)
 			templateChunks.push(`-> ${params["jumpCondition"]}`);
 		if (params["pageProgress"] !== undefined)
 			templateChunks.push(`|> ${params["pageProgress"]}`);
 		if (params["post"] !== undefined) templateChunks.push(">> post");
-		if (params["buttonAlign"] !== undefined)
-			templateChunks.push(`=| ${params["buttonAlign"]}`);
 		if (params["disablePrevious"] !== undefined)
 			templateChunks.push("<< disable");
 
@@ -1079,7 +1086,6 @@ class Composer {
 	 *
 	 * @typedef {Object} StartSlideParamsType
 	 * @property {string} [buttonText] Custom text for the start button.
-	 * @property {"center"|"end"} [buttonAlign] Alignment of the slide action button.
 	 */
 
 	/**
@@ -1095,14 +1101,19 @@ class Composer {
 		const templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["buttonText"] !== undefined) {
 			templateChunks.push(`-> start -> ${params["buttonText"]}`);
 		} else {
 			templateChunks.push("-> start");
 		}
-		if (params["buttonAlign"] !== undefined)
-			templateChunks.push(`=| ${params["buttonAlign"]}`);
 
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
@@ -1130,7 +1141,14 @@ class Composer {
 		const templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["redirectUrl"] !== undefined) {
 			templateChunks.push(`-> end -> ${params["redirectUrl"]}`);
 		} else {

@@ -79,6 +79,8 @@ website = uRlInPuT(
 	| placeholder = Keep this empty if you do not have one.
 )
 
+password = passwordinput(| question = Password)
+
 shortBio = TextInput(
 	| question = Write a short description about yourself.
 	| multiline
@@ -334,6 +336,19 @@ const expectedTemplate = `
 		class="bmd-form-str-input bmd-form-control"
 		placeholder="Keep this empty if you do not have one."
 		value="https://mysite.com"
+	>
+</div>
+
+<div class="bmd-form-field">
+	<label class="bmd-form-question" for="id_password">
+		Password
+	</label>
+	<input
+		name="password"
+		id="id_password"
+		type="password"
+		class="bmd-form-password-input bmd-form-control"
+		placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
 	>
 </div>
 

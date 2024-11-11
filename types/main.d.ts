@@ -16,11 +16,12 @@ export class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInline] Padding for inline pages or forms.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
+	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
+	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
-	 * @property {boolean} [removePaddingInline] Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
@@ -55,9 +56,17 @@ export class blocksmd {
 			 */
 			isFullPage?: boolean;
 			/**
-			 * Padding for inline pages or forms.
+			 * Padding top for inline pages or forms.
 			 */
-			paddingInline?: number;
+			paddingInlineTop?: number;
+			/**
+			 * Horizontal padding for inline pages or forms. Default is `0`.
+			 */
+			paddingInlineHorizontal?: number;
+			/**
+			 * Padding bottom for inline pages or forms.
+			 */
+			paddingInlineBottom?: number;
 			/**
 			 * Extra data sent with POST requests.
 			 */
@@ -70,10 +79,6 @@ export class blocksmd {
 			 * Whether to prioritize URL form data. Default is `false`.
 			 */
 			prioritizeURLFormData?: boolean;
-			/**
-			 * Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
-			 */
-			removePaddingInline?: boolean;
 			/**
 			 * Whether to sanitize template. Default is `true`.
 			 */
@@ -135,11 +140,12 @@ export class blocksmd {
 		getHeaders: {};
 		id: string;
 		isFullPage: boolean;
-		paddingInline: any;
+		paddingInlineBottom: any;
+		paddingInlineHorizontal: number;
+		paddingInlineTop: any;
 		postData: {};
 		postHeaders: {};
 		prioritizeURLFormData: boolean;
-		removePaddingInline: boolean;
 		sanitize: boolean;
 		saveState: boolean;
 		setColorSchemeAttrsAgain: boolean;

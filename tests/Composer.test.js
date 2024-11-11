@@ -14,6 +14,7 @@ const allSettings = {
 	backgroundImage: "url(bg.jpg)",
 	blocksmdBranding: "hide",
 	brand: "![Logo](logo.png)",
+	buttonAlignment: "stretch",
 	color: "#000000",
 	colorScheme: "dark",
 	colorSchemeScope: "isolate",
@@ -46,9 +47,11 @@ const allSettings = {
 	pageProgress: "hide",
 	postSheetName: "Responses",
 	postUrl: "https://api.example.com/submit",
+	restartButton: "hide",
 	rounded: "pill",
 	slideControls: "hide",
 	slideDelimiter: "---",
+	submitButtonText: "Submit",
 	title: "Test Form",
 	verticalAlignment: "start",
 };
@@ -62,6 +65,7 @@ const expectedTemplate = `
 #! background-image = url(bg.jpg)
 #! blocksmd-branding = hide
 #! brand = ![Logo](logo.png)
+#! button-alignment = stretch
 #! color = #000000
 #! color-scheme = dark
 #! color-scheme-scope = isolate
@@ -94,9 +98,11 @@ const expectedTemplate = `
 #! page-progress = hide
 #! post-sheet-name = Responses
 #! post-url = https://api.example.com/submit
+#! restart-button = hide
 #! rounded = pill
 #! slide-controls = hide
 #! slide-delimiter = ---
+#! submit-button-text = Submit
 #! title = Test Form
 #! vertical-alignment = start
 `;
@@ -1049,106 +1055,72 @@ file = FileInput(
 
 // Slide tests
 
-const expectedSlideBasic = `
----
-`;
-
-test("Basic slide with no parameters", () => {
+test("Basic slide with no parameters and empty template", () => {
 	const composer = new Composer();
-	expect(composer.slide()).toBe(expectedSlideBasic);
+	expect(composer.slide()).toBe("\n\n");
+});
+
+test("Basic slide with no parameters and only settings", () => {
+	const composer = new Composer({ title: "Test" });
+	expect(composer.slide()).toBe("\n\n");
+});
+
+test("Basic slide with no parameters and content", () => {
+	const composer = new Composer();
+	composer.p("Some content");
+	expect(composer.slide()).toBe("\n---\n");
 });
 
 const expectedSlideCustomDelimiter = `
 ***
 `;
 
-test("Slide with custom delimiter", () => {
+test("Slide with custom delimiter and existing content", () => {
 	const composer = new Composer({ slideDelimiter: "***" });
+	composer.p("Some content");
 	expect(composer.slide()).toBe(expectedSlideCustomDelimiter);
 });
 
 const expectedSlideJumpCondition = `
----
 -> age > 18
 `;
 
-test("Slide with jump condition", () => {
+test("Slide with jump condition and empty template", () => {
 	const composer = new Composer();
-	expect(
-		composer.slide({
-			jumpCondition: "age > 18",
-		}),
-	).toBe(expectedSlideJumpCondition);
+	expect(composer.slide({ jumpCondition: "age > 18" })).toBe(
+		expectedSlideJumpCondition,
+	);
 });
 
 const expectedSlidePageProgress = `
----
 |> 50%
 `;
 
-test("Slide with page progress", () => {
+test("Slide with page progress and empty template", () => {
 	const composer = new Composer();
-	expect(
-		composer.slide({
-			pageProgress: "50%",
-		}),
-	).toBe(expectedSlidePageProgress);
+	expect(composer.slide({ pageProgress: "50%" })).toBe(
+		expectedSlidePageProgress,
+	);
 });
 
 const expectedSlidePost = `
----
 >> post
 `;
 
-test("Slide with post parameter", () => {
+test("Slide with post parameter and empty template", () => {
 	const composer = new Composer();
-	expect(
-		composer.slide({
-			post: true,
-		}),
-	).toBe(expectedSlidePost);
-});
-
-const expectedSlideButtonAlignCenter = `
----
-=| center
-`;
-
-test("Slide with button alignment center", () => {
-	const composer = new Composer();
-	expect(
-		composer.slide({
-			buttonAlign: "center",
-		}),
-	).toBe(expectedSlideButtonAlignCenter);
-});
-
-const expectedSlideButtonAlignEnd = `
----
-=| end
-`;
-
-test("Slide with button alignment end", () => {
-	const composer = new Composer();
-	expect(
-		composer.slide({
-			buttonAlign: "end",
-		}),
-	).toBe(expectedSlideButtonAlignEnd);
+	expect(composer.slide({ post: true })).toBe(expectedSlidePost);
 });
 
 const expectedSlideDisablePrevious = `
----
 << disable
 `;
 
-test("Slide with disabled previous button", () => {
+test("Slide with disabled previous button and empty template", () => {
 	const composer = new Composer();
-	expect(
-		composer.slide({
-			disablePrevious: true,
-		}),
-	).toBe(expectedSlideDisablePrevious);
+	expect(composer.slide({ disablePrevious: true })).toBe(
+		expectedSlideDisablePrevious,
+	);
 });
 
 const expectedSlideMultipleParams = `
@@ -1156,110 +1128,75 @@ const expectedSlideMultipleParams = `
 -> age > 18
 |> 2/5
 >> post
-=| center
 << disable
 `;
 
-test("Slide with multiple parameters", () => {
+test("Slide with multiple parameters and existing content", () => {
 	const composer = new Composer();
+	composer.p("Some content");
 	expect(
 		composer.slide({
 			jumpCondition: "age > 18",
 			pageProgress: "2/5",
 			post: true,
-			buttonAlign: "center",
 			disablePrevious: true,
 		}),
 	).toBe(expectedSlideMultipleParams);
 });
 
-const expectedSlideEmptyParams = `
----
-`;
-
-test("Slide with empty parameters object", () => {
-	const composer = new Composer();
-	expect(composer.slide({})).toBe(expectedSlideEmptyParams);
+test("Slide after only settings should not add delimiter", () => {
+	const composer = new Composer({
+		title: "Test Form",
+		accent: "#FF0000",
+		fontSize: "sm",
+	});
+	expect(composer.slide()).toBe("\n\n");
 });
 
 // Start slide tests
 
-const expectedStartSlideBasic = `
----
--> start
-`;
-
-test("Basic start slide with no parameters", () => {
+test("Basic start slide with empty template", () => {
 	const composer = new Composer();
-	expect(composer.startSlide()).toBe(expectedStartSlideBasic);
+	expect(composer.startSlide()).toBe("\n-> start\n");
+});
+
+test("Start slide with existing content", () => {
+	const composer = new Composer();
+	composer.p("Some content");
+	expect(composer.startSlide()).toBe("\n---\n-> start\n");
 });
 
 const expectedStartSlideCustomText = `
----
 -> start -> Get Started
 `;
 
-test("Start slide with custom button text", () => {
+test("Start slide with custom button text and empty template", () => {
 	const composer = new Composer();
-	expect(
-		composer.startSlide({
-			buttonText: "Get Started",
-		}),
-	).toBe(expectedStartSlideCustomText);
-});
-
-const expectedStartSlideButtonAlignCenter = `
----
--> start
-=| center
-`;
-
-test("Start slide with center button alignment", () => {
-	const composer = new Composer();
-	expect(
-		composer.startSlide({
-			buttonAlign: "center",
-		}),
-	).toBe(expectedStartSlideButtonAlignCenter);
-});
-
-const expectedStartSlideButtonAlignEnd = `
----
--> start
-=| end
-`;
-
-test("Start slide with end button alignment", () => {
-	const composer = new Composer();
-	expect(
-		composer.startSlide({
-			buttonAlign: "end",
-		}),
-	).toBe(expectedStartSlideButtonAlignEnd);
+	expect(composer.startSlide({ buttonText: "Get Started" })).toBe(
+		expectedStartSlideCustomText,
+	);
 });
 
 const expectedStartSlideAllParams = `
 ---
 -> start -> Begin Here
-=| center
 `;
 
-test("Start slide with all parameters", () => {
+test("Start slide with all parameters and existing content", () => {
 	const composer = new Composer();
+	composer.p("Some content");
 	expect(
 		composer.startSlide({
 			buttonText: "Begin Here",
-			buttonAlign: "center",
 		}),
 	).toBe(expectedStartSlideAllParams);
 });
 
 const expectedStartSlideEmptyParams = `
----
 -> start
 `;
 
-test("Start slide with empty parameters object", () => {
+test("Start slide with empty parameters object and empty template", () => {
 	const composer = new Composer();
 	expect(composer.startSlide({})).toBe(expectedStartSlideEmptyParams);
 });
@@ -1267,37 +1204,45 @@ test("Start slide with empty parameters object", () => {
 const expectedStartSlideCustomDelimiter = `
 ***
 -> start -> Custom Start
-=| end
 `;
 
-test("Start slide with custom delimiter", () => {
+test("Start slide with custom delimiter and existing content", () => {
 	const composer = new Composer({ slideDelimiter: "***" });
+	composer.p("Some content");
 	expect(
 		composer.startSlide({
 			buttonText: "Custom Start",
-			buttonAlign: "end",
 		}),
 	).toBe(expectedStartSlideCustomDelimiter);
 });
 
+test("Start slide after only settings should not add delimiter", () => {
+	const composer = new Composer({
+		title: "Test Form",
+		accent: "#FF0000",
+		fontSize: "sm",
+	});
+	expect(composer.startSlide()).toBe("\n-> start\n");
+});
+
 // End slide tests
 
-const expectedEndSlideBasic = `
----
--> end
-`;
-
-test("Basic end slide with no parameters", () => {
+test("Basic end slide with empty template", () => {
 	const composer = new Composer();
-	expect(composer.endSlide()).toBe(expectedEndSlideBasic);
+	expect(composer.endSlide()).toBe("\n-> end\n");
+});
+
+test("End slide with existing content", () => {
+	const composer = new Composer();
+	composer.p("Some content");
+	expect(composer.endSlide()).toBe("\n---\n-> end\n");
 });
 
 const expectedEndSlideRedirect = `
----
 -> end -> https://example.com/thank-you
 `;
 
-test("End slide with redirect URL", () => {
+test("End slide with redirect URL and empty template", () => {
 	const composer = new Composer();
 	expect(
 		composer.endSlide({
@@ -1307,11 +1252,10 @@ test("End slide with redirect URL", () => {
 });
 
 const expectedEndSlideEmptyParams = `
----
 -> end
 `;
 
-test("End slide with empty parameters object", () => {
+test("End slide with empty parameters object and empty template", () => {
 	const composer = new Composer();
 	expect(composer.endSlide({})).toBe(expectedEndSlideEmptyParams);
 });
@@ -1321,13 +1265,23 @@ const expectedEndSlideCustomDelimiter = `
 -> end -> https://example.com/finish
 `;
 
-test("End slide with custom delimiter", () => {
+test("End slide with custom delimiter and existing content", () => {
 	const composer = new Composer({ slideDelimiter: "***" });
+	composer.p("Some content");
 	expect(
 		composer.endSlide({
 			redirectUrl: "https://example.com/finish",
 		}),
 	).toBe(expectedEndSlideCustomDelimiter);
+});
+
+test("End slide after only settings should not add delimiter", () => {
+	const composer = new Composer({
+		title: "Test Form",
+		accent: "#FF0000",
+		fontSize: "sm",
+	});
+	expect(composer.endSlide()).toBe("\n-> end\n");
 });
 
 // Data-block tests

@@ -30,11 +30,12 @@ class blocksmd {
 		getHeaders: {},
 		id: "",
 		isFullPage: false,
-		paddingInline: null,
+		paddingInlineBottom: null,
+		paddingInlineHorizontal: 0,
+		paddingInlineTop: null,
 		postData: {},
 		postHeaders: {},
 		prioritizeURLFormData: false,
-		removePaddingInline: true,
 		sanitize: true,
 		saveState: true,
 		setColorSchemeAttrsAgain: true,
@@ -70,11 +71,12 @@ class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInline] Padding for inline pages or forms.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
+	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
+	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
-	 * @property {boolean} [removePaddingInline] Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
@@ -120,12 +122,25 @@ class blocksmd {
 				typeof options["isFullPage"] === "boolean"
 			)
 				this.options["isFullPage"] = options["isFullPage"];
-			// Padding inline
+			// Padding bottom
 			if (
-				options["paddingInline"] !== undefined &&
-				typeof options["paddingInline"] === "number"
+				options["paddingInlineBottom"] !== undefined &&
+				typeof options["paddingInlineBottom"] === "number"
 			)
-				this.options["paddingInline"] = options["paddingInline"];
+				this.options["paddingInlineBottom"] = options["paddingInlineBottom"];
+			// Padding inline horizontal
+			if (
+				options["paddingInlineHorizontal"] !== undefined &&
+				typeof options["paddingInlineHorizontal"] === "number"
+			)
+				this.options["paddingInlineHorizontal"] =
+					options["paddingInlineHorizontal"];
+			// Padding top
+			if (
+				options["paddingInlineTop"] !== undefined &&
+				typeof options["paddingInlineTop"] === "number"
+			)
+				this.options["paddingInlineTop"] = options["paddingInlineTop"];
 			// POST data
 			if (
 				options["postData"] !== undefined &&
@@ -153,12 +168,6 @@ class blocksmd {
 			)
 				this.options["prioritizeURLFormData"] =
 					options["prioritizeURLFormData"];
-			// Remove padding inline
-			if (
-				options["removePaddingInline"] !== undefined &&
-				typeof options["removePaddingInline"] === "boolean"
-			)
-				this.options["removePaddingInline"] = options["removePaddingInline"];
 			// Sanitize
 			if (
 				options["sanitize"] !== undefined &&
@@ -1702,6 +1711,13 @@ class blocksmd {
 			}
 		}
 
+		// Add the password inputs (these are not in the state)
+		instance.container
+			.querySelectorAll('.bmd-form-password-input[type="password"]')
+			.forEach((input) => {
+				formData.append(input.getAttribute("name"), input.value);
+			});
+
 		// Add the chosen files from the inputs (these are not in the state)
 		instance.container
 			.querySelectorAll('.bmd-form-file-input[type="file"]')
@@ -2447,13 +2463,29 @@ class blocksmd {
 		if (!instance.options["isFullPage"]) {
 			let rootElemClass = "bmd-root bmd-root-inline";
 			let rootElemStyle = "";
-			if (instance.options["paddingInline"] !== null) {
-				rootElemClass += " bmd-px-custom";
-				rootElemStyle = `--bmd-content-padding-x-custom: ${instance.options["paddingInline"]}px;`;
-			} else {
-				if (instance.options["removePaddingInline"])
-					rootElemClass += " bmd-px-0";
+
+			// Handle padding inline bottom
+			if (instance.options["paddingInlineBottom"] !== null) {
+				rootElemClass += " bmd-pb-custom";
+				rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options["paddingInlineBottom"]}px;`;
+				if (instance.options["paddingInlineBottom"] === 0)
+					rootElemClass += " bmd-pb-0";
 			}
+
+			// Handle padding inline horizontal
+			rootElemClass += " bmd-px-custom";
+			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options["paddingInlineHorizontal"]}px;`;
+			if (instance.options["paddingInlineHorizontal"] === 0)
+				rootElemClass += " bmd-px-0";
+
+			// Handle padding inline top
+			if (instance.options["paddingInlineTop"] !== null) {
+				rootElemClass += " bmd-pt-custom";
+				rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options["paddingInlineTop"]}px;`;
+				if (instance.options["paddingInlineTop"] === 0)
+					rootElemClass += " bmd-pt-0";
+			}
+
 			instance.container.innerHTML = [
 				"<div",
 				'	spellcheck="false"',
@@ -2527,6 +2559,7 @@ class blocksmd {
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const rootSettingsAttributesMap = {
 			"browser": "data-bmd-browser",
+			"button-alignment": "data-bmd-button-alignment",
 			"dir": "dir",
 			"field-size": "data-bmd-field-size",
 			"font-size": "data-bmd-font-size",

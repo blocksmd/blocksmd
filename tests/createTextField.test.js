@@ -613,3 +613,49 @@ test("Case 13 (telephone number with restricted available countries)", () => {
 		),
 	).toBe(beautify(expectedTemplate13, { format: "html" }));
 });
+
+// Case 14 (password)
+
+const expectedTemplate14 = `
+<div id="some-id" class="bmd-col-8 bmd-form-field">
+	<label class="bmd-form-question" for="id_password">
+		Enter your <span class="bmd-text-nowrap" aria-hidden="true">password<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">password (required)</span>
+	</label>
+	<p class="bmd-form-description">
+		Must be 8 characters long.
+	</p>
+	<input
+		name="password"
+		id="id_password"
+		type="password"
+		class="bmd-form-password-input bmd-form-control"
+		placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+		required
+		value="my-password"
+		maxlength="8"
+	>
+</div>
+`;
+
+test("Case 14 (password)", () => {
+	expect(
+		beautify(
+			createTextField(
+				"password",
+				"password",
+				true,
+				'id="some-id" class="bmd-col-8"',
+				`
+					| question = Enter your password
+					| description = Must be 8 characters long.
+					| value = my-password
+					| maxlength = 8
+				`,
+				"|",
+				"",
+				"en",
+			),
+			{ format: "html" },
+		),
+	).toBe(beautify(expectedTemplate14, { format: "html" }));
+});
