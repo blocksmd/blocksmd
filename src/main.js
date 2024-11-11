@@ -1702,6 +1702,13 @@ class blocksmd {
 			}
 		}
 
+		// Add the password inputs (these are not in the state)
+		instance.container
+			.querySelectorAll('.bmd-form-password-input[type="password"]')
+			.forEach((input) => {
+				formData.append(input.getAttribute("name"), input.value);
+			});
+
 		// Add the chosen files from the inputs (these are not in the state)
 		instance.container
 			.querySelectorAll('.bmd-form-file-input[type="file"]')

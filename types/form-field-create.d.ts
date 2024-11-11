@@ -24,11 +24,12 @@ export function formFieldSetup(
 	restParams: any;
 };
 /**
- * Create a text form field. Supported types are "text", "email", "url", and
- * "tel". For the multiline "text" type, the <textarea> element is used.
+ * Create a text form field. Supported types are "text", "email", "url",
+ * "tel", and "password". For the multiline "text" type, the <textarea>
+ * element is used.
  *
  * @param {string} name
- * @param {"text"|"email"|"url"|"tel"} inputType
+ * @param {"text"|"email"|"url"|"tel"|"password"} inputType
  * @param {boolean} required
  * @param {string} parsedAttrs
  * @param {string} params
@@ -39,7 +40,7 @@ export function formFieldSetup(
  */
 export function createTextField(
 	name: string,
-	inputType: "text" | "email" | "url" | "tel",
+	inputType: "text" | "email" | "url" | "tel" | "password",
 	required: boolean,
 	parsedAttrs: string,
 	params: string,

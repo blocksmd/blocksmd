@@ -232,7 +232,8 @@ renderer.paragraph = function (text) {
 				fieldInputType === "textinput" ||
 				fieldInputType === "emailinput" ||
 				fieldInputType === "urlinput" ||
-				fieldInputType === "telinput"
+				fieldInputType === "telinput" ||
+				fieldInputType === "passwordinput"
 			) {
 				return createTextField(
 					fieldName,
