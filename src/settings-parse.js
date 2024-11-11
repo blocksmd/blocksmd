@@ -237,6 +237,7 @@ function parseColor(colorString) {
  */
 function getDefaultSettings() {
 	return {
+		"button-alignment": "start",
 		"color-scheme": "light",
 		"color-scheme-scope": "domain-wide",
 		"css-prefix": "bmd-",
@@ -313,6 +314,10 @@ function parseSettings(template) {
 			pattern: /^!\[.*\]\(.*\)$/s,
 			accepted:
 				"Markdown image, example: ![Example logo](https://example.com/logo.png)",
+		},
+		"button-alignment": {
+			pattern: /^(center|end|stretch)$/,
+			accepted: "center || end || stretch",
 		},
 		"color": {
 			accepted: "valid color (name, hex code, or RGB)",

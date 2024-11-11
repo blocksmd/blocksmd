@@ -375,6 +375,35 @@
 	--bmd-main-container-width: 100%;
 }
 
+.bmd-root[data-bmd-button-alignment="center"]
+	.bmd-slide:not(.bmd-end-slide)
+	.bmd-next-controls {
+	justify-content: center;
+}
+
+.bmd-root[data-bmd-button-alignment="end"]
+	.bmd-slide:not(.bmd-end-slide)
+	.bmd-next-controls {
+	justify-content: end;
+}
+
+.bmd-root[data-bmd-button-alignment="stretch"]
+	.bmd-slide:not(.bmd-end-slide)
+	.bmd-next-controls {
+	justify-content: stretch;
+}
+
+.bmd-root[data-bmd-button-alignment="stretch"]
+	.bmd-slide:not(.bmd-end-slide)
+	.bmd-next-controls
+	.bmd-submit-btn,
+.bmd-root[data-bmd-button-alignment="stretch"]
+	.bmd-slide:not(.bmd-end-slide)
+	.bmd-next-controls
+	.bmd-next-btn {
+	width: 100%;
+}
+
 /**
  * The following styles can be globally scoped (via attribure on root), or 
  * locally. Therefore, any time a variable is changed in the following blocks, 

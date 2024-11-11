@@ -13,6 +13,7 @@ const template1 = `
 #! background-image = https://example.com/bg.jpg
 #! blocksmd-branding = hide
 #! brand = ![Logo](https://example.com/logo.png "Logo")
+#! button-alignment = end
 #! color = black || white
 #! color-scheme = dark
 #! color-scheme-scope = isolate
@@ -40,6 +41,7 @@ const expectedSettings1 = {
 	"background-image": "https://example.com/bg.jpg",
 	"blocksmd-branding": "hide",
 	"brand": '![Logo](https://example.com/logo.png "Logo")',
+	"button-alignment": "end",
 	"color": "0, 0, 0",
 	"color-alt-scheme": "255, 255, 255",
 	"color-scheme": "dark",

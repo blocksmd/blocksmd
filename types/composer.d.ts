@@ -29,6 +29,7 @@ export class Composer {
 	 * @property {string} [backgroundImage] The `background-image` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
 	 * @property {string} [brand] An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of the slide CTA buttons.
 	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {"domain-wide"|"isolate"} [colorSchemeScope] Determines how color scheme preference is saved and applied. Default is `"domain-wide"`.
@@ -107,6 +108,10 @@ export class Composer {
 		 * An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		brand?: string;
+		/**
+		 * Set the alignment of the slide CTA buttons.
+		 */
+		buttonAlignment?: "center" | "end" | "stretch";
 		/**
 		 * The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */

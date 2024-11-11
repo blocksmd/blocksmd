@@ -14,6 +14,7 @@ const allSettings = {
 	backgroundImage: "url(bg.jpg)",
 	blocksmdBranding: "hide",
 	brand: "![Logo](logo.png)",
+	buttonAlignment: "stretch",
 	color: "#000000",
 	colorScheme: "dark",
 	colorSchemeScope: "isolate",
@@ -64,6 +65,7 @@ const expectedTemplate = `
 #! background-image = url(bg.jpg)
 #! blocksmd-branding = hide
 #! brand = ![Logo](logo.png)
+#! button-alignment = stretch
 #! color = #000000
 #! color-scheme = dark
 #! color-scheme-scope = isolate

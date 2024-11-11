@@ -2527,6 +2527,7 @@ class blocksmd {
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const rootSettingsAttributesMap = {
 			"browser": "data-bmd-browser",
+			"button-alignment": "data-bmd-button-alignment",
 			"dir": "dir",
 			"field-size": "data-bmd-field-size",
 			"font-size": "data-bmd-font-size",
