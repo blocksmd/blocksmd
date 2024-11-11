@@ -336,6 +336,7 @@ function parseSlides(
 						`</div>\n`,
 					].join("\n"),
 			redirect: "",
+			btnSettings: btnSettings,
 			translations: {
 				restartBtn: getTranslation(localization, "restart-btn"),
 			},

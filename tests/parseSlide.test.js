@@ -154,7 +154,7 @@ test("Case 3 (form, slide without form field)", () => {
 		template3,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ hideRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result3["template"], { format: "html" })).toBe(
@@ -358,7 +358,7 @@ test("Case 7 (form, start slide without form field)", () => {
 		template7,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ hideRestartBtn: false, submitBtnText: "Submit" },
 		"en",
 	);
 	expect(beautify(result7["template"], { format: "html" })).toBe(
@@ -503,7 +503,7 @@ test("Case 10 (form, start slide with form field)", () => {
 		template10,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ hideRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result10["template"], { format: "html" })).toBe(
@@ -988,4 +988,103 @@ test("Case 20 (not form, first slide with form field)", () => {
 		beautify(expectedTemplate20, { format: "html" }),
 	);
 	expect(result20["slideType"]).toBe("body");
+});
+
+// Case 21 (form, end slide, hidden restart button)
+
+const template21 = `
+-> END
+|> 95%
+>> POST
+
+# Welcome
+
+email* = EmailInput(question=What is your email address?)
+`;
+const expectedTemplate21 = `
+<div
+	class="bmd-slide bmd-end-slide"
+>
+	<div class="bmd-grid">
+		<markdown>
+
+		# Welcome
+
+		email* = EmailInput(question=What is your email address?)
+
+		</markdown>
+	</div>
+</div>
+`;
+
+test("Case 21 (form, end slide, hidden restart button)", () => {
+	const result21 = parseSlide(
+		template21,
+		true,
+		false,
+		{ hideRestartBtn: true, submitBtnText: "" },
+		"en",
+	);
+	expect(beautify(result21["template"], { format: "html" })).toBe(
+		beautify(expectedTemplate21, { format: "html" }),
+	);
+	expect(result21["slideType"]).toBe("end");
+});
+
+// Case 22 (form, slide with form field, different submit button text)
+
+const template22 = `
+-> profession == "business"
+|> 25%
+<< DISABLE
+>> POST
+=| CENTER
+
+# Heading
+
+This is a paragraph.
+
+email* = EmailInput(question=What is your email address?)
+`;
+const expectedTemplate22 = `
+<form
+	method="POST"
+	action="javascript:void(0);"
+	class="bmd-slide"
+	data-bmd-jump="profession == 'business'"
+	data-bmd-page-progress="25%"
+	data-bmd-disable-prev-btn
+	data-bmd-post
+>
+	<div class="bmd-grid">
+		<markdown>
+
+		# Heading
+
+		This is a paragraph.
+
+		email* = EmailInput(question=What is your email address?)
+
+		</markdown>
+		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
+			<button type="submit" class="bmd-submit-btn bmd-btn bmd-btn-accent bmd-d-inline-flex bmd-align-items-center">
+				Submit form
+			</button>
+		</div>
+	</div>
+</form>
+`;
+
+test("Case 22 (form, slide with form field, different submit button text)", () => {
+	const result22 = parseSlide(
+		template22,
+		true,
+		false,
+		{ hideRestartBtn: false, submitBtnText: "Submit form" },
+		"en",
+	);
+	expect(beautify(result22["template"], { format: "html" })).toBe(
+		beautify(expectedTemplate22, { format: "html" }),
+	);
+	expect(result22["slideType"]).toBe("body");
 });

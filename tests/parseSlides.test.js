@@ -711,3 +711,80 @@ test("Case 9 (empty template)", () => {
 		beautify(expectedTemplate9, { format: "html" }),
 	);
 });
+
+// Case 10 (form, two slides, different submit button text, hidden restart button)
+
+const template10 = `
+name* = TextInput(
+	| question = What is your name?
+)
+---
+email* = EmailInput(
+	| question = What is your email address?
+)
+`;
+const expectedTemplate10 = `
+<form
+	method="POST"
+	action="javascript:void(0);"
+	class="bmd-slide bmd-first-slide"
+>
+	<div class="bmd-grid">
+		<markdown>
+
+		name* = TextInput(
+			| question = What is your name?
+		)
+
+		</markdown>
+		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-start">
+			<button type="submit" class="bmd-submit-btn bmd-btn bmd-btn-accent bmd-d-inline-flex bmd-align-items-center">
+				Let's Go!	
+			</button>
+		</div>
+	</div>
+</form>
+<form
+	method="POST"
+	action="javascript:void(0);"
+	class="bmd-slide"
+>
+	<div class="bmd-grid">
+		<markdown>
+
+		email* = EmailInput(
+			| question = What is your email address?
+		)
+
+		</markdown>
+		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-start">
+			<button type="submit" class="bmd-submit-btn bmd-btn bmd-btn-accent bmd-d-inline-flex bmd-align-items-center">
+				Let's Go!	
+			</button>
+		</div>
+	</div>
+</form>
+<div
+	class="bmd-slide bmd-end-slide"
+>
+	<div class="bmd-grid">
+		<div class="bmd-text-center">
+			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
+			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
+		</div>
+	</div>
+</div>
+`;
+
+test("Case 10 (form, two slides, different submit button text, hidden restart button)", () => {
+	const result10 = parseSlides(
+		template10,
+		true,
+		{ hideRestartBtn: true, submitBtnText: "Let's Go!" },
+		"en",
+		"---",
+	);
+	expect(beautify(result10, { format: "html" })).toBe(
+		beautify(expectedTemplate10, { format: "html" }),
+	);
+});
