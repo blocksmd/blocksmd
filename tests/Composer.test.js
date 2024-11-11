@@ -1110,28 +1110,6 @@ test("Slide with post parameter and empty template", () => {
 	expect(composer.slide({ post: true })).toBe(expectedSlidePost);
 });
 
-const expectedSlideButtonAlignCenter = `
-=| center
-`;
-
-test("Slide with button alignment center and empty template", () => {
-	const composer = new Composer();
-	expect(composer.slide({ buttonAlign: "center" })).toBe(
-		expectedSlideButtonAlignCenter,
-	);
-});
-
-const expectedSlideButtonAlignEnd = `
-=| end
-`;
-
-test("Slide with button alignment end and empty template", () => {
-	const composer = new Composer();
-	expect(composer.slide({ buttonAlign: "end" })).toBe(
-		expectedSlideButtonAlignEnd,
-	);
-});
-
 const expectedSlideDisablePrevious = `
 << disable
 `;
@@ -1148,7 +1126,6 @@ const expectedSlideMultipleParams = `
 -> age > 18
 |> 2/5
 >> post
-=| center
 << disable
 `;
 
@@ -1160,7 +1137,6 @@ test("Slide with multiple parameters and existing content", () => {
 			jumpCondition: "age > 18",
 			pageProgress: "2/5",
 			post: true,
-			buttonAlign: "center",
 			disablePrevious: true,
 		}),
 	).toBe(expectedSlideMultipleParams);
@@ -1199,34 +1175,9 @@ test("Start slide with custom button text and empty template", () => {
 	);
 });
 
-const expectedStartSlideButtonAlignCenter = `
--> start
-=| center
-`;
-
-test("Start slide with center button alignment and empty template", () => {
-	const composer = new Composer();
-	expect(composer.startSlide({ buttonAlign: "center" })).toBe(
-		expectedStartSlideButtonAlignCenter,
-	);
-});
-
-const expectedStartSlideButtonAlignEnd = `
--> start
-=| end
-`;
-
-test("Start slide with end button alignment and empty template", () => {
-	const composer = new Composer();
-	expect(composer.startSlide({ buttonAlign: "end" })).toBe(
-		expectedStartSlideButtonAlignEnd,
-	);
-});
-
 const expectedStartSlideAllParams = `
 ---
 -> start -> Begin Here
-=| center
 `;
 
 test("Start slide with all parameters and existing content", () => {
@@ -1235,7 +1186,6 @@ test("Start slide with all parameters and existing content", () => {
 	expect(
 		composer.startSlide({
 			buttonText: "Begin Here",
-			buttonAlign: "center",
 		}),
 	).toBe(expectedStartSlideAllParams);
 });
@@ -1252,7 +1202,6 @@ test("Start slide with empty parameters object and empty template", () => {
 const expectedStartSlideCustomDelimiter = `
 ***
 -> start -> Custom Start
-=| end
 `;
 
 test("Start slide with custom delimiter and existing content", () => {
@@ -1261,7 +1210,6 @@ test("Start slide with custom delimiter and existing content", () => {
 	expect(
 		composer.startSlide({
 			buttonText: "Custom Start",
-			buttonAlign: "end",
 		}),
 	).toBe(expectedStartSlideCustomDelimiter);
 });
