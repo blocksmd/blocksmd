@@ -122,7 +122,7 @@ class blocksmd {
 				typeof options["isFullPage"] === "boolean"
 			)
 				this.options["isFullPage"] = options["isFullPage"];
-			// Padding bottom
+			// Padding inline bottom
 			if (
 				options["paddingInlineBottom"] !== undefined &&
 				typeof options["paddingInlineBottom"] === "number"
@@ -135,7 +135,7 @@ class blocksmd {
 			)
 				this.options["paddingInlineHorizontal"] =
 					options["paddingInlineHorizontal"];
-			// Padding top
+			// Padding inline top
 			if (
 				options["paddingInlineTop"] !== undefined &&
 				typeof options["paddingInlineTop"] === "number"
