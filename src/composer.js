@@ -1059,7 +1059,14 @@ class Composer {
 		var templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["jumpCondition"] !== undefined)
 			templateChunks.push(`-> ${params["jumpCondition"]}`);
 		if (params["pageProgress"] !== undefined)
@@ -1097,7 +1104,14 @@ class Composer {
 		const templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["buttonText"] !== undefined) {
 			templateChunks.push(`-> start -> ${params["buttonText"]}`);
 		} else {
@@ -1132,7 +1146,14 @@ class Composer {
 		const templateChunks = [];
 
 		// Add the slide and params
-		templateChunks.push(instance.settings["slideDelimiter"]);
+		if (
+			instance.template
+				.split("\n")
+				.filter((line) => !line.trim().startsWith("#!"))
+				.join("\n")
+				.trim() !== ""
+		)
+			templateChunks.push(instance.settings["slideDelimiter"]);
 		if (params["redirectUrl"] !== undefined) {
 			templateChunks.push(`-> end -> ${params["redirectUrl"]}`);
 		} else {
