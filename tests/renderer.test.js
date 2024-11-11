@@ -348,7 +348,7 @@ const expectedTemplate = `
 		id="id_password"
 		type="password"
 		class="bmd-form-password-input bmd-form-control"
-		placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+		placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
 	>
 </div>
 

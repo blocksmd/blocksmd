@@ -252,7 +252,7 @@ function createTextField(
 		validParams["placeholder"] = "https://example.com";
 	} else if (inputType === "password") {
 		validParams["placeholder"] =
-			"&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;";
+			"&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;";
 	}
 
 	// Go through the rest of the params and validate
