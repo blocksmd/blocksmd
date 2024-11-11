@@ -2463,22 +2463,29 @@ class blocksmd {
 		if (!instance.options["isFullPage"]) {
 			let rootElemClass = "bmd-root bmd-root-inline";
 			let rootElemStyle = "";
+
+			// Handle padding inline bottom
 			if (instance.options["paddingInlineBottom"] !== null) {
 				rootElemClass += " bmd-pb-custom";
 				rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options["paddingInlineBottom"]}px;`;
 				if (instance.options["paddingInlineBottom"] === 0)
 					rootElemClass += " bmd-pb-0";
 			}
+
+			// Handle padding inline horizontal
 			rootElemClass += " bmd-px-custom";
 			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options["paddingInlineHorizontal"]}px;`;
 			if (instance.options["paddingInlineHorizontal"] === 0)
 				rootElemClass += " bmd-px-0";
+
+			// Handle padding inline top
 			if (instance.options["paddingInlineTop"] !== null) {
 				rootElemClass += " bmd-pt-custom";
 				rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options["paddingInlineTop"]}px;`;
 				if (instance.options["paddingInlineTop"] === 0)
 					rootElemClass += " bmd-pt-0";
 			}
+
 			instance.container.innerHTML = [
 				"<div",
 				'	spellcheck="false"',

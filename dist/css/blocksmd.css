@@ -368,15 +368,6 @@
 	--bmd-content-padding-top-xs: var(--bmd-content-padding-top-custom, 0px);
 }
 
-.bmd-root.bmd-root-inline.bmd-px-custom {
-	/* Layout */
-
-	--bmd-content-padding-x: var(--bmd-content-padding-x-custom, 0px);
-	--bmd-content-padding-x-md: var(--bmd-content-padding-x-custom, 0px);
-	--bmd-content-padding-x-xs: var(--bmd-content-padding-x-custom, 0px);
-	--bmd-main-container-width: 100%;
-}
-
 .bmd-root.bmd-root-inline.bmd-pb-custom {
 	/* Layout */
 
@@ -389,6 +380,15 @@
 		--bmd-content-padding-bottom-custom,
 		0px
 	);
+}
+
+.bmd-root.bmd-root-inline.bmd-px-custom {
+	/* Layout */
+
+	--bmd-content-padding-x: var(--bmd-content-padding-x-custom, 0px);
+	--bmd-content-padding-x-md: var(--bmd-content-padding-x-custom, 0px);
+	--bmd-content-padding-x-xs: var(--bmd-content-padding-x-custom, 0px);
+	--bmd-main-container-width: 100%;
 }
 
 .bmd-root[data-bmd-button-alignment="center"]
