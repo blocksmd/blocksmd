@@ -75,7 +75,7 @@ class blocksmd {
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
 	 * @property {boolean} [removePaddingInline] Whether to remove padding from inline pages and forms. Default is `true` for inline pages and forms.
-	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `false`.
+	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
 	 * @property {ThemeType} [themeDark] Dark theme.
