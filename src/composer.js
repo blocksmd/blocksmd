@@ -15,20 +15,18 @@ function composeSharedFieldParams(params, formDelimiter) {
 	const sharedParams = [];
 
 	// Add the shared params
-	sharedParams.push(`\t${formDelimiter}question = ${params["question"]}`);
-	if (params["description"] !== undefined)
-		sharedParams.push(
-			`\t${formDelimiter}description = ${params["description"]}`,
-		);
-	if (params["fieldSize"] === "sm")
-		sharedParams.push(`\t${formDelimiter}fieldSize = ${params["fieldSize"]}`);
-	if (params["labelStyle"] === "classic")
-		sharedParams.push(`\t${formDelimiter}labelStyle = ${params["labelStyle"]}`);
-	if (params["subfield"] !== undefined)
+	sharedParams.push(`\t${formDelimiter}question = ${params.question}`);
+	if (params.description !== undefined)
+		sharedParams.push(`\t${formDelimiter}description = ${params.description}`);
+	if (params.fieldSize === "sm")
+		sharedParams.push(`\t${formDelimiter}fieldSize = ${params.fieldSize}`);
+	if (params.labelStyle === "classic")
+		sharedParams.push(`\t${formDelimiter}labelStyle = ${params.labelStyle}`);
+	if (params.subfield !== undefined)
 		sharedParams.push(`\t${formDelimiter}subfield`);
-	if (params["disabled"] !== undefined)
+	if (params.disabled !== undefined)
 		sharedParams.push(`\t${formDelimiter}disabled`);
-	if (params["autofocus"] !== undefined)
+	if (params.autofocus !== undefined)
 		sharedParams.push(`\t${formDelimiter}autofocus`);
 
 	return sharedParams;
@@ -44,15 +42,15 @@ function composeAttrs(params) {
 	const attrs = [];
 
 	// Add the id, CSS class names and other HTML attributes
-	if (params["id"] !== undefined) attrs.push(`#${params["id"]}`);
-	if (params["classNames"] !== undefined) {
-		for (const className of params["classNames"]) {
+	if (params.id !== undefined) attrs.push(`#${params.id}`);
+	if (params.classNames !== undefined) {
+		for (const className of params.classNames) {
 			attrs.push(`.${className}`);
 		}
 	}
-	if (params["attrs"] !== undefined) {
-		for (const attr of params["attrs"]) {
-			attrs.push(`${attr["name"]}="${attr["value"]}"`);
+	if (params.attrs !== undefined) {
+		for (const attr of params.attrs) {
+			attrs.push(`${attr.name}="${attr.value}"`);
 		}
 	}
 
@@ -200,28 +198,26 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = TextInput(`,
+			`${name}${params.required ? "*" : ""} = TextInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["multiline"] !== undefined)
+		if (params.multiline !== undefined)
 			templateChunks.push(`\t${formDelimiter}multiline`);
-		if (params["maxlength"] !== undefined)
-			templateChunks.push(
-				`\t${formDelimiter}maxlength = ${params["maxlength"]}`,
-			);
-		if (params["pattern"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}pattern = ${params["pattern"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.maxlength !== undefined)
+			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
+		if (params.pattern !== undefined)
+			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -258,26 +254,24 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = EmailInput(`,
+			`${name}${params.required ? "*" : ""} = EmailInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["maxlength"] !== undefined)
-			templateChunks.push(
-				`\t${formDelimiter}maxlength = ${params["maxlength"]}`,
-			);
-		if (params["pattern"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}pattern = ${params["pattern"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.maxlength !== undefined)
+			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
+		if (params.pattern !== undefined)
+			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -314,26 +308,24 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = URLInput(`,
+			`${name}${params.required ? "*" : ""} = URLInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["maxlength"] !== undefined)
-			templateChunks.push(
-				`\t${formDelimiter}maxlength = ${params["maxlength"]}`,
-			);
-		if (params["pattern"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}pattern = ${params["pattern"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.maxlength !== undefined)
+			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
+		if (params.pattern !== undefined)
+			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -378,32 +370,30 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = TelInput(`,
+			`${name}${params.required ? "*" : ""} = TelInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["maxlength"] !== undefined)
-			templateChunks.push(
-				`\t${formDelimiter}maxlength = ${params["maxlength"]}`,
-			);
-		if (params["pattern"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}pattern = ${params["pattern"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
-		if (params["country"] !== undefined) {
-			templateChunks.push(`\t${formDelimiter}country = ${params["country"]}`);
+		if (params.maxlength !== undefined)
+			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
+		if (params.pattern !== undefined)
+			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		if (params.country !== undefined) {
+			templateChunks.push(`\t${formDelimiter}country = ${params.country}`);
 		}
-		if (params["availableCountries"] !== undefined) {
+		if (params.availableCountries !== undefined) {
 			templateChunks.push(
-				`\t${formDelimiter}availableCountries = ${params["availableCountries"].join(", ")}`,
+				`\t${formDelimiter}availableCountries = ${params.availableCountries.join(", ")}`,
 			);
 		}
 
@@ -445,30 +435,30 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = NumberInput(`,
+			`${name}${params.required ? "*" : ""} = NumberInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["min"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}min = ${params["min"]}`);
-		if (params["max"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}max = ${params["max"]}`);
-		if (params["step"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}step = ${params["step"]}`);
-		if (params["unit"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}unit = ${params["unit"]}`);
-		if (params["unitEnd"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}unitend = ${params["unitEnd"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.min !== undefined)
+			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
+		if (params.max !== undefined)
+			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
+		if (params.step !== undefined)
+			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
+		if (params.unit !== undefined)
+			templateChunks.push(`\t${formDelimiter}unit = ${params.unit}`);
+		if (params.unitEnd !== undefined)
+			templateChunks.push(`\t${formDelimiter}unitend = ${params.unitEnd}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -512,20 +502,20 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = SelectBox(`,
+			`${name}${params.required ? "*" : ""} = SelectBox(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
 
-		const optionsString = params["options"]
+		const optionsString = params.options
 			.map((option) => {
 				if (typeof option === "string") {
 					return option;
@@ -538,8 +528,8 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}options = ${optionsString}`);
 
-		if (params["selected"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}selected = ${params["selected"]}`);
+		if (params.selected !== undefined)
+			templateChunks.push(`\t${formDelimiter}selected = ${params.selected}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -584,15 +574,15 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = ChoiceInput(`,
+			`${name}${params.required ? "*" : ""} = ChoiceInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		const choicesString = params["choices"]
+		const choicesString = params.choices
 			.map((choice) => {
 				if (typeof choice === "string") {
 					return choice;
@@ -605,13 +595,13 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}choices = ${choicesString}`);
 
-		if (params["multiple"] !== undefined)
+		if (params.multiple !== undefined)
 			templateChunks.push(`\t${formDelimiter}multiple`);
-		if (params["horizontal"] !== undefined)
+		if (params.horizontal !== undefined)
 			templateChunks.push(`\t${formDelimiter}horizontal`);
-		if (params["checked"] !== undefined)
+		if (params.checked !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}checked = ${params["checked"].join(", ")}`,
+				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,
 			);
 
 		// Close the input and add the attributes (if applicable)
@@ -659,15 +649,15 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = PictureChoice(`,
+			`${name}${params.required ? "*" : ""} = PictureChoice(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		const choicesString = params["choices"]
+		const choicesString = params.choices
 			.map((choice) => {
 				const baseChoice =
 					choice.value !== undefined
@@ -678,15 +668,15 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}choices = ${choicesString}`);
 
-		if (params["multiple"] !== undefined)
+		if (params.multiple !== undefined)
 			templateChunks.push(`\t${formDelimiter}multiple`);
-		if (params["supersize"] !== undefined)
+		if (params.supersize !== undefined)
 			templateChunks.push(`\t${formDelimiter}supersize`);
-		if (params["hideLabels"] !== undefined)
+		if (params.hideLabels !== undefined)
 			templateChunks.push(`\t${formDelimiter}hidelabels`);
-		if (params["checked"] !== undefined)
+		if (params.checked !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}checked = ${params["checked"].join(", ")}`,
+				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,
 			);
 
 		// Close the input and add the attributes (if applicable)
@@ -724,21 +714,21 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = RatingInput(`,
+			`${name}${params.required ? "*" : ""} = RatingInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["outOf"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}outof = ${params["outOf"]}`);
-		if (params["icon"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}icon = ${params["icon"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
-		if (params["hideLabels"] !== undefined)
+		if (params.outOf !== undefined)
+			templateChunks.push(`\t${formDelimiter}outof = ${params.outOf}`);
+		if (params.icon !== undefined)
+			templateChunks.push(`\t${formDelimiter}icon = ${params.icon}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		if (params.hideLabels !== undefined)
 			templateChunks.push(`\t${formDelimiter}hidelabels`);
 
 		// Close the input and add the attributes (if applicable)
@@ -779,30 +769,30 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = OpinionScale(`,
+			`${name}${params.required ? "*" : ""} = OpinionScale(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["startAt"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}startat = ${params["startAt"]}`);
-		if (params["outOf"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}outof = ${params["outOf"]}`);
-		if (params["labelStart"] !== undefined)
+		if (params.startAt !== undefined)
+			templateChunks.push(`\t${formDelimiter}startat = ${params.startAt}`);
+		if (params.outOf !== undefined)
+			templateChunks.push(`\t${formDelimiter}outof = ${params.outOf}`);
+		if (params.labelStart !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}labelstart = ${params["labelStart"]}`,
+				`\t${formDelimiter}labelstart = ${params.labelStart}`,
 			);
-		if (params["labelEnd"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}labelend = ${params["labelEnd"]}`);
-		if (params["hideLabelStart"] !== undefined)
+		if (params.labelEnd !== undefined)
+			templateChunks.push(`\t${formDelimiter}labelend = ${params.labelEnd}`);
+		if (params.hideLabelStart !== undefined)
 			templateChunks.push(`\t${formDelimiter}hidelabelstart`);
-		if (params["hideLabelEnd"] !== undefined)
+		if (params.hideLabelEnd !== undefined)
 			templateChunks.push(`\t${formDelimiter}hidelabelend`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -840,26 +830,26 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = DatetimeInput(`,
+			`${name}${params.required ? "*" : ""} = DatetimeInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["min"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}min = ${params["min"]}`);
-		if (params["max"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}max = ${params["max"]}`);
-		if (params["step"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}step = ${params["step"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.min !== undefined)
+			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
+		if (params.max !== undefined)
+			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
+		if (params.step !== undefined)
+			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -897,26 +887,26 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = DateInput(`,
+			`${name}${params.required ? "*" : ""} = DateInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["min"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}min = ${params["min"]}`);
-		if (params["max"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}max = ${params["max"]}`);
-		if (params["step"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}step = ${params["step"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.min !== undefined)
+			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
+		if (params.max !== undefined)
+			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
+		if (params.step !== undefined)
+			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -954,26 +944,26 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = TimeInput(`,
+			`${name}${params.required ? "*" : ""} = TimeInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["placeholder"] !== undefined)
+		if (params.placeholder !== undefined)
 			templateChunks.push(
-				`\t${formDelimiter}placeholder = ${params["placeholder"]}`,
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params["min"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}min = ${params["min"]}`);
-		if (params["max"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}max = ${params["max"]}`);
-		if (params["step"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}step = ${params["step"]}`);
-		if (params["value"] !== undefined)
-			templateChunks.push(`\t${formDelimiter}value = ${params["value"]}`);
+		if (params.min !== undefined)
+			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
+		if (params.max !== undefined)
+			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
+		if (params.step !== undefined)
+			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1008,19 +998,17 @@ class Composer {
 
 		// Set up the template chunks using the shared params
 		const formDelimiter =
-			instance.settings["formDelimiter"] !== "\n"
-				? `${instance.settings["formDelimiter"]} `
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
 				: "";
 		const templateChunks = [
-			`${name}${params["required"] ? "*" : ""} = FileInput(`,
+			`${name}${params.required ? "*" : ""} = FileInput(`,
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params["sizeLimit"] !== undefined)
-			templateChunks.push(
-				`\t${formDelimiter}sizelimit = ${params["sizeLimit"]}`,
-			);
-		if (params["imageOnly"] !== undefined)
+		if (params.sizeLimit !== undefined)
+			templateChunks.push(`\t${formDelimiter}sizelimit = ${params.sizeLimit}`);
+		if (params.imageOnly !== undefined)
 			templateChunks.push(`\t${formDelimiter}imageonly`);
 
 		// Close the input and add the attributes (if applicable)
@@ -1066,14 +1054,13 @@ class Composer {
 				.join("\n")
 				.trim() !== ""
 		)
-			templateChunks.push(instance.settings["slideDelimiter"]);
-		if (params["jumpCondition"] !== undefined)
-			templateChunks.push(`-> ${params["jumpCondition"]}`);
-		if (params["pageProgress"] !== undefined)
-			templateChunks.push(`|> ${params["pageProgress"]}`);
-		if (params["post"] !== undefined) templateChunks.push(">> post");
-		if (params["disablePrevious"] !== undefined)
-			templateChunks.push("<< disable");
+			templateChunks.push(instance.settings.slideDelimiter);
+		if (params.jumpCondition !== undefined)
+			templateChunks.push(`-> ${params.jumpCondition}`);
+		if (params.pageProgress !== undefined)
+			templateChunks.push(`|> ${params.pageProgress}`);
+		if (params.post !== undefined) templateChunks.push(">> post");
+		if (params.disablePrevious !== undefined) templateChunks.push("<< disable");
 
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
@@ -1108,9 +1095,9 @@ class Composer {
 				.join("\n")
 				.trim() !== ""
 		)
-			templateChunks.push(instance.settings["slideDelimiter"]);
-		if (params["buttonText"] !== undefined) {
-			templateChunks.push(`-> start -> ${params["buttonText"]}`);
+			templateChunks.push(instance.settings.slideDelimiter);
+		if (params.buttonText !== undefined) {
+			templateChunks.push(`-> start -> ${params.buttonText}`);
 		} else {
 			templateChunks.push("-> start");
 		}
@@ -1148,9 +1135,9 @@ class Composer {
 				.join("\n")
 				.trim() !== ""
 		)
-			templateChunks.push(instance.settings["slideDelimiter"]);
-		if (params["redirectUrl"] !== undefined) {
-			templateChunks.push(`-> end -> ${params["redirectUrl"]}`);
+			templateChunks.push(instance.settings.slideDelimiter);
+		if (params.redirectUrl !== undefined) {
+			templateChunks.push(`-> end -> ${params.redirectUrl}`);
 		} else {
 			templateChunks.push("-> end");
 		}
@@ -1446,10 +1433,10 @@ class Composer {
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
-			const language = params["language"] || "";
+			const language = params.language || "";
 			result = `\n\`\`\`${language} [${attrs.join(" ")}]\n${content}\n\`\`\`\n`;
 		} else {
-			const language = params["language"] || "";
+			const language = params.language || "";
 			result = `\n\`\`\`${language}\n${content}\n\`\`\`\n`;
 		}
 		instance.template += result;
@@ -1465,7 +1452,7 @@ class Composer {
 		const instance = this;
 
 		let result = "";
-		if (instance.settings["slideDelimiter"] === "---") {
+		if (instance.settings.slideDelimiter === "---") {
 			result = "\n***\n";
 		} else {
 			result = "\n---\n";
@@ -1491,15 +1478,15 @@ class Composer {
 		const instance = this;
 
 		if (!params) params = {};
-		if (!params["bind"]) params["bind"] = [];
+		if (!params.bind) params.bind = [];
 
 		const attrs = composeAttrs(params);
 		let result = "";
 
-		if (attrs.length > 0 || params["bind"].length > 0) {
+		if (attrs.length > 0 || params.bind.length > 0) {
 			const attrPart = attrs.length > 0 ? attrs.join(" ") : "";
 			const bindPart =
-				params["bind"].length > 0 ? `{$ ${params["bind"].join(" ")} $}` : "";
+				params.bind.length > 0 ? `{$ ${params.bind.join(" ")} $}` : "";
 
 			// Handle cases where we might have either attrs or bindings or both
 			if (attrPart && bindPart) {

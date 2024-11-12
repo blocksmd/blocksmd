@@ -90,11 +90,11 @@ function formFieldSetup(
 	let startTag = `<${startTagName}>`;
 	if (parsedAttrs) startTag = `<${startTagName} ${parsedAttrs}>`;
 	startTag = addReservedClass(startTag, "bmd-form-field");
-	if (validParams["fieldsize"] === "sm")
+	if (validParams.fieldsize === "sm")
 		startTag = addReservedClass(startTag, "bmd-form-field-sm");
 	if (
-		validParams["subfield"] !== undefined ||
-		validParams["labelstyle"] === "classic"
+		validParams.subfield !== undefined ||
+		validParams.labelstyle === "classic"
 	)
 		startTag = addReservedClass(startTag, "bmd-form-field-classic-labels");
 
@@ -242,16 +242,16 @@ function createTextField(
 	const translations = {};
 
 	// Add the default placeholder based on input type
-	validParams["placeholder"] = getTranslation(
+	validParams.placeholder = getTranslation(
 		localization,
 		"text-input-placeholder",
 	);
 	if (inputType === "email") {
-		validParams["placeholder"] = "name@example.com";
+		validParams.placeholder = "name@example.com";
 	} else if (inputType === "url") {
-		validParams["placeholder"] = "https://example.com";
+		validParams.placeholder = "https://example.com";
 	} else if (inputType === "password") {
-		validParams["placeholder"] =
+		validParams.placeholder =
 			"&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;";
 	}
 
@@ -291,17 +291,15 @@ function createTextField(
 	// Add the telephone input placeholder using the country (if applicable)
 	// Also set the available countries as an array
 	if (inputType === "tel") {
-		validParams["country"] = validParams["country"] || "US";
-		validParams["placeholder"] = getPhoneNumberPlaceholder(
-			validParams["country"],
-		);
+		validParams.country = validParams.country || "US";
+		validParams.placeholder = getPhoneNumberPlaceholder(validParams.country);
 
-		validParams["availablecountries"] = validParams["availablecountries"] || "";
-		if (validParams["availablecountries"].trim() === "") {
-			validParams["availablecountries"] = [];
+		validParams.availablecountries = validParams.availablecountries || "";
+		if (validParams.availablecountries.trim() === "") {
+			validParams.availablecountries = [];
 		} else {
-			validParams["availablecountries"] =
-				validParams["availablecountries"].split(",");
+			validParams.availablecountries =
+				validParams.availablecountries.split(",");
 		}
 	}
 
@@ -309,19 +307,19 @@ function createTextField(
 	// If multiline, template is switched to use the <textarea> element
 	// If telephone input, template is switched to include country code <select>
 	let template = textFieldTemplate;
-	if (inputType === "text" && validParams["multiline"] !== undefined) {
+	if (inputType === "text" && validParams.multiline !== undefined) {
 		template = multilineTextFieldTemplate;
-		translations["newLineText"] = getTranslation(
+		translations.newLineText = getTranslation(
 			localization,
 			"textarea-new-line-text",
 		);
 	} else if (inputType === "tel") {
 		template = telFieldTemplate;
-		translations["countryCallingCodeLabel"] = getTranslation(
+		translations.countryCallingCodeLabel = getTranslation(
 			localization,
 			"country-calling-code-label",
 		);
-		translations["phoneNumberLabel"] = getTranslation(
+		translations.phoneNumberLabel = getTranslation(
 			localization,
 			"phone-number-label",
 		);
@@ -340,8 +338,8 @@ function createTextField(
 		availableCountryOptions:
 			inputType === "tel"
 				? createCountryCallingCodeOptions(
-						validParams["country"],
-						validParams["availablecountries"],
+						validParams.country,
+						validParams.availablecountries,
 					)
 				: "",
 	});
@@ -428,7 +426,7 @@ function createNumberField(
 	const translations = {};
 
 	// Add the default placeholder
-	validParams["placeholder"] = getTranslation(
+	validParams.placeholder = getTranslation(
 		localization,
 		"number-input-placeholder",
 	);
@@ -546,7 +544,7 @@ function createSelectField(
 	const translations = {};
 
 	// Add the default placeholder
-	validParams["placeholder"] = getTranslation(
+	validParams.placeholder = getTranslation(
 		localization,
 		"select-box-placeholder",
 	);
@@ -750,7 +748,7 @@ function createChoiceField(
 
 	// Create the validation attributes (to be added to the start tag)
 	let validationAttrs = `data-bmd-name="${name}"`;
-	if (!validParams["multiple"]) {
+	if (!validParams.multiple) {
 		validationAttrs += ' data-bmd-type="radio"';
 	} else {
 		validationAttrs += ' data-bmd-type="checkbox"';
@@ -758,8 +756,8 @@ function createChoiceField(
 	if (required) validationAttrs += " data-bmd-required";
 
 	// Only keep one checked value in case of radio buttons
-	if (!validParams["multiple"] && Array.isArray(validParams["checked"]))
-		validParams["checked"].splice(1);
+	if (!validParams.multiple && Array.isArray(validParams.checked))
+		validParams.checked.splice(1);
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
@@ -862,8 +860,8 @@ function createRatingField(
 	};
 
 	// Set default params
-	validParams["outof"] = 5;
-	validParams["icon"] = "star";
+	validParams.outof = 5;
+	validParams.icon = "star";
 
 	// Go through the rest of the params and validate
 	for (let [key, value] of Object.entries(restParams)) {
@@ -994,10 +992,10 @@ function createOpinionScaleField(
 	const translations = {};
 
 	// Set default params
-	validParams["startat"] = 0;
-	validParams["outof"] = 10;
-	validParams["labelstart"] = getTranslation(localization, "nps-label-start");
-	validParams["labelend"] = getTranslation(localization, "nps-label-end");
+	validParams.startat = 0;
+	validParams.outof = 10;
+	validParams.labelstart = getTranslation(localization, "nps-label-start");
+	validParams.labelend = getTranslation(localization, "nps-label-end");
 
 	// Go through the rest of the params and validate
 	for (let [key, value] of Object.entries(restParams)) {
@@ -1025,9 +1023,8 @@ function createOpinionScaleField(
 	}
 
 	// Hide labels
-	if (validParams["hidelabelstart"] !== undefined)
-		validParams["labelstart"] = "";
-	if (validParams["hidelabelend"] !== undefined) validParams["labelend"] = "";
+	if (validParams.hidelabelstart !== undefined) validParams.labelstart = "";
+	if (validParams.hidelabelend !== undefined) validParams.labelend = "";
 
 	// Create the validation attributes (to be added to the start tag)
 	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
@@ -1120,13 +1117,13 @@ function createDatetimeField(
 	// Also set up the pattern
 	let pattern = /.*/;
 	if (inputType === "datetime-local") {
-		validParams["placeholder"] = "YYYY-MM-DDTHH:mm";
+		validParams.placeholder = "YYYY-MM-DDTHH:mm";
 		pattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
 	} else if (inputType === "date") {
-		validParams["placeholder"] = "YYYY-MM-DD";
+		validParams.placeholder = "YYYY-MM-DD";
 		pattern = /^\d{4}-\d{2}-\d{2}$/;
 	} else if (inputType === "time") {
-		validParams["placeholder"] = "HH:mm";
+		validParams.placeholder = "HH:mm";
 		pattern = /^\d{2}:\d{2}$/;
 	}
 
@@ -1269,10 +1266,10 @@ function createFileField(
 	}
 
 	// Set default size limit
-	validParams["sizelimit"] = validParams["sizelimit"] || 10;
+	validParams.sizelimit = validParams.sizelimit || 10;
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="file" data-bmd-size-limit="${validParams["sizelimit"]}"`;
+	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="file" data-bmd-size-limit="${validParams.sizelimit}"`;
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });

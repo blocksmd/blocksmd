@@ -65,10 +65,10 @@ test("Case 1", () => {
 		"localization": "en",
 		"page": "form-slides",
 	});
-	expect(beautify(result1["template"], { format: "html" })).toBe(
+	expect(beautify(result1.template, { format: "html" })).toBe(
 		beautify(expectedTemplate1, { format: "html" }),
 	);
-	expect(result1["settings"]).toMatchObject({
+	expect(result1.settings).toMatchObject({
 		"brand":
 			'<img class="bmd-header-brand bmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">',
 		"brand-alt-scheme":
@@ -146,10 +146,10 @@ test("Case 2 (dark color scheme)", () => {
 		"localization": "en",
 		"page": "form-slides",
 	});
-	expect(beautify(result2["template"], { format: "html" })).toBe(
+	expect(beautify(result2.template, { format: "html" })).toBe(
 		beautify(expectedTemplate2, { format: "html" }),
 	);
-	expect(result2["settings"]).toMatchObject({
+	expect(result2.settings).toMatchObject({
 		"brand":
 			'<img class="bmd-header-brand bmd-hide-lm" src="https://example.com/logo-dm.svg" loading="lazy" alt="Brand">',
 		"brand-alt-scheme":
@@ -227,10 +227,10 @@ test("Case 3 (different localization)", () => {
 		"localization": "bn",
 		"page": "form-slides",
 	});
-	expect(beautify(result3["template"], { format: "html" })).toBe(
+	expect(beautify(result3.template, { format: "html" })).toBe(
 		beautify(expectedTemplate3, { format: "html" }),
 	);
-	expect(result3["settings"]).toMatchObject({
+	expect(result3.settings).toMatchObject({
 		"brand":
 			'<img class="bmd-header-brand bmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">',
 		"brand-alt-scheme":
@@ -277,10 +277,10 @@ test("Case 4 (hide all)", () => {
 		"page": "form-slides",
 		"page-progress": "hide",
 	});
-	expect(beautify(result4["template"], { format: "html" })).toBe(
+	expect(beautify(result4.template, { format: "html" })).toBe(
 		beautify(expectedTemplate4, { format: "html" }),
 	);
-	expect(result4["settings"]).toMatchObject({
+	expect(result4.settings).toMatchObject({
 		"brand":
 			'<img class="bmd-header-brand bmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">',
 		"brand-alt-scheme":
@@ -332,10 +332,10 @@ test("Case 5 (only header brand)", () => {
 		"page": "form-slides",
 		"page-progress": "hide",
 	});
-	expect(beautify(result5["template"], { format: "html" })).toBe(
+	expect(beautify(result5.template, { format: "html" })).toBe(
 		beautify(expectedTemplate5, { format: "html" }),
 	);
-	expect(result5["settings"]).toMatchObject({
+	expect(result5.settings).toMatchObject({
 		"brand":
 			'<img class="bmd-header-brand" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">',
 		"color-scheme": "light",
@@ -381,10 +381,10 @@ test("Case 6 (only header CTA)", () => {
 		"page": "form-slides",
 		"page-progress": "hide",
 	});
-	expect(beautify(result6["template"], { format: "html" })).toBe(
+	expect(beautify(result6.template, { format: "html" })).toBe(
 		beautify(expectedTemplate6, { format: "html" }),
 	);
-	expect(result6["settings"]).toMatchObject({
+	expect(result6.settings).toMatchObject({
 		"cta":
 			'<a class="bmd-btn bmd-btn-accent bmd-btn-control bmd-ms-auto" href="https://example.com/learn-more/">Learn More</a>',
 		"color-scheme": "light",
@@ -440,10 +440,10 @@ test("Case 7 (no footer toggle color scheme button)", () => {
 		"page": "form-slides",
 		"page-progress": "hide",
 	});
-	expect(beautify(result7["template"], { format: "html" })).toBe(
+	expect(beautify(result7.template, { format: "html" })).toBe(
 		beautify(expectedTemplate7, { format: "html" }),
 	);
-	expect(result7["settings"]).toMatchObject({
+	expect(result7.settings).toMatchObject({
 		"color-scheme": "light",
 		"footer-render": true,
 		"header-render": false,
@@ -488,10 +488,10 @@ test("Case 8 (no footer slide controls)", () => {
 		"page-progress": "hide",
 		"slide-controls": "hide",
 	});
-	expect(beautify(result8["template"], { format: "html" })).toBe(
+	expect(beautify(result8.template, { format: "html" })).toBe(
 		beautify(expectedTemplate8, { format: "html" }),
 	);
-	expect(result8["settings"]).toMatchObject({
+	expect(result8.settings).toMatchObject({
 		"color-scheme": "light",
 		"footer-render": true,
 		"header-render": false,
@@ -536,10 +536,10 @@ test("Case 9 (no footer slide controls with page setting)", () => {
 		"page": "single",
 		"page-progress": "hide",
 	});
-	expect(beautify(result9["template"], { format: "html" })).toBe(
+	expect(beautify(result9.template, { format: "html" })).toBe(
 		beautify(expectedTemplate9, { format: "html" }),
 	);
-	expect(result9["settings"]).toMatchObject({
+	expect(result9.settings).toMatchObject({
 		"color-scheme": "light",
 		"footer-render": true,
 		"header-render": false,
@@ -589,10 +589,10 @@ test("Case 10 (no blocksmd branding)", () => {
 		"page": "slides",
 		"page-progress": "hide",
 	});
-	expect(beautify(result10["template"], { format: "html" })).toBe(
+	expect(beautify(result10.template, { format: "html" })).toBe(
 		beautify(expectedTemplate10, { format: "html" }),
 	);
-	expect(result10["settings"]).toMatchObject({
+	expect(result10.settings).toMatchObject({
 		"blocksmd-branding": "hide",
 		"color-scheme": "light",
 		"footer-render": true,

@@ -97,172 +97,166 @@ class blocksmd {
 		// Set the options for use
 		if (options) {
 			// Color Scheme
-			if (
-				options["colorScheme"] === "light" ||
-				options["colorScheme"] === "dark"
-			) {
-				this.options["colorScheme"] = options["colorScheme"];
+			if (options.colorScheme === "light" || options.colorScheme === "dark") {
+				this.options.colorScheme = options.colorScheme;
 			}
 			// GET headers
 			if (
-				options["getHeaders"] !== undefined &&
-				typeof options["getHeaders"] === "object"
+				options.getHeaders !== undefined &&
+				typeof options.getHeaders === "object"
 			) {
-				this.options["getHeaders"] = {
-					...this.options["getHeaders"],
-					...options["getHeaders"],
+				this.options.getHeaders = {
+					...this.options.getHeaders,
+					...options.getHeaders,
 				};
 			}
 			// Id
-			if (options["id"] !== undefined && typeof options["id"] === "string")
-				this.options["id"] = options["id"];
+			if (options.id !== undefined && typeof options.id === "string")
+				this.options.id = options.id;
 			// Is full page
 			if (
-				options["isFullPage"] !== undefined &&
-				typeof options["isFullPage"] === "boolean"
+				options.isFullPage !== undefined &&
+				typeof options.isFullPage === "boolean"
 			)
-				this.options["isFullPage"] = options["isFullPage"];
+				this.options.isFullPage = options.isFullPage;
 			// Padding inline bottom
 			if (
-				options["paddingInlineBottom"] !== undefined &&
-				typeof options["paddingInlineBottom"] === "number"
+				options.paddingInlineBottom !== undefined &&
+				typeof options.paddingInlineBottom === "number"
 			)
-				this.options["paddingInlineBottom"] = options["paddingInlineBottom"];
+				this.options.paddingInlineBottom = options.paddingInlineBottom;
 			// Padding inline horizontal
 			if (
-				options["paddingInlineHorizontal"] !== undefined &&
-				typeof options["paddingInlineHorizontal"] === "number"
+				options.paddingInlineHorizontal !== undefined &&
+				typeof options.paddingInlineHorizontal === "number"
 			)
-				this.options["paddingInlineHorizontal"] =
-					options["paddingInlineHorizontal"];
+				this.options.paddingInlineHorizontal = options.paddingInlineHorizontal;
 			// Padding inline top
 			if (
-				options["paddingInlineTop"] !== undefined &&
-				typeof options["paddingInlineTop"] === "number"
+				options.paddingInlineTop !== undefined &&
+				typeof options.paddingInlineTop === "number"
 			)
-				this.options["paddingInlineTop"] = options["paddingInlineTop"];
+				this.options.paddingInlineTop = options.paddingInlineTop;
 			// POST data
 			if (
-				options["postData"] !== undefined &&
-				typeof options["postData"] === "object"
+				options.postData !== undefined &&
+				typeof options.postData === "object"
 			) {
-				this.options["postData"] = {
-					...this.options["postData"],
-					...options["postData"],
+				this.options.postData = {
+					...this.options.postData,
+					...options.postData,
 				};
 			}
 			// POST headers
 			if (
-				options["postHeaders"] !== undefined &&
-				typeof options["postHeaders"] === "object"
+				options.postHeaders !== undefined &&
+				typeof options.postHeaders === "object"
 			) {
-				this.options["postHeaders"] = {
-					...this.options["postHeaders"],
-					...options["postHeaders"],
+				this.options.postHeaders = {
+					...this.options.postHeaders,
+					...options.postHeaders,
 				};
 			}
 			// Prioritize form data from URLs
 			if (
-				options["prioritizeURLFormData"] !== undefined &&
-				typeof options["prioritizeURLFormData"] === "boolean"
+				options.prioritizeURLFormData !== undefined &&
+				typeof options.prioritizeURLFormData === "boolean"
 			)
-				this.options["prioritizeURLFormData"] =
-					options["prioritizeURLFormData"];
+				this.options.prioritizeURLFormData = options.prioritizeURLFormData;
 			// Sanitize
 			if (
-				options["sanitize"] !== undefined &&
-				typeof options["sanitize"] === "boolean"
+				options.sanitize !== undefined &&
+				typeof options.sanitize === "boolean"
 			)
-				this.options["sanitize"] = options["sanitize"];
+				this.options.sanitize = options.sanitize;
 			// Save state
 			if (
-				options["saveState"] !== undefined &&
-				typeof options["saveState"] === "boolean"
+				options.saveState !== undefined &&
+				typeof options.saveState === "boolean"
 			)
-				this.options["saveState"] = options["saveState"];
+				this.options.saveState = options.saveState;
 			// Set color scheme attributes again
 			if (
-				options["setColorSchemeAttrsAgain"] !== undefined &&
-				typeof options["setColorSchemeAttrsAgain"] === "boolean"
+				options.setColorSchemeAttrsAgain !== undefined &&
+				typeof options.setColorSchemeAttrsAgain === "boolean"
 			)
-				this.options["setColorSchemeAttrsAgain"] =
-					options["setColorSchemeAttrsAgain"];
-			else if (!this.options["isFullPage"]) {
-				this.options["setColorSchemeAttrsAgain"] = false;
+				this.options.setColorSchemeAttrsAgain =
+					options.setColorSchemeAttrsAgain;
+			else if (!this.options.isFullPage) {
+				this.options.setColorSchemeAttrsAgain = false;
 			}
 			// Theme dark
 			if (
-				options["themeDark"] !== undefined &&
-				typeof options["themeDark"] === "object"
+				options.themeDark !== undefined &&
+				typeof options.themeDark === "object"
 			) {
 				if (
-					options["themeDark"]["accent"] !== undefined &&
-					typeof options["themeDark"]["accent"] === "string"
+					options.themeDark.accent !== undefined &&
+					typeof options.themeDark.accent === "string"
 				) {
-					this.options["themeDark"]["accent"] = options["themeDark"]["accent"];
+					this.options.themeDark.accent = options.themeDark.accent;
 				}
 				if (
-					options["themeDark"]["accentForeground"] !== undefined &&
-					typeof options["themeDark"]["accentForeground"] === "string"
+					options.themeDark.accentForeground !== undefined &&
+					typeof options.themeDark.accentForeground === "string"
 				) {
-					this.options["themeDark"]["accentForeground"] =
-						options["themeDark"]["accentForeground"];
+					this.options.themeDark.accentForeground =
+						options.themeDark.accentForeground;
 				}
 				if (
-					options["themeDark"]["backgroundColor"] !== undefined &&
-					typeof options["themeDark"]["backgroundColor"] === "string"
+					options.themeDark.backgroundColor !== undefined &&
+					typeof options.themeDark.backgroundColor === "string"
 				) {
-					this.options["themeDark"]["backgroundColor"] =
-						options["themeDark"]["backgroundColor"];
+					this.options.themeDark.backgroundColor =
+						options.themeDark.backgroundColor;
 				}
 				if (
-					options["themeDark"]["color"] !== undefined &&
-					typeof options["themeDark"]["color"] === "string"
+					options.themeDark.color !== undefined &&
+					typeof options.themeDark.color === "string"
 				) {
-					this.options["themeDark"]["color"] = options["themeDark"]["color"];
+					this.options.themeDark.color = options.themeDark.color;
 				}
 			}
 			// Theme light
 			if (
-				options["themeLight"] !== undefined &&
-				typeof options["themeLight"] === "object"
+				options.themeLight !== undefined &&
+				typeof options.themeLight === "object"
 			) {
 				if (
-					options["themeLight"]["accent"] !== undefined &&
-					typeof options["themeLight"]["accent"] === "string"
+					options.themeLight.accent !== undefined &&
+					typeof options.themeLight.accent === "string"
 				) {
-					this.options["themeLight"]["accent"] =
-						options["themeLight"]["accent"];
+					this.options.themeLight.accent = options.themeLight.accent;
 				}
 				if (
-					options["themeLight"]["accentForeground"] !== undefined &&
-					typeof options["themeLight"]["accentForeground"] === "string"
+					options.themeLight.accentForeground !== undefined &&
+					typeof options.themeLight.accentForeground === "string"
 				) {
-					this.options["themeLight"]["accentForeground"] =
-						options["themeLight"]["accentForeground"];
+					this.options.themeLight.accentForeground =
+						options.themeLight.accentForeground;
 				}
 				if (
-					options["themeLight"]["backgroundColor"] !== undefined &&
-					typeof options["themeLight"]["backgroundColor"] === "string"
+					options.themeLight.backgroundColor !== undefined &&
+					typeof options.themeLight.backgroundColor === "string"
 				) {
-					this.options["themeLight"]["backgroundColor"] =
-						options["themeLight"]["backgroundColor"];
+					this.options.themeLight.backgroundColor =
+						options.themeLight.backgroundColor;
 				}
 				if (
-					options["themeLight"]["color"] !== undefined &&
-					typeof options["themeLight"]["color"] === "string"
+					options.themeLight.color !== undefined &&
+					typeof options.themeLight.color === "string"
 				) {
-					this.options["themeLight"]["color"] = options["themeLight"]["color"];
+					this.options.themeLight.color = options.themeLight.color;
 				}
 			}
 		}
 
 		// Set up the settings from the options
 		const templateSettingsFromOptions = [];
-		if (this.options["id"] !== "")
-			templateSettingsFromOptions.push(`#! id = ${this.options["id"]}`);
+		if (this.options.id !== "")
+			templateSettingsFromOptions.push(`#! id = ${this.options.id}`);
 
-		let colorScheme = this.options["colorScheme"];
+		let colorScheme = this.options.colorScheme;
 		const templateContainsColorScheme = template.match(
 			/#!\s*color-scheme\s*=\s*(light|dark)/,
 		);
@@ -272,23 +266,23 @@ class blocksmd {
 			templateSettingsFromOptions.push(`#! color-scheme = ${colorScheme}`);
 		}
 
-		let theme = this.options["themeLight"];
-		let themeAltScheme = this.options["themeDark"];
+		let theme = this.options.themeLight;
+		let themeAltScheme = this.options.themeDark;
 		if (colorScheme === "dark") {
-			theme = this.options["themeDark"];
-			themeAltScheme = this.options["themeLight"];
+			theme = this.options.themeDark;
+			themeAltScheme = this.options.themeLight;
 		}
 		templateSettingsFromOptions.push(
-			`#! accent = ${theme["accent"]} || ${themeAltScheme["accent"]}`,
+			`#! accent = ${theme.accent} || ${themeAltScheme.accent}`,
 		);
 		templateSettingsFromOptions.push(
-			`#! accent-foreground = ${theme["accentForeground"]} || ${themeAltScheme["accentForeground"]}`,
+			`#! accent-foreground = ${theme.accentForeground} || ${themeAltScheme.accentForeground}`,
 		);
 		templateSettingsFromOptions.push(
-			`#! background-color = ${theme["backgroundColor"]} || ${themeAltScheme["backgroundColor"]}`,
+			`#! background-color = ${theme.backgroundColor} || ${themeAltScheme.backgroundColor}`,
 		);
 		templateSettingsFromOptions.push(
-			`#! color = ${theme["color"]} || ${themeAltScheme["color"]}`,
+			`#! color = ${theme.color} || ${themeAltScheme.color}`,
 		);
 
 		// Set the template
@@ -364,8 +358,8 @@ class blocksmd {
 	getIdPrefix = () => {
 		const instance = this;
 
-		return instance.state["settings"]["id"] !== ""
-			? `${instance.state["settings"]["id"]}:`
+		return instance.state.settings.id !== ""
+			? `${instance.state.settings.id}:`
 			: "";
 	};
 
@@ -402,7 +396,7 @@ class blocksmd {
 		e.preventDefault();
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const localStorageKey =
-			instance.state["settings"]["color-scheme-scope"] === "isolate"
+			instance.state.settings["color-scheme-scope"] === "isolate"
 				? `blocksmd:${instance.getIdPrefix()}${window.location.hostname}${
 						window.location.pathname
 					}color-scheme`
@@ -509,25 +503,25 @@ class blocksmd {
 			.querySelectorAll(`div[data-bmd-bind-${name}]`)
 			.forEach((div) => {
 				const template =
-					instance.state["bindDivTemplates"][
+					instance.state.bindDivTemplates[
 						div.getAttribute("data-bmd-bind-template-ref")
 					];
 				marked.use({
 					renderer: renderer,
 					markedSettings: {
-						"css-prefix": instance.state["settings"]["css-prefix"],
-						"form-delimiter": instance.state["settings"]["form-delimiter"],
-						"id": instance.state["settings"]["id"],
-						"localization": instance.state["settings"]["localization"],
+						"css-prefix": instance.state.settings["css-prefix"],
+						"form-delimiter": instance.state.settings["form-delimiter"],
+						"id": instance.state.settings.id,
+						"localization": instance.state.settings.localization,
 					},
 				});
 				let parsedTemplate = marked.parse(
 					nunjucks.renderString(template, {
-						...instance.state["data"],
-						...instance.state["formData"],
+						...instance.state.data,
+						...instance.state.formData,
 					}),
 				);
-				if (instance.options["sanitize"]) {
+				if (instance.options.sanitize) {
 					const DOMPurify = createDOMPurify(window);
 					parsedTemplate = DOMPurify.sanitize(parsedTemplate);
 				}
@@ -546,7 +540,7 @@ class blocksmd {
 		instance.container
 			.querySelectorAll(`span[data-bmd-bind-${name}]`)
 			.forEach((span) => {
-				span.innerText = instance.state["formData"][name];
+				span.innerText = instance.state.formData[name];
 			});
 	};
 
@@ -661,8 +655,8 @@ class blocksmd {
 					name = "name";
 				}
 
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = type;
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = type;
 				instance.reRenderBindElems(name);
 			});
 
@@ -672,8 +666,8 @@ class blocksmd {
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = isNumeric(elem.value) ? Number(elem.value) : null;
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = "number";
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = "number";
 				instance.reRenderBindElems(name);
 			});
 
@@ -683,8 +677,8 @@ class blocksmd {
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = elem.value;
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = "select";
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = "select";
 				instance.reRenderBindElems(name);
 			});
 
@@ -701,8 +695,8 @@ class blocksmd {
 					"bmd-form-str-check-input",
 					type,
 				);
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = "choice";
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = "choice";
 				instance.reRenderBindElems(name);
 			});
 
@@ -717,8 +711,8 @@ class blocksmd {
 					"radio",
 				);
 				value = value ? parseInt(value) : null;
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = "num-choice";
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = "num-choice";
 				instance.reRenderBindElems(name);
 			});
 
@@ -731,8 +725,8 @@ class blocksmd {
 				let name = elem.getAttribute("name");
 				const value = elem.value;
 				const type = elem.getAttribute("type");
-				instance.state["formData"][name] = value;
-				instance.state["fieldTypes"][name] = type;
+				instance.state.formData[name] = value;
+				instance.state.fieldTypes[name] = type;
 				instance.reRenderBindElems(name);
 			});
 	};
@@ -754,9 +748,9 @@ class blocksmd {
 			let value = urlParam[1];
 
 			// Make sure URL parameters are id-scoped
-			if (instance.state["settings"]["id"] !== "") {
-				if (name.startsWith(`${instance.state["settings"]["id"]}:`)) {
-					name = name.replace(`${instance.state["settings"]["id"]}:`, "");
+			if (instance.state.settings.id !== "") {
+				if (name.startsWith(`${instance.state.settings.id}:`)) {
+					name = name.replace(`${instance.state.settings.id}:`, "");
 				} else {
 					continue;
 				}
@@ -764,40 +758,40 @@ class blocksmd {
 
 			// Text field
 			if (
-				instance.state["fieldTypes"][name] === "text" ||
-				instance.state["fieldTypes"][name] === "email" ||
-				instance.state["fieldTypes"][name] === "url" ||
-				instance.state["fieldTypes"][name] === "tel"
+				instance.state.fieldTypes[name] === "text" ||
+				instance.state.fieldTypes[name] === "email" ||
+				instance.state.fieldTypes[name] === "url" ||
+				instance.state.fieldTypes[name] === "tel"
 			) {
 				const input = instance.container.querySelector(
 					`.bmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
-					instance.state["formData"][name] = value;
-					if (updateLocalStorage && instance.options["saveState"])
+					instance.state.formData[name] = value;
+					if (updateLocalStorage && instance.options.saveState)
 						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
 
 			// Number field
-			if (instance.state["fieldTypes"][name] === "number") {
+			if (instance.state.fieldTypes[name] === "number") {
 				const input = instance.container.querySelector(
 					`.bmd-form-num-input[name="${name}"]`,
 				);
 				if (input && isNumeric(value)) {
 					value = Number(value);
 					input.value = value;
-					instance.state["formData"][name] = value;
-					if (updateLocalStorage && instance.options["saveState"])
+					instance.state.formData[name] = value;
+					if (updateLocalStorage && instance.options.saveState)
 						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
 
 			// Select field
-			if (instance.state["fieldTypes"][name] === "select") {
+			if (instance.state.fieldTypes[name] === "select") {
 				const select = instance.container.querySelector(
 					`.bmd-form-str-select[name="${name}"]`,
 				);
@@ -806,8 +800,8 @@ class blocksmd {
 					for (const option of options) {
 						if (option.getAttribute("value") === value) {
 							select.value = value;
-							instance.state["formData"][name] = value;
-							if (updateLocalStorage && instance.options["saveState"])
+							instance.state.formData[name] = value;
+							if (updateLocalStorage && instance.options.saveState)
 								instance.saveFieldValue(name, value);
 							instance.reRenderBindElems(name);
 							break;
@@ -819,7 +813,7 @@ class blocksmd {
 			}
 
 			// Choice field
-			if (instance.state["fieldTypes"][name] === "choice") {
+			if (instance.state.fieldTypes[name] === "choice") {
 				const input = instance.container.querySelector(
 					`.bmd-form-str-check-input[name="${name}"]`,
 				);
@@ -841,15 +835,15 @@ class blocksmd {
 						"bmd-form-str-check-input",
 						type,
 					);
-					instance.state["formData"][name] = value;
-					if (updateLocalStorage && instance.options["saveState"])
+					instance.state.formData[name] = value;
+					if (updateLocalStorage && instance.options.saveState)
 						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
 			}
 
 			// Number choice field
-			if (instance.state["fieldTypes"][name] === "num-choice") {
+			if (instance.state.fieldTypes[name] === "num-choice") {
 				const input = instance.container.querySelector(
 					`.bmd-form-num-check-input[name="${name}"]`,
 				);
@@ -866,8 +860,8 @@ class blocksmd {
 						"radio",
 					);
 					value = value ? parseInt(value) : null;
-					instance.state["formData"][name] = value;
-					if (updateLocalStorage && instance.options["saveState"])
+					instance.state.formData[name] = value;
+					if (updateLocalStorage && instance.options.saveState)
 						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
@@ -875,17 +869,17 @@ class blocksmd {
 
 			// Datetime field
 			if (
-				instance.state["fieldTypes"][name] === "datetime-local" ||
-				instance.state["fieldTypes"][name] === "date" ||
-				instance.state["fieldTypes"][name] === "time"
+				instance.state.fieldTypes[name] === "datetime-local" ||
+				instance.state.fieldTypes[name] === "date" ||
+				instance.state.fieldTypes[name] === "time"
 			) {
 				const input = instance.container.querySelector(
 					`.bmd-form-datetime-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
-					instance.state["formData"][name] = value;
-					if (updateLocalStorage && instance.options["saveState"])
+					instance.state.formData[name] = value;
+					if (updateLocalStorage && instance.options.saveState)
 						instance.saveFieldValue(name, value);
 					instance.reRenderBindElems(name);
 				}
@@ -908,35 +902,35 @@ class blocksmd {
 		for (const [name, value] of Object.entries(JSON.parse(savedFormData))) {
 			// Text field
 			if (
-				instance.state["fieldTypes"][name] === "text" ||
-				instance.state["fieldTypes"][name] === "email" ||
-				instance.state["fieldTypes"][name] === "url" ||
-				instance.state["fieldTypes"][name] === "tel"
+				instance.state.fieldTypes[name] === "text" ||
+				instance.state.fieldTypes[name] === "email" ||
+				instance.state.fieldTypes[name] === "url" ||
+				instance.state.fieldTypes[name] === "tel"
 			) {
 				const input = instance.container.querySelector(
 					`.bmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
-					instance.state["formData"][name] = value;
+					instance.state.formData[name] = value;
 					instance.reRenderBindElems(name);
 				}
 			}
 
 			// Number field
-			if (instance.state["fieldTypes"][name] === "number") {
+			if (instance.state.fieldTypes[name] === "number") {
 				const input = instance.container.querySelector(
 					`.bmd-form-num-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
-					instance.state["formData"][name] = value;
+					instance.state.formData[name] = value;
 					instance.reRenderBindElems(name);
 				}
 			}
 
 			// Select field
-			if (instance.state["fieldTypes"][name] === "select") {
+			if (instance.state.fieldTypes[name] === "select") {
 				const select = instance.container.querySelector(
 					`.bmd-form-str-select[name="${name}"]`,
 				);
@@ -945,7 +939,7 @@ class blocksmd {
 					for (const option of options) {
 						if (option.getAttribute("value") === value) {
 							select.value = value;
-							instance.state["formData"][name] = value;
+							instance.state.formData[name] = value;
 							instance.reRenderBindElems(name);
 							break;
 						}
@@ -956,7 +950,7 @@ class blocksmd {
 			}
 
 			// Choice field
-			if (instance.state["fieldTypes"][name] === "choice") {
+			if (instance.state.fieldTypes[name] === "choice") {
 				const input = instance.container.querySelector(
 					`.bmd-form-str-check-input[name="${name}"]`,
 				);
@@ -968,7 +962,7 @@ class blocksmd {
 						type,
 						value,
 					);
-					instance.state["formData"][name] = instance.getRadioCheckboxValue(
+					instance.state.formData[name] = instance.getRadioCheckboxValue(
 						name,
 						"bmd-form-str-check-input",
 						type,
@@ -978,7 +972,7 @@ class blocksmd {
 			}
 
 			// Number choice field
-			if (instance.state["fieldTypes"][name] === "num-choice") {
+			if (instance.state.fieldTypes[name] === "num-choice") {
 				const input = instance.container.querySelector(
 					`.bmd-form-num-check-input[name="${name}"]`,
 				);
@@ -989,7 +983,7 @@ class blocksmd {
 						"radio",
 						String(value),
 					);
-					instance.state["formData"][name] = instance.getRadioCheckboxValue(
+					instance.state.formData[name] = instance.getRadioCheckboxValue(
 						name,
 						"bmd-form-num-check-input",
 						"radio",
@@ -1000,16 +994,16 @@ class blocksmd {
 
 			// Datetime field
 			if (
-				instance.state["fieldTypes"][name] === "datetime-local" ||
-				instance.state["fieldTypes"][name] === "date" ||
-				instance.state["fieldTypes"][name] === "time"
+				instance.state.fieldTypes[name] === "datetime-local" ||
+				instance.state.fieldTypes[name] === "date" ||
+				instance.state.fieldTypes[name] === "time"
 			) {
 				const input = instance.container.querySelector(
 					`.bmd-form-datetime-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
-					instance.state["formData"][name] = value;
+					instance.state.formData[name] = value;
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -1086,8 +1080,8 @@ class blocksmd {
 
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1104,8 +1098,8 @@ class blocksmd {
 
 		const name = e.target.getAttribute("name");
 		const value = isNumeric(e.target.value) ? Number(e.target.value) : null;
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1123,8 +1117,8 @@ class blocksmd {
 
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 
@@ -1150,8 +1144,8 @@ class blocksmd {
 			"bmd-form-str-check-input",
 			type,
 		);
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1170,8 +1164,8 @@ class blocksmd {
 		const value = parseInt(
 			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 		);
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1188,8 +1182,8 @@ class blocksmd {
 
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
-		instance.state["formData"][name] = value;
-		if (instance.options["saveState"]) instance.saveFieldValue(name, value);
+		instance.state.formData[name] = value;
+		if (instance.options.saveState) instance.saveFieldValue(name, value);
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1309,7 +1303,7 @@ class blocksmd {
 		const instance = this;
 
 		btn.classList.add("bmd-btn-processing");
-		const localization = instance.state["settings"]["localization"];
+		const localization = instance.state.settings.localization;
 		btn.setAttribute("aria-label", getTranslation(localization, "loading"));
 	};
 
@@ -1323,7 +1317,7 @@ class blocksmd {
 
 		btn.classList.remove("bmd-btn-processing");
 		btn.removeAttribute("aria-label");
-		const localization = instance.state["settings"]["localization"];
+		const localization = instance.state.settings.localization;
 		const footerPreviousBtn = instance.container.querySelector(
 			".bmd-footer .bmd-previous-btn",
 		);
@@ -1397,7 +1391,7 @@ class blocksmd {
 	formValid = (form) => {
 		const instance = this;
 
-		const localization = instance.state["settings"]["localization"];
+		const localization = instance.state.settings.localization;
 
 		// Remove all form errors (reset)
 		instance.removeSlideErrors(form);
@@ -1571,10 +1565,10 @@ class blocksmd {
 	addSlideError = (slide, ctaBtn, messages) => {
 		const instance = this;
 
-		const localization = instance.state["settings"]["localization"];
+		const localization = instance.state.settings.localization;
 		const error = document.createElement("div");
 		const errorId = `${instance.getIdPrefix()}id_slide-${
-			instance.state["slideData"]["currentIndex"]
+			instance.state.slideData.currentIndex
 		}-error`;
 		error.setAttribute("id", errorId);
 		const messageList = [];
@@ -1617,16 +1611,16 @@ class blocksmd {
 		}
 
 		// GET url not provided in settings (return resolved promise)
-		if (instance.state["settings"]["get-url"] === undefined) {
+		if (instance.state.settings["get-url"] === undefined) {
 			return Promise.resolve("").then((result) => {
 				return result;
 			});
 		}
 
 		// Fetch data using GET url
-		return fetch(instance.state["settings"]["get-url"], {
+		return fetch(instance.state.settings["get-url"], {
 			method: "GET",
-			headers: instance.options["getHeaders"],
+			headers: instance.options.getHeaders,
 		})
 			.then((response) => {
 				if (response.ok) {
@@ -1690,7 +1684,7 @@ class blocksmd {
 		// POST url not provided in settings (return resolved promise)
 		// True is returned with a console warning
 		// Again, this way, the form can continue working (useful when drafting)
-		if (instance.state["settings"]["post-url"] === undefined) {
+		if (instance.state.settings["post-url"] === undefined) {
 			console.warn('Form data not sent: "post-url" setting not found.');
 			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
@@ -1701,7 +1695,7 @@ class blocksmd {
 		const formData = new FormData();
 
 		// Set the POST data from the options
-		for (const [key, value] of Object.entries(instance.options["postData"])) {
+		for (const [key, value] of Object.entries(instance.options.postData)) {
 			formData.append(key, value);
 		}
 
@@ -1715,8 +1709,8 @@ class blocksmd {
 		} catch (error) {
 			console.error(error);
 		}
-		for (const [key, value] of Object.entries(instance.state["formData"])) {
-			if (instance.state["fieldTypes"][key] === "datetime-local") {
+		for (const [key, value] of Object.entries(instance.state.formData)) {
+			if (instance.state.fieldTypes[key] === "datetime-local") {
 				formData.append(key, `${value}${timezoneOffset}`);
 			} else {
 				formData.append(key, value);
@@ -1746,14 +1740,14 @@ class blocksmd {
 		formData.append("_rid", instance.getOrCreateResponseId());
 		formData.append(
 			"_sheetName",
-			instance.state["settings"]["post-sheet-name"] || "",
+			instance.state.settings["post-sheet-name"] || "",
 		);
 		formData.append("_submitted", new Date().toUTCString());
 
 		// Send data using POST url
-		return fetch(instance.state["settings"]["post-url"], {
+		return fetch(instance.state.settings["post-url"], {
 			method: "POST",
-			headers: instance.options["postHeaders"],
+			headers: instance.options.postHeaders,
 			body: formData,
 		})
 			.then((response) =>
@@ -1783,7 +1777,7 @@ class blocksmd {
 	getPrevSlide = () => {
 		const instance = this;
 
-		const currentIndex = instance.state["slideData"]["currentIndex"];
+		const currentIndex = instance.state.slideData.currentIndex;
 		const slides = instance.container.querySelectorAll(".bmd-slide");
 		let prevSlide = slides[currentIndex];
 		let prevSlideIndex = currentIndex;
@@ -1804,8 +1798,8 @@ class blocksmd {
 			const jumpCondition = nunjucks.renderString(
 				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
 				{
-					...instance.state["data"],
-					...instance.state["formData"],
+					...instance.state.data,
+					...instance.state.formData,
 				},
 			);
 			if (jumpCondition === "true") {
@@ -1831,7 +1825,7 @@ class blocksmd {
 	getNextSlide = () => {
 		const instance = this;
 
-		const currentIndex = instance.state["slideData"]["currentIndex"];
+		const currentIndex = instance.state.slideData.currentIndex;
 		const slides = instance.container.querySelectorAll(".bmd-slide");
 		let nextSlide = slides[currentIndex];
 		let nextSlideIndex = currentIndex;
@@ -1852,8 +1846,8 @@ class blocksmd {
 			const jumpCondition = nunjucks.renderString(
 				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
 				{
-					...instance.state["data"],
-					...instance.state["formData"],
+					...instance.state.data,
+					...instance.state.formData,
 				},
 			);
 			if (jumpCondition === "true") {
@@ -1910,7 +1904,7 @@ class blocksmd {
 		const instance = this;
 
 		// Update state
-		instance.state["slideData"]["currentIndex"] = index;
+		instance.state.slideData.currentIndex = index;
 
 		// Handle page progress (if applicable)
 		const pageProgress = instance.container.querySelector(".bmd-page-progress");
@@ -1925,9 +1919,9 @@ class blocksmd {
 		if (
 			pageProgress &&
 			slidePageProgress !== undefined &&
-			instance.state["settings"]["page-progress"] !== "decorative"
+			instance.state.settings["page-progress"] !== "decorative"
 		) {
-			const localization = instance.state["settings"]["localization"];
+			const localization = instance.state.settings.localization;
 			pageProgress.setAttribute("role", "progressbar");
 			pageProgress.setAttribute(
 				"aria-label",
@@ -1947,7 +1941,7 @@ class blocksmd {
 		// The timeout makes sure that the slide animation has completed
 		setTimeout(function () {
 			// Scroll
-			if (instance.options["isFullPage"]) {
+			if (instance.options.isFullPage) {
 				window.scroll({ top: 0 });
 			} else {
 				instance.container.scroll({ top: 0 });
@@ -1987,8 +1981,8 @@ class blocksmd {
 			}
 
 			// Autofocus (if applicable)
-			if (!fromInit || (fromInit && instance.options["isFullPage"])) {
-				if (instance.state["settings"]["autofocus"] === "all-slides") {
+			if (!fromInit || (fromInit && instance.options.isFullPage)) {
+				if (instance.state.settings.autofocus === "all-slides") {
 					const elemToAutofocus = slide.querySelector(
 						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
 					);
@@ -2140,7 +2134,7 @@ class blocksmd {
 		// Get the next slide
 		// If it is the same as the active slide, add (and show) error
 		const nextSlideAndIndex = instance.getNextSlide();
-		if (activeSlide === nextSlideAndIndex["slide"]) {
+		if (activeSlide === nextSlideAndIndex.slide) {
 			// Add error
 			instance.addSlideError(activeSlide, ctaBtn, []);
 
@@ -2159,26 +2153,26 @@ class blocksmd {
 
 		// POST form data
 		const postCondition =
-			instance.state["settings"]["page"] === "form-slides" &&
+			instance.state.settings.page === "form-slides" &&
 			(activeSlide.hasAttribute("data-bmd-post") ||
-				nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"))
+				nextSlideAndIndex.slide.classList.contains("bmd-end-slide"))
 				? true
 				: false;
 		instance
 			.postFormData(
 				postCondition,
-				nextSlideAndIndex["slide"].classList.contains("bmd-end-slide"),
+				nextSlideAndIndex.slide.classList.contains("bmd-end-slide"),
 			)
 			.then((promiseResult) => {
 				// Success
-				if (promiseResult["ok"]) {
+				if (promiseResult.ok) {
 					// If next slide is the end slide: remove response id, remove form
 					// data from local storage, and redirect (if applicable)
-					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
+					if (nextSlideAndIndex.slide.classList.contains("bmd-end-slide")) {
 						instance.removeResponseId();
 						instance.removeSavedFormData();
 						const redirect =
-							nextSlideAndIndex["slide"].getAttribute("data-bmd-redirect");
+							nextSlideAndIndex.slide.getAttribute("data-bmd-redirect");
 						if (redirect) {
 							window.location.href = redirect;
 							return;
@@ -2186,12 +2180,12 @@ class blocksmd {
 					}
 
 					// Fade in next slide
-					instance.fadeInNextSlide(activeSlide, nextSlideAndIndex["slide"]);
+					instance.fadeInNextSlide(activeSlide, nextSlideAndIndex.slide);
 
 					// Handle the new active slide
 					instance.hasNewActiveSlide(
-						nextSlideAndIndex["slide"],
-						nextSlideAndIndex["index"],
+						nextSlideAndIndex.slide,
+						nextSlideAndIndex.index,
 						false,
 					);
 				}
@@ -2200,7 +2194,7 @@ class blocksmd {
 					// Add error
 					let errorMessages = [];
 					try {
-						errorMessages = instance.getSubmissionErrors(promiseResult["json"]);
+						errorMessages = instance.getSubmissionErrors(promiseResult.json);
 					} catch (error) {
 						console.error(error);
 					}
@@ -2223,8 +2217,8 @@ class blocksmd {
 						instance.disableAllClicks,
 						true,
 					);
-					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
-						instance.onCompletion(promiseResult["json"]);
+					if (nextSlideAndIndex.slide.classList.contains("bmd-end-slide")) {
+						instance.onCompletion(promiseResult.json);
 					}
 				}, instance.getSlideTransitionDuration() * 3);
 			});
@@ -2259,7 +2253,7 @@ class blocksmd {
 		// Get the previous slide
 		// If it is the same as the active slide, log error
 		const prevSlideAndIndex = instance.getPrevSlide();
-		if (activeSlide === prevSlideAndIndex["slide"]) {
+		if (activeSlide === prevSlideAndIndex.slide) {
 			// Log error
 			console.error("Something went wrong. Please try again.");
 
@@ -2277,12 +2271,12 @@ class blocksmd {
 		}
 
 		// Fade in previous slide
-		instance.fadeInPrevSlide(activeSlide, prevSlideAndIndex["slide"]);
+		instance.fadeInPrevSlide(activeSlide, prevSlideAndIndex.slide);
 
 		// Handle the new active slide
 		instance.hasNewActiveSlide(
-			prevSlideAndIndex["slide"],
-			prevSlideAndIndex["index"],
+			prevSlideAndIndex.slide,
+			prevSlideAndIndex.index,
 			false,
 		);
 
@@ -2323,14 +2317,14 @@ class blocksmd {
 
 		// Show confirmation
 		copyBtn.innerHTML = getTranslation(
-			instance.state["settings"]["localization"],
+			instance.state.settings.localization,
 			"copy-btn-success",
 		);
 
 		// Hide confirmation after 2 seconds
 		setTimeout(function () {
 			copyBtn.innerHTML = getTranslation(
-				instance.state["settings"]["localization"],
+				instance.state.settings.localization,
 				"copy-btn",
 			);
 		}, 2000);
@@ -2349,7 +2343,7 @@ class blocksmd {
 			// Blur header when scrolling over content
 			// This is done only for full page (header is always blurred inline)
 			const header = instance.container.querySelector(".bmd-header");
-			if (header && instance.options["isFullPage"]) {
+			if (header && instance.options.isFullPage) {
 				const pageProgress =
 					instance.container.querySelector(".bmd-page-progress");
 				const pageProgressHeight = pageProgress ? pageProgress.offsetHeight : 0;
@@ -2426,7 +2420,7 @@ class blocksmd {
 			// Restart buttons
 			instance.container.querySelectorAll(".bmd-restart-btn").forEach((btn) => {
 				btn.addEventListener("click", function (e) {
-					if (instance.options["isFullPage"]) {
+					if (instance.options.isFullPage) {
 						window.location.reload();
 					} else {
 						instance._init(false);
@@ -2510,36 +2504,36 @@ class blocksmd {
 
 		// Initialize settings
 		const parsedTemplateAndSettings = parseSettings(instance._template);
-		instance.template = parsedTemplateAndSettings["template"];
-		instance.state["settings"] = {
-			...instance.state["settings"],
-			...parsedTemplateAndSettings["settings"],
+		instance.template = parsedTemplateAndSettings.template;
+		instance.state.settings = {
+			...instance.state.settings,
+			...parsedTemplateAndSettings.settings,
 		};
 
 		// Add the root and body in case of inline
-		if (!instance.options["isFullPage"]) {
+		if (!instance.options.isFullPage) {
 			let rootElemClass = "bmd-root bmd-root-inline";
 			let rootElemStyle = "";
 
 			// Handle padding inline bottom
-			if (instance.options["paddingInlineBottom"] !== null) {
+			if (instance.options.paddingInlineBottom !== null) {
 				rootElemClass += " bmd-pb-custom";
-				rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options["paddingInlineBottom"]}px;`;
-				if (instance.options["paddingInlineBottom"] === 0)
+				rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
+				if (instance.options.paddingInlineBottom === 0)
 					rootElemClass += " bmd-pb-0";
 			}
 
 			// Handle padding inline horizontal
 			rootElemClass += " bmd-px-custom";
-			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options["paddingInlineHorizontal"]}px;`;
-			if (instance.options["paddingInlineHorizontal"] === 0)
+			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options.paddingInlineHorizontal}px;`;
+			if (instance.options.paddingInlineHorizontal === 0)
 				rootElemClass += " bmd-px-0";
 
 			// Handle padding inline top
-			if (instance.options["paddingInlineTop"] !== null) {
+			if (instance.options.paddingInlineTop !== null) {
 				rootElemClass += " bmd-pt-custom";
-				rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options["paddingInlineTop"]}px;`;
-				if (instance.options["paddingInlineTop"] === 0)
+				rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
+				if (instance.options.paddingInlineTop === 0)
 					rootElemClass += " bmd-pt-0";
 			}
 
@@ -2548,8 +2542,8 @@ class blocksmd {
 				'	spellcheck="false"',
 				`	class="${rootElemClass}"`,
 				`	style="${rootElemStyle}"`,
-				`	data-bmd-color-scheme="${instance.state["settings"]["color-scheme"]}"`,
-				`	data-bmd-id="${instance.state["settings"]["id"]}"`,
+				`	data-bmd-color-scheme="${instance.state.settings["color-scheme"]}"`,
+				`	data-bmd-id="${instance.state.settings.id}"`,
 				">",
 				'	<div class="bmd-body">',
 				"		<noscript>Please turn on JavaScript to see this page.</noscript>",
@@ -2564,29 +2558,29 @@ class blocksmd {
 		}
 
 		// Get or create response id
-		if (instance.state["settings"]["page"] === "form-slides")
+		if (instance.state.settings.page === "form-slides")
 			instance.getOrCreateResponseId();
 
 		// The following is done only for full page (not inline)
-		if (instance.options["isFullPage"]) {
+		if (instance.options.isFullPage) {
 			// Set title and favicon
-			if (instance.state["settings"]["title"] !== undefined)
-				document.title = instance.state["settings"]["title"];
-			if (instance.state["settings"]["favicon"] !== undefined) {
+			if (instance.state.settings.title !== undefined)
+				document.title = instance.state.settings.title;
+			if (instance.state.settings.favicon !== undefined) {
 				let faviconLink = document.querySelector('link[rel~="icon"]');
 				if (!faviconLink) {
 					faviconLink = document.createElement("link");
 					faviconLink.rel = "icon";
 					document.head.appendChild(faviconLink);
 				}
-				faviconLink.href = instance.state["settings"]["favicon"];
+				faviconLink.href = instance.state.settings.favicon;
 			}
 
 			// Swap out the main CSS stylesheet in case of RTL
 			const mainStylesheetLink = document.querySelector(
 				'link[href$="blocksmd.min.css"]',
 			);
-			if (instance.state["settings"]["dir"] === "rtl" && mainStylesheetLink) {
+			if (instance.state.settings.dir === "rtl" && mainStylesheetLink) {
 				mainStylesheetLink.setAttribute(
 					"href",
 					mainStylesheetLink
@@ -2600,14 +2594,14 @@ class blocksmd {
 		if (isFirstInit) {
 			const stylesheet = document.createElement("style");
 			stylesheet.setAttribute("type", "text/css");
-			stylesheet.innerText = createStyles(instance.state["settings"]);
+			stylesheet.innerText = createStyles(instance.state.settings);
 			document.head.appendChild(stylesheet);
 		}
 
 		// Add setting if browser is Safari
 		try {
 			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
-				instance.state["settings"]["browser"] = "safari";
+				instance.state.settings.browser = "safari";
 		} catch (error) {
 			console.error(error);
 		}
@@ -2628,14 +2622,14 @@ class blocksmd {
 			"rounded": "data-bmd-rounded",
 			"vertical-alignment": "data-bmd-vertical-alignment",
 		};
-		if (instance.options["setColorSchemeAttrsAgain"]) {
+		if (instance.options.setColorSchemeAttrsAgain) {
 			rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";
 			rootSettingsAttributesMap["color-scheme-scope"] =
 				"data-bmd-color-scheme-scope";
 			rootSettingsAttributesMap["color-scheme-toggle"] =
 				"data-bmd-color-scheme-toggle";
 		}
-		for (const [key, value] of Object.entries(instance.state["settings"])) {
+		for (const [key, value] of Object.entries(instance.state.settings)) {
 			if (rootSettingsAttributesMap[key] !== undefined) {
 				const attribute = rootSettingsAttributesMap[key];
 				rootElem.setAttribute(attribute, value);
@@ -2646,17 +2640,17 @@ class blocksmd {
 		// This is done here again in case we are re-setting the "color-scheme"
 		// attribute to the root
 		if (
-			instance.options["setColorSchemeAttrsAgain"] &&
-			instance.state["settings"]["color-scheme-toggle"] === "show"
+			instance.options.setColorSchemeAttrsAgain &&
+			instance.state.settings["color-scheme-toggle"] === "show"
 		)
 			instance.setPreferredColorScheme();
 
 		// Add the made in loader to the DOM body
-		const localization = instance.state["settings"]["localization"];
+		const localization = instance.state.settings.localization;
 		nunjucks.configure({ autoescape: false });
 		instance.container.querySelector(".bmd-body").innerHTML =
 			nunjucks.renderString(madeInLoaderTemplate, {
-				settings: instance.state["settings"],
+				settings: instance.state.settings,
 				translations: {
 					loading: getTranslation(localization, "loading"),
 					madeInLoader: getTranslation(localization, "made-in-loader"),
@@ -2665,10 +2659,10 @@ class blocksmd {
 
 		// Set data defined in the template
 		const parsedTemplateAndData = parseDataBlocks(instance.template);
-		instance.template = parsedTemplateAndData["template"];
-		instance.state["data"] = {
-			...instance.state["data"],
-			...parsedTemplateAndData["data"],
+		instance.template = parsedTemplateAndData.template;
+		instance.state.data = {
+			...instance.state.data,
+			...parsedTemplateAndData.data,
 		};
 
 		// Fetch data from remote source
@@ -2677,17 +2671,17 @@ class blocksmd {
 			// Set fetched data to state
 			if (promiseResult !== "") {
 				// Create variables for settings needed (for better readability)
-				const getFormat = instance.state["settings"]["get-format"];
-				const getObjectsName = instance.state["settings"]["get-objects-name"];
+				const getFormat = instance.state.settings["get-format"];
+				const getObjectsName = instance.state.settings["get-objects-name"];
 
 				// JSON (set response data depending on the format)
 				if (getFormat === "json") {
 					const promiseResultJSON = JSON.parse(promiseResult);
 					if (Array.isArray(promiseResultJSON)) {
-						instance.state["data"][getObjectsName] = promiseResultJSON;
+						instance.state.data[getObjectsName] = promiseResultJSON;
 					} else {
-						instance.state["data"] = {
-							...instance.state["data"],
+						instance.state.data = {
+							...instance.state.data,
 							...promiseResultJSON,
 						};
 					}
@@ -2703,12 +2697,12 @@ class blocksmd {
 						promiseResult,
 						delimeter,
 					);
-					instance.state["data"] = {
-						...instance.state["data"],
-						...parsedSpreadsheetData["dataSpreadsheet"],
+					instance.state.data = {
+						...instance.state.data,
+						...parsedSpreadsheetData.dataSpreadsheet,
 					};
-					instance.state["data"][getObjectsName] =
-						parsedSpreadsheetData["dataNormalized"];
+					instance.state.data[getObjectsName] =
+						parsedSpreadsheetData.dataNormalized;
 				}
 			}
 
@@ -2716,33 +2710,33 @@ class blocksmd {
 			// The "header-render" and "footer-render" settings are also set here
 			// (in the function being called)
 			const bodyTemplateAndSettings = createBodyTemplate(
-				instance.state["settings"],
+				instance.state.settings,
 			);
-			const bodyTemplate = bodyTemplateAndSettings["template"];
-			instance.state["settings"] = bodyTemplateAndSettings["settings"];
+			const bodyTemplate = bodyTemplateAndSettings.template;
+			instance.state.settings = bodyTemplateAndSettings.settings;
 			instance.container.querySelector(".bmd-body").innerHTML = bodyTemplate;
 
 			// Hide page progress, header and/or footer (if applicable)
-			if (instance.state["settings"]["page-progress"] === "hide")
+			if (instance.state.settings["page-progress"] === "hide")
 				rootElem.setAttribute("data-bmd-page-progress", "hide");
-			if (!instance.state["settings"]["header-render"])
+			if (!instance.state.settings["header-render"])
 				rootElem.setAttribute("data-bmd-header", "hide");
-			if (!instance.state["settings"]["footer-render"])
+			if (!instance.state.settings["footer-render"])
 				rootElem.setAttribute("data-bmd-footer", "hide");
 
 			// Create the content template and add to the DOM
 			const contentTemplateAndBindDivs = createContentTemplate(
 				instance.template,
-				instance.state["settings"],
+				instance.state.settings,
 				{
-					...instance.state["data"],
-					...instance.state["formData"],
+					...instance.state.data,
+					...instance.state.formData,
 				},
-				instance.options["sanitize"],
+				instance.options.sanitize,
 			);
-			instance.template = contentTemplateAndBindDivs["template"];
-			instance.state["bindDivTemplates"] =
-				contentTemplateAndBindDivs["bindDivTemplates"];
+			instance.template = contentTemplateAndBindDivs.template;
+			instance.state.bindDivTemplates =
+				contentTemplateAndBindDivs.bindDivTemplates;
 			instance.container
 				.querySelector(".bmd-main-container")
 				.insertAdjacentHTML("beforeend", instance.template);
@@ -2757,7 +2751,7 @@ class blocksmd {
 			instance.setFormDataToState();
 
 			// Set form data from URL parameters BEFORE local storage
-			if (!instance.options["prioritizeURLFormData"])
+			if (!instance.options.prioritizeURLFormData)
 				try {
 					instance.setFormDataFromURL(false);
 				} catch (error) {
@@ -2765,7 +2759,7 @@ class blocksmd {
 				}
 
 			// Set form data saved in local storage
-			if (instance.options["saveState"]) {
+			if (instance.options.saveState) {
 				try {
 					instance.setSavedFormData();
 				} catch (error) {
@@ -2774,7 +2768,7 @@ class blocksmd {
 			}
 
 			// Set form data from URL parameters AFTER local storage
-			if (instance.options["prioritizeURLFormData"])
+			if (instance.options.prioritizeURLFormData)
 				try {
 					instance.setFormDataFromURL(true);
 				} catch (error) {
@@ -2785,7 +2779,7 @@ class blocksmd {
 			instance.container
 				.querySelector(".bmd-loader-container")
 				.classList.add("bmd-d-none");
-			if (instance.state["settings"]["page"] !== "single") {
+			if (instance.state.settings.page !== "single") {
 				const firstSlide = instance.container.querySelector(".bmd-slide");
 				firstSlide.classList.add("bmd-slide-active");
 				instance.hasNewActiveSlide(firstSlide, 0, true);

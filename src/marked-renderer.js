@@ -37,18 +37,17 @@ function getMarkedSettings(options) {
 	};
 
 	// If settings not present in the options, return the defaults
-	if (options["markedSettings"] === undefined) return markedSettings;
+	if (options.markedSettings === undefined) return markedSettings;
 
 	// Update with the settings present in the options
-	if (options["markedSettings"]["css-prefix"] !== undefined)
-		markedSettings["css-prefix"] = options["markedSettings"]["css-prefix"];
-	if (options["markedSettings"]["form-delimiter"] !== undefined)
-		markedSettings["form-delimiter"] =
-			options["markedSettings"]["form-delimiter"];
-	if (options["markedSettings"]["id"] !== undefined)
-		markedSettings["id"] = options["markedSettings"]["id"];
-	if (options["markedSettings"]["localization"] !== undefined)
-		markedSettings["localization"] = options["markedSettings"]["localization"];
+	if (options.markedSettings["css-prefix"] !== undefined)
+		markedSettings["css-prefix"] = options.markedSettings["css-prefix"];
+	if (options.markedSettings["form-delimiter"] !== undefined)
+		markedSettings["form-delimiter"] = options.markedSettings["form-delimiter"];
+	if (options.markedSettings.id !== undefined)
+		markedSettings.id = options.markedSettings.id;
+	if (options.markedSettings.localization !== undefined)
+		markedSettings.localization = options.markedSettings.localization;
 
 	return markedSettings;
 }
@@ -71,9 +70,9 @@ renderer.blockquote = function (quote) {
 renderer.checkbox = function (checked) {
 	const markedSettings = getMarkedSettings(this.options);
 	if (checked) {
-		return `<div role="checkbox" class="bmd-list-check bmd-list-checked" aria-label="${getTranslation(markedSettings["localization"], "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
+		return `<div role="checkbox" class="bmd-list-check bmd-list-checked" aria-label="${getTranslation(markedSettings.localization, "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
 	} else {
-		return `<div role="checkbox" class="bmd-list-check" aria-label="${getTranslation(markedSettings["localization"], "list-check")}" aria-checked="false"></div>`;
+		return `<div role="checkbox" class="bmd-list-check" aria-label="${getTranslation(markedSettings.localization, "list-check")}" aria-checked="false"></div>`;
 	}
 };
 
@@ -124,7 +123,7 @@ renderer.code = function (code, infostring, escaped) {
 
 	return [
 		`${startTag}`,
-		`	<div class="bmd-code-header"><span>${lang}</span><button type="button" class="bmd-copy-btn">${getTranslation(markedSettings["localization"], "copy-btn")}</button></div>`,
+		`	<div class="bmd-code-header"><span>${lang}</span><button type="button" class="bmd-copy-btn">${getTranslation(markedSettings.localization, "copy-btn")}</button></div>`,
 		`	<pre tabindex="0"><code${langClass}>${code}</code></pre>`,
 		`</div>\n`,
 	].join("\n");
@@ -156,7 +155,7 @@ renderer.heading = function (text, level, raw) {
 			.replace(/[^a-z0-9 -]/g, "")
 			.replace(/\s+/g, "-")
 			.replace(/-+/g, "-");
-		if (markedSettings["id"] !== "") id = `${markedSettings["id"]}:${id}`;
+		if (markedSettings.id !== "") id = `${markedSettings.id}:${id}`;
 		startTag = startTag.replace(/<([^\s>]+)/, `<$1 id="${id}"`);
 	}
 
@@ -242,8 +241,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "numberinput") {
 				return createNumberField(
@@ -252,8 +251,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "selectbox") {
 				return createSelectField(
@@ -262,8 +261,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (
 				fieldInputType === "choiceinput" ||
@@ -276,8 +275,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "ratinginput") {
 				return createRatingField(
@@ -286,8 +285,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "opinionscale") {
 				return createOpinionScaleField(
@@ -296,8 +295,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (
 				fieldInputType === "datetimeinput" ||
@@ -311,8 +310,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "fileinput") {
 				return createFileField(
@@ -321,8 +320,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["id"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			}
 		} catch (error) {

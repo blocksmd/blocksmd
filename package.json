@@ -5,8 +5,9 @@
 	"main": "src/index.js",
 	"types": "types/index.d.ts",
 	"scripts": {
-		"build": "rtlcss dist/css/blocksmd.css dist/css/blocksmd.rtl.css && tsc && npm run format && csso dist/css/blocksmd.css -o dist/css/blocksmd.min.css -s file && csso dist/css/blocksmd.rtl.css -o dist/css/blocksmd.rtl.min.css -s file && webpack --config webpack.config.js && npx babel dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js && terser dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js",
+		"build": "rtlcss dist/css/blocksmd.css dist/css/blocksmd.rtl.css && tsc && npm run lint && npm run format && csso dist/css/blocksmd.css -o dist/css/blocksmd.min.css -s file && csso dist/css/blocksmd.rtl.css -o dist/css/blocksmd.rtl.min.css -s file && webpack --config webpack.config.js && npx babel dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js && terser dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js",
 		"format": "npx prettier . --write",
+		"lint": "eslint bin/ --fix && eslint src/ --fix && eslint tests/ --fix",
 		"test": "jest --runInBand",
 		"webpack": "webpack --config webpack.config.js"
 	},
@@ -35,9 +36,12 @@
 		"@babel/cli": "^7.24.7",
 		"@babel/core": "^7.24.7",
 		"@babel/preset-env": "^7.24.7",
+		"@eslint/js": "^9.14.0",
 		"beautify": "^0.0.8",
 		"csso-cli": "^4.0.2",
+		"eslint": "^9.14.0",
 		"fs-extra": "^11.2.0",
+		"globals": "^15.12.0",
 		"jest": "^29.7.0",
 		"prettier": "^3.2.5",
 		"rtlcss": "^4.1.1",

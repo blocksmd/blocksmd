@@ -53,8 +53,8 @@ const expectedSettings1 = {
 
 test("Case 1", () => {
 	const result1 = parseSettings(template1);
-	expect(result1["template"]).toBe(expectedTemplate1);
-	expect(result1["settings"]).toMatchObject(expectedSettings1);
+	expect(result1.template).toBe(expectedTemplate1);
+	expect(result1.settings).toMatchObject(expectedSettings1);
 });
 
 // Case 2
@@ -112,8 +112,8 @@ const expectedSettings2 = {
 
 test("Case 2", () => {
 	const result2 = parseSettings(template2);
-	expect(result2["template"]).toBe(expectedTemplate2);
-	expect(result2["settings"]).toMatchObject(expectedSettings2);
+	expect(result2.template).toBe(expectedTemplate2);
+	expect(result2.settings).toMatchObject(expectedSettings2);
 });
 
 // Case 3 (weird formatting)
@@ -181,8 +181,8 @@ const expectedSettings3 = {
 
 test("Case 3 (weird formatting)", () => {
 	const result3 = parseSettings(template3);
-	expect(result3["template"]).toBe(expectedTemplate3);
-	expect(result3["settings"]).toMatchObject(expectedSettings3);
+	expect(result3.template).toBe(expectedTemplate3);
+	expect(result3.settings).toMatchObject(expectedSettings3);
 });
 
 // Case 4 (invalid settings)
@@ -217,8 +217,8 @@ const expectedSettings4 = {
 
 test("Case 4 (invalid settings)", () => {
 	const result4 = parseSettings(template4);
-	expect(result4["template"]).toBe(expectedTemplate4);
-	expect(result4["settings"]).toMatchObject(expectedSettings4);
+	expect(result4.template).toBe(expectedTemplate4);
+	expect(result4.settings).toMatchObject(expectedSettings4);
 });
 
 // Case 5 (no settings)
@@ -237,8 +237,8 @@ const expectedSettings5 = {};
 
 test("Case 5 (no settings)", () => {
 	const result5 = parseSettings(template5);
-	expect(result5["template"]).toBe(expectedTemplate5);
-	expect(result5["settings"]).toMatchObject(expectedSettings5);
+	expect(result5.template).toBe(expectedTemplate5);
+	expect(result5.settings).toMatchObject(expectedSettings5);
 });
 
 // Case 6 (empty string)
@@ -249,6 +249,6 @@ const expectedSettings6 = {};
 
 test("Case 6 (empty string)", () => {
 	const result6 = parseSettings(template6);
-	expect(result6["template"]).toBe(expectedTemplate6);
-	expect(result6["settings"]).toMatchObject(expectedSettings6);
+	expect(result6.template).toBe(expectedTemplate6);
+	expect(result6.settings).toMatchObject(expectedSettings6);
 });

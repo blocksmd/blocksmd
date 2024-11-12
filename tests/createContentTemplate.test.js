@@ -111,10 +111,10 @@ test("Case 1 (slides)", () => {
 		},
 		false,
 	);
-	expect(beautify(result1["template"], { format: "html" })).toBe(
+	expect(beautify(result1.template, { format: "html" })).toBe(
 		beautify(expectedTemplate1, { format: "html" }),
 	);
-	expect(result1["bindDivTemplates"]).toMatchObject({
+	expect(result1.bindDivTemplates).toMatchObject({
 		0: "\n\nHello {{ name }}, who is {{ age }}!\n\n",
 		1: "\n\nWord\n\n",
 	});
@@ -176,10 +176,10 @@ test("Case 2 (single)", () => {
 		},
 		false,
 	);
-	expect(beautify(result2["template"], { format: "html" })).toBe(
+	expect(beautify(result2.template, { format: "html" })).toBe(
 		beautify(expectedTemplate2, { format: "html" }),
 	);
-	expect(result2["bindDivTemplates"]).toMatchObject({
+	expect(result2.bindDivTemplates).toMatchObject({
 		0: "\n\nWord\n\n",
 	});
 });

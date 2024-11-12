@@ -30,8 +30,8 @@ const expectedData1 = {
 
 test("Case 1", () => {
 	const result1 = parseDataBlocks(template1);
-	expect(result1["template"]).toBe(expectedTemplate1);
-	expect(result1["data"]).toMatchObject(expectedData1);
+	expect(result1.template).toBe(expectedTemplate1);
+	expect(result1.data).toMatchObject(expectedData1);
 });
 
 // Case 2 (multiple data-blocks, weird formatting and case)
@@ -85,8 +85,8 @@ const expectedData2 = {
 
 test("Case 2 (multiple data-blocks, weird formatting and case)", () => {
 	const result2 = parseDataBlocks(template2);
-	expect(result2["template"]).toBe(expectedTemplate2);
-	expect(result2["data"]).toMatchObject(expectedData2);
+	expect(result2.template).toBe(expectedTemplate2);
+	expect(result2.data).toMatchObject(expectedData2);
 });
 
 // Case 3 (using tildes)
@@ -117,8 +117,8 @@ const expectedData3 = {
 
 test("Case 3 (using tildes)", () => {
 	const result3 = parseDataBlocks(template3);
-	expect(result3["template"]).toBe(expectedTemplate3);
-	expect(result3["data"]).toMatchObject(expectedData3);
+	expect(result3.template).toBe(expectedTemplate3);
+	expect(result3.data).toMatchObject(expectedData3);
 });
 
 // Case 4 (mix and match)
@@ -172,8 +172,8 @@ const expectedData4 = {
 
 test("Case 4 (mix and match)", () => {
 	const result4 = parseDataBlocks(template4);
-	expect(result4["template"]).toBe(expectedTemplate4);
-	expect(result4["data"]).toMatchObject(expectedData4);
+	expect(result4.template).toBe(expectedTemplate4);
+	expect(result4.data).toMatchObject(expectedData4);
 });
 
 // Case 5 (invalid JSON)
@@ -225,8 +225,8 @@ const expectedData5 = {
 
 test("Case 5 (invalid JSON)", () => {
 	const result5 = parseDataBlocks(template5);
-	expect(result5["template"]).toBe(expectedTemplate5);
-	expect(result5["data"]).toMatchObject(expectedData5);
+	expect(result5.template).toBe(expectedTemplate5);
+	expect(result5.data).toMatchObject(expectedData5);
 });
 
 // Case 6 (no data-blocks)
@@ -259,8 +259,8 @@ const expectedData6 = {};
 
 test("Case 6 (no data-blocks)", () => {
 	const result6 = parseDataBlocks(template6);
-	expect(result6["template"]).toBe(expectedTemplate6);
-	expect(result6["data"]).toMatchObject(expectedData6);
+	expect(result6.template).toBe(expectedTemplate6);
+	expect(result6.data).toMatchObject(expectedData6);
 });
 
 // Case 7 (empty block)
@@ -285,8 +285,8 @@ const expectedData7 = {};
 
 test("Case 7 (empty block)", () => {
 	const result7 = parseDataBlocks(template7);
-	expect(result7["template"]).toBe(expectedTemplate7);
-	expect(result7["data"]).toMatchObject(expectedData7);
+	expect(result7.template).toBe(expectedTemplate7);
+	expect(result7.data).toMatchObject(expectedData7);
 });
 
 // Case 8 (empty string)
@@ -297,6 +297,6 @@ const expectedData8 = {};
 
 test("Case 8 (empty string)", () => {
 	const result8 = parseDataBlocks(template8);
-	expect(result8["template"]).toBe(expectedTemplate8);
-	expect(result8["data"]).toMatchObject(expectedData8);
+	expect(result8.template).toBe(expectedTemplate8);
+	expect(result8.data).toMatchObject(expectedData8);
 });

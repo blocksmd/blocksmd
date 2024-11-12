@@ -265,7 +265,7 @@ function getPhoneNumberPlaceholder(countryCode) {
 	countryCode = countryCode.toUpperCase();
 	if (placeholdersAndCallingCodes[countryCode] === undefined)
 		countryCode = "US";
-	return placeholdersAndCallingCodes[countryCode]["placeholder"] || "";
+	return placeholdersAndCallingCodes[countryCode].placeholder || "";
 }
 
 /**
@@ -305,8 +305,8 @@ function createCountryCallingCodeOptions(
 	const options = [];
 	for (const country of available) {
 		if (placeholdersAndCallingCodes[country] !== undefined) {
-			const callingCode = placeholdersAndCallingCodes[country]["callingCode"];
-			const placeholder = placeholdersAndCallingCodes[country]["placeholder"];
+			const callingCode = placeholdersAndCallingCodes[country].callingCode;
+			const placeholder = placeholdersAndCallingCodes[country].placeholder;
 			const selected = country === selectedCountryCode ? " selected" : "";
 			options.push(
 				`<option value="${country} ${callingCode}"${selected} data-bmd-placeholder="${placeholder}">${country}</option>`,

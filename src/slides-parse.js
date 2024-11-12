@@ -294,13 +294,13 @@ function parseSlides(
 			btnSettings,
 			localization,
 		);
-		if (parsedSlide["slideType"] === "start") {
-			startSlides.push(parsedSlide["template"]);
-		} else if (parsedSlide["slideType"] === "body") {
-			bodySlides.push(parsedSlide["template"]);
-		} else if (parsedSlide["slideType"] === "end") {
+		if (parsedSlide.slideType === "start") {
+			startSlides.push(parsedSlide.template);
+		} else if (parsedSlide.slideType === "body") {
+			bodySlides.push(parsedSlide.template);
+		} else if (parsedSlide.slideType === "end") {
 			containsEndSlide = true;
-			endSlide = parsedSlide["template"];
+			endSlide = parsedSlide.template;
 		}
 	}
 

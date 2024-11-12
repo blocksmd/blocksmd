@@ -55,10 +55,10 @@ test("Case 1 (form, slide with form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result1["template"], { format: "html" })).toBe(
+	expect(beautify(result1.template, { format: "html" })).toBe(
 		beautify(expectedTemplate1, { format: "html" }),
 	);
-	expect(result1["slideType"]).toBe("body");
+	expect(result1.slideType).toBe("body");
 });
 
 // Case 2 (form, slide with form field and incorrect page progress, different localization)
@@ -108,10 +108,10 @@ test("Case 2 (form, slide with form field and incorrect page progress, different
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
-	expect(beautify(result2["template"], { format: "html" })).toBe(
+	expect(beautify(result2.template, { format: "html" })).toBe(
 		beautify(expectedTemplate2, { format: "html" }),
 	);
-	expect(result2["slideType"]).toBe("body");
+	expect(result2.slideType).toBe("body");
 });
 
 // Case 3 (form, slide without form field)
@@ -156,10 +156,10 @@ test("Case 3 (form, slide without form field)", () => {
 		{ hideRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result3["template"], { format: "html" })).toBe(
+	expect(beautify(result3.template, { format: "html" })).toBe(
 		beautify(expectedTemplate3, { format: "html" }),
 	);
-	expect(result3["slideType"]).toBe("body");
+	expect(result3.slideType).toBe("body");
 });
 
 // Case 4 (form, slide without form field, different localization)
@@ -208,10 +208,10 @@ test("Case 4 (form, slide without form field, different localization)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
-	expect(beautify(result4["template"], { format: "html" })).toBe(
+	expect(beautify(result4.template, { format: "html" })).toBe(
 		beautify(expectedTemplate4, { format: "html" }),
 	);
-	expect(result4["slideType"]).toBe("body");
+	expect(result4.slideType).toBe("body");
 });
 
 // Case 5 (not form, slide with form field)
@@ -262,10 +262,10 @@ test("Case 5 (not form, slide with form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result5["template"], { format: "html" })).toBe(
+	expect(beautify(result5.template, { format: "html" })).toBe(
 		beautify(expectedTemplate5, { format: "html" }),
 	);
-	expect(result5["slideType"]).toBe("body");
+	expect(result5.slideType).toBe("body");
 });
 
 // Case 6 (not form, slide without form field)
@@ -312,10 +312,10 @@ test("Case 6 (not form, slide without form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result6["template"], { format: "html" })).toBe(
+	expect(beautify(result6.template, { format: "html" })).toBe(
 		beautify(expectedTemplate6, { format: "html" }),
 	);
-	expect(result6["slideType"]).toBe("body");
+	expect(result6.slideType).toBe("body");
 });
 
 // Case 7 (form, start slide without form field)
@@ -357,10 +357,10 @@ test("Case 7 (form, start slide without form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "Submit" },
 		"en",
 	);
-	expect(beautify(result7["template"], { format: "html" })).toBe(
+	expect(beautify(result7.template, { format: "html" })).toBe(
 		beautify(expectedTemplate7, { format: "html" }),
 	);
-	expect(result7["slideType"]).toBe("start");
+	expect(result7.slideType).toBe("start");
 });
 
 // Case 8 (form, start slide without form field, different localization)
@@ -404,10 +404,10 @@ test("Case 8 (form, start slide without form field, different localization)", ()
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
-	expect(beautify(result8["template"], { format: "html" })).toBe(
+	expect(beautify(result8.template, { format: "html" })).toBe(
 		beautify(expectedTemplate8, { format: "html" }),
 	);
-	expect(result8["slideType"]).toBe("start");
+	expect(result8.slideType).toBe("start");
 });
 
 // Case 9 (form, start slide with custom start button and without form field)
@@ -446,10 +446,10 @@ test("Case 9 (form, start slide with custom start button and without form field)
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result9["template"], { format: "html" })).toBe(
+	expect(beautify(result9.template, { format: "html" })).toBe(
 		beautify(expectedTemplate9, { format: "html" }),
 	);
-	expect(result9["slideType"]).toBe("start");
+	expect(result9.slideType).toBe("start");
 });
 
 // Case 10 (form, start slide with form field)
@@ -502,10 +502,10 @@ test("Case 10 (form, start slide with form field)", () => {
 		{ hideRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result10["template"], { format: "html" })).toBe(
+	expect(beautify(result10.template, { format: "html" })).toBe(
 		beautify(expectedTemplate10, { format: "html" }),
 	);
-	expect(result10["slideType"]).toBe("start");
+	expect(result10.slideType).toBe("start");
 });
 
 // Case 11 (form, start slide with custom start button and form field)
@@ -554,10 +554,10 @@ test("Case 11 (form, start slide with custom start button and form field)", () =
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result11["template"], { format: "html" })).toBe(
+	expect(beautify(result11.template, { format: "html" })).toBe(
 		beautify(expectedTemplate11, { format: "html" }),
 	);
-	expect(result11["slideType"]).toBe("start");
+	expect(result11.slideType).toBe("start");
 });
 
 // Case 12 (not form, start slide with form field)
@@ -600,10 +600,10 @@ test("Case 12 (not form, start slide with form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result12["template"], { format: "html" })).toBe(
+	expect(beautify(result12.template, { format: "html" })).toBe(
 		beautify(expectedTemplate12, { format: "html" }),
 	);
-	expect(result12["slideType"]).toBe("start");
+	expect(result12.slideType).toBe("start");
 });
 
 // Case 13 (not form, start slide with custom start button and form field)
@@ -646,10 +646,10 @@ test("Case 13 (not form, start slide with custom start button and form field)", 
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result13["template"], { format: "html" })).toBe(
+	expect(beautify(result13.template, { format: "html" })).toBe(
 		beautify(expectedTemplate13, { format: "html" }),
 	);
-	expect(result13["slideType"]).toBe("start");
+	expect(result13.slideType).toBe("start");
 });
 
 // Case 14 (form, end slide)
@@ -693,10 +693,10 @@ test("Case 14 (form, end slide)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result14["template"], { format: "html" })).toBe(
+	expect(beautify(result14.template, { format: "html" })).toBe(
 		beautify(expectedTemplate14, { format: "html" }),
 	);
-	expect(result14["slideType"]).toBe("end");
+	expect(result14.slideType).toBe("end");
 });
 
 // Case 15 (not form, end slide with custom redirect)
@@ -741,10 +741,10 @@ test("Case 15 (not form, end slide with custom redirect)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result15["template"], { format: "html" })).toBe(
+	expect(beautify(result15.template, { format: "html" })).toBe(
 		beautify(expectedTemplate15, { format: "html" }),
 	);
-	expect(result15["slideType"]).toBe("end");
+	expect(result15.slideType).toBe("end");
 });
 
 // Case 16 (form, end slide with custom redirect, different localization)
@@ -789,10 +789,10 @@ test("Case 16 (form, end slide with custom redirect, different localization)", (
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
-	expect(beautify(result16["template"], { format: "html" })).toBe(
+	expect(beautify(result16.template, { format: "html" })).toBe(
 		beautify(expectedTemplate16, { format: "html" }),
 	);
-	expect(result16["slideType"]).toBe("end");
+	expect(result16.slideType).toBe("end");
 });
 
 // Case 17 (form, empty template)
@@ -825,10 +825,10 @@ test("Case 17 (form, empty template)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result17["template"], { format: "html" })).toBe(
+	expect(beautify(result17.template, { format: "html" })).toBe(
 		beautify(expectedTemplate17, { format: "html" }),
 	);
-	expect(result17["slideType"]).toBe("body");
+	expect(result17.slideType).toBe("body");
 });
 
 // Case 18 (form, first slide with form field)
@@ -881,10 +881,10 @@ test("Case 18 (form, first slide with form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result18["template"], { format: "html" })).toBe(
+	expect(beautify(result18.template, { format: "html" })).toBe(
 		beautify(expectedTemplate18, { format: "html" }),
 	);
-	expect(result18["slideType"]).toBe("body");
+	expect(result18.slideType).toBe("body");
 });
 
 // Case 19 (form, start first slide without form field)
@@ -925,10 +925,10 @@ test("Case 19 (form, start first slide without form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result19["template"], { format: "html" })).toBe(
+	expect(beautify(result19.template, { format: "html" })).toBe(
 		beautify(expectedTemplate19, { format: "html" }),
 	);
-	expect(result19["slideType"]).toBe("start");
+	expect(result19.slideType).toBe("start");
 });
 
 // Case 20 (not form, first slide with form field)
@@ -977,10 +977,10 @@ test("Case 20 (not form, first slide with form field)", () => {
 		{ hideRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result20["template"], { format: "html" })).toBe(
+	expect(beautify(result20.template, { format: "html" })).toBe(
 		beautify(expectedTemplate20, { format: "html" }),
 	);
-	expect(result20["slideType"]).toBe("body");
+	expect(result20.slideType).toBe("body");
 });
 
 // Case 21 (form, end slide, hidden restart button)
@@ -1018,10 +1018,10 @@ test("Case 21 (form, end slide, hidden restart button)", () => {
 		{ hideRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
-	expect(beautify(result21["template"], { format: "html" })).toBe(
+	expect(beautify(result21.template, { format: "html" })).toBe(
 		beautify(expectedTemplate21, { format: "html" }),
 	);
-	expect(result21["slideType"]).toBe("end");
+	expect(result21.slideType).toBe("end");
 });
 
 // Case 22 (form, slide with form field, different submit button text)
@@ -1075,8 +1075,8 @@ test("Case 22 (form, slide with form field, different submit button text)", () =
 		{ hideRestartBtn: false, submitBtnText: "Submit form" },
 		"en",
 	);
-	expect(beautify(result22["template"], { format: "html" })).toBe(
+	expect(beautify(result22.template, { format: "html" })).toBe(
 		beautify(expectedTemplate22, { format: "html" }),
 	);
-	expect(result22["slideType"]).toBe("body");
+	expect(result22.slideType).toBe("body");
 });

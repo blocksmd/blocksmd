@@ -546,14 +546,14 @@ function parseSettings(template) {
 				valueInvalid = true;
 			}
 		} else if (key === "css-prefix") {
-			if (value.match(settingsRef[key]["pattern"])) {
+			if (value.match(settingsRef[key].pattern)) {
 				settings[key] =
 					value === "none" ? "" : unescape(value.replace(/\\n/g, "\n"));
 			} else {
 				valueInvalid = true;
 			}
 		} else {
-			if (value.match(settingsRef[key]["pattern"])) {
+			if (value.match(settingsRef[key].pattern)) {
 				settings[key] = unescape(value.replace(/\\n/g, "\n"));
 			} else {
 				valueInvalid = true;
@@ -568,7 +568,7 @@ function parseSettings(template) {
 				keyForUser = key.substring(0, key.length - "-alt-scheme".length);
 			}
 			console.warn(
-				`[SETTINGS] "${keyForUser}" value "${value}" is not valid, accepted: ${settingsRef[key]["accepted"]}`,
+				`[SETTINGS] "${keyForUser}" value "${value}" is not valid, accepted: ${settingsRef[key].accepted}`,
 			);
 		}
 	}

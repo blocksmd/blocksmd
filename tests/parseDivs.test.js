@@ -26,8 +26,8 @@ const expectedBindDivTemplates1 = {};
 
 test("Case 1", () => {
 	const result1 = parseDivs(template1, "bmd-");
-	expect(result1["template"]).toBe(expectedTemplate1);
-	expect(result1["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates1);
+	expect(result1.template).toBe(expectedTemplate1);
+	expect(result1.bindDivTemplates).toMatchObject(expectedBindDivTemplates1);
 });
 
 // Case 2 (multiple <div> elements and attributes)
@@ -67,8 +67,8 @@ const expectedBindDivTemplates2 = {};
 
 test("Case 2 (multiple <div> elements and attributes)", () => {
 	const result2 = parseDivs(template2, "bmd-");
-	expect(result2["template"]).toBe(expectedTemplate2);
-	expect(result2["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates2);
+	expect(result2.template).toBe(expectedTemplate2);
+	expect(result2.bindDivTemplates).toMatchObject(expectedBindDivTemplates2);
 });
 
 // Case 3 (bind and one-line)
@@ -121,8 +121,8 @@ const expectedBindDivTemplates3 = {
 
 test("Case 3 (bind and one-line)", () => {
 	const result3 = parseDivs(template3, "bmd-");
-	expect(result3["template"]).toBe(expectedTemplate3);
-	expect(result3["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates3);
+	expect(result3.template).toBe(expectedTemplate3);
+	expect(result3.bindDivTemplates).toMatchObject(expectedBindDivTemplates3);
 });
 
 // Case 4 (odd marker)
@@ -163,8 +163,8 @@ const expectedBindDivTemplates4 = {};
 
 test("Case 4 (odd marker)", () => {
 	const result4 = parseDivs(template4, "bmd-");
-	expect(result4["template"]).toBe(expectedTemplate4);
-	expect(result4["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates4);
+	expect(result4.template).toBe(expectedTemplate4);
+	expect(result4.bindDivTemplates).toMatchObject(expectedBindDivTemplates4);
 });
 
 // Case 5 (no <div> elements)
@@ -187,8 +187,8 @@ const expectedBindDivTemplates5 = {};
 
 test("Case 5 (no <div> elements)", () => {
 	const result5 = parseDivs(template5, "bmd-");
-	expect(result5["template"]).toBe(expectedTemplate5);
-	expect(result5["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates5);
+	expect(result5.template).toBe(expectedTemplate5);
+	expect(result5.bindDivTemplates).toMatchObject(expectedBindDivTemplates5);
 });
 
 // Case 6 (empty string)
@@ -199,6 +199,6 @@ const expectedBindDivTemplates6 = {};
 
 test("Case 6 (empty string)", () => {
 	const result6 = parseDivs(template6, "bmd-");
-	expect(result6["template"]).toBe(expectedTemplate6);
-	expect(result6["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates6);
+	expect(result6.template).toBe(expectedTemplate6);
+	expect(result6.bindDivTemplates).toMatchObject(expectedBindDivTemplates6);
 });

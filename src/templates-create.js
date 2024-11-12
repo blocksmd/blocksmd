@@ -81,8 +81,8 @@ function createStyles(settings) {
 
 	// Create the selector using the id
 	const selector =
-		settings["id"] !== ""
-			? `.bmd-root[data-bmd-id="${settings["id"]}"]`
+		settings.id !== ""
+			? `.bmd-root[data-bmd-id="${settings.id}"]`
 			: ".bmd-root";
 
 	// Add the base styles block
@@ -217,16 +217,16 @@ function createBodyTemplate(settings) {
 		markedSettings: {
 			"css-prefix": settings["css-prefix"],
 			"form-delimiter": settings["form-delimiter"],
-			"id": settings["id"],
-			"localization": settings["localization"],
+			"id": settings.id,
+			"localization": settings.localization,
 		},
 	});
 
 	// Parse the brand (if provided)
 	// The class for hiding depending on the color scheme is only added if the
 	// alternate color scheme brand is also provided
-	if (settings["brand"] !== undefined) {
-		let brand = marked.parseInline(settings["brand"]);
+	if (settings.brand !== undefined) {
+		let brand = marked.parseInline(settings.brand);
 		brand = addReservedClass(brand, "bmd-header-brand");
 		if (settings["brand-alt-scheme"] !== undefined) {
 			brand =
@@ -234,7 +234,7 @@ function createBodyTemplate(settings) {
 					? addReservedClass(brand, "bmd-hide-dm")
 					: addReservedClass(brand, "bmd-hide-lm");
 		}
-		settings["brand"] = brand;
+		settings.brand = brand;
 
 		// Parse the brand for the alternate color scheme (if provided)
 		if (settings["brand-alt-scheme"] !== undefined) {
@@ -249,30 +249,29 @@ function createBodyTemplate(settings) {
 	}
 
 	// Parse the CTA (if provided)
-	if (settings["cta"] !== undefined) {
-		let cta = marked.parseInline(settings["cta"]);
+	if (settings.cta !== undefined) {
+		let cta = marked.parseInline(settings.cta);
 		cta = addReservedClass(cta, "bmd-btn");
 		cta = addReservedClass(cta, "bmd-btn-accent");
 		cta = addReservedClass(cta, "bmd-btn-control");
 		cta = addReservedClass(cta, "bmd-ms-auto");
-		settings["cta"] = cta;
+		settings.cta = cta;
 	}
 
 	// Set the condition for rendering the header
 	settings["header-render"] =
-		settings["header"] !== "hide" &&
-		(settings["brand"] !== undefined || settings["cta"] !== undefined);
+		settings.header !== "hide" &&
+		(settings.brand !== undefined || settings.cta !== undefined);
 
 	// Set the condition for rendering the footer
 	settings["footer-render"] =
-		settings["footer"] !== "hide" &&
+		settings.footer !== "hide" &&
 		(settings["color-scheme-toggle"] === "show" ||
-			(settings["slide-controls"] !== "hide" &&
-				settings["page"] !== "single") ||
+			(settings["slide-controls"] !== "hide" && settings.page !== "single") ||
 			settings["blocksmd-branding"] !== "hide");
 
 	// Render the template using Nunjucks
-	const localization = settings["localization"];
+	const localization = settings.localization;
 	nunjucks.configure({ autoescape: false });
 	const template = nunjucks.renderString(bodyTemplate, {
 		settings: settings,
@@ -308,17 +307,17 @@ function createBodyTemplate(settings) {
 function createContentTemplate(template, settings, data, windowAndSanitize) {
 	// Parse <div> elements
 	const parsedTemplateWithDivs = parseDivs(template, settings["css-prefix"]);
-	template = parsedTemplateWithDivs["template"];
-	const bindDivTemplates = parsedTemplateWithDivs["bindDivTemplates"];
+	template = parsedTemplateWithDivs.template;
+	const bindDivTemplates = parsedTemplateWithDivs.bindDivTemplates;
 
 	// Parse bind <span> elements
 	template = parseBindSpans(template);
 
 	// Parse slides
-	if (settings["page"] !== "single") {
+	if (settings.page !== "single") {
 		template = parseSlides(
 			template,
-			settings["page"] === "form-slides" ? true : false,
+			settings.page === "form-slides" ? true : false,
 			{
 				hideRestartBtn: settings["restart-button"] === "hide" ? true : false,
 				submitBtnText:
@@ -326,7 +325,7 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 						? settings["submit-button-text"]
 						: "",
 			},
-			settings["localization"],
+			settings.localization,
 			settings["slide-delimiter"],
 		);
 	} else {
@@ -351,8 +350,8 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 		markedSettings: {
 			"css-prefix": settings["css-prefix"],
 			"form-delimiter": settings["form-delimiter"],
-			"id": settings["id"],
-			"localization": settings["localization"],
+			"id": settings.id,
+			"localization": settings.localization,
 		},
 	});
 	template = template.replace(
