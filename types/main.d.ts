@@ -534,6 +534,12 @@ export class blocksmd {
 	 */
 	getSubmissionErrors: (json: any) => Array<string>;
 	/**
+	 * Called when the user reaches the end slide. Meant to be overridden.
+	 *
+	 * @param {Object} json
+	 */
+	onCompletion: (json: any) => void;
+	/**
 	 * Go to the next slide.
 	 *
 	 * @param {HTMLElement} activeSlide

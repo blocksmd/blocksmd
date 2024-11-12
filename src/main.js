@@ -2080,6 +2080,13 @@ class blocksmd {
 	};
 
 	/**
+	 * Called when the user reaches the end slide. Meant to be overridden.
+	 *
+	 * @param {Object} json
+	 */
+	onCompletion = (json) => {};
+
+	/**
 	 * Go to the next slide.
 	 *
 	 * @param {HTMLElement} activeSlide
@@ -2204,6 +2211,7 @@ class blocksmd {
 					});
 
 				// Enable all clicks on root element
+				// Call the on completion function if end slide
 				// Timeout makes sure that the slide animation has completed
 				setTimeout(function () {
 					rootElem.removeEventListener(
@@ -2211,6 +2219,9 @@ class blocksmd {
 						instance.disableAllClicks,
 						true,
 					);
+					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
+						instance.onCompletion(promiseResult["json"]);
+					}
 				}, instance.getSlideTransitionDuration() * 3);
 			});
 	};
