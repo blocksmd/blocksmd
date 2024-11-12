@@ -1,13 +1,13 @@
 <!doctype html>
 <html
-	dir="{{ settings['dir'] }}"
-	lang="{{ settings['localization'] }}"
+	dir="{{ settings.dir }}"
+	lang="{{ settings.localization }}"
 	spellcheck="false"
 	class="bmd-root"
 	data-bmd-color-scheme="{{ settings['color-scheme'] }}"
 	data-bmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
 	data-bmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
-	data-bmd-id="{{ settings['id'] }}"
+	data-bmd-id="{{ settings.id }}"
 >
 	<head>
 		<!-- Required meta tags -->
@@ -15,8 +15,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<!-- Title and favicon -->
-		<title>{{ settings["title"] }}</title>
-		<link rel="icon" href="{{ settings['favicon'] }}" />
+		<title>{{ settings.title }}</title>
+		<link rel="icon" href="{{ settings.favicon }}" />
 
 		<!-- SEO -->
 		<meta name="description" content="{{ settings['meta-description'] }}" />
@@ -26,7 +26,7 @@
 		<!-- Open Graph -->
 		<meta property="og:type" content="{{ settings['meta-type'] }}" />
 		<meta property="og:url" content="{{ settings['meta-url'] }}" />
-		<meta property="og:title" content="{{ settings['title'] }}" />
+		<meta property="og:title" content="{{ settings.title }}" />
 		<meta
 			property="og:description"
 			content="{{ settings['meta-description'] }}"
@@ -50,7 +50,7 @@
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="./blocksmd/css/blocksmd{% if settings['dir'] == 'rtl' %}.rtl{% endif %}.min.css"
+			href="./blocksmd/css/blocksmd{% if settings.dir == 'rtl' %}.rtl{% endif %}.min.css"
 		/>
 	</head>
 	<body class="bmd-body">
