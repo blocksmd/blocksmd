@@ -534,7 +534,8 @@ export class blocksmd {
 	 */
 	getSubmissionErrors: (json: any) => Array<string>;
 	/**
-	 * Called when the user reaches the end slide. Meant to be overridden.
+	 * Called when the user reaches the end slide. This function can be
+	 * overridden to do something when the user reaches completion.
 	 *
 	 * @param {Object} json
 	 */
