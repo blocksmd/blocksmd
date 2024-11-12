@@ -27,6 +27,8 @@ var nunjucks = require("nunjucks");
 class blocksmd {
 	options = {
 		colorScheme: "light",
+		errorFieldKey: "field",
+		errorMessageKey: "message",
 		getHeaders: {},
 		id: "",
 		isFullPage: false,
@@ -68,6 +70,8 @@ class blocksmd {
 	 *
 	 * @typedef {Object} OptionsType
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
+	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
+	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
@@ -99,6 +103,20 @@ class blocksmd {
 			// Color Scheme
 			if (options.colorScheme === "light" || options.colorScheme === "dark") {
 				this.options.colorScheme = options.colorScheme;
+			}
+			// Error field key
+			if (
+				options.errorFieldKey !== undefined &&
+				typeof options.errorFieldKey === "string"
+			) {
+				this.options.errorFieldKey = options.errorFieldKey;
+			}
+			// Error message key
+			if (
+				options.errorMessageKey !== undefined &&
+				typeof options.errorMessageKey === "string"
+			) {
+				this.options.errorMessageKey = options.errorMessageKey;
 			}
 			// GET headers
 			if (
@@ -2052,22 +2070,27 @@ class blocksmd {
 	/**
 	 * Get error messages from the JSON response received during form submission.
 	 * By default, it is assumed that the errors in the response will use the
-	 * Django REST framework format. However, this function can be overridden to
-	 * make sure other formats are supported.
+	 * OpenAPI format. However, this function can be overridden to make sure
+	 * other formats are supported.
 	 *
 	 * @param {Object} json
 	 * @returns {Array.<string>}
 	 */
 	getSubmissionErrors = (json) => {
+		const instance = this;
+
 		const messages = [];
-		for (const [key, value] of Object.entries(json)) {
-			if (Array.isArray(value)) {
-				for (const message of value) {
-					if (key === "non_field_errors") {
-						messages.push(message);
-					} else {
-						messages.push(`${key}: ${message}`);
-					}
+		if (json.errors && Array.isArray(json.errors)) {
+			for (const error of json.errors) {
+				if (
+					error[instance.options.errorFieldKey] &&
+					error[instance.options.errorMessageKey]
+				) {
+					messages.push(
+						`${error[instance.options.errorFieldKey]}: ${error[instance.options.errorMessageKey]}`,
+					);
+				} else if (error[instance.options.errorMessageKey]) {
+					messages.push(error[instance.options.errorMessageKey]);
 				}
 			}
 		}

@@ -13,6 +13,8 @@ export class blocksmd {
 	 *
 	 * @typedef {Object} OptionsType
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
+	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
+	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
@@ -43,6 +45,14 @@ export class blocksmd {
 			 * The default or initial color scheme of the page. Default is `"light"`.
 			 */
 			colorScheme?: "light" | "dark";
+			/**
+			 * The key used to identify the field in error objects. Default is `"field"`.
+			 */
+			errorFieldKey?: string;
+			/**
+			 * The key used to identify the error message in error objects. Default is `"message"`.
+			 */
+			errorMessageKey?: string;
 			/**
 			 * Headers for GET requests.
 			 */
@@ -137,6 +147,8 @@ export class blocksmd {
 	);
 	options: {
 		colorScheme: string;
+		errorFieldKey: string;
+		errorMessageKey: string;
 		getHeaders: {};
 		id: string;
 		isFullPage: boolean;
@@ -529,8 +541,8 @@ export class blocksmd {
 	/**
 	 * Get error messages from the JSON response received during form submission.
 	 * By default, it is assumed that the errors in the response will use the
-	 * Django REST framework format. However, this function can be overridden to
-	 * make sure other formats are supported.
+	 * OpenAPI format. However, this function can be overridden to make sure
+	 * other formats are supported.
 	 *
 	 * @param {Object} json
 	 * @returns {Array.<string>}
