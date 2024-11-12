@@ -422,12 +422,17 @@ export class blocksmd {
 	formValid: (form: HTMLFormElement) => boolean;
 	/**
 	 * When an error occurs during form submission or slide transition, add an
-	 * error inside the slide element.
+	 * error inside the slide element that contains the messages (if any).
 	 *
 	 * @param {HTMLElement} slide
 	 * @param {HTMLButtonElement} ctaBtn
+	 * @param {Array.<string>} messages
 	 */
-	addSlideError: (slide: HTMLElement, ctaBtn: HTMLButtonElement) => void;
+	addSlideError: (
+		slide: HTMLElement,
+		ctaBtn: HTMLButtonElement,
+		messages: Array<string>,
+	) => void;
 	/**
 	 * GET data from remote source. A remote source here is anything outside of
 	 * the actual template.

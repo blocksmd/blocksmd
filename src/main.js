@@ -1562,12 +1562,13 @@ class blocksmd {
 
 	/**
 	 * When an error occurs during form submission or slide transition, add an
-	 * error inside the slide element.
+	 * error inside the slide element that contains the messages (if any).
 	 *
 	 * @param {HTMLElement} slide
 	 * @param {HTMLButtonElement} ctaBtn
+	 * @param {Array.<string>} messages
 	 */
-	addSlideError = (slide, ctaBtn) => {
+	addSlideError = (slide, ctaBtn, messages) => {
 		const instance = this;
 
 		const localization = instance.state["settings"]["localization"];
@@ -1576,10 +1577,21 @@ class blocksmd {
 			instance.state["slideData"]["currentIndex"]
 		}-error`;
 		error.setAttribute("id", errorId);
+		const messageList = [];
+		if (messages.length > 0) {
+			messageList.push('<ul class="bmd-error-list">');
+			for (const message of messages) {
+				messageList.push(`<li>${message}</li>`);
+			}
+			messageList.push("</ul>");
+		}
 		error.innerHTML = [
 			`<div class="bmd-error">`,
-			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
-			`	${getTranslation(localization, "slide-error")}`,
+			`	<div class="bmd-error-inner">`,
+			`		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`		${getTranslation(localization, "slide-error")}`,
+			`	</div>`,
+			`	${messageList.join("\n")}`,
 			`</div>`,
 		].join("\n");
 		ctaBtn.setAttribute("aria-describedby", errorId);
@@ -2095,7 +2107,7 @@ class blocksmd {
 		const nextSlideAndIndex = instance.getNextSlide();
 		if (activeSlide === nextSlideAndIndex["slide"]) {
 			// Add error
-			instance.addSlideError(activeSlide, ctaBtn);
+			instance.addSlideError(activeSlide, ctaBtn, []);
 
 			// Remove all buttons from their processing states
 			instance.container
@@ -2151,7 +2163,7 @@ class blocksmd {
 				// Error
 				else {
 					// Add error
-					instance.addSlideError(activeSlide, ctaBtn);
+					instance.addSlideError(activeSlide, ctaBtn, []);
 				}
 
 				// Remove all buttons from their processing states
