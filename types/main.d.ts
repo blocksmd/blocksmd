@@ -452,9 +452,15 @@ export class blocksmd {
 	 *
 	 * @param {boolean} postCondition
 	 * @param {boolean} end
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<{ok: boolean, json: Object}>}
 	 */
-	postFormData: (postCondition: boolean, end: boolean) => Promise<boolean>;
+	postFormData: (
+		postCondition: boolean,
+		end: boolean,
+	) => Promise<{
+		ok: boolean;
+		json: any;
+	}>;
 	/**
 	 * Go through each slide (before the current one) to get the previous one to
 	 * make active (depending on the jump condition).
@@ -520,6 +526,13 @@ export class blocksmd {
 	 * @param {MouseEvent} e
 	 */
 	disableAllClicks: (e: MouseEvent) => boolean;
+	/**
+	 * Get error messages from the JSON response received during form submission.
+	 *
+	 * @param {Object} json
+	 * @returns {Array.<string>}
+	 */
+	getSubmissionErrors: (json: any) => Array<string>;
 	/**
 	 * Go to the next slide.
 	 *

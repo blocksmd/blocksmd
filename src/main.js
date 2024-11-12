@@ -1666,14 +1666,14 @@ class blocksmd {
 	 *
 	 * @param {boolean} postCondition
 	 * @param {boolean} end
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<{ok: boolean, json: Object}>}
 	 */
 	postFormData = (postCondition, end) => {
 		const instance = this;
 
 		// If the post condition is false, return resolved promise
 		if (!postCondition) {
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1682,7 +1682,7 @@ class blocksmd {
 		// This way, the form can continue working (useful when drafting)
 		if (window.location.protocol === "file:") {
 			console.warn("Form data not sent: HTML page is a file (CORS issue).");
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1692,7 +1692,7 @@ class blocksmd {
 		// Again, this way, the form can continue working (useful when drafting)
 		if (instance.state["settings"]["post-url"] === undefined) {
 			console.warn('Form data not sent: "post-url" setting not found.');
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1756,18 +1756,20 @@ class blocksmd {
 			headers: instance.options["postHeaders"],
 			body: formData,
 		})
-			.then((response) => {
-				if (response.ok) {
-					console.log("Form data sent successfully!");
-					return true;
-				} else {
-					console.error("Network response not ok.");
-					return false;
-				}
-			})
+			.then((response) =>
+				response
+					.json()
+					.then((json) => {
+						return { ok: response.ok, json: json };
+					})
+					.catch((error) => {
+						console.error(error);
+						return { ok: response.ok, json: {} };
+					}),
+			)
 			.catch((error) => {
 				console.error(error);
-				return false;
+				return { ok: false, json: {} };
 			});
 	};
 
@@ -2056,6 +2058,28 @@ class blocksmd {
 	};
 
 	/**
+	 * Get error messages from the JSON response received during form submission.
+	 *
+	 * @param {Object} json
+	 * @returns {Array.<string>}
+	 */
+	getSubmissionErrors = (json) => {
+		const messages = [];
+		for (const [key, value] of Object.entries(json)) {
+			if (Array.isArray(value)) {
+				for (const message of value) {
+					if (key === "non_field_errors") {
+						messages.push(message);
+					} else {
+						messages.push(`${key}: ${message}`);
+					}
+				}
+			}
+		}
+		return messages;
+	};
+
+	/**
 	 * Go to the next slide.
 	 *
 	 * @param {HTMLElement} activeSlide
@@ -2136,7 +2160,7 @@ class blocksmd {
 			)
 			.then((promiseResult) => {
 				// Success
-				if (promiseResult) {
+				if (promiseResult["ok"]) {
 					// If next slide is the end slide: remove response id, remove form
 					// data from local storage, and redirect (if applicable)
 					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
@@ -2163,7 +2187,13 @@ class blocksmd {
 				// Error
 				else {
 					// Add error
-					instance.addSlideError(activeSlide, ctaBtn, []);
+					let errorMessages = [];
+					try {
+						errorMessages = instance.getSubmissionErrors(promiseResult["json"]);
+					} catch (error) {
+						console.error(error);
+					}
+					instance.addSlideError(activeSlide, ctaBtn, errorMessages);
 				}
 
 				// Remove all buttons from their processing states
