@@ -1367,8 +1367,6 @@ class blocksmd {
 	 * @param {string} message
 	 */
 	addFieldError = (formField, errorId, message) => {
-		const instance = this;
-
 		const error = document.createElement("div");
 		error.setAttribute("id", errorId);
 		error.innerHTML = [
