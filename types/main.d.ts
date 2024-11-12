@@ -422,12 +422,17 @@ export class blocksmd {
 	formValid: (form: HTMLFormElement) => boolean;
 	/**
 	 * When an error occurs during form submission or slide transition, add an
-	 * error inside the slide element.
+	 * error inside the slide element that contains the messages (if any).
 	 *
 	 * @param {HTMLElement} slide
 	 * @param {HTMLButtonElement} ctaBtn
+	 * @param {Array.<string>} messages
 	 */
-	addSlideError: (slide: HTMLElement, ctaBtn: HTMLButtonElement) => void;
+	addSlideError: (
+		slide: HTMLElement,
+		ctaBtn: HTMLButtonElement,
+		messages: Array<string>,
+	) => void;
 	/**
 	 * GET data from remote source. A remote source here is anything outside of
 	 * the actual template.
@@ -447,9 +452,15 @@ export class blocksmd {
 	 *
 	 * @param {boolean} postCondition
 	 * @param {boolean} end
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<{ok: boolean, json: Object}>}
 	 */
-	postFormData: (postCondition: boolean, end: boolean) => Promise<boolean>;
+	postFormData: (
+		postCondition: boolean,
+		end: boolean,
+	) => Promise<{
+		ok: boolean;
+		json: any;
+	}>;
 	/**
 	 * Go through each slide (before the current one) to get the previous one to
 	 * make active (depending on the jump condition).
@@ -515,6 +526,20 @@ export class blocksmd {
 	 * @param {MouseEvent} e
 	 */
 	disableAllClicks: (e: MouseEvent) => boolean;
+	/**
+	 * Get error messages from the JSON response received during form submission.
+	 *
+	 * @param {Object} json
+	 * @returns {Array.<string>}
+	 */
+	getSubmissionErrors: (json: any) => Array<string>;
+	/**
+	 * Called when the user reaches the end slide. This function can be
+	 * overridden to do something when the user reaches completion.
+	 *
+	 * @param {Object} json
+	 */
+	onCompletion: (json: any) => void;
 	/**
 	 * Go to the next slide.
 	 *

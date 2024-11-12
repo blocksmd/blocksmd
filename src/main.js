@@ -1562,12 +1562,13 @@ class blocksmd {
 
 	/**
 	 * When an error occurs during form submission or slide transition, add an
-	 * error inside the slide element.
+	 * error inside the slide element that contains the messages (if any).
 	 *
 	 * @param {HTMLElement} slide
 	 * @param {HTMLButtonElement} ctaBtn
+	 * @param {Array.<string>} messages
 	 */
-	addSlideError = (slide, ctaBtn) => {
+	addSlideError = (slide, ctaBtn, messages) => {
 		const instance = this;
 
 		const localization = instance.state["settings"]["localization"];
@@ -1576,10 +1577,21 @@ class blocksmd {
 			instance.state["slideData"]["currentIndex"]
 		}-error`;
 		error.setAttribute("id", errorId);
+		const messageList = [];
+		if (messages.length > 0) {
+			messageList.push('<ul class="bmd-error-list">');
+			for (const message of messages) {
+				messageList.push(`<li>${message}</li>`);
+			}
+			messageList.push("</ul>");
+		}
 		error.innerHTML = [
 			`<div class="bmd-error">`,
-			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
-			`	${getTranslation(localization, "slide-error")}`,
+			`	<div class="bmd-error-inner">`,
+			`		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`		${getTranslation(localization, "slide-error")}`,
+			`	</div>`,
+			`	${messageList.join("\n")}`,
 			`</div>`,
 		].join("\n");
 		ctaBtn.setAttribute("aria-describedby", errorId);
@@ -1654,14 +1666,14 @@ class blocksmd {
 	 *
 	 * @param {boolean} postCondition
 	 * @param {boolean} end
-	 * @returns {Promise<boolean>}
+	 * @returns {Promise<{ok: boolean, json: Object}>}
 	 */
 	postFormData = (postCondition, end) => {
 		const instance = this;
 
 		// If the post condition is false, return resolved promise
 		if (!postCondition) {
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1670,7 +1682,7 @@ class blocksmd {
 		// This way, the form can continue working (useful when drafting)
 		if (window.location.protocol === "file:") {
 			console.warn("Form data not sent: HTML page is a file (CORS issue).");
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1680,7 +1692,7 @@ class blocksmd {
 		// Again, this way, the form can continue working (useful when drafting)
 		if (instance.state["settings"]["post-url"] === undefined) {
 			console.warn('Form data not sent: "post-url" setting not found.');
-			return Promise.resolve(true).then((result) => {
+			return Promise.resolve({ ok: true, json: {} }).then((result) => {
 				return result;
 			});
 		}
@@ -1744,18 +1756,20 @@ class blocksmd {
 			headers: instance.options["postHeaders"],
 			body: formData,
 		})
-			.then((response) => {
-				if (response.ok) {
-					console.log("Form data sent successfully!");
-					return true;
-				} else {
-					console.error("Network response not ok.");
-					return false;
-				}
-			})
+			.then((response) =>
+				response
+					.json()
+					.then((json) => {
+						return { ok: response.ok, json: json };
+					})
+					.catch((error) => {
+						console.error(error);
+						return { ok: response.ok, json: {} };
+					}),
+			)
 			.catch((error) => {
 				console.error(error);
-				return false;
+				return { ok: false, json: {} };
 			});
 	};
 
@@ -2044,6 +2058,36 @@ class blocksmd {
 	};
 
 	/**
+	 * Get error messages from the JSON response received during form submission.
+	 *
+	 * @param {Object} json
+	 * @returns {Array.<string>}
+	 */
+	getSubmissionErrors = (json) => {
+		const messages = [];
+		for (const [key, value] of Object.entries(json)) {
+			if (Array.isArray(value)) {
+				for (const message of value) {
+					if (key === "non_field_errors") {
+						messages.push(message);
+					} else {
+						messages.push(`${key}: ${message}`);
+					}
+				}
+			}
+		}
+		return messages;
+	};
+
+	/**
+	 * Called when the user reaches the end slide. This function can be
+	 * overridden to do something when the user reaches completion.
+	 *
+	 * @param {Object} json
+	 */
+	onCompletion = (json) => {};
+
+	/**
 	 * Go to the next slide.
 	 *
 	 * @param {HTMLElement} activeSlide
@@ -2095,7 +2139,7 @@ class blocksmd {
 		const nextSlideAndIndex = instance.getNextSlide();
 		if (activeSlide === nextSlideAndIndex["slide"]) {
 			// Add error
-			instance.addSlideError(activeSlide, ctaBtn);
+			instance.addSlideError(activeSlide, ctaBtn, []);
 
 			// Remove all buttons from their processing states
 			instance.container
@@ -2124,7 +2168,7 @@ class blocksmd {
 			)
 			.then((promiseResult) => {
 				// Success
-				if (promiseResult) {
+				if (promiseResult["ok"]) {
 					// If next slide is the end slide: remove response id, remove form
 					// data from local storage, and redirect (if applicable)
 					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
@@ -2151,7 +2195,13 @@ class blocksmd {
 				// Error
 				else {
 					// Add error
-					instance.addSlideError(activeSlide, ctaBtn);
+					let errorMessages = [];
+					try {
+						errorMessages = instance.getSubmissionErrors(promiseResult["json"]);
+					} catch (error) {
+						console.error(error);
+					}
+					instance.addSlideError(activeSlide, ctaBtn, errorMessages);
 				}
 
 				// Remove all buttons from their processing states
@@ -2162,6 +2212,7 @@ class blocksmd {
 					});
 
 				// Enable all clicks on root element
+				// Call the on completion function if end slide
 				// Timeout makes sure that the slide animation has completed
 				setTimeout(function () {
 					rootElem.removeEventListener(
@@ -2169,6 +2220,9 @@ class blocksmd {
 						instance.disableAllClicks,
 						true,
 					);
+					if (nextSlideAndIndex["slide"].classList.contains("bmd-end-slide")) {
+						instance.onCompletion(promiseResult["json"]);
+					}
 				}, instance.getSlideTransitionDuration() * 3);
 			});
 	};

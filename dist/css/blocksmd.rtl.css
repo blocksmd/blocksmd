@@ -1342,8 +1342,7 @@
 }
 
 .bmd-root .bmd-error {
-	display: flex;
-	align-items: center;
+	width: 100%;
 	max-width: 100%;
 	padding: calc(var(--bmd-spacer) * 0.5) calc(var(--bmd-spacer) * 0.75);
 	margin-top: calc(var(--bmd-spacer) * 0.75);
@@ -1360,9 +1359,21 @@
 	border-radius: var(--bmd-border-radius-lg);
 }
 
+.bmd-root .bmd-error-inner {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	max-width: 100%;
+}
+
 .bmd-root .bmd-error-icon {
 	flex-shrink: 0;
 	margin-left: calc(var(--bmd-spacer) * 0.75);
+}
+
+.bmd-root .bmd-error-list {
+	margin-top: calc(var(--bmd-spacer) * 0.75);
+	margin-bottom: 0;
 }
 
 /* Form control */
