@@ -2059,6 +2059,9 @@ class blocksmd {
 
 	/**
 	 * Get error messages from the JSON response received during form submission.
+	 * By default, it is assumed that the errors in the response will use the
+	 * Django REST framework format. However, this function can be overridden to
+	 * make sure other formats are supported.
 	 *
 	 * @param {Object} json
 	 * @returns {Array.<string>}
