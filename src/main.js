@@ -2635,6 +2635,7 @@ class blocksmd {
 			"dir": "dir",
 			"field-size": "data-bmd-field-size",
 			"font-size": "data-bmd-font-size",
+			"form-style": "data-bmd-form-style",
 			"header": "data-bmd-header",
 			"headings": "data-bmd-headings",
 			"id": "data-bmd-id",

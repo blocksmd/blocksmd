@@ -221,7 +221,7 @@
 	--bmd-input-disabled-color: var(--bmd-body-color);
 	--bmd-input-disabled-bg: rgba(var(--bmd-body-color-rgb), 0.1);
 	--bmd-input-disabled-border-color: rgba(var(--bmd-body-color-rgb), 0.25);
-	--bmd-input-disabled-shadow: var(--bmd-input-shadow);
+	--bmd-input-disabled-shadow: none;
 	--bmd-input-placeholder-color: rgb(
 		calc((var(--bmd-body-bg-r) * 2 + var(--bmd-accent-r)) / 3),
 		calc((var(--bmd-body-bg-g) * 2 + var(--bmd-accent-g)) / 3),
@@ -232,13 +232,14 @@
 		calc((var(--bmd-body-bg-g) + var(--bmd-accent-g) * 2) / 3),
 		calc((var(--bmd-body-bg-b) + var(--bmd-accent-b) * 2) / 3)
 	);
+	--bmd-input-tel-country-code-width: calc(var(--bmd-font-size-base) + 52px);
 
 	--bmd-check-padding-x: 12px;
-	--bmd-check-padding-y: var(--bmd-action-padding-y);
+	--bmd-check-padding-y: 6px;
 	--bmd-check-font-size: var(--bmd-font-size-lg);
 	--bmd-check-font-size-sm: var(--bmd-font-size-base);
-	--bmd-check-line-height: var(--bmd-action-line-height);
-	--bmd-check-color: var(--bmd-input-color);
+	--bmd-check-line-height: var(--bmd-line-height-base);
+	--bmd-check-color: rgb(var(--bmd-accent-rgb));
 	--bmd-check-bg: rgba(var(--bmd-accent-rgb), 0.075);
 	--bmd-check-bg-blur-radius: 0;
 	--bmd-check-border-color: rgba(var(--bmd-accent-rgb), 0.625);
@@ -258,7 +259,7 @@
 	--bmd-rating-grid-columns: repeat(auto-fill, minmax(48px, 1fr));
 	--bmd-rating-grid-gap: 12px 8px;
 	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(40px, 1fr));
-	--bmd-rating-grid-gap-xs: var(--bmd-rating-grid-gap);
+	--bmd-rating-grid-gap-xs: 12px 8px;
 	--bmd-rating-grid-columns-5-or-more-xs: repeat(auto-fill, minmax(28px, 1fr));
 	--bmd-rating-grid-gap-5-or-more-xs: 12px 4px;
 
@@ -427,26 +428,26 @@
  * also be re-declared.
  */
 
-.bmd-root[data-bmd-field-size="sm"],
-.bmd-root .bmd-form-field-sm {
+.bmd-root:not([data-bmd-form-style="classic"])[data-bmd-field-size="sm"],
+.bmd-root:not([data-bmd-form-style="classic"]) .bmd-form-field-sm {
 	/* Form */
 
 	--bmd-form-question-font-size: calc(var(--bmd-font-size-base) + 2px);
-	--bmd-form-question-font-size-xs: var(--bmd-form-question-font-size);
+	--bmd-form-question-font-size-xs: calc(var(--bmd-font-size-base) + 2px);
 	--bmd-form-question-margin-bottom: calc(var(--bmd-spacer) * 0.75);
 	--bmd-form-description-font-size: var(--bmd-font-size-base);
 	--bmd-form-description-margin-bottom: var(--bmd-spacer);
 	--bmd-form-description-margin-bottom-xs: var(--bmd-spacer);
 
 	--bmd-input-font-size: calc(var(--bmd-font-size-base) + 2px);
-	--bmd-input-font-size-xs: var(--bmd-input-font-size);
+	--bmd-input-font-size-xs: calc(var(--bmd-font-size-base) + 2px);
 
 	--bmd-check-padding-x: 10px;
 	--bmd-check-padding-y: 4px;
 	--bmd-check-font-size: var(--bmd-font-size-base);
 
 	--bmd-rating-grid-columns: repeat(auto-fill, minmax(32px, 1fr));
-	--bmd-rating-grid-columns-xs: var(--bmd-rating-grid-columns);
+	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(32px, 1fr));
 
 	--bmd-scale-check-size: 40px;
 	--bmd-scale-check-size-md: 40px;
@@ -457,15 +458,14 @@
 	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-sm) - 2px);
 }
 
-.bmd-root[data-bmd-label-style="classic"],
-.bmd-root .bmd-form-field-classic-labels {
+.bmd-root:not([data-bmd-form-style="classic"])[data-bmd-label-style="classic"],
+.bmd-root:not([data-bmd-form-style="classic"]) .bmd-form-field-classic-labels {
 	/* Form */
 
 	--bmd-form-question-font-size: var(--bmd-font-size-base);
 	--bmd-form-question-font-size-xs: var(--bmd-font-size-base);
 	--bmd-form-question-color: rgb(var(--bmd-accent-rgb));
 	--bmd-form-question-margin-bottom: calc(var(--bmd-spacer) * 0.5);
-
 	--bmd-form-description-font-size: var(--bmd-font-size-sm);
 	--bmd-form-description-font-size-xs: var(--bmd-font-size-sm);
 	--bmd-form-description-margin-bottom: calc(var(--bmd-spacer) * 0.5);
@@ -2112,7 +2112,7 @@
 .bmd-root .bmd-input-group > .bmd-form-countrycode-select {
 	flex-grow: 0;
 	flex-shrink: 0;
-	width: 68px;
+	width: var(--bmd-input-tel-country-code-width);
 	padding-left: 16px;
 }
 

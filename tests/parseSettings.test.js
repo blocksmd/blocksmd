@@ -67,6 +67,7 @@ const template2 = `
 #! font-import-url = https://example.com/font/
 #! font-size = lg
 #! form-delimiter = \\n
+#! form-style = classic
 #! footer = hide
 #! get-format = json
 #! get-objects-name = examples
@@ -99,6 +100,7 @@ const expectedSettings2 = {
 	"font-import-url": "https://example.com/font/",
 	"font-size": "lg",
 	"form-delimiter": "\n",
+	"form-style": "classic",
 	"footer": "hide",
 	"get-format": "json",
 	"get-objects-name": "examples",

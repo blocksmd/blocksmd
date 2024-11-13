@@ -28,6 +28,7 @@ const allSettings = {
 	fontImportUrl: "https://fonts.googleapis.com/css2?family=Open+Sans",
 	fontSize: "sm",
 	formDelimiter: "|",
+	formStyle: "classic",
 	footer: "hide",
 	getFormat: "json",
 	getObjectsName: "data",
@@ -79,6 +80,7 @@ const expectedTemplate = `
 #! font-import-url = https://fonts.googleapis.com/css2?family=Open+Sans
 #! font-size = sm
 #! form-delimiter = |
+#! form-style = classic
 #! footer = hide
 #! get-format = json
 #! get-objects-name = data

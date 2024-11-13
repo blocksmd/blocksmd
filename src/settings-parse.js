@@ -373,6 +373,10 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
+		"form-style": {
+			pattern: /^classic$/,
+			accepted: "classic",
+		},
 		"footer": {
 			pattern: /^hide$/,
 			accepted: "hide",
