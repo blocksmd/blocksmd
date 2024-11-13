@@ -1491,6 +1491,11 @@
 	resize: none;
 }
 
+.bmd-root[data-bmd-form-style="classic"][data-bmd-rounded="pill"]
+	textarea.bmd-form-control {
+	border-radius: var(--bmd-border-radius-lg);
+}
+
 @media (max-width: 575.98px) {
 	.bmd-root textarea.bmd-form-control {
 		height: calc(
