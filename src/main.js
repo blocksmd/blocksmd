@@ -41,6 +41,7 @@ class blocksmd {
 		sanitize: true,
 		saveState: true,
 		setColorSchemeAttrsAgain: true,
+		startSlide: 0,
 		themeDark: {
 			accent: "rgb(138, 180, 248)",
 			accentForeground: "rgb(0, 0, 0)",
@@ -75,15 +76,16 @@ class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
-	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
+	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
+	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
 	 * @property {ThemeType} [themeDark] Dark theme.
 	 * @property {ThemeType} [themeLight] Light theme.
 	 */
@@ -2808,9 +2810,16 @@ class blocksmd {
 				.querySelector(".bmd-loader-container")
 				.classList.add("bmd-d-none");
 			if (instance.state.settings.page !== "single") {
-				const firstSlide = instance.container.querySelector(".bmd-slide");
+				const firstSlide =
+					instance.container.querySelectorAll(".bmd-slide")[
+						instance.options.startSlide
+					];
 				firstSlide.classList.add("bmd-slide-active");
-				instance.hasNewActiveSlide(firstSlide, 0, true);
+				instance.hasNewActiveSlide(
+					firstSlide,
+					instance.options.startSlide,
+					true,
+				);
 			} else {
 				instance.container
 					.querySelector(".bmd-single")

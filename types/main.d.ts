@@ -18,15 +18,16 @@ export class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
-	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
+	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
+	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
 	 * @property {ThemeType} [themeDark] Dark theme.
 	 * @property {ThemeType} [themeLight] Light theme.
 	 */
@@ -66,17 +67,17 @@ export class blocksmd {
 			 */
 			isFullPage?: boolean;
 			/**
-			 * Padding top for inline pages or forms.
+			 * Padding bottom for inline pages or forms.
 			 */
-			paddingInlineTop?: number;
+			paddingInlineBottom?: number;
 			/**
 			 * Horizontal padding for inline pages or forms. Default is `0`.
 			 */
 			paddingInlineHorizontal?: number;
 			/**
-			 * Padding bottom for inline pages or forms.
+			 * Padding top for inline pages or forms.
 			 */
-			paddingInlineBottom?: number;
+			paddingInlineTop?: number;
 			/**
 			 * Extra data sent with POST requests.
 			 */
@@ -101,6 +102,10 @@ export class blocksmd {
 			 * Whether to set color scheme attributes again.
 			 */
 			setColorSchemeAttrsAgain?: boolean;
+			/**
+			 * The index of the first slide to make active. Default is `0`.
+			 */
+			startSlide?: number;
 			/**
 			 * Dark theme.
 			 */
@@ -161,6 +166,7 @@ export class blocksmd {
 		sanitize: boolean;
 		saveState: boolean;
 		setColorSchemeAttrsAgain: boolean;
+		startSlide: number;
 		themeDark: {
 			accent: string;
 			accentForeground: string;
