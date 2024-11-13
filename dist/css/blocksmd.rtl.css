@@ -466,8 +466,8 @@
 	--bmd-check-padding-y: 4px;
 	--bmd-check-font-size: var(--bmd-font-size-base);
 
-	--bmd-rating-grid-columns: repeat(auto-fill, minmax(32px, 1fr));
-	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(32px, 1fr));
+	--bmd-rating-grid-columns: repeat(auto-fill, minmax(34px, 1fr));
+	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(34px, 1fr));
 
 	--bmd-scale-check-size: 40px;
 	--bmd-scale-check-size-md: 40px;
@@ -501,8 +501,8 @@
 	--bmd-check-padding-y: 4px;
 	--bmd-check-font-size: var(--bmd-font-size-base);
 
-	--bmd-rating-grid-columns: repeat(auto-fill, minmax(32px, 1fr));
-	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(32px, 1fr));
+	--bmd-rating-grid-columns: repeat(auto-fill, minmax(34px, 1fr));
+	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(34px, 1fr));
 
 	--bmd-scale-check-size: 40px;
 	--bmd-scale-check-size-md: 40px;
