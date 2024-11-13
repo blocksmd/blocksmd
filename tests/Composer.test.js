@@ -442,6 +442,7 @@ colors* = ChoiceInput(
 	| choices = "red" Red, "blue" Blue, Green
 	| multiple
 	| horizontal
+	| hideformtext
 	| checked = red, blue
 )
 `;
@@ -468,6 +469,7 @@ test("Choice input with all parameters", () => {
 			],
 			multiple: true,
 			horizontal: true,
+			hideFormText: true,
 			checked: ["red", "blue"],
 		}),
 	).toBe(expectedChoiceTemplate);
@@ -518,6 +520,7 @@ theme* = PictureChoice(
 	| multiple
 	| supersize
 	| hidelabels
+	| hideformtext
 	| checked = light
 )
 `;
@@ -544,6 +547,7 @@ test("Picture choice with all parameters", () => {
 			multiple: true,
 			supersize: true,
 			hideLabels: true,
+			hideFormText: true,
 			checked: ["light"],
 		}),
 	).toBe(expectedPictureTemplate);

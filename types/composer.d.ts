@@ -1415,8 +1415,9 @@ export class Composer {
 	 *
 	 * @typedef {Object} ChoiceInputParamsType
 	 * @property {Array<string|ChoiceOptionType>} choices Array of choices as strings or ChoiceOptionType objects.
-	 * @property {boolean} [multiple] Allow multiple selections.
-	 * @property {boolean} [horizontal] Display choices horizontally.
+	 * @property {true} [multiple] Allow multiple selections.
+	 * @property {true} [horizontal] Display choices horizontally.
+	 * @property {true} [hideFormText] Hide the form text.
 	 * @property {Array<string>} [checked] Array of pre-checked choice values.
 	 */
 	/**
@@ -1502,11 +1503,15 @@ export class Composer {
 			/**
 			 * Allow multiple selections.
 			 */
-			multiple?: boolean;
+			multiple?: true;
 			/**
 			 * Display choices horizontally.
 			 */
-			horizontal?: boolean;
+			horizontal?: true;
+			/**
+			 * Hide the form text.
+			 */
+			hideFormText?: true;
 			/**
 			 * Array of pre-checked choice values.
 			 */
@@ -1526,9 +1531,10 @@ export class Composer {
 	 *
 	 * @typedef {Object} PictureChoiceParamsType
 	 * @property {Array<PictureChoiceOptionType>} choices Array of picture choices.
-	 * @property {boolean} [multiple] Allow multiple selections.
-	 * @property {boolean} [supersize] Make the pictures larger.
-	 * @property {boolean} [hideLabels] Hide the text labels.
+	 * @property {true} [multiple] Allow multiple selections.
+	 * @property {true} [supersize] Make the pictures larger.
+	 * @property {true} [hideLabels] Hide the text labels.
+	 * @property {true} [hideFormText] Hide the form text.
 	 * @property {Array<string>} [checked] Array of pre-checked choice values.
 	 */
 	/**
@@ -1615,15 +1621,19 @@ export class Composer {
 			/**
 			 * Allow multiple selections.
 			 */
-			multiple?: boolean;
+			multiple?: true;
 			/**
 			 * Make the pictures larger.
 			 */
-			supersize?: boolean;
+			supersize?: true;
 			/**
 			 * Hide the text labels.
 			 */
-			hideLabels?: boolean;
+			hideLabels?: true;
+			/**
+			 * Hide the form text.
+			 */
+			hideFormText?: true;
 			/**
 			 * Array of pre-checked choice values.
 			 */

@@ -559,8 +559,9 @@ class Composer {
 	 *
 	 * @typedef {Object} ChoiceInputParamsType
 	 * @property {Array<string|ChoiceOptionType>} choices Array of choices as strings or ChoiceOptionType objects.
-	 * @property {boolean} [multiple] Allow multiple selections.
-	 * @property {boolean} [horizontal] Display choices horizontally.
+	 * @property {true} [multiple] Allow multiple selections.
+	 * @property {true} [horizontal] Display choices horizontally.
+	 * @property {true} [hideFormText] Hide the form text.
 	 * @property {Array<string>} [checked] Array of pre-checked choice values.
 	 */
 
@@ -601,6 +602,8 @@ class Composer {
 			templateChunks.push(`\t${formDelimiter}multiple`);
 		if (params.horizontal !== undefined)
 			templateChunks.push(`\t${formDelimiter}horizontal`);
+		if (params.hideFormText !== undefined)
+			templateChunks.push(`\t${formDelimiter}hideformtext`);
 		if (params.checked !== undefined)
 			templateChunks.push(
 				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,
@@ -633,9 +636,10 @@ class Composer {
 	 *
 	 * @typedef {Object} PictureChoiceParamsType
 	 * @property {Array<PictureChoiceOptionType>} choices Array of picture choices.
-	 * @property {boolean} [multiple] Allow multiple selections.
-	 * @property {boolean} [supersize] Make the pictures larger.
-	 * @property {boolean} [hideLabels] Hide the text labels.
+	 * @property {true} [multiple] Allow multiple selections.
+	 * @property {true} [supersize] Make the pictures larger.
+	 * @property {true} [hideLabels] Hide the text labels.
+	 * @property {true} [hideFormText] Hide the form text.
 	 * @property {Array<string>} [checked] Array of pre-checked choice values.
 	 */
 
@@ -676,6 +680,8 @@ class Composer {
 			templateChunks.push(`\t${formDelimiter}supersize`);
 		if (params.hideLabels !== undefined)
 			templateChunks.push(`\t${formDelimiter}hidelabels`);
+		if (params.hideFormText !== undefined)
+			templateChunks.push(`\t${formDelimiter}hideformtext`);
 		if (params.checked !== undefined)
 			templateChunks.push(
 				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,

@@ -489,9 +489,6 @@ const expectedTemplate6 = `
 	<p class="bmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-form-text">
-		Choose as many as you like
-	</div>
 	<div class="bmd-check-grid-wrapper">
 		<div class="bmd-check-grid">
 			<div class="bmd-form-check">
@@ -559,6 +556,7 @@ test("Case 6 (checkbox)", () => {
 					| multiple
 					| fieldsize = sm
 					| subfield
+					| hideFormText
 				`,
 				"|",
 				"",

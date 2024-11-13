@@ -612,7 +612,7 @@ const choiceFieldTemplate = `
 		{{ validParams.description }}
 	</p>
 	{% endif %}
-	{% if validParams.multiple %}
+	{% if validParams.multiple and not validParams.hideformtext %}
 	<div class="bmd-form-text">
 		{{ translations.chooseManyText }}
 	</div>
@@ -738,6 +738,8 @@ function createChoiceField(
 				return item.trim();
 			});
 		} else if (key === "hidelabels" && value) {
+			validParams[key] = value;
+		} else if (key === "hideformtext" && value) {
 			validParams[key] = value;
 		} else {
 			console.warn(
