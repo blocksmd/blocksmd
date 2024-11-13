@@ -232,6 +232,7 @@
 		calc((var(--bmd-body-bg-g) + var(--bmd-accent-g) * 2) / 3),
 		calc((var(--bmd-body-bg-b) + var(--bmd-accent-b) * 2) / 3)
 	);
+	--bmd-input-tel-country-code-width: calc(var(--bmd-font-size-base) + 52px);
 
 	--bmd-check-padding-x: 12px;
 	--bmd-check-padding-y: 6px;
@@ -427,8 +428,8 @@
  * also be re-declared.
  */
 
-.bmd-root[data-bmd-field-size="sm"],
-.bmd-root .bmd-form-field-sm {
+.bmd-root:not([data-bmd-form-style="classic"])[data-bmd-field-size="sm"],
+.bmd-root:not([data-bmd-form-style="classic"]) .bmd-form-field-sm {
 	/* Form */
 
 	--bmd-form-question-font-size: calc(var(--bmd-font-size-base) + 2px);
@@ -457,8 +458,8 @@
 	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-sm) - 2px);
 }
 
-.bmd-root[data-bmd-label-style="classic"],
-.bmd-root .bmd-form-field-classic-labels {
+.bmd-root:not([data-bmd-form-style="classic"])[data-bmd-label-style="classic"],
+.bmd-root:not([data-bmd-form-style="classic"]) .bmd-form-field-classic-labels {
 	/* Form */
 
 	--bmd-form-question-font-size: var(--bmd-font-size-base);
@@ -2113,7 +2114,7 @@
 .bmd-root .bmd-input-group > .bmd-form-countrycode-select {
 	flex-grow: 0;
 	flex-shrink: 0;
-	width: 68px;
+	width: var(--bmd-input-tel-country-code-width);
 	padding-right: 16px;
 }
 
