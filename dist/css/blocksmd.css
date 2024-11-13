@@ -233,6 +233,10 @@
 		calc((var(--bmd-body-bg-b) + var(--bmd-accent-b) * 2) / 3)
 	);
 	--bmd-input-tel-country-code-width: calc(var(--bmd-font-size-base) + 52px);
+	--bmd-input-textarea-height: calc(
+		(var(--bmd-input-font-size) * var(--bmd-input-line-height)) +
+			(2 * var(--bmd-input-padding-y)) + 1px
+	);
 
 	--bmd-check-padding-x: 12px;
 	--bmd-check-padding-y: 6px;
@@ -419,6 +423,57 @@
 	.bmd-next-controls
 	.bmd-next-btn {
 	width: 100%;
+}
+
+.bmd-root[data-bmd-form-style="classic"] {
+	/* Form */
+
+	--bmd-form-question-font-size: var(--bmd-font-size-base);
+	--bmd-form-question-font-size-xs: var(--bmd-font-size-base);
+	--bmd-form-question-margin-bottom: calc(var(--bmd-spacer) * 0.5);
+	--bmd-form-description-font-size: var(--bmd-font-size-sm);
+	--bmd-form-description-font-size-xs: var(--bmd-font-size-sm);
+	--bmd-form-description-margin-bottom: calc(var(--bmd-spacer) * 0.5);
+	--bmd-form-description-margin-bottom-xs: calc(var(--bmd-spacer) * 0.5);
+
+	--bmd-input-padding-x: 10px;
+	--bmd-input-font-size: var(--bmd-font-size-base);
+	--bmd-input-font-size-xs: var(--bmd-font-size-base);
+	--bmd-input-color: var(--bmd-body-color);
+	--bmd-input-bg: rgb(var(--bmd-body-bg-rgb));
+	--bmd-input-border-width: 1px;
+	--bmd-input-border-color: rgba(var(--bmd-body-color-rgb), 0.3125);
+	--bmd-input-border-radius: var(--bmd-border-radius);
+	--bmd-input-focus-border-color: rgba(var(--bmd-body-color-rgb), 0.3125);
+	--bmd-input-focus-shadow: var(--bmd-action-focus-shadow);
+	--bmd-input-placeholder-color: rgb(
+		calc((var(--bmd-body-bg-r) * 2 + var(--bmd-body-color-r)) / 3),
+		calc((var(--bmd-body-bg-g) * 2 + var(--bmd-body-color-g)) / 3),
+		calc((var(--bmd-body-bg-b) * 2 + var(--bmd-body-color-b)) / 3)
+	);
+	--bmd-input-datetime-placeholder-color: rgb(
+		calc((var(--bmd-body-bg-r) + var(--bmd-body-color-r) * 2) / 3),
+		calc((var(--bmd-body-bg-g) + var(--bmd-body-color-g) * 2) / 3),
+		calc((var(--bmd-body-bg-b) + var(--bmd-body-color-b) * 2) / 3)
+	);
+	--bmd-input-tel-country-code-width: calc(var(--bmd-font-size-base) + 64px);
+	--bmd-input-textarea-height: calc(
+		(var(--bmd-input-font-size) * var(--bmd-input-line-height)) +
+			(2 * var(--bmd-input-padding-y)) + 2px
+	);
+
+	--bmd-check-padding-x: 10px;
+	--bmd-check-padding-y: 4px;
+	--bmd-check-font-size: var(--bmd-font-size-base);
+
+	--bmd-rating-grid-columns: repeat(auto-fill, minmax(32px, 1fr));
+	--bmd-rating-grid-columns-xs: repeat(auto-fill, minmax(32px, 1fr));
+
+	--bmd-scale-check-size: 40px;
+	--bmd-scale-check-size-md: 40px;
+	--bmd-scale-check-size-xs: 40px;
+
+	--bmd-file-input-min-height: 224px;
 }
 
 /**
@@ -1430,10 +1485,7 @@
 }
 
 .bmd-root textarea.bmd-form-control {
-	height: calc(
-		(var(--bmd-input-font-size) * var(--bmd-input-line-height)) +
-			(2 * var(--bmd-input-padding-y))
-	);
+	height: var(--bmd-input-textarea-height);
 	overflow: hidden;
 	word-break: break-all;
 	resize: none;
@@ -2061,7 +2113,7 @@
 .bmd-root .bmd-form-file-reset-btn {
 	display: inline-block;
 	padding: 6px;
-	font-size: 24px;
+	font-size: calc(var(--bmd-font-size-base) + 8px);
 	line-height: 1;
 	text-align: center;
 	text-decoration: none;
