@@ -129,6 +129,7 @@ const template3 = `
 	#! meta-url = https://example.com/articles/4/
 #! page = slides
 	#! page-progress = hide
+			#! placeholders = hide
 #! post-sheet-name = Sheet2
 		#! post-url = https://example.com/api/examples/create/
 #! restart-button = hide
@@ -170,6 +171,7 @@ const expectedSettings3 = {
 	"meta-url": "https://example.com/articles/4/",
 	"page": "slides",
 	"page-progress": "hide",
+	"placeholders": "hide",
 	"post-sheet-name": "Sheet2",
 	"post-url": "https://example.com/api/examples/create/",
 	"restart-button": "hide",

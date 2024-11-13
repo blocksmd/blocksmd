@@ -2646,6 +2646,7 @@ class blocksmd {
 			"id": "data-bmd-id",
 			"label-style": "data-bmd-label-style",
 			"localization": "lang",
+			"placeholders": "data-bmd-placeholders",
 			"rounded": "data-bmd-rounded",
 			"vertical-alignment": "data-bmd-vertical-alignment",
 		};

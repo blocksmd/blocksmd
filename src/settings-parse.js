@@ -445,6 +445,10 @@ function parseSettings(template) {
 			pattern: /^(hide|decorative)$/,
 			accepted: "hide || decorative",
 		},
+		"placeholders": {
+			pattern: /^hide$/,
+			accepted: "hide",
+		},
 		"post-sheet-name": {
 			pattern: /^.*$/,
 			accepted: "valid string",

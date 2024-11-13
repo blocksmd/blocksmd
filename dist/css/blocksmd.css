@@ -499,6 +499,11 @@
 	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-base) - 2px);
 }
 
+.bmd-root[data-bmd-placeholders="hide"] {
+	--bmd-input-placeholder-color: transparent;
+	--bmd-input-datetime-placeholder-color: transparent;
+}
+
 /**
  * The following styles can be globally scoped (via attribure on root), or 
  * locally. Therefore, any time a variable is changed in the following blocks, 

@@ -46,6 +46,7 @@ const allSettings = {
 	metaUrl: "https://example.com",
 	page: "form-slides",
 	pageProgress: "hide",
+	placeholders: "hide",
 	postSheetName: "Responses",
 	postUrl: "https://api.example.com/submit",
 	restartButton: "hide",
@@ -98,6 +99,7 @@ const expectedTemplate = `
 #! meta-url = https://example.com
 #! page = form-slides
 #! page-progress = hide
+#! placeholders = hide
 #! post-sheet-name = Responses
 #! post-url = https://api.example.com/submit
 #! restart-button = hide
