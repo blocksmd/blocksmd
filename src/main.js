@@ -1283,7 +1283,12 @@ class blocksmd {
 	setTextareaHeightOnInput = (e) => {
 		const textarea = e.target;
 		textarea.style.height = "";
-		textarea.style.height = textarea.scrollHeight + "px";
+		const computedStyle = window.getComputedStyle(textarea);
+		const newHeight =
+			parseFloat(textarea.scrollHeight) +
+			parseFloat(computedStyle.borderTopWidth) +
+			parseFloat(computedStyle.borderBottomWidth);
+		textarea.style.height = String(newHeight) + "px";
 	};
 
 	/**
