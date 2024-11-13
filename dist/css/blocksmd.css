@@ -432,8 +432,8 @@
 .bmd-root[data-bmd-form-style="classic"] {
 	/* Form */
 
-	--bmd-form-question-font-size: var(--bmd-font-size-base);
-	--bmd-form-question-font-size-xs: var(--bmd-font-size-base);
+	--bmd-form-question-font-size: var(--bmd-font-size-sm);
+	--bmd-form-question-font-size-xs: var(--bmd-font-size-sm);
 	--bmd-form-question-margin-bottom: calc(var(--bmd-spacer) * 0.5);
 	--bmd-form-description-font-size: var(--bmd-font-size-sm);
 	--bmd-form-description-font-size-xs: var(--bmd-font-size-sm);
@@ -441,14 +441,15 @@
 	--bmd-form-description-margin-bottom-xs: calc(var(--bmd-spacer) * 0.5);
 
 	--bmd-input-padding-x: 10px;
+	--bmd-input-padding-y: 5px;
 	--bmd-input-font-size: var(--bmd-font-size-base);
 	--bmd-input-font-size-xs: var(--bmd-font-size-base);
 	--bmd-input-color: var(--bmd-body-color);
 	--bmd-input-bg: rgb(var(--bmd-body-bg-rgb));
 	--bmd-input-border-width: 1px;
-	--bmd-input-border-color: rgba(var(--bmd-body-color-rgb), 0.3125);
+	--bmd-input-border-color: rgba(var(--bmd-body-color-rgb), 0.275);
 	--bmd-input-border-radius: var(--bmd-border-radius);
-	--bmd-input-focus-border-color: rgba(var(--bmd-body-color-rgb), 0.3125);
+	--bmd-input-focus-border-color: rgba(var(--bmd-body-color-rgb), 0.275);
 	--bmd-input-focus-shadow: var(--bmd-action-focus-shadow);
 	--bmd-input-placeholder-color: rgb(
 		calc((var(--bmd-body-bg-r) * 2 + var(--bmd-body-color-r)) / 3),
@@ -471,7 +472,7 @@
 	);
 
 	--bmd-check-padding-x: 10px;
-	--bmd-check-padding-y: 4px;
+	--bmd-check-padding-y: 5px;
 	--bmd-check-font-size: var(--bmd-font-size-base);
 
 	--bmd-rating-grid-columns: repeat(auto-fill, minmax(34px, 1fr));
@@ -482,6 +483,20 @@
 	--bmd-scale-check-size-xs: 40px;
 
 	--bmd-file-input-min-height: 224px;
+	--bmd-file-input-font-size: var(--bmd-font-size-sm);
+	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-sm) - 2px);
+}
+
+.bmd-root[data-bmd-font-size="sm"][data-bmd-form-style="classic"] {
+	/* Form */
+
+	--bmd-form-question-font-size: var(--bmd-font-size-base);
+	--bmd-form-question-font-size-xs: var(--bmd-font-size-base);
+	--bmd-form-description-font-size: var(--bmd-font-size-base);
+	--bmd-form-description-font-size-xs: var(--bmd-font-size-base);
+
+	--bmd-file-input-font-size: var(--bmd-font-size-base);
+	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-base) - 2px);
 }
 
 /**
