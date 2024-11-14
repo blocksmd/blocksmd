@@ -388,7 +388,13 @@ export class blocksmd {
 	 */
 	fileFieldOnInput: (e: InputEvent) => void;
 	/**
-	 * Set the height of a <textrea> element on input.
+	 * Set the height of a <textarea> element.
+	 *
+	 * @param {HTMLTextAreaElement} textarea
+	 */
+	setTextareaHeight: (textarea: HTMLTextAreaElement) => void;
+	/**
+	 * Set the height of a <textarea> element on input.
 	 *
 	 * @param {InputEvent} e
 	 */

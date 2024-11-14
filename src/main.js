@@ -1278,12 +1278,11 @@ class blocksmd {
 	};
 
 	/**
-	 * Set the height of a <textrea> element on input.
+	 * Set the height of a <textarea> element.
 	 *
-	 * @param {InputEvent} e
+	 * @param {HTMLTextAreaElement} textarea
 	 */
-	setTextareaHeightOnInput = (e) => {
-		const textarea = e.target;
+	setTextareaHeight = (textarea) => {
 		textarea.style.height = "";
 		const computedStyle = window.getComputedStyle(textarea);
 		const newHeight =
@@ -1291,6 +1290,17 @@ class blocksmd {
 			parseFloat(computedStyle.borderTopWidth) +
 			parseFloat(computedStyle.borderBottomWidth);
 		textarea.style.height = String(newHeight) + "px";
+	};
+
+	/**
+	 * Set the height of a <textarea> element on input.
+	 *
+	 * @param {InputEvent} e
+	 */
+	setTextareaHeightOnInput = (e) => {
+		const instance = this;
+
+		instance.setTextareaHeight(e.target);
 	};
 
 	/**
@@ -2015,6 +2025,13 @@ class blocksmd {
 					if (elemToAutofocus) elemToAutofocus.focus();
 				}
 			}
+
+			// Set heights of <textarea> elements (in case of default values)
+			slide
+				.querySelectorAll("textarea.bmd-form-str-input")
+				.forEach((textarea) => {
+					instance.setTextareaHeight(textarea);
+				});
 		}, instance.getSlideTransitionDuration() * 2);
 	};
 
@@ -2781,12 +2798,13 @@ class blocksmd {
 			instance.setFormDataToState();
 
 			// Set form data from URL parameters BEFORE local storage
-			if (!instance.options.prioritizeURLFormData)
+			if (!instance.options.prioritizeURLFormData) {
 				try {
 					instance.setFormDataFromURL(false);
 				} catch (error) {
 					console.error(error);
 				}
+			}
 
 			// Set form data saved in local storage
 			if (instance.options.saveState) {
@@ -2798,12 +2816,13 @@ class blocksmd {
 			}
 
 			// Set form data from URL parameters AFTER local storage
-			if (instance.options.prioritizeURLFormData)
+			if (instance.options.prioritizeURLFormData) {
 				try {
 					instance.setFormDataFromURL(true);
 				} catch (error) {
 					console.error(error);
 				}
+			}
 
 			// Hide loader and show content
 			instance.container
@@ -2824,6 +2843,13 @@ class blocksmd {
 				instance.container
 					.querySelector(".bmd-single")
 					.classList.add("bmd-single-active");
+
+				// Set heights of <textarea> elements (in case of default values)
+				instance.container
+					.querySelectorAll("textarea.bmd-form-str-input")
+					.forEach((textarea) => {
+						instance.setTextareaHeight(textarea);
+					});
 			}
 		});
 	};
