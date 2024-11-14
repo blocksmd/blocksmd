@@ -432,8 +432,8 @@
 .bmd-root[data-bmd-form-style="classic"] {
 	/* Form */
 
-	--bmd-form-question-font-size: var(--bmd-font-size-sm);
-	--bmd-form-question-font-size-xs: var(--bmd-font-size-sm);
+	--bmd-form-question-font-size: calc(var(--bmd-font-size-base) - 1px);
+	--bmd-form-question-font-size-xs: calc(var(--bmd-font-size-base) - 1px);
 	--bmd-form-question-margin-bottom: calc(var(--bmd-spacer) * 0.5);
 	--bmd-form-description-font-size: var(--bmd-font-size-sm);
 	--bmd-form-description-font-size-xs: var(--bmd-font-size-sm);
@@ -497,6 +497,13 @@
 
 	--bmd-file-input-font-size: var(--bmd-font-size-base);
 	--bmd-file-input-size-limit-font-size: calc(var(--bmd-font-size-base) - 2px);
+}
+
+.bmd-root[data-bmd-font-size="lg"][data-bmd-form-style="classic"] {
+	/* Form */
+
+	--bmd-form-question-font-size: var(--bmd-font-size-sm);
+	--bmd-form-question-font-size-xs: var(--bmd-font-size-sm);
 }
 
 .bmd-root[data-bmd-placeholders="hide"] {
