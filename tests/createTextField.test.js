@@ -235,7 +235,7 @@ const expectedTemplate6 = `
 		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type in your description here..."
 		required
-		aria-details="id_description-form-text"
+		aria-describedby="id_description-form-text"
 	></textarea>
 	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
 		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
@@ -283,7 +283,7 @@ const expectedTemplate7 = `
 		class="bmd-form-str-input bmd-form-control"
 		placeholder="Type your answer here..."
 		data-bmd-autofocus
-		aria-details="id_description-form-text"
+		aria-describedby="id_description-form-text"
 	>This is my
 description</textarea>
 	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
@@ -426,7 +426,7 @@ const expectedTemplate10 = `
 		id="id_description"
 		class="bmd-form-str-input bmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
-		aria-details="id_description-form-text"
+		aria-describedby="id_description-form-text"
 	></textarea>
 	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
 		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>

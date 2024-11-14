@@ -152,7 +152,7 @@ const multilineTextFieldTemplate = `
 		{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
 		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
-		aria-details="{{ inputId }}-form-text"
+		aria-describedby="{{ inputId }}-form-text"
 	>{% if validParams.value %}{{ validParams.value }}{% endif %}</textarea>
 	<div id="{{ inputId }}-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
 		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
