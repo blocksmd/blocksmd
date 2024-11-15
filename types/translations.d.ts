@@ -9,6 +9,7 @@ export namespace translations {
 		"datetime-input-error": string;
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
+		"file-input-change": string;
 		"file-input-choose": string;
 		"file-input-clear-check": string;
 		"file-input-currently": string;
@@ -54,6 +55,7 @@ export namespace translations {
 		"datetime-input-error": string;
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
+		"file-input-change": string;
 		"file-input-choose": string;
 		"file-input-clear-check": string;
 		"file-input-currently": string;
@@ -99,6 +101,7 @@ export namespace translations {
 		"datetime-input-error": string;
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
+		"file-input-change": string;
 		"file-input-choose": string;
 		"file-input-clear-check": string;
 		"file-input-currently": string;

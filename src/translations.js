@@ -11,6 +11,7 @@ const translations = {
 		"datetime-input-error": "Please use the YYYY-MM-DDTHH:mm format.",
 		"end-slide-title": "Thank you",
 		"end-slide-subtitle": "You've reached the end. Thanks for reading!",
+		"file-input-change": "Change",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">Choose file</strong><span class="bmd-xs:d-none"> or drag here</span>',
 		"file-input-clear-check":
@@ -60,6 +61,7 @@ const translations = {
 			"অনুগ্রহ করে YYYY-MM-DDTHH:mm ফর্ম্যাট ব্যবহার করুন।",
 		"end-slide-title": "ধন্যবাদ",
 		"end-slide-subtitle": "আপনি শেষ পর্যন্ত পৌঁছেছেন৷ পড়ার জন্য ধন্যবাদ!",
+		"file-input-change": "পালটান",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">ফাইল বেছে নিন</strong><span class="bmd-xs:d-none"> বা এখানে টেনে আনুন</span>',
 		"file-input-clear-check":
@@ -108,6 +110,7 @@ const translations = {
 		"datetime-input-error": "Utilice el formato YYYY-MM-DDTHH:mm.",
 		"end-slide-title": "Gracias",
 		"end-slide-subtitle": "Has llegado al final. Gracias por leer!",
+		"file-input-change": "Cambiar",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">Elige el archivo</strong><span class="bmd-xs:d-none"> o arrastra aquí</span>',
 		"file-input-clear-check":
