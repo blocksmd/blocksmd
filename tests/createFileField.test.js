@@ -175,7 +175,7 @@ const expectedTemplate3 = `
 				</span>
 				<span class="bmd-file-exists-section"></span>
 				<span class="bmd-form-file-size-limit bmd-mt-1">
-					সাইয লিমিট: 100MB
+					সাইজ লিমিট: 100MB
 				</span>
 			</span>
 		</label>
@@ -542,7 +542,7 @@ const expectedTemplate8 = `
 				</span>
 				<span class="bmd-file-exists-section"></span>
 				<span class="bmd-form-file-size-limit bmd-mt-1">
-					সাইয লিমিট: 100MB
+					সাইজ লিমিট: 100MB
 				</span>
 			</span>
 		</label>
