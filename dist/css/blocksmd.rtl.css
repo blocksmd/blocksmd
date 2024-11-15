@@ -3291,6 +3291,12 @@
 	white-space: nowrap !important;
 }
 
+/* Text transform */
+
+.bmd-root .bmd-first-letter-uppercase::first-letter {
+	text-transform: uppercase !important;
+}
+
 /* Antialiasing */
 
 .bmd-root .bmd-antialiased {

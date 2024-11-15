@@ -13,7 +13,7 @@ const translations = {
 		"end-slide-subtitle": "You've reached the end. Thanks for reading!",
 		"file-input-change": "Change",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">Choose file</strong><span class="bmd-xs:d-none"> or drag here</span>',
+			'<strong class="bmd-text-accent">choose file</strong><span class="bmd-xs:d-none"> or drag here</span>',
 		"file-input-clear-check":
 			'Clear<span class="bmd-visually-hidden"> current file</span>',
 		"file-input-currently": "Currently",
@@ -112,7 +112,7 @@ const translations = {
 		"end-slide-subtitle": "Has llegado al final. ¡Gracias por leer!",
 		"file-input-change": "Cambiar",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">Elige el archivo</strong><span class="bmd-xs:d-none"> o arrastra aquí</span>',
+			'<strong class="bmd-text-accent">elige el archivo</strong><span class="bmd-xs:d-none"> o arrastra aquí</span>',
 		"file-input-clear-check":
 			'Borrar<span class="bmd-visually-hidden"> el archivo actual</span>',
 		"file-input-currently": "Actualmente",
