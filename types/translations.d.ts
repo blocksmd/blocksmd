@@ -10,6 +10,8 @@ export namespace translations {
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
 		"file-input-choose": string;
+		"file-input-clear-check": string;
+		"file-input-currently": string;
 		"file-input-reset-btn": string;
 		"file-input-size-error": string;
 		"file-input-size-limit": string;
@@ -53,6 +55,8 @@ export namespace translations {
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
 		"file-input-choose": string;
+		"file-input-clear-check": string;
+		"file-input-currently": string;
 		"file-input-reset-btn": string;
 		"file-input-size-error": string;
 		"file-input-size-limit": string;
@@ -96,6 +100,8 @@ export namespace translations {
 		"end-slide-title": string;
 		"end-slide-subtitle": string;
 		"file-input-choose": string;
+		"file-input-clear-check": string;
+		"file-input-currently": string;
 		"file-input-reset-btn": string;
 		"file-input-size-error": string;
 		"file-input-size-limit": string;

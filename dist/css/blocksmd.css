@@ -2178,6 +2178,48 @@
 	fill: rgb(var(--bmd-accent-rgb));
 }
 
+.bmd-root .bmd-current-file {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: calc(var(--bmd-spacer) * 0.5);
+	font-size: var(--bmd-font-size-sm);
+}
+
+.bmd-root .bmd-current-file-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bmd-root .bmd-current-file-clear {
+	flex-shrink: 0;
+	margin-left: var(--bmd-spacer);
+}
+
+.bmd-root .bmd-current-file-clear .bmd-form-check-label {
+	font-size: var(--bmd-font-size-sm);
+	line-height: 1;
+	padding: 4px;
+}
+
+.bmd-root .bmd-current-file-clear .bmd-form-clear-mark {
+	display: none;
+	width: 12px;
+	height: 12px;
+	margin-left: 4px;
+}
+
+.bmd-root
+	.bmd-current-file-clear
+	.bmd-form-check-input:checked
+	+ .bmd-form-check-label
+	> .bmd-form-clear-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .bmd-root[data-bmd-rounded="pill"] .bmd-form-file-label {
 	border-radius: var(--bmd-border-radius-lg);
 }

@@ -1176,6 +1176,32 @@ const fileFieldTemplate = `
 		{{ validParams.description }}
 	</p>
 	{% endif %}
+	{% if validParams.currentfile %}
+	<div class="bmd-current-file">
+		<div class="bmd-current-file-label">
+			{{ translations.fileInputCurrently }}: <a href="{{ validParams.currentfile }}">{{ validParams.currentfilename }}</a>
+		</div>
+		{% if not required %}
+		<div class="bmd-current-file-clear">
+			<div class="bmd-form-check">
+				<input
+					name="{{ name }}Clear"
+					id="{{ inputId }}Clear"
+					type="checkbox"
+					class="bmd-form-file-clear-check-input bmd-form-check-input"
+					value="Clear"
+				>
+				<label class="bmd-form-check-label" for="{{ inputId }}Clear">
+					{{ translations.fileInputClearCheck | safe }}
+					<span class="bmd-form-clear-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path></svg>
+					</span>
+				</label>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+	{% endif %}
 	<div class="bmd-form-file">
 		<label class="bmd-form-file-label{% if validParams.disabled %} bmd-disabled{% endif %}">
 			<input
@@ -1183,7 +1209,7 @@ const fileFieldTemplate = `
 				id="{{ inputId }}"
 				type="file"
 				class="bmd-form-file-input"
-				{% if required %}required{% endif %}
+				{% if required and not validParams.currentfile %}required{% endif %}
 				{% if validParams.imageonly %}accept="image/*"{% endif %}
 				{% if validParams.disabled %}disabled{% endif %}
 				{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
@@ -1251,6 +1277,8 @@ function createFileField(
 	);
 	const translations = {
 		fileInputChoose: getTranslation(localization, "file-input-choose"),
+		fileInputClearCheck: getTranslation(localization, "file-input-clear-check"),
+		fileInputCurrently: getTranslation(localization, "file-input-currently"),
 		fileInputResetBtn: getTranslation(localization, "file-input-reset-btn"),
 		fileInputSizeLimit: getTranslation(localization, "file-input-size-limit"),
 	};
@@ -1263,6 +1291,10 @@ function createFileField(
 			validParams[key] = Math.ceil(Math.abs(Number(value)));
 		} else if (key === "imageonly" && value) {
 			validParams[key] = value;
+		} else if (key === "currentfile" && value && typeof value === "string") {
+			validParams[key] = value;
+			validParams.currentfilename =
+				value.substring(value.lastIndexOf("/") + 1) || value;
 		} else {
 			console.warn(
 				`[FORM-FIELDS] "${name}": "${key} = ${value}" is not a valid parameter`,

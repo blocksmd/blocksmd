@@ -1768,6 +1768,18 @@ class blocksmd {
 				}
 			});
 
+		// Add the current file clear checks (these are not in the state)
+		instance.container
+			.querySelectorAll('.bmd-form-file-clear-check-input[type="checkbox"]')
+			.forEach((input) => {
+				const name = input.getAttribute("name");
+				if (input.checked) {
+					formData.append(name, true);
+				} else {
+					formData.append(name, false);
+				}
+			});
+
 		// Set the extra fields
 		formData.append("_end", end ? end : "");
 		formData.append("_rid", instance.getOrCreateResponseId());

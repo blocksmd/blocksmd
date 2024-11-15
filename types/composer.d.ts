@@ -2131,6 +2131,7 @@ export class Composer {
 	 * @typedef {Object} FileInputParamsType
 	 * @property {number} [sizeLimit] Maximum file size in MB. Defaults to `10`.
 	 * @property {true} [imageOnly] When set, only image files are accepted.
+	 * @property {string} [currentFile] The current file that exists in the database. Use a URL for best results, for example, https://example.s3.com/image.png.
 	 */
 	/**
 	 * Create a file input field.
@@ -2204,6 +2205,10 @@ export class Composer {
 			 * When set, only image files are accepted.
 			 */
 			imageOnly?: true;
+			/**
+			 * The current file that exists in the database. Use a URL for best results, for example, https://example.s3.com/image.png.
+			 */
+			currentFile?: string;
 		},
 	) => string;
 	/**

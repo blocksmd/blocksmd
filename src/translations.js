@@ -13,6 +13,9 @@ const translations = {
 		"end-slide-subtitle": "You've reached the end. Thanks for reading!",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">Choose file</strong><span class="bmd-xs:d-none"> or drag here</span>',
+		"file-input-clear-check":
+			'Clear<span class="bmd-visually-hidden"> current file</span>',
+		"file-input-currently": "Currently",
 		"file-input-reset-btn": "Remove chosen file",
 		"file-input-size-error": "File exceeds the size limit.",
 		"file-input-size-limit": "Size limit",
@@ -59,6 +62,9 @@ const translations = {
 		"end-slide-subtitle": "আপনি শেষ পর্যন্ত পৌঁছেছেন৷ পড়ার জন্য ধন্যবাদ!",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">ফাইল বেছে নিন</strong><span class="bmd-xs:d-none"> বা এখানে টেনে আনুন</span>',
+		"file-input-clear-check":
+			'সাফ<span class="bmd-visually-hidden"> করুন বর্তমান ফাইল</span>',
+		"file-input-currently": "বর্তমানে",
 		"file-input-reset-btn": "নির্বাচিত ফাইল সরান",
 		"file-input-size-error": "ফাইলের সাইয সীমা ছাড়িয়ে গেছে।",
 		"file-input-size-limit": "সাইয লিমিট",
@@ -104,6 +110,9 @@ const translations = {
 		"end-slide-subtitle": "Has llegado al final. Gracias por leer!",
 		"file-input-choose":
 			'<strong class="bmd-text-accent">Elige el archivo</strong><span class="bmd-xs:d-none"> o arrastra aquí</span>',
+		"file-input-clear-check":
+			'Borrar<span class="bmd-visually-hidden"> el archivo actual</span>',
+		"file-input-currently": "Actualmente",
 		"file-input-reset-btn": "Eliminar el archivo elegido",
 		"file-input-size-error": "El archivo excede el límite de tamaño.",
 		"file-input-size-limit": "Límite de tamaño",

@@ -992,6 +992,7 @@ class Composer {
 	 * @typedef {Object} FileInputParamsType
 	 * @property {number} [sizeLimit] Maximum file size in MB. Defaults to `10`.
 	 * @property {true} [imageOnly] When set, only image files are accepted.
+	 * @property {string} [currentFile] The current file that exists in the database. Use a URL for best results, for example, https://example.s3.com/image.png.
 	 */
 
 	/**
@@ -1018,6 +1019,10 @@ class Composer {
 			templateChunks.push(`\t${formDelimiter}sizelimit = ${params.sizeLimit}`);
 		if (params.imageOnly !== undefined)
 			templateChunks.push(`\t${formDelimiter}imageonly`);
+		if (params.currentFile !== undefined)
+			templateChunks.push(
+				`\t${formDelimiter}currentfile = ${params.currentFile}`,
+			);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");

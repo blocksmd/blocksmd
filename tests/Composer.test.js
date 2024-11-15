@@ -819,6 +819,7 @@ attachment* = FileInput(
 	| autofocus
 	| sizelimit = 5
 	| imageonly
+	| currentfile = https://example.s3.com/image.png
 )
 `;
 
@@ -839,6 +840,7 @@ test("File input with all parameters", () => {
 			attrs: [{ name: "aria-label", value: "File input" }],
 			sizeLimit: 5,
 			imageOnly: true,
+			currentFile: "https://example.s3.com/image.png",
 		}),
 	).toBe(expectedFileTemplate);
 });
