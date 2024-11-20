@@ -38,6 +38,12 @@ class blocksmd {
 		postData: {},
 		postHeaders: {},
 		prioritizeURLFormData: false,
+		recaptcha: {
+			siteKey: "",
+			action: "submit",
+			badgePosition: "bottomleft",
+			hideBadge: false,
+		},
 		sanitize: true,
 		saveState: true,
 		setColorSchemeAttrsAgain: true,
@@ -55,6 +61,16 @@ class blocksmd {
 			color: "rgb(0, 0, 0)",
 		},
 	};
+
+	/**
+	 * Google reCAPTCHA attributes.
+	 *
+	 * @typedef {Object} RecaptchaType
+	 * @property {string} [siteKey] Google reCAPTCHA site key.
+	 * @property {string} [action] The action name. Default is `"submit"`.
+	 * @property {"bottomleft"|"bottomright"|"inline"} [badgePosition] The position of the reCAPTCHA badge. Default is `"bottomleft"`.
+	 * @property {boolean} [hideBadge] Whether to hide the reCAPTCHA badge. Default is `false`.
+	 */
 
 	/**
 	 * Theme for the page or form.
@@ -82,6 +98,7 @@ class blocksmd {
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
+	 * @property {RecaptchaType} [recaptcha] The Google reCAPTCHA attributes.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
@@ -183,6 +200,37 @@ class blocksmd {
 				typeof options.prioritizeURLFormData === "boolean"
 			)
 				this.options.prioritizeURLFormData = options.prioritizeURLFormData;
+			// Google reCAPTCHA
+			if (
+				options.recaptcha !== undefined &&
+				typeof options.recaptcha === "object"
+			) {
+				if (
+					options.recaptcha.siteKey !== undefined &&
+					typeof options.recaptcha.siteKey === "string"
+				) {
+					this.options.recaptcha.siteKey = options.recaptcha.siteKey;
+				}
+				if (
+					options.recaptcha.action !== undefined &&
+					typeof options.recaptcha.action === "string"
+				) {
+					this.options.recaptcha.action = options.recaptcha.action;
+				}
+				if (
+					options.recaptcha.badgePosition !== undefined &&
+					typeof options.recaptcha.badgePosition === "string"
+				) {
+					this.options.recaptcha.badgePosition =
+						options.recaptcha.badgePosition;
+				}
+				if (
+					options.recaptcha.hideBadge !== undefined &&
+					typeof options.recaptcha.hideBadge === "boolean"
+				) {
+					this.options.recaptcha.hideBadge = options.recaptcha.hideBadge;
+				}
+			}
 			// Sanitize
 			if (
 				options.sanitize !== undefined &&
@@ -1689,6 +1737,40 @@ class blocksmd {
 	};
 
 	/**
+	 * Execute Google reCAPTCHA v3 validation.
+	 *
+	 * @returns {Promise<string>} The Google reCAPTCHA token
+	 */
+	executeRecaptcha = () => {
+		const instance = this;
+
+		return new Promise((resolve) => {
+			if (!instance.options.recaptcha.siteKey) {
+				resolve("");
+				return;
+			}
+
+			if (!window.grecaptcha) {
+				console.error("CAPTCHA not loaded. Please try again.");
+				resolve("");
+				return;
+			}
+
+			window.grecaptcha.ready(() => {
+				window.grecaptcha
+					.execute(instance.options.recaptcha.siteKey, {
+						action: instance.options.recaptcha.action,
+					})
+					.then((token) => resolve(token))
+					.catch((error) => {
+						console.error("CAPTCHA execution error:", error);
+						resolve("");
+					});
+			});
+		});
+	};
+
+	/**
 	 * POST form data.
 	 *
 	 * @param {boolean} postCondition
@@ -1773,11 +1855,7 @@ class blocksmd {
 			.querySelectorAll('.bmd-form-file-clear-check-input[type="checkbox"]')
 			.forEach((input) => {
 				const name = input.getAttribute("name");
-				if (input.checked) {
-					formData.append(name, true);
-				} else {
-					formData.append(name, false);
-				}
+				formData.append(name, input.checked);
 			});
 
 		// Set the extra fields
@@ -1789,7 +1867,34 @@ class blocksmd {
 		);
 		formData.append("_submitted", new Date().toUTCString());
 
-		// Send data using POST url
+		// Get and use reCAPTCHA token if site key provided
+		if (instance.options.recaptcha.siteKey) {
+			return instance.executeRecaptcha().then((token) => {
+				formData.append("_captcha", token);
+				return fetch(instance.state.settings["post-url"], {
+					method: "POST",
+					headers: instance.options.postHeaders,
+					body: formData,
+				})
+					.then((response) =>
+						response
+							.json()
+							.then((json) => {
+								return { ok: response.ok, json: json };
+							})
+							.catch((error) => {
+								console.error(error);
+								return { ok: response.ok, json: {} };
+							}),
+					)
+					.catch((error) => {
+						console.error(error);
+						return { ok: false, json: {} };
+					});
+			});
+		}
+
+		// No reCAPTCHA needed, just send the form data
 		return fetch(instance.state.settings["post-url"], {
 			method: "POST",
 			headers: instance.options.postHeaders,
@@ -2548,6 +2653,32 @@ class blocksmd {
 	};
 
 	/**
+	 * Load the Google reCAPTCHA v3 script asynchronously.
+	 */
+	loadRecaptchaScript = () => {
+		const instance = this;
+
+		if (!instance.options.recaptcha.siteKey || window.grecaptcha) return;
+
+		// Return if script already loaded
+		const scriptId = `captcha-${instance.options.recaptcha.siteKey}`;
+		if (document.getElementById(scriptId)) return;
+
+		// Load script
+		const script = document.createElement("script");
+		script.setAttribute("id", scriptId);
+		script.src = `https://www.google.com/recaptcha/api.js?render=${instance.options.recaptcha.siteKey}&badge=${instance.options.recaptcha.badgePosition}`;
+		document.head.appendChild(script);
+
+		// Hide badge if needed
+		if (instance.options.recaptcha.hideBadge) {
+			const styleSheet = document.createElement("style");
+			styleSheet.textContent = ".grecaptcha-badge { visibility: hidden; }";
+			document.head.appendChild(styleSheet);
+		}
+	};
+
+	/**
 	 * Initialize settings, set data defined in the template, fetch and set data
 	 * from remote source, and create the templates.
 	 *
@@ -2555,6 +2686,11 @@ class blocksmd {
 	 */
 	_init = (isFirstInit) => {
 		const instance = this;
+
+		// Load Google reCAPTCHA script if site key provided
+		if (isFirstInit && instance.options.recaptcha.siteKey) {
+			instance.loadRecaptchaScript();
+		}
 
 		// Set the state to defaults
 		instance.setStateToDefaults();

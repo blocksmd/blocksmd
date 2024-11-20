@@ -1,5 +1,14 @@
 export class blocksmd {
 	/**
+	 * Google reCAPTCHA attributes.
+	 *
+	 * @typedef {Object} RecaptchaType
+	 * @property {string} [siteKey] Google reCAPTCHA site key.
+	 * @property {string} [action] The action name. Default is `"submit"`.
+	 * @property {"bottomleft"|"bottomright"|"inline"} [badgePosition] The position of the reCAPTCHA badge. Default is `"bottomleft"`.
+	 * @property {boolean} [hideBadge] Whether to hide the reCAPTCHA badge. Default is `false`.
+	 */
+	/**
 	 * Theme for the page or form.
 	 *
 	 * @typedef {Object} ThemeType
@@ -24,6 +33,7 @@ export class blocksmd {
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
+	 * @property {RecaptchaType} [recaptcha] The Google reCAPTCHA attributes.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
@@ -90,6 +100,27 @@ export class blocksmd {
 			 * Whether to prioritize URL form data. Default is `false`.
 			 */
 			prioritizeURLFormData?: boolean;
+			/**
+			 * The Google reCAPTCHA attributes.
+			 */
+			recaptcha?: {
+				/**
+				 * Google reCAPTCHA site key.
+				 */
+				siteKey?: string;
+				/**
+				 * The action name. Default is `"submit"`.
+				 */
+				action?: string;
+				/**
+				 * The position of the reCAPTCHA badge. Default is `"bottomleft"`.
+				 */
+				badgePosition?: "bottomleft" | "bottomright" | "inline";
+				/**
+				 * Whether to hide the reCAPTCHA badge. Default is `false`.
+				 */
+				hideBadge?: boolean;
+			};
 			/**
 			 * Whether to sanitize template. Default is `true`.
 			 */
@@ -163,6 +194,12 @@ export class blocksmd {
 		postData: {};
 		postHeaders: {};
 		prioritizeURLFormData: boolean;
+		recaptcha: {
+			siteKey: string;
+			action: string;
+			badgePosition: string;
+			hideBadge: boolean;
+		};
 		sanitize: boolean;
 		saveState: boolean;
 		setColorSchemeAttrsAgain: boolean;
@@ -472,6 +509,12 @@ export class blocksmd {
 	 */
 	convertTimezoneOffset: (minutes: number) => string;
 	/**
+	 * Execute Google reCAPTCHA v3 validation.
+	 *
+	 * @returns {Promise<string>} The Google reCAPTCHA token
+	 */
+	executeRecaptcha: () => Promise<string>;
+	/**
 	 * POST form data.
 	 *
 	 * @param {boolean} postCondition
@@ -593,6 +636,10 @@ export class blocksmd {
 	 * @param {boolean} fromInit
 	 */
 	addEventListeners: (container: HTMLElement, fromInit: boolean) => void;
+	/**
+	 * Load the Google reCAPTCHA v3 script asynchronously.
+	 */
+	loadRecaptchaScript: () => void;
 	/**
 	 * Initialize settings, set data defined in the template, fetch and set data
 	 * from remote source, and create the templates.
