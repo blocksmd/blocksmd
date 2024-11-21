@@ -306,6 +306,48 @@ test("Telephone input with all parameters", () => {
 	).toBe(expectedTelTemplate);
 });
 
+// Password input test
+
+const expectedPasswordTemplate = `
+[#password-field .col-6 .xs:col-8 aria-label="Password input"]
+password* = PasswordInput(
+	| question = Password
+	| description = Enter your password
+	| fieldSize = sm
+	| labelStyle = classic
+	| subfield
+	| disabled
+	| autofocus
+	| placeholder = Enter password
+	| maxlength = 50
+	| pattern = ^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$
+	| value = testpass123
+)
+`;
+
+test("Password input with all parameters", () => {
+	const composer = new Composer();
+	expect(
+		composer.passwordInput("password", {
+			question: "Password",
+			required: true,
+			description: "Enter your password",
+			fieldSize: "sm",
+			labelStyle: "classic",
+			subfield: true,
+			disabled: true,
+			autofocus: true,
+			id: "password-field",
+			classNames: ["col-6", "xs:col-8"],
+			attrs: [{ name: "aria-label", value: "Password input" }],
+			placeholder: "Enter password",
+			maxlength: 50,
+			pattern: "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+			value: "testpass123",
+		}),
+	).toBe(expectedPasswordTemplate);
+});
+
 // Number input test
 
 const expectedNumberTemplate = `
@@ -904,6 +946,20 @@ tel = TelInput(
 			description: "Enter phone",
 		}),
 	).toBe(expectedTelSimple);
+
+	// Password input
+	const expectedPasswordSimple = `
+password = PasswordInput(
+	question = Password
+	description = Enter password
+)
+`;
+	expect(
+		composer.passwordInput("password", {
+			question: "Password",
+			description: "Enter password",
+		}),
+	).toBe(expectedPasswordSimple);
 
 	// Number input
 	const expectedNumberSimple = `

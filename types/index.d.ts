@@ -1,3 +1,4 @@
+import { _ } from "./composer";
 import { Composer } from "./composer";
 import { blocksmd } from "./main";
-export { Composer, blocksmd };
+export { _, Composer, blocksmd };

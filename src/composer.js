@@ -57,6 +57,22 @@ function composeAttrs(params) {
 	return attrs;
 }
 
+/**
+ * Given the localization and object of translations, get the
+ * localized string.
+ *
+ * @property {string} localization
+ * @property {Object} translations
+ * @returns {string}
+ */
+function _(localization, translations) {
+	if (translations[localization] !== undefined) {
+		return translations[localization];
+	} else {
+		return Object.values(translations)[0];
+	}
+}
+
 class Composer {
 	template = "";
 	settings = {};
@@ -88,7 +104,7 @@ class Composer {
 	 * @property {string} [fontImportUrl] URL to import custom fonts (must be valid CSS for the `@import` property).
 	 * @property {"sm"|"lg"} [fontSize] Makes the `font-size` of everything on the page smaller or larger.
 	 * @property {string} [formDelimiter] Used to separate parameters when creating form fields. Default is `"|"`.
-	 * @property {string} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
+	 * @property {"classic"} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
 	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
 	 * @property {"json"|"csv"|"tsv"} [getFormat] The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
 	 * @property {string} [getObjectsName] Name used for objects when reading data. Default is `"objects"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
@@ -398,6 +414,60 @@ class Composer {
 				`\t${formDelimiter}availableCountries = ${params.availableCountries.join(", ")}`,
 			);
 		}
+
+		// Close the input and add the attributes (if applicable)
+		templateChunks.push(")");
+		const attrs = composeAttrs(params);
+		if (attrs.length > 0) {
+			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create the result, add it to the template and return
+		const result = `\n${templateChunks.join("\n")}\n`;
+		instance.template += result;
+		return result;
+	};
+
+	/**
+	 * Password input params.
+	 *
+	 * @typedef {Object} PasswordInputParamsType
+	 * @property {string} [placeholder] Sets the `placeholder` attribute of the input.
+	 * @property {number} [maxlength] If set, this becomes the maximum number of allowed characters in the input.
+	 * @property {string} [pattern] If set, the input value must match the given pattern.
+	 * @property {string} [value] If set, this becomes the default value of the input.
+	 */
+
+	/**
+	 * Create a password input field.
+	 *
+	 * @param {string} name
+	 * @param {FormFieldSharedParamsType & PasswordInputParamsType} params
+	 * @returns {string}
+	 */
+	passwordInput = (name, params) => {
+		const instance = this;
+
+		// Set up the template chunks using the shared params
+		const formDelimiter =
+			instance.settings.formDelimiter !== "\n"
+				? `${instance.settings.formDelimiter} `
+				: "";
+		const templateChunks = [
+			`${name}${params.required ? "*" : ""} = PasswordInput(`,
+		].concat(composeSharedFieldParams(params, formDelimiter));
+
+		// Add the other params
+		if (params.placeholder !== undefined)
+			templateChunks.push(
+				`\t${formDelimiter}placeholder = ${params.placeholder}`,
+			);
+		if (params.maxlength !== undefined)
+			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
+		if (params.pattern !== undefined)
+			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
+		if (params.value !== undefined)
+			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1548,4 +1618,5 @@ class Composer {
 
 exports.composeSharedFieldParams = composeSharedFieldParams;
 exports.composeAttrs = composeAttrs;
+exports._ = _;
 exports.Composer = Composer;

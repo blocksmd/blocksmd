@@ -7,8 +7,9 @@
 
 "use strict";
 
-const { Composer } = require("./composer");
+const { _, Composer } = require("./composer");
 const { blocksmd } = require("./main");
 
+exports._ = _;
 exports.Composer = Composer;
 exports.blocksmd = blocksmd;

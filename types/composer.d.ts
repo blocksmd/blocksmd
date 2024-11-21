@@ -16,6 +16,15 @@ export function composeSharedFieldParams(
  * @returns {Array.<string>}
  */
 export function composeAttrs(params: any): Array<string>;
+/**
+ * Given the localization and object of translations, get the
+ * localized string.
+ *
+ * @property {string} localization
+ * @property {Object} translations
+ * @returns {string}
+ */
+export function _(localization: any, translations: any): string;
 export class Composer {
 	/**
 	 * The page or form settings.
@@ -43,7 +52,7 @@ export class Composer {
 	 * @property {string} [fontImportUrl] URL to import custom fonts (must be valid CSS for the `@import` property).
 	 * @property {"sm"|"lg"} [fontSize] Makes the `font-size` of everything on the page smaller or larger.
 	 * @property {string} [formDelimiter] Used to separate parameters when creating form fields. Default is `"|"`.
-	 * @property {string} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
+	 * @property {"classic"} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
 	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
 	 * @property {"json"|"csv"|"tsv"} [getFormat] The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
 	 * @property {string} [getObjectsName] Name used for objects when reading data. Default is `"objects"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
@@ -169,7 +178,7 @@ export class Composer {
 		/**
 		 * If set to `"classic"`, the form fields will have a classic appearance.
 		 */
-		formStyle?: string;
+		formStyle?: "classic";
 		/**
 		 * If set to `"hide"`, the footer will be hidden.
 		 */
@@ -1190,6 +1199,97 @@ export class Composer {
 				| "ZM"
 				| "ZW"
 			)[];
+		},
+	) => string;
+	/**
+	 * Password input params.
+	 *
+	 * @typedef {Object} PasswordInputParamsType
+	 * @property {string} [placeholder] Sets the `placeholder` attribute of the input.
+	 * @property {number} [maxlength] If set, this becomes the maximum number of allowed characters in the input.
+	 * @property {string} [pattern] If set, the input value must match the given pattern.
+	 * @property {string} [value] If set, this becomes the default value of the input.
+	 */
+	/**
+	 * Create a password input field.
+	 *
+	 * @param {string} name
+	 * @param {FormFieldSharedParamsType & PasswordInputParamsType} params
+	 * @returns {string}
+	 */
+	passwordInput: (
+		name: string,
+		params: {
+			/**
+			 * The main question of the form field.
+			 */
+			question: string;
+			/**
+			 * When set, the field becomes required.
+			 */
+			required?: true;
+			/**
+			 * Any extra information that the user may need to fill out the form.
+			 */
+			description?: string;
+			/**
+			 * When set to `"sm"`, the font sizes of the question, description, and answer are made smaller.
+			 */
+			fieldSize?: "sm";
+			/**
+			 * When set to `"classic"`, the question and description of the form field are made smaller.
+			 */
+			labelStyle?: "classic";
+			/**
+			 * When set, the question and description of the form field are made smaller.
+			 */
+			subfield?: true;
+			/**
+			 * When set, the input is disabled.
+			 */
+			disabled?: true;
+			/**
+			 * When set, the input will be automatically focused when the parent slide becomes active, or immediately after page load.
+			 */
+			autofocus?: true;
+			/**
+			 * The id attribute of the form field.
+			 */
+			id?: string;
+			/**
+			 * The CSS class names of the form field.
+			 */
+			classNames?: Array<string>;
+			/**
+			 * Other HTML attributes of the form field.
+			 */
+			attrs?: {
+				/**
+				 * The name of the attribute.
+				 */
+				name: string;
+				/**
+				 * The value of the attribute.
+				 */
+				value: string;
+			}[];
+		} & {
+			/**
+			 * Sets the `placeholder` attribute of the input.
+			 */
+			placeholder?: string;
+			/**
+			 * If set, this becomes the maximum number of allowed characters in the input.
+			 */
+			maxlength?: number;
+			/**
+			 * If set, the input value must match the given pattern.
+			 */
+			pattern?: string;
+			/**
+			 * If set, this becomes the default value of the input.
+			 */
+			value?: string;
 		},
 	) => string;
 	/**

@@ -32,9 +32,9 @@ class blocksmd {
 		getHeaders: {},
 		id: "",
 		isFullPage: false,
-		paddingInlineBottom: null,
+		paddingInlineBottom: 20,
 		paddingInlineHorizontal: 0,
-		paddingInlineTop: null,
+		paddingInlineTop: 20,
 		postData: {},
 		postHeaders: {},
 		prioritizeURLFormData: false,
@@ -92,9 +92,9 @@ class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
+	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
-	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
@@ -2709,12 +2709,10 @@ class blocksmd {
 			let rootElemStyle = "";
 
 			// Handle padding inline bottom
-			if (instance.options.paddingInlineBottom !== null) {
-				rootElemClass += " bmd-pb-custom";
-				rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
-				if (instance.options.paddingInlineBottom === 0)
-					rootElemClass += " bmd-pb-0";
-			}
+			rootElemClass += " bmd-pb-custom";
+			rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
+			if (instance.options.paddingInlineBottom === 0)
+				rootElemClass += " bmd-pb-0";
 
 			// Handle padding inline horizontal
 			rootElemClass += " bmd-px-custom";
@@ -2723,12 +2721,9 @@ class blocksmd {
 				rootElemClass += " bmd-px-0";
 
 			// Handle padding inline top
-			if (instance.options.paddingInlineTop !== null) {
-				rootElemClass += " bmd-pt-custom";
-				rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
-				if (instance.options.paddingInlineTop === 0)
-					rootElemClass += " bmd-pt-0";
-			}
+			rootElemClass += " bmd-pt-custom";
+			rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
+			if (instance.options.paddingInlineTop === 0) rootElemClass += " bmd-pt-0";
 
 			instance.container.innerHTML = [
 				"<div",

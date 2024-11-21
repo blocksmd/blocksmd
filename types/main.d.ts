@@ -27,9 +27,9 @@ export class blocksmd {
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
-	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms.
+	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
-	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms.
+	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
@@ -77,7 +77,7 @@ export class blocksmd {
 			 */
 			isFullPage?: boolean;
 			/**
-			 * Padding bottom for inline pages or forms.
+			 * Padding bottom for inline pages or forms. Default is `20`.
 			 */
 			paddingInlineBottom?: number;
 			/**
@@ -85,7 +85,7 @@ export class blocksmd {
 			 */
 			paddingInlineHorizontal?: number;
 			/**
-			 * Padding top for inline pages or forms.
+			 * Padding top for inline pages or forms. Default is `20`.
 			 */
 			paddingInlineTop?: number;
 			/**
@@ -188,9 +188,9 @@ export class blocksmd {
 		getHeaders: {};
 		id: string;
 		isFullPage: boolean;
-		paddingInlineBottom: any;
+		paddingInlineBottom: number;
 		paddingInlineHorizontal: number;
-		paddingInlineTop: any;
+		paddingInlineTop: number;
 		postData: {};
 		postHeaders: {};
 		prioritizeURLFormData: boolean;
