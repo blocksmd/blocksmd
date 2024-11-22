@@ -58,10 +58,25 @@ function composeAttrs(params) {
 }
 
 /**
+ * Translations.
+ *
+ * @typedef {Object} TranslationsType
+ * @property {string} [en] The text in English.
+ * @property {string} [ar] The text in Arabic.
+ * @property {string} [bn] The text in Bengali.
+ * @property {string} [de] The text in German.
+ * @property {string} [es] The text in Spanish.
+ * @property {string} [fr] The text in French.
+ * @property {string} [ja] The text in Japanese.
+ * @property {string} [pt] The text in Portuguese.
+ * @property {string} [zh] The text in Chinese.
+ */
+
+/**
  * Given the localization and object of translations, get the localized string.
  *
- * @property {string} localization
- * @property {Object} translations
+ * @param {string} localization
+ * @param {TranslationsType} translations
  * @returns {string}
  */
 function _(localization, translations) {

@@ -1,4 +1,45 @@
 /**
+ * Translations.
+ */
+export type TranslationsType = {
+	/**
+	 * The text in English.
+	 */
+	en?: string;
+	/**
+	 * The text in Arabic.
+	 */
+	ar?: string;
+	/**
+	 * The text in Bengali.
+	 */
+	bn?: string;
+	/**
+	 * The text in German.
+	 */
+	de?: string;
+	/**
+	 * The text in Spanish.
+	 */
+	es?: string;
+	/**
+	 * The text in French.
+	 */
+	fr?: string;
+	/**
+	 * The text in Japanese.
+	 */
+	ja?: string;
+	/**
+	 * The text in Portuguese.
+	 */
+	pt?: string;
+	/**
+	 * The text in Chinese.
+	 */
+	zh?: string;
+};
+/**
  * Get the shared form field params.
  *
  * @param {Object} params
@@ -17,13 +58,27 @@ export function composeSharedFieldParams(
  */
 export function composeAttrs(params: any): Array<string>;
 /**
+ * Translations.
+ *
+ * @typedef {Object} TranslationsType
+ * @property {string} [en] The text in English.
+ * @property {string} [ar] The text in Arabic.
+ * @property {string} [bn] The text in Bengali.
+ * @property {string} [de] The text in German.
+ * @property {string} [es] The text in Spanish.
+ * @property {string} [fr] The text in French.
+ * @property {string} [ja] The text in Japanese.
+ * @property {string} [pt] The text in Portuguese.
+ * @property {string} [zh] The text in Chinese.
+ */
+/**
  * Given the localization and object of translations, get the localized string.
  *
- * @property {string} localization
- * @property {Object} translations
+ * @param {string} localization
+ * @param {TranslationsType} translations
  * @returns {string}
  */
-export function _(localization: any, translations: any): string;
+export function _(localization: string, translations: TranslationsType): string;
 export class Composer {
 	/**
 	 * The page or form settings.
