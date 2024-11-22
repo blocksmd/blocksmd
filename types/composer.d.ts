@@ -17,8 +17,7 @@ export function composeSharedFieldParams(
  */
 export function composeAttrs(params: any): Array<string>;
 /**
- * Given the localization and object of translations, get the
- * localized string.
+ * Given the localization and object of translations, get the localized string.
  *
  * @property {string} localization
  * @property {Object} translations
