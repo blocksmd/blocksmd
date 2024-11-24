@@ -1334,17 +1334,6 @@
 	display: none;
 }
 
-.bmd-root:not([data-bmd-form-style="classic"])
-	.bmd-grid
-	> .bmd-form-field
-	+ .bmd-next-controls,
-.bmd-root:not([data-bmd-form-style="classic"])
-	.bmd-grid
-	> .bmd-grid:empty
-	+ .bmd-next-controls {
-	margin-top: calc(-1 * var(--bmd-form-field-padding-y)) !important;
-}
-
 /**
  * ----------------------------------------------------------------------------
  * [ Tables ]

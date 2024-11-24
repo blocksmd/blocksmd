@@ -715,14 +715,6 @@ class blocksmd {
 				let name = elem.getAttribute("name");
 				const value = elem.value;
 				const type = elem.getAttribute("type") || "text";
-
-				// Issue-fix with DOMPurify (in case of sanitization)
-				// https://github.com/cure53/DOMPurify/issues/952
-				if (elem.getAttribute("id") === `${instance.getIdPrefix()}id_name`) {
-					elem.setAttribute("name", "name");
-					name = "name";
-				}
-
 				instance.state.formData[name] = value;
 				instance.state.fieldTypes[name] = type;
 				instance.reRenderBindElems(name);
