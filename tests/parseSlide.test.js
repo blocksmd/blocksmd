@@ -52,7 +52,7 @@ test("Case 1 (form, slide with form field)", () => {
 		template1,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result1.template, { format: "html" })).toBe(
@@ -105,7 +105,7 @@ test("Case 2 (form, slide with form field and incorrect page progress, different
 		template2,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
 	expect(beautify(result2.template, { format: "html" })).toBe(
@@ -153,7 +153,7 @@ test("Case 3 (form, slide without form field)", () => {
 		template3,
 		true,
 		false,
-		{ hideRestartBtn: true, submitBtnText: "" },
+		{ showRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result3.template, { format: "html" })).toBe(
@@ -205,7 +205,7 @@ test("Case 4 (form, slide without form field, different localization)", () => {
 		template4,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
 	expect(beautify(result4.template, { format: "html" })).toBe(
@@ -259,7 +259,7 @@ test("Case 5 (not form, slide with form field)", () => {
 		template5,
 		false,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result5.template, { format: "html" })).toBe(
@@ -309,7 +309,7 @@ test("Case 6 (not form, slide without form field)", () => {
 		template6,
 		false,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result6.template, { format: "html" })).toBe(
@@ -354,7 +354,7 @@ test("Case 7 (form, start slide without form field)", () => {
 		template7,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "Submit" },
+		{ showRestartBtn: false, submitBtnText: "Submit" },
 		"en",
 	);
 	expect(beautify(result7.template, { format: "html" })).toBe(
@@ -401,7 +401,7 @@ test("Case 8 (form, start slide without form field, different localization)", ()
 		template8,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
 	expect(beautify(result8.template, { format: "html" })).toBe(
@@ -443,7 +443,7 @@ test("Case 9 (form, start slide with custom start button and without form field)
 		template9,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result9.template, { format: "html" })).toBe(
@@ -499,7 +499,7 @@ test("Case 10 (form, start slide with form field)", () => {
 		template10,
 		true,
 		false,
-		{ hideRestartBtn: true, submitBtnText: "" },
+		{ showRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result10.template, { format: "html" })).toBe(
@@ -551,7 +551,7 @@ test("Case 11 (form, start slide with custom start button and form field)", () =
 		template11,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result11.template, { format: "html" })).toBe(
@@ -597,7 +597,7 @@ test("Case 12 (not form, start slide with form field)", () => {
 		template12,
 		false,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result12.template, { format: "html" })).toBe(
@@ -643,7 +643,7 @@ test("Case 13 (not form, start slide with custom start button and form field)", 
 		template13,
 		false,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result13.template, { format: "html" })).toBe(
@@ -675,12 +675,6 @@ const expectedTemplate14 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
-		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
-			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
-				Restart
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
-			</button>
-		</div>
 	</div>
 </div>
 `;
@@ -690,7 +684,7 @@ test("Case 14 (form, end slide)", () => {
 		template14,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result14.template, { format: "html" })).toBe(
@@ -723,12 +717,6 @@ const expectedTemplate15 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
-		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
-			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
-				Restart
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
-			</button>
-		</div>
 	</div>
 </div>
 `;
@@ -738,7 +726,7 @@ test("Case 15 (not form, end slide with custom redirect)", () => {
 		template15,
 		false,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result15.template, { format: "html" })).toBe(
@@ -771,12 +759,6 @@ const expectedTemplate16 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
-		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
-			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
-				আবার শুরু
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
-			</button>
-		</div>
 	</div>
 </div>
 `;
@@ -786,7 +768,7 @@ test("Case 16 (form, end slide with custom redirect, different localization)", (
 		template16,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"bn",
 	);
 	expect(beautify(result16.template, { format: "html" })).toBe(
@@ -822,7 +804,7 @@ test("Case 17 (form, empty template)", () => {
 		template17,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result17.template, { format: "html" })).toBe(
@@ -879,7 +861,7 @@ test("Case 18 (form, first slide with form field)", () => {
 		template18,
 		true,
 		true,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result18.template, { format: "html" })).toBe(
@@ -924,7 +906,7 @@ test("Case 19 (form, start first slide without form field)", () => {
 		template19,
 		true,
 		true,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result19.template, { format: "html" })).toBe(
@@ -977,7 +959,7 @@ test("Case 20 (not form, first slide with form field)", () => {
 		template20,
 		false,
 		true,
-		{ hideRestartBtn: false, submitBtnText: "" },
+		{ showRestartBtn: false, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result20.template, { format: "html" })).toBe(
@@ -986,7 +968,7 @@ test("Case 20 (not form, first slide with form field)", () => {
 	expect(result20.slideType).toBe("body");
 });
 
-// Case 21 (form, end slide, hidden restart button)
+// Case 21 (form, end slide, show restart button)
 
 const template21 = `
 -> END
@@ -1009,16 +991,22 @@ const expectedTemplate21 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
+		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
+			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+				Restart
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
+			</button>
+		</div>
 	</div>
 </div>
 `;
 
-test("Case 21 (form, end slide, hidden restart button)", () => {
+test("Case 21 (form, end slide, show restart button)", () => {
 	const result21 = parseSlide(
 		template21,
 		true,
 		false,
-		{ hideRestartBtn: true, submitBtnText: "" },
+		{ showRestartBtn: true, submitBtnText: "" },
 		"en",
 	);
 	expect(beautify(result21.template, { format: "html" })).toBe(
@@ -1075,11 +1063,58 @@ test("Case 22 (form, slide with form field, different submit button text)", () =
 		template22,
 		true,
 		false,
-		{ hideRestartBtn: false, submitBtnText: "Submit form" },
+		{ showRestartBtn: false, submitBtnText: "Submit form" },
 		"en",
 	);
 	expect(beautify(result22.template, { format: "html" })).toBe(
 		beautify(expectedTemplate22, { format: "html" }),
 	);
 	expect(result22.slideType).toBe("body");
+});
+
+// Case 23 (form, end slide, show restart button, different localization)
+
+const template23 = `
+-> END
+|> 95%
+>> POST
+
+# Welcome
+
+email* = EmailInput(question=What is your email address?)
+`;
+const expectedTemplate23 = `
+<div
+	class="bmd-slide bmd-end-slide"
+>
+	<div class="bmd-grid">
+		<markdown>
+
+		# Welcome
+
+		email* = EmailInput(question=What is your email address?)
+
+		</markdown>
+		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
+			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+				আবার শুরু
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
+			</button>
+		</div>
+	</div>
+</div>
+`;
+
+test("Case 23 (form, end slide, show restart button, different localization)", () => {
+	const result23 = parseSlide(
+		template23,
+		true,
+		false,
+		{ showRestartBtn: true, submitBtnText: "" },
+		"bn",
+	);
+	expect(beautify(result23.template, { format: "html" })).toBe(
+		beautify(expectedTemplate23, { format: "html" }),
+	);
+	expect(result23.slideType).toBe("end");
 });

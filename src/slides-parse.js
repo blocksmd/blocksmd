@@ -78,7 +78,7 @@ const endSlideTemplate = `
 >
 	<div class="bmd-grid">
 		{{ content }}
-		{% if not btnSettings.hideRestartBtn %}
+		{% if btnSettings.showRestartBtn %}
 		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
 			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
 				{{ translations.restartBtn }}
@@ -104,7 +104,7 @@ const endSlideTemplate = `
  * @param {string} template
  * @param {boolean} isForm
  * @param {boolean} isFirstSlide
- * @param {{hideRestartBtn: boolean, submitBtnText: string}} btnSettings
+ * @param {{showRestartBtn: boolean, submitBtnText: string}} btnSettings
  * @param {string} localization
  * @returns {{template: string, slideType:"start"|"body"|"end"}} template with
  * parsed slides, type of the slide
@@ -265,7 +265,7 @@ function parseSlide(template, isForm, isFirstSlide, btnSettings, localization) {
  *
  * @param {string} template
  * @param {boolean} isForm
- * @param {{hideRestartBtn: boolean, submitBtnText: string}} btnSettings
+ * @param {{showRestartBtn: boolean, submitBtnText: string}} btnSettings
  * @param {string} localization
  * @param {string} slideDelimiter
  * @returns {string} template with parsed slides

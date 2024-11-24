@@ -82,12 +82,6 @@ const expectedTemplate1 = `
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
 			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
 		</div>
-		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
-			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
-				Restart
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
-			</button>
-		</div>
 	</div>
 </div>
 `;

@@ -132,7 +132,7 @@ const template3 = `
 			#! placeholders = hide
 #! post-sheet-name = Sheet2
 		#! post-url = https://example.com/api/examples/create/
-#! restart-button = hide
+#! restart-button = show
 		#! rounded = pill
 			#! slide-controls = hide
 	#! slide-delimiter = ***
@@ -174,7 +174,7 @@ const expectedSettings3 = {
 	"placeholders": "hide",
 	"post-sheet-name": "Sheet2",
 	"post-url": "https://example.com/api/examples/create/",
-	"restart-button": "hide",
+	"restart-button": "show",
 	"rounded": "pill",
 	"slide-controls": "hide",
 	"slide-delimiter": "***",

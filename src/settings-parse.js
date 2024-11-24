@@ -458,8 +458,8 @@ function parseSettings(template) {
 			accepted: "valid URL",
 		},
 		"restart-button": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^show$/,
+			accepted: "show",
 		},
 		"rounded": {
 			pattern: /^(none|pill)$/,

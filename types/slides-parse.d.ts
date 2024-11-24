@@ -12,7 +12,7 @@
  * @param {string} template
  * @param {boolean} isForm
  * @param {boolean} isFirstSlide
- * @param {{hideRestartBtn: boolean, submitBtnText: string}} btnSettings
+ * @param {{showRestartBtn: boolean, submitBtnText: string}} btnSettings
  * @param {string} localization
  * @returns {{template: string, slideType:"start"|"body"|"end"}} template with
  * parsed slides, type of the slide
@@ -22,7 +22,7 @@ export function parseSlide(
 	isForm: boolean,
 	isFirstSlide: boolean,
 	btnSettings: {
-		hideRestartBtn: boolean;
+		showRestartBtn: boolean;
 		submitBtnText: string;
 	},
 	localization: string,
@@ -36,7 +36,7 @@ export function parseSlide(
  *
  * @param {string} template
  * @param {boolean} isForm
- * @param {{hideRestartBtn: boolean, submitBtnText: string}} btnSettings
+ * @param {{showRestartBtn: boolean, submitBtnText: string}} btnSettings
  * @param {string} localization
  * @param {string} slideDelimiter
  * @returns {string} template with parsed slides
@@ -45,7 +45,7 @@ export function parseSlides(
 	template: string,
 	isForm: boolean,
 	btnSettings: {
-		hideRestartBtn: boolean;
+		showRestartBtn: boolean;
 		submitBtnText: string;
 	},
 	localization: string,

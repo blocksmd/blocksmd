@@ -319,7 +319,7 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 			template,
 			settings.page === "form-slides" ? true : false,
 			{
-				hideRestartBtn: settings["restart-button"] === "hide" ? true : false,
+				showRestartBtn: settings["restart-button"] === "show" ? true : false,
 				submitBtnText:
 					settings["submit-button-text"] !== undefined
 						? settings["submit-button-text"]
