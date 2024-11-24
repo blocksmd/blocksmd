@@ -12,7 +12,7 @@ const slideTemplate = `
 	action="javascript:void(0);"
 	class="bmd-slide{% if isFirstSlide %} bmd-first-slide{% endif %}"
 	{% if jump and not isFirstSlide %}data-bmd-jump="{{ jump }}"{% endif %}
-	{% if pageProgress and not isFirstSlide %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
+	{% if pageProgress %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
 	{% if disablePrevBtn %}data-bmd-disable-prev-btn{% endif %}
 	{% if post %}data-bmd-post{% endif %}
 >
@@ -44,7 +44,7 @@ const slideTemplate = `
 <div
 	class="bmd-slide{% if isFirstSlide %} bmd-first-slide{% endif %}"
 	{% if jump and not isFirstSlide %}data-bmd-jump="{{ jump }}"{% endif %}
-	{% if pageProgress and not isFirstSlide %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
+	{% if pageProgress %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
 	{% if disablePrevBtn %}data-bmd-disable-prev-btn{% endif %}
 >
 	<div class="bmd-grid">

@@ -850,6 +850,7 @@ const expectedTemplate18 = `
 	method="POST"
 	action="javascript:void(0);"
 	class="bmd-slide bmd-first-slide"
+	data-bmd-page-progress="25%"
 	data-bmd-disable-prev-btn
 	data-bmd-post
 >
@@ -899,6 +900,7 @@ const template19 = `
 const expectedTemplate19 = `
 <div
 	class="bmd-slide bmd-first-slide"
+	data-bmd-page-progress="25%"
 >
 	<div class="bmd-grid">
 		<markdown>
@@ -947,6 +949,7 @@ email* = EmailInput(question=What is your email address?)
 const expectedTemplate20 = `
 <div
 	class="bmd-slide bmd-first-slide"
+	data-bmd-page-progress="25%"
 >
 	<div class="bmd-grid">
 		<markdown>

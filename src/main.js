@@ -2059,9 +2059,7 @@ class blocksmd {
 		// Handle page progress (if applicable)
 		const pageProgress = instance.container.querySelector(".bmd-page-progress");
 		let slidePageProgress;
-		if (slide.classList.contains("bmd-first-slide")) {
-			slidePageProgress = "0%";
-		} else if (slide.classList.contains("bmd-end-slide")) {
+		if (slide.classList.contains("bmd-end-slide")) {
 			slidePageProgress = "100%";
 		} else if (slide.hasAttribute("data-bmd-page-progress")) {
 			slidePageProgress = slide.getAttribute("data-bmd-page-progress");
