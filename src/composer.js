@@ -191,6 +191,14 @@ class Composer {
 	 */
 
 	/**
+	 * Display condition.
+	 *
+	 * @typedef {Object} DisplayConditionType
+	 * @property {string} dependency The name of the form field or data to use in the condition.
+	 * @property {string} condition The actual condition.
+	 */
+
+	/**
 	 * Params shared between all form fields.
 	 *
 	 * @typedef {Object} FormFieldSharedParamsType
@@ -205,6 +213,7 @@ class Composer {
 	 * @property {string} [id] The id attribute of the form field.
 	 * @property {Array.<string>} [classNames] The CSS class names of the form field.
 	 * @property {Array.<HTMLAttributeType>} [attrs] Other HTML attributes of the form field.
+	 * @property {DisplayConditionType} [displayCondition] Display condition for the form field.
 	 */
 
 	/**
@@ -256,6 +265,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -312,6 +331,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -364,6 +393,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -436,6 +475,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -488,6 +537,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -551,6 +610,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -622,6 +691,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -698,6 +777,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -778,6 +867,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -828,6 +927,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -893,6 +1002,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -948,6 +1067,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return
@@ -1007,6 +1136,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -1064,6 +1203,16 @@ class Composer {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
 		}
 
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
+		}
+
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
 		instance.template += result;
@@ -1113,6 +1262,16 @@ class Composer {
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
 			templateChunks.unshift(`[${attrs.join(" ")}]`);
+		}
+
+		// Create a wrapping <div> with the display condition (if applicable)
+		if (params.displayCondition !== undefined) {
+			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
+			templateChunks.unshift(
+				`::: [{$ ${params.displayCondition.dependency} $}]`,
+			);
+			templateChunks.push("{% endif %}");
+			templateChunks.push(":::");
 		}
 
 		// Create the result, add it to the template and return

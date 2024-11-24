@@ -353,6 +353,13 @@ export class Composer {
 	 * @property {string} value The value of the attribute.
 	 */
 	/**
+	 * Display condition.
+	 *
+	 * @typedef {Object} DisplayConditionType
+	 * @property {string} dependency The name of the form field or data to use in the condition.
+	 * @property {string} condition The actual condition.
+	 */
+	/**
 	 * Params shared between all form fields.
 	 *
 	 * @typedef {Object} FormFieldSharedParamsType
@@ -367,6 +374,7 @@ export class Composer {
 	 * @property {string} [id] The id attribute of the form field.
 	 * @property {Array.<string>} [classNames] The CSS class names of the form field.
 	 * @property {Array.<HTMLAttributeType>} [attrs] Other HTML attributes of the form field.
+	 * @property {DisplayConditionType} [displayCondition] Display condition for the form field.
 	 */
 	/**
 	 * Text input params.
@@ -441,6 +449,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -536,6 +557,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -627,6 +661,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -725,6 +772,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -1327,6 +1387,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -1421,6 +1494,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -1530,6 +1616,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the placeholder option of the select.
@@ -1637,6 +1736,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Array of choices as strings or ChoiceOptionType objects.
@@ -1754,6 +1866,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Array of picture choices.
@@ -1866,6 +1991,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Number of rating options (1-10). Defaults to `5`.
@@ -1960,6 +2098,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Starting number (`0` or `1`). Defaults to `0`.
@@ -2064,6 +2215,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -2160,6 +2324,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -2256,6 +2433,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Sets the `placeholder` attribute of the input.
@@ -2350,6 +2540,19 @@ export class Composer {
 				 */
 				value: string;
 			}[];
+			/**
+			 * Display condition for the form field.
+			 */
+			displayCondition?: {
+				/**
+				 * The name of the form field or data to use in the condition.
+				 */
+				dependency: string;
+				/**
+				 * The actual condition.
+				 */
+				condition: string;
+			};
 		} & {
 			/**
 			 * Maximum file size in MB. Defaults to `10`.

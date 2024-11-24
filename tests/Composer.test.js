@@ -1119,6 +1119,357 @@ file = FileInput(
 	).toBe(expectedFileSimple);
 });
 
+test("Input fields with display conditions", () => {
+	const composer = new Composer();
+
+	// Text input - shows when age is over 18
+	const expectedTextSimple = `
+::: [{$ age $}]
+{% if age >= 18 %}
+text = TextInput(
+	| question = Text
+	| description = Enter text
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.textInput("text", {
+			question: "Text",
+			description: "Enter text",
+			displayCondition: {
+				dependency: "age",
+				condition: "age >= 18",
+			},
+		}),
+	).toBe(expectedTextSimple);
+
+	// Email input - shows when subscription is checked
+	const expectedEmailSimple = `
+::: [{$ subscription $}]
+{% if subscription == true %}
+email = EmailInput(
+	| question = Email
+	| description = Enter email
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.emailInput("email", {
+			question: "Email",
+			description: "Enter email",
+			displayCondition: {
+				dependency: "subscription",
+				condition: "subscription == true",
+			},
+		}),
+	).toBe(expectedEmailSimple);
+
+	// URL input - shows when hasWebsite is yes
+	const expectedUrlSimple = `
+::: [{$ hasWebsite $}]
+{% if hasWebsite == "yes" %}
+url = URLInput(
+	| question = Website
+	| description = Enter website
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.urlInput("url", {
+			question: "Website",
+			description: "Enter website",
+			displayCondition: {
+				dependency: "hasWebsite",
+				condition: 'hasWebsite == "yes"',
+			},
+		}),
+	).toBe(expectedUrlSimple);
+
+	// Telephone input - shows when contactMethod is phone
+	const expectedTelSimple = `
+::: [{$ contactMethod $}]
+{% if contactMethod == "phone" %}
+tel = TelInput(
+	| question = Phone
+	| description = Enter phone
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.telInput("tel", {
+			question: "Phone",
+			description: "Enter phone",
+			displayCondition: {
+				dependency: "contactMethod",
+				condition: 'contactMethod == "phone"',
+			},
+		}),
+	).toBe(expectedTelSimple);
+
+	// Password input - shows when accountType is premium
+	const expectedPasswordSimple = `
+::: [{$ accountType $}]
+{% if accountType == "premium" %}
+password = PasswordInput(
+	| question = Password
+	| description = Enter password
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.passwordInput("password", {
+			question: "Password",
+			description: "Enter password",
+			displayCondition: {
+				dependency: "accountType",
+				condition: 'accountType == "premium"',
+			},
+		}),
+	).toBe(expectedPasswordSimple);
+
+	// Number input - shows when hasSalary is true
+	const expectedNumberSimple = `
+::: [{$ hasSalary $}]
+{% if hasSalary %}
+number = NumberInput(
+	| question = Amount
+	| description = Enter amount
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.numberInput("number", {
+			question: "Amount",
+			description: "Enter amount",
+			displayCondition: {
+				dependency: "hasSalary",
+				condition: "hasSalary",
+			},
+		}),
+	).toBe(expectedNumberSimple);
+
+	// Select box - shows when country is US
+	const expectedSelectSimple = `
+::: [{$ country $}]
+{% if country == "US" %}
+select = SelectBox(
+	| question = Select
+	| description = Make selection
+	| options = Option 1, Option 2
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.selectBox("select", {
+			question: "Select",
+			description: "Make selection",
+			options: ["Option 1", "Option 2"],
+			displayCondition: {
+				dependency: "country",
+				condition: 'country == "US"',
+			},
+		}),
+	).toBe(expectedSelectSimple);
+
+	// Choice input - shows when experience is greater than 5
+	const expectedChoiceSimple = `
+::: [{$ experience $}]
+{% if experience > 5 %}
+choice = ChoiceInput(
+	| question = Choose
+	| description = Make choice
+	| choices = Choice 1, Choice 2
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.choiceInput("choice", {
+			question: "Choose",
+			description: "Make choice",
+			choices: ["Choice 1", "Choice 2"],
+			displayCondition: {
+				dependency: "experience",
+				condition: "experience > 5",
+			},
+		}),
+	).toBe(expectedChoiceSimple);
+
+	// Picture choice - shows when theme is modern
+	const expectedPictureSimple = `
+::: [{$ theme $}]
+{% if theme == "modern" %}
+picture = PictureChoice(
+	| question = Select Picture
+	| description = Choose picture
+	| choices = Option 1 && /img1.png, Option 2 && /img2.png
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.pictureChoice("picture", {
+			question: "Select Picture",
+			description: "Choose picture",
+			choices: [
+				{ label: "Option 1", image: "/img1.png" },
+				{ label: "Option 2", image: "/img2.png" },
+			],
+			displayCondition: {
+				dependency: "theme",
+				condition: 'theme == "modern"',
+			},
+		}),
+	).toBe(expectedPictureSimple);
+
+	// Rating input - shows when feedbackEnabled is true
+	const expectedRatingSimple = `
+::: [{$ feedbackEnabled $}]
+{% if feedbackEnabled == true %}
+rating = RatingInput(
+	| question = Rate
+	| description = Give rating
+	| outof = 5
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.ratingInput("rating", {
+			question: "Rate",
+			description: "Give rating",
+			outOf: 5,
+			displayCondition: {
+				dependency: "feedbackEnabled",
+				condition: "feedbackEnabled == true",
+			},
+		}),
+	).toBe(expectedRatingSimple);
+
+	// Opinion Scale - shows when satisfaction is less than 3
+	const expectedOpinionSimple = `
+::: [{$ satisfaction $}]
+{% if satisfaction < 3 %}
+opinion = OpinionScale(
+	| question = Opinion
+	| description = Share opinion
+	| outof = 7
+	| labelstart = Low
+	| labelend = High
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.opinionScale("opinion", {
+			question: "Opinion",
+			description: "Share opinion",
+			outOf: 7,
+			labelStart: "Low",
+			labelEnd: "High",
+			displayCondition: {
+				dependency: "satisfaction",
+				condition: "satisfaction < 3",
+			},
+		}),
+	).toBe(expectedOpinionSimple);
+
+	// Datetime input - shows when scheduleType is custom
+	const expectedDatetimeSimple = `
+::: [{$ scheduleType $}]
+{% if scheduleType == "custom" %}
+datetime = DatetimeInput(
+	| question = Date and Time
+	| description = Select datetime
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.datetimeInput("datetime", {
+			question: "Date and Time",
+			description: "Select datetime",
+			displayCondition: {
+				dependency: "scheduleType",
+				condition: 'scheduleType == "custom"',
+			},
+		}),
+	).toBe(expectedDatetimeSimple);
+
+	// Date input - shows when hasPassport is true
+	const expectedDateSimple = `
+::: [{$ hasPassport $}]
+{% if hasPassport %}
+date = DateInput(
+	| question = Date
+	| description = Select date
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.dateInput("date", {
+			question: "Date",
+			description: "Select date",
+			displayCondition: {
+				dependency: "hasPassport",
+				condition: "hasPassport",
+			},
+		}),
+	).toBe(expectedDateSimple);
+
+	// Time input - shows when availability includes weekends
+	const expectedTimeSimple = `
+::: [{$ availability $}]
+{% if availability.includes("weekend") %}
+time = TimeInput(
+	| question = Time
+	| description = Select time
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.timeInput("time", {
+			question: "Time",
+			description: "Select time",
+			displayCondition: {
+				dependency: "availability",
+				condition: 'availability.includes("weekend")',
+			},
+		}),
+	).toBe(expectedTimeSimple);
+
+	// File input - shows when documentRequired is true
+	const expectedFileSimple = `
+::: [{$ documentRequired $}]
+{% if documentRequired %}
+file = FileInput(
+	| question = Upload
+	| description = Select file
+)
+{% endif %}
+:::
+`;
+	expect(
+		composer.fileInput("file", {
+			question: "Upload",
+			description: "Select file",
+			displayCondition: {
+				dependency: "documentRequired",
+				condition: "documentRequired",
+			},
+		}),
+	).toBe(expectedFileSimple);
+});
+
 // Slide tests
 
 test("Basic slide with no parameters and empty template", () => {
