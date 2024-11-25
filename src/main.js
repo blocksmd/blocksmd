@@ -51,7 +51,7 @@ class blocksmd {
 		themeDark: {
 			accent: "rgb(138, 180, 248)",
 			accentForeground: "rgb(0, 0, 0)",
-			backgroundColor: "rgb(18, 18, 18)",
+			backgroundColor: "rgb(26, 26, 26)",
 			color: "rgb(240, 240, 240)",
 		},
 		themeLight: {
@@ -2051,10 +2051,12 @@ class blocksmd {
 		// Handle page progress (if applicable)
 		const pageProgress = instance.container.querySelector(".bmd-page-progress");
 		let slidePageProgress;
-		if (slide.classList.contains("bmd-end-slide")) {
-			slidePageProgress = "100%";
-		} else if (slide.hasAttribute("data-bmd-page-progress")) {
+		if (slide.hasAttribute("data-bmd-page-progress")) {
 			slidePageProgress = slide.getAttribute("data-bmd-page-progress");
+		} else if (slide.classList.contains("bmd-first-slide")) {
+			slidePageProgress = "0%";
+		} else if (slide.classList.contains("bmd-end-slide")) {
+			slidePageProgress = "100%";
 		}
 		if (
 			pageProgress &&
