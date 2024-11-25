@@ -356,7 +356,7 @@ export class Composer {
 	 * Display condition.
 	 *
 	 * @typedef {Object} DisplayConditionType
-	 * @property {string} dependency The name of the form field or data to use in the condition.
+	 * @property {Array.<string>} dependencies The names of the form fields or data to use in the condition.
 	 * @property {string} condition The actual condition.
 	 */
 	/**
@@ -454,9 +454,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -562,9 +562,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -666,9 +666,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -777,9 +777,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1392,9 +1392,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1499,9 +1499,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1621,9 +1621,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1741,9 +1741,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1871,9 +1871,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -1996,9 +1996,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -2103,9 +2103,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -2220,9 +2220,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -2329,9 +2329,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -2438,9 +2438,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */
@@ -2545,9 +2545,9 @@ export class Composer {
 			 */
 			displayCondition?: {
 				/**
-				 * The name of the form field or data to use in the condition.
+				 * The names of the form fields or data to use in the condition.
 				 */
-				dependency: string;
+				dependencies: Array<string>;
 				/**
 				 * The actual condition.
 				 */

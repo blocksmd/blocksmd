@@ -1124,8 +1124,8 @@ test("Input fields with display conditions", () => {
 
 	// Text input - shows when age is over 18
 	const expectedTextSimple = `
-::: [{$ age $}]
-{% if age >= 18 %}
+::: [{$ age experience $}]
+{% if age >= 18 && experience > 2 %}
 text = TextInput(
 	| question = Text
 	| description = Enter text
@@ -1138,16 +1138,16 @@ text = TextInput(
 			question: "Text",
 			description: "Enter text",
 			displayCondition: {
-				dependency: "age",
-				condition: "age >= 18",
+				dependencies: ["age", "experience"],
+				condition: "age >= 18 && experience > 2",
 			},
 		}),
 	).toBe(expectedTextSimple);
 
-	// Email input - shows when subscription is checked
+	// Email input - shows when subscription and newsletter are both checked
 	const expectedEmailSimple = `
-::: [{$ subscription $}]
-{% if subscription == true %}
+::: [{$ subscription newsletter $}]
+{% if subscription == true && newsletter == true %}
 email = EmailInput(
 	| question = Email
 	| description = Enter email
@@ -1160,8 +1160,8 @@ email = EmailInput(
 			question: "Email",
 			description: "Enter email",
 			displayCondition: {
-				dependency: "subscription",
-				condition: "subscription == true",
+				dependencies: ["subscription", "newsletter"],
+				condition: "subscription == true && newsletter == true",
 			},
 		}),
 	).toBe(expectedEmailSimple);
@@ -1182,16 +1182,16 @@ url = URLInput(
 			question: "Website",
 			description: "Enter website",
 			displayCondition: {
-				dependency: "hasWebsite",
+				dependencies: ["hasWebsite"],
 				condition: 'hasWebsite == "yes"',
 			},
 		}),
 	).toBe(expectedUrlSimple);
 
-	// Telephone input - shows when contactMethod is phone
+	// Telephone input - shows when contactMethod is phone and region is US
 	const expectedTelSimple = `
-::: [{$ contactMethod $}]
-{% if contactMethod == "phone" %}
+::: [{$ contactMethod region $}]
+{% if contactMethod == "phone" && region == "US" %}
 tel = TelInput(
 	| question = Phone
 	| description = Enter phone
@@ -1204,16 +1204,16 @@ tel = TelInput(
 			question: "Phone",
 			description: "Enter phone",
 			displayCondition: {
-				dependency: "contactMethod",
-				condition: 'contactMethod == "phone"',
+				dependencies: ["contactMethod", "region"],
+				condition: 'contactMethod == "phone" && region == "US"',
 			},
 		}),
 	).toBe(expectedTelSimple);
 
-	// Password input - shows when accountType is premium
+	// Password input - shows when accountType is premium and securityLevel is high
 	const expectedPasswordSimple = `
-::: [{$ accountType $}]
-{% if accountType == "premium" %}
+::: [{$ accountType securityLevel $}]
+{% if accountType == "premium" && securityLevel == "high" %}
 password = PasswordInput(
 	| question = Password
 	| description = Enter password
@@ -1226,16 +1226,16 @@ password = PasswordInput(
 			question: "Password",
 			description: "Enter password",
 			displayCondition: {
-				dependency: "accountType",
-				condition: 'accountType == "premium"',
+				dependencies: ["accountType", "securityLevel"],
+				condition: 'accountType == "premium" && securityLevel == "high"',
 			},
 		}),
 	).toBe(expectedPasswordSimple);
 
-	// Number input - shows when hasSalary is true
+	// Number input - shows when hasSalary and allowsDisclosure are both true
 	const expectedNumberSimple = `
-::: [{$ hasSalary $}]
-{% if hasSalary %}
+::: [{$ hasSalary allowsDisclosure $}]
+{% if hasSalary && allowsDisclosure %}
 number = NumberInput(
 	| question = Amount
 	| description = Enter amount
@@ -1248,16 +1248,16 @@ number = NumberInput(
 			question: "Amount",
 			description: "Enter amount",
 			displayCondition: {
-				dependency: "hasSalary",
-				condition: "hasSalary",
+				dependencies: ["hasSalary", "allowsDisclosure"],
+				condition: "hasSalary && allowsDisclosure",
 			},
 		}),
 	).toBe(expectedNumberSimple);
 
-	// Select box - shows when country is US
+	// Select box - shows when country is US and state is California
 	const expectedSelectSimple = `
-::: [{$ country $}]
-{% if country == "US" %}
+::: [{$ country state $}]
+{% if country == "US" && state == "CA" %}
 select = SelectBox(
 	| question = Select
 	| description = Make selection
@@ -1272,16 +1272,16 @@ select = SelectBox(
 			description: "Make selection",
 			options: ["Option 1", "Option 2"],
 			displayCondition: {
-				dependency: "country",
-				condition: 'country == "US"',
+				dependencies: ["country", "state"],
+				condition: 'country == "US" && state == "CA"',
 			},
 		}),
 	).toBe(expectedSelectSimple);
 
-	// Choice input - shows when experience is greater than 5
+	// Choice input - shows when experience is greater than 5 and department is IT
 	const expectedChoiceSimple = `
-::: [{$ experience $}]
-{% if experience > 5 %}
+::: [{$ experience department $}]
+{% if experience > 5 && department == "IT" %}
 choice = ChoiceInput(
 	| question = Choose
 	| description = Make choice
@@ -1296,16 +1296,16 @@ choice = ChoiceInput(
 			description: "Make choice",
 			choices: ["Choice 1", "Choice 2"],
 			displayCondition: {
-				dependency: "experience",
-				condition: "experience > 5",
+				dependencies: ["experience", "department"],
+				condition: 'experience > 5 && department == "IT"',
 			},
 		}),
 	).toBe(expectedChoiceSimple);
 
-	// Picture choice - shows when theme is modern
+	// Picture choice - shows when theme is modern and platform is desktop
 	const expectedPictureSimple = `
-::: [{$ theme $}]
-{% if theme == "modern" %}
+::: [{$ theme platform $}]
+{% if theme == "modern" && platform == "desktop" %}
 picture = PictureChoice(
 	| question = Select Picture
 	| description = Choose picture
@@ -1323,16 +1323,16 @@ picture = PictureChoice(
 				{ label: "Option 2", image: "/img2.png" },
 			],
 			displayCondition: {
-				dependency: "theme",
-				condition: 'theme == "modern"',
+				dependencies: ["theme", "platform"],
+				condition: 'theme == "modern" && platform == "desktop"',
 			},
 		}),
 	).toBe(expectedPictureSimple);
 
-	// Rating input - shows when feedbackEnabled is true
+	// Rating input - shows when feedbackEnabled is true and userType is premium
 	const expectedRatingSimple = `
-::: [{$ feedbackEnabled $}]
-{% if feedbackEnabled == true %}
+::: [{$ feedbackEnabled userType $}]
+{% if feedbackEnabled == true && userType == "premium" %}
 rating = RatingInput(
 	| question = Rate
 	| description = Give rating
@@ -1347,16 +1347,16 @@ rating = RatingInput(
 			description: "Give rating",
 			outOf: 5,
 			displayCondition: {
-				dependency: "feedbackEnabled",
-				condition: "feedbackEnabled == true",
+				dependencies: ["feedbackEnabled", "userType"],
+				condition: 'feedbackEnabled == true && userType == "premium"',
 			},
 		}),
 	).toBe(expectedRatingSimple);
 
-	// Opinion Scale - shows when satisfaction is less than 3
+	// Opinion Scale - shows when satisfaction is less than 3 and followUpEnabled is true
 	const expectedOpinionSimple = `
-::: [{$ satisfaction $}]
-{% if satisfaction < 3 %}
+::: [{$ satisfaction followUpEnabled $}]
+{% if satisfaction < 3 && followUpEnabled %}
 opinion = OpinionScale(
 	| question = Opinion
 	| description = Share opinion
@@ -1375,16 +1375,16 @@ opinion = OpinionScale(
 			labelStart: "Low",
 			labelEnd: "High",
 			displayCondition: {
-				dependency: "satisfaction",
-				condition: "satisfaction < 3",
+				dependencies: ["satisfaction", "followUpEnabled"],
+				condition: "satisfaction < 3 && followUpEnabled",
 			},
 		}),
 	).toBe(expectedOpinionSimple);
 
-	// Datetime input - shows when scheduleType is custom
+	// Datetime input - shows when scheduleType is custom and availabilityConfirmed is true
 	const expectedDatetimeSimple = `
-::: [{$ scheduleType $}]
-{% if scheduleType == "custom" %}
+::: [{$ scheduleType availabilityConfirmed $}]
+{% if scheduleType == "custom" && availabilityConfirmed %}
 datetime = DatetimeInput(
 	| question = Date and Time
 	| description = Select datetime
@@ -1397,16 +1397,16 @@ datetime = DatetimeInput(
 			question: "Date and Time",
 			description: "Select datetime",
 			displayCondition: {
-				dependency: "scheduleType",
-				condition: 'scheduleType == "custom"',
+				dependencies: ["scheduleType", "availabilityConfirmed"],
+				condition: 'scheduleType == "custom" && availabilityConfirmed',
 			},
 		}),
 	).toBe(expectedDatetimeSimple);
 
-	// Date input - shows when hasPassport is true
+	// Date input - shows when hasPassport is true and travelApproved is true
 	const expectedDateSimple = `
-::: [{$ hasPassport $}]
-{% if hasPassport %}
+::: [{$ hasPassport travelApproved $}]
+{% if hasPassport && travelApproved %}
 date = DateInput(
 	| question = Date
 	| description = Select date
@@ -1419,16 +1419,16 @@ date = DateInput(
 			question: "Date",
 			description: "Select date",
 			displayCondition: {
-				dependency: "hasPassport",
-				condition: "hasPassport",
+				dependencies: ["hasPassport", "travelApproved"],
+				condition: "hasPassport && travelApproved",
 			},
 		}),
 	).toBe(expectedDateSimple);
 
-	// Time input - shows when availability includes weekends
+	// Time input - shows when availability is true and isFullTime is true
 	const expectedTimeSimple = `
-::: [{$ availability $}]
-{% if availability.includes("weekend") %}
+::: [{$ availability isFullTime $}]
+{% if availability && isFullTime %}
 time = TimeInput(
 	| question = Time
 	| description = Select time
@@ -1441,16 +1441,16 @@ time = TimeInput(
 			question: "Time",
 			description: "Select time",
 			displayCondition: {
-				dependency: "availability",
-				condition: 'availability.includes("weekend")',
+				dependencies: ["availability", "isFullTime"],
+				condition: "availability && isFullTime",
 			},
 		}),
 	).toBe(expectedTimeSimple);
 
-	// File input - shows when documentRequired is true
+	// File input - shows when documentRequired is true and fileTypeVerified is true
 	const expectedFileSimple = `
-::: [{$ documentRequired $}]
-{% if documentRequired %}
+::: [{$ documentRequired fileTypeVerified $}]
+{% if documentRequired && fileTypeVerified %}
 file = FileInput(
 	| question = Upload
 	| description = Select file
@@ -1463,8 +1463,8 @@ file = FileInput(
 			question: "Upload",
 			description: "Select file",
 			displayCondition: {
-				dependency: "documentRequired",
-				condition: "documentRequired",
+				dependencies: ["documentRequired", "fileTypeVerified"],
+				condition: "documentRequired && fileTypeVerified",
 			},
 		}),
 	).toBe(expectedFileSimple);

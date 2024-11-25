@@ -194,7 +194,7 @@ class Composer {
 	 * Display condition.
 	 *
 	 * @typedef {Object} DisplayConditionType
-	 * @property {string} dependency The name of the form field or data to use in the condition.
+	 * @property {Array.<string>} dependencies The names of the form fields or data to use in the condition.
 	 * @property {string} condition The actual condition.
 	 */
 
@@ -271,7 +271,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -335,7 +335,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -399,7 +399,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -479,7 +479,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -543,7 +543,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -616,7 +616,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -697,7 +697,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -783,7 +783,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -871,7 +871,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -933,7 +933,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -1006,7 +1006,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -1073,7 +1073,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -1140,7 +1140,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -1207,7 +1207,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
@@ -1268,7 +1268,7 @@ class Composer {
 		if (params.displayCondition !== undefined) {
 			templateChunks.unshift(`{% if ${params.displayCondition.condition} %}`);
 			templateChunks.unshift(
-				`::: [{$ ${params.displayCondition.dependency} $}]`,
+				`::: [{$ ${params.displayCondition.dependencies.join(" ")} $}]`,
 			);
 			templateChunks.push("{% endif %}");
 			templateChunks.push(":::");
