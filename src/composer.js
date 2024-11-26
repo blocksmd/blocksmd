@@ -135,7 +135,7 @@ class Composer {
 	 * @property {string} [metaType] Sets the Open Graph type.
 	 * @property {string} [metaUrl] Sets the Open Graph URL.
 	 * @property {"form-slides"|"slides"|"single"} [page] Determines the layout of the page. Default is `"form-slides"`.
-	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
+	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
 	 * @property {"hide"} [placeholders] Controls visibility of input placeholders.
 	 * @property {string} [postSheetName] When sending responses directly to Google Sheets, this specifies which sheet to save responses to.
 	 * @property {string} [postUrl] URL to send form responses to using POST request.

@@ -101,7 +101,7 @@ class blocksmd {
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
-	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
+	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
