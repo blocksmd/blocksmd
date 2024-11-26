@@ -26,15 +26,18 @@ var nunjucks = require("nunjucks");
 
 class blocksmd {
 	options = {
+		blocksmdBranding: "",
 		colorScheme: "light",
 		errorFieldKey: "field",
 		errorMessageKey: "message",
+		footer: "",
 		getHeaders: {},
 		id: "",
 		isFullPage: false,
 		paddingInlineBottom: 20,
 		paddingInlineHorizontal: 0,
 		paddingInlineTop: 20,
+		pageProgress: "",
 		postData: {},
 		postHeaders: {},
 		prioritizeURLFormData: false,
@@ -47,6 +50,7 @@ class blocksmd {
 		sanitize: true,
 		saveState: true,
 		setColorSchemeAttrsAgain: true,
+		slideControls: "",
 		startSlide: 0,
 		themeDark: {
 			accent: "rgb(138, 180, 248)",
@@ -86,15 +90,18 @@ class blocksmd {
 	 * Options for the page or form.
 	 *
 	 * @typedef {Object} OptionsType
+	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
 	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
+	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
+	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
@@ -102,6 +109,7 @@ class blocksmd {
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
+	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
 	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
 	 * @property {ThemeType} [themeDark] Dark theme.
 	 * @property {ThemeType} [themeLight] Light theme.
@@ -119,6 +127,10 @@ class blocksmd {
 
 		// Set the options for use
 		if (options) {
+			// blocks.md branding
+			if (options.blocksmdBranding === "hide") {
+				this.options.blocksmdBranding = options.blocksmdBranding;
+			}
 			// Color Scheme
 			if (options.colorScheme === "light" || options.colorScheme === "dark") {
 				this.options.colorScheme = options.colorScheme;
@@ -136,6 +148,10 @@ class blocksmd {
 				typeof options.errorMessageKey === "string"
 			) {
 				this.options.errorMessageKey = options.errorMessageKey;
+			}
+			// Footer
+			if (options.footer === "hide") {
+				this.options.footer = options.footer;
 			}
 			// GET headers
 			if (
@@ -174,6 +190,13 @@ class blocksmd {
 				typeof options.paddingInlineTop === "number"
 			)
 				this.options.paddingInlineTop = options.paddingInlineTop;
+			// Page progress
+			if (
+				options.pageProgress === "hide" ||
+				options.pageProgress === "decorative"
+			) {
+				this.options.pageProgress = options.pageProgress;
+			}
 			// POST data
 			if (
 				options.postData !== undefined &&
@@ -252,6 +275,17 @@ class blocksmd {
 					options.setColorSchemeAttrsAgain;
 			else if (!this.options.isFullPage) {
 				this.options.setColorSchemeAttrsAgain = false;
+			}
+			// Slide controls
+			if (options.slideControls === "hide") {
+				this.options.slideControls = options.slideControls;
+			}
+			// Start slide
+			if (
+				options.startSlide !== undefined &&
+				typeof options.startSlide === "number"
+			) {
+				this.options.startSlide = options.startSlide;
 			}
 			// Theme dark
 			if (
@@ -352,6 +386,25 @@ class blocksmd {
 		templateSettingsFromOptions.push(
 			`#! color = ${theme.color} || ${themeAltScheme.color}`,
 		);
+
+		if (this.options.blocksmdBranding !== undefined) {
+			templateSettingsFromOptions.push(
+				`#! blocksmd-branding = ${this.options.blocksmdBranding}`,
+			);
+		}
+		if (this.options.footer !== undefined) {
+			templateSettingsFromOptions.push(`#! footer = ${this.options.footer}`);
+		}
+		if (this.options.pageProgress !== undefined) {
+			templateSettingsFromOptions.push(
+				`#! page-progress = ${this.options.pageProgress}`,
+			);
+		}
+		if (this.options.slideControls !== undefined) {
+			templateSettingsFromOptions.push(
+				`#! slide-controls = ${this.options.slideControls}`,
+			);
+		}
 
 		// Set the template
 		this._template = `${templateSettingsFromOptions.join("\n")}\n\n${template}`;

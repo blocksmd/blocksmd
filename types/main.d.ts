@@ -21,15 +21,18 @@ export class blocksmd {
 	 * Options for the page or form.
 	 *
 	 * @typedef {Object} OptionsType
+	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
 	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
+	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
+	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility of the page progress.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
@@ -37,6 +40,7 @@ export class blocksmd {
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
+	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
 	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
 	 * @property {ThemeType} [themeDark] Dark theme.
 	 * @property {ThemeType} [themeLight] Light theme.
@@ -53,6 +57,10 @@ export class blocksmd {
 		container: Document | HTMLElement | Element,
 		options: {
 			/**
+			 * If set to `"hide"`, then the blocks.md branding will be hidden.
+			 */
+			blocksmdBranding?: "hide";
+			/**
 			 * The default or initial color scheme of the page. Default is `"light"`.
 			 */
 			colorScheme?: "light" | "dark";
@@ -64,6 +72,10 @@ export class blocksmd {
 			 * The key used to identify the error message in error objects. Default is `"message"`.
 			 */
 			errorMessageKey?: string;
+			/**
+			 * If set to `"hide"`, the footer will be hidden.
+			 */
+			footer?: "hide";
 			/**
 			 * Headers for GET requests.
 			 */
@@ -88,6 +100,10 @@ export class blocksmd {
 			 * Padding top for inline pages or forms. Default is `20`.
 			 */
 			paddingInlineTop?: number;
+			/**
+			 * Controls visibility of the page progress.
+			 */
+			pageProgress?: "hide" | "decorative";
 			/**
 			 * Extra data sent with POST requests.
 			 */
@@ -133,6 +149,10 @@ export class blocksmd {
 			 * Whether to set color scheme attributes again.
 			 */
 			setColorSchemeAttrsAgain?: boolean;
+			/**
+			 * If set to `"hide"`, next and previous buttons will be hidden.
+			 */
+			slideControls?: "hide";
 			/**
 			 * The index of the first slide to make active. Default is `0`.
 			 */
@@ -182,15 +202,18 @@ export class blocksmd {
 		},
 	);
 	options: {
+		blocksmdBranding: string;
 		colorScheme: string;
 		errorFieldKey: string;
 		errorMessageKey: string;
+		footer: string;
 		getHeaders: {};
 		id: string;
 		isFullPage: boolean;
 		paddingInlineBottom: number;
 		paddingInlineHorizontal: number;
 		paddingInlineTop: number;
+		pageProgress: string;
 		postData: {};
 		postHeaders: {};
 		prioritizeURLFormData: boolean;
@@ -203,6 +226,7 @@ export class blocksmd {
 		sanitize: boolean;
 		saveState: boolean;
 		setColorSchemeAttrsAgain: boolean;
+		slideControls: string;
 		startSlide: number;
 		themeDark: {
 			accent: string;
