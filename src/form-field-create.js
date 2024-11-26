@@ -45,7 +45,9 @@ function formFieldSetup(
 	// Go through the params
 	for (let param of params.split(formDelimiter)) {
 		param = param.trim();
-		if (!param) continue;
+		if (!param) {
+			continue;
+		}
 
 		// A param can have a value (set by using "=") or be a boolean attribute
 		let key, value, equalIndex;
@@ -88,15 +90,19 @@ function formFieldSetup(
 	// Create the start tag and add the reserved class names
 	const startTagName = useFieldset ? "fieldset" : "div";
 	let startTag = `<${startTagName}>`;
-	if (parsedAttrs) startTag = `<${startTagName} ${parsedAttrs}>`;
+	if (parsedAttrs) {
+		startTag = `<${startTagName} ${parsedAttrs}>`;
+	}
 	startTag = addReservedClass(startTag, "bmd-form-field");
-	if (validParams.fieldsize === "sm")
+	if (validParams.fieldsize === "sm") {
 		startTag = addReservedClass(startTag, "bmd-form-field-sm");
+	}
 	if (
 		validParams.subfield !== undefined ||
 		validParams.labelstyle === "classic"
-	)
+	) {
 		startTag = addReservedClass(startTag, "bmd-form-field-classic-labels");
+	}
 
 	return {
 		startTag: startTag,
@@ -560,7 +566,9 @@ function createSelectField(
 			for (let option of value.split(",")) {
 				// Skip empty options
 				option = unescape(option.trim());
-				if (!option) continue;
+				if (!option) {
+					continue;
+				}
 
 				let optionValue = option;
 				let optionLabel = option;
@@ -707,7 +715,9 @@ function createChoiceField(
 			for (let choice of value.split(",")) {
 				// Skip empty choices
 				choice = unescape(choice.trim());
-				if (!choice) continue;
+				if (!choice) {
+					continue;
+				}
 
 				// For image choices, the "src" for the image must come AFTER "&&"
 				const choiceAndImage = choice.split("&&");
@@ -755,11 +765,14 @@ function createChoiceField(
 	} else {
 		validationAttrs += ' data-bmd-type="checkbox"';
 	}
-	if (required) validationAttrs += " data-bmd-required";
+	if (required) {
+		validationAttrs += " data-bmd-required";
+	}
 
 	// Only keep one checked value in case of radio buttons
-	if (!validParams.multiple && Array.isArray(validParams.checked))
+	if (!validParams.multiple && Array.isArray(validParams.checked)) {
 		validParams.checked.splice(1);
+	}
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
@@ -890,7 +903,9 @@ function createRatingField(
 
 	// Create the validation attributes (to be added to the start tag)
 	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
-	if (required) validationAttrs += " data-bmd-required";
+	if (required) {
+		validationAttrs += " data-bmd-required";
+	}
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
@@ -1025,12 +1040,18 @@ function createOpinionScaleField(
 	}
 
 	// Hide labels
-	if (validParams.hidelabelstart !== undefined) validParams.labelstart = "";
-	if (validParams.hidelabelend !== undefined) validParams.labelend = "";
+	if (validParams.hidelabelstart !== undefined) {
+		validParams.labelstart = "";
+	}
+	if (validParams.hidelabelend !== undefined) {
+		validParams.labelend = "";
+	}
 
 	// Create the validation attributes (to be added to the start tag)
 	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
-	if (required) validationAttrs += " data-bmd-required";
+	if (required) {
+		validationAttrs += " data-bmd-required";
+	}
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
@@ -1112,7 +1133,9 @@ function createDatetimeField(
 	const translations = {};
 
 	// Update the input type
-	if (inputType === "datetime") inputType = "datetime-local";
+	if (inputType === "datetime") {
+		inputType = "datetime-local";
+	}
 
 	// Add the default placeholder based on input type
 	// The placeholder is useful on browsers that don't support the input types

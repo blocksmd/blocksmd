@@ -263,8 +263,9 @@ const placeholdersAndCallingCodes = {
 function getPhoneNumberPlaceholder(countryCode) {
 	// Fallback country code is "US"
 	countryCode = countryCode.toUpperCase();
-	if (placeholdersAndCallingCodes[countryCode] === undefined)
+	if (placeholdersAndCallingCodes[countryCode] === undefined) {
 		countryCode = "US";
+	}
 	return placeholdersAndCallingCodes[countryCode].placeholder || "";
 }
 
@@ -281,8 +282,9 @@ function createCountryCallingCodeOptions(
 ) {
 	// Fallback country code is "US"
 	selectedCountryCode = selectedCountryCode.toUpperCase();
-	if (placeholdersAndCallingCodes[selectedCountryCode] === undefined)
+	if (placeholdersAndCallingCodes[selectedCountryCode] === undefined) {
 		selectedCountryCode = "US";
+	}
 
 	// If available country codes are not set (empty array), then use all
 	const available = [];

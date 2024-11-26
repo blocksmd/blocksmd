@@ -38,9 +38,12 @@ const argv = require("yargs/yargs")(process.argv.slice(2)).options({
 // Make sure to remove any and all leading and trailing forward slashes
 const inputDir = `${cwd()}/${argv.input.replace(/^\/+|\/+$/g, "")}`;
 const outputDir = `${cwd()}/${argv.output.replace(/^\/+|\/+$/g, "")}`;
-if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
-if (!fs.existsSync(`${outputDir}/content`))
+if (!fs.existsSync(outputDir)) {
+	fs.mkdirSync(outputDir);
+}
+if (!fs.existsSync(`${outputDir}/content`)) {
 	fs.mkdirSync(`${outputDir}/content`);
+}
 const staticDirName = argv["static-dir-name"]
 	.replace(/^\/+|\/+$/g, "")
 	.split("/")[0];

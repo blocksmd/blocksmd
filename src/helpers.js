@@ -7,7 +7,9 @@
  * @returns {boolean}
  */
 function isNumeric(str) {
-	if (typeof str != "string") return false; // Only process strings
+	if (typeof str != "string") {
+		return false;
+	} // Only process strings
 	return (
 		!isNaN(str) && // Use type coercion to parse the entirety of the string (`parseFloat` alone does not do this)
 		!isNaN(parseFloat(str)) // Ensure strings of whitespace fail

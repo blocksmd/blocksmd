@@ -37,17 +37,23 @@ function getMarkedSettings(options) {
 	};
 
 	// If settings not present in the options, return the defaults
-	if (options.markedSettings === undefined) return markedSettings;
+	if (options.markedSettings === undefined) {
+		return markedSettings;
+	}
 
 	// Update with the settings present in the options
-	if (options.markedSettings["css-prefix"] !== undefined)
+	if (options.markedSettings["css-prefix"] !== undefined) {
 		markedSettings["css-prefix"] = options.markedSettings["css-prefix"];
-	if (options.markedSettings["form-delimiter"] !== undefined)
+	}
+	if (options.markedSettings["form-delimiter"] !== undefined) {
 		markedSettings["form-delimiter"] = options.markedSettings["form-delimiter"];
-	if (options.markedSettings.id !== undefined)
+	}
+	if (options.markedSettings.id !== undefined) {
 		markedSettings.id = options.markedSettings.id;
-	if (options.markedSettings.localization !== undefined)
+	}
+	if (options.markedSettings.localization !== undefined) {
 		markedSettings.localization = options.markedSettings.localization;
+	}
 
 	return markedSettings;
 }
@@ -102,7 +108,9 @@ renderer.code = function (code, infostring, escaped) {
 	// Get language and format code
 	let lang = "";
 	const containsLang = infostring.match(/^\S*/);
-	if (containsLang) lang = containsLang[0];
+	if (containsLang) {
+		lang = containsLang[0];
+	}
 	code = code.replace(/\n$/, "") + "\n";
 
 	// Mermaid integration
@@ -117,9 +125,13 @@ renderer.code = function (code, infostring, escaped) {
 	}
 
 	// Encode code and create the language class for it
-	if (!escaped) code = escape$1(code, true);
+	if (!escaped) {
+		code = escape$1(code, true);
+	}
 	let langClass = "";
-	if (lang) langClass = ` class="language-${escape$1(lang, true)}"`;
+	if (lang) {
+		langClass = ` class="language-${escape$1(lang, true)}"`;
+	}
 
 	return [
 		`${startTag}`,
@@ -155,7 +167,9 @@ renderer.heading = function (text, level, raw) {
 			.replace(/[^a-z0-9 -]/g, "")
 			.replace(/\s+/g, "-")
 			.replace(/-+/g, "-");
-		if (markedSettings.id !== "") id = `${markedSettings.id}:${id}`;
+		if (markedSettings.id !== "") {
+			id = `${markedSettings.id}:${id}`;
+		}
 		startTag = startTag.replace(/<([^\s>]+)/, `<$1 id="${id}"`);
 	}
 
@@ -333,7 +347,9 @@ renderer.paragraph = function (text) {
 };
 
 renderer.table = function (header, body) {
-	if (body) body = `<tbody>${body}</tbody>`;
+	if (body) {
+		body = `<tbody>${body}</tbody>`;
+	}
 	return [
 		`<table class="bmd-table">`,
 		`	<thead>${header}</thead>`,

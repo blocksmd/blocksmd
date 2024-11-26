@@ -164,32 +164,37 @@ class blocksmd {
 				};
 			}
 			// Id
-			if (options.id !== undefined && typeof options.id === "string")
+			if (options.id !== undefined && typeof options.id === "string") {
 				this.options.id = options.id;
+			}
 			// Is full page
 			if (
 				options.isFullPage !== undefined &&
 				typeof options.isFullPage === "boolean"
-			)
+			) {
 				this.options.isFullPage = options.isFullPage;
+			}
 			// Padding inline bottom
 			if (
 				options.paddingInlineBottom !== undefined &&
 				typeof options.paddingInlineBottom === "number"
-			)
+			) {
 				this.options.paddingInlineBottom = options.paddingInlineBottom;
+			}
 			// Padding inline horizontal
 			if (
 				options.paddingInlineHorizontal !== undefined &&
 				typeof options.paddingInlineHorizontal === "number"
-			)
+			) {
 				this.options.paddingInlineHorizontal = options.paddingInlineHorizontal;
+			}
 			// Padding inline top
 			if (
 				options.paddingInlineTop !== undefined &&
 				typeof options.paddingInlineTop === "number"
-			)
+			) {
 				this.options.paddingInlineTop = options.paddingInlineTop;
+			}
 			// Page progress
 			if (
 				options.pageProgress === "hide" ||
@@ -221,8 +226,9 @@ class blocksmd {
 			if (
 				options.prioritizeURLFormData !== undefined &&
 				typeof options.prioritizeURLFormData === "boolean"
-			)
+			) {
 				this.options.prioritizeURLFormData = options.prioritizeURLFormData;
+			}
 			// Google reCAPTCHA
 			if (
 				options.recaptcha !== undefined &&
@@ -258,22 +264,24 @@ class blocksmd {
 			if (
 				options.sanitize !== undefined &&
 				typeof options.sanitize === "boolean"
-			)
+			) {
 				this.options.sanitize = options.sanitize;
+			}
 			// Save state
 			if (
 				options.saveState !== undefined &&
 				typeof options.saveState === "boolean"
-			)
+			) {
 				this.options.saveState = options.saveState;
+			}
 			// Set color scheme attributes again
 			if (
 				options.setColorSchemeAttrsAgain !== undefined &&
 				typeof options.setColorSchemeAttrsAgain === "boolean"
-			)
+			) {
 				this.options.setColorSchemeAttrsAgain =
 					options.setColorSchemeAttrsAgain;
-			else if (!this.options.isFullPage) {
+			} else if (!this.options.isFullPage) {
 				this.options.setColorSchemeAttrsAgain = false;
 			}
 			// Slide controls
@@ -355,8 +363,9 @@ class blocksmd {
 
 		// Set up the settings from the options
 		const templateSettingsFromOptions = [];
-		if (this.options.id !== "")
+		if (this.options.id !== "") {
 			templateSettingsFromOptions.push(`#! id = ${this.options.id}`);
+		}
 
 		let colorScheme = this.options.colorScheme;
 		const templateContainsColorScheme = template.match(
@@ -463,7 +472,9 @@ class blocksmd {
 				return v !== "";
 			});
 		const index = attrsArr.indexOf(value);
-		if (index > -1) attrsArr.splice(index, 1);
+		if (index > -1) {
+			attrsArr.splice(index, 1);
+		}
 		if (attrsArr.length > 0) {
 			elem.setAttribute(name, attrsArr.join(" "));
 		} else {
@@ -500,8 +511,9 @@ class blocksmd {
 					}color-scheme`
 				: "blocksmd:color-scheme";
 		const preferredColorScheme = localStorage.getItem(localStorageKey);
-		if (preferredColorScheme)
+		if (preferredColorScheme) {
 			rootElem.setAttribute("data-bmd-color-scheme", preferredColorScheme);
+		}
 	};
 
 	/**
@@ -682,7 +694,9 @@ class blocksmd {
 			const input = instance.container.querySelector(
 				`.${inputClass}[type="radio"][name="${name}"]:checked`,
 			);
-			if (input) value = input.value;
+			if (input) {
+				value = input.value;
+			}
 			return value;
 		}
 		// For checkboxes, an array of checked values is returned
@@ -712,11 +726,15 @@ class blocksmd {
 
 		// For radio buttons, the value is a single string
 		if (type === "radio") {
-			if (typeof value === "string") value = value.trim();
+			if (typeof value === "string") {
+				value = value.trim();
+			}
 			const input = instance.container.querySelector(
 				`.${inputClass}[type="radio"][name="${name}"][value="${value}"]`,
 			);
-			if (input) input.checked = true;
+			if (input) {
+				input.checked = true;
+			}
 		}
 		// For checkboxes, the value is an array of strings
 		else if (type === "checkbox") {
@@ -728,7 +746,9 @@ class blocksmd {
 				.querySelectorAll(`.${inputClass}[type="checkbox"][name="${name}"]`)
 				.forEach((input) => {
 					input.checked = false;
-					if (values[input.value]) input.checked = true;
+					if (values[input.value]) {
+						input.checked = true;
+					}
 				});
 		}
 	};
@@ -882,8 +902,9 @@ class blocksmd {
 				if (input) {
 					input.value = value;
 					instance.state.formData[name] = value;
-					if (updateLocalStorage && instance.options.saveState)
+					if (updateLocalStorage && instance.options.saveState) {
 						instance.saveFieldValue(name, value);
+					}
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -897,8 +918,9 @@ class blocksmd {
 					value = Number(value);
 					input.value = value;
 					instance.state.formData[name] = value;
-					if (updateLocalStorage && instance.options.saveState)
+					if (updateLocalStorage && instance.options.saveState) {
 						instance.saveFieldValue(name, value);
+					}
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -914,14 +936,16 @@ class blocksmd {
 						if (option.getAttribute("value") === value) {
 							select.value = value;
 							instance.state.formData[name] = value;
-							if (updateLocalStorage && instance.options.saveState)
+							if (updateLocalStorage && instance.options.saveState) {
 								instance.saveFieldValue(name, value);
+							}
 							instance.reRenderBindElems(name);
 							break;
 						}
 					}
-					if (select.classList.contains("bmd-form-countrycode-select"))
+					if (select.classList.contains("bmd-form-countrycode-select")) {
 						instance.setTelInputPlaceholder(select);
+					}
 				}
 			}
 
@@ -934,7 +958,9 @@ class blocksmd {
 					const type = input.getAttribute("type");
 
 					// Set value, for checkbox, convert to array first
-					if (type === "checkbox") value = value.split(",");
+					if (type === "checkbox") {
+						value = value.split(",");
+					}
 					instance.setRadioCheckboxValue(
 						name,
 						"bmd-form-str-check-input",
@@ -949,8 +975,9 @@ class blocksmd {
 						type,
 					);
 					instance.state.formData[name] = value;
-					if (updateLocalStorage && instance.options.saveState)
+					if (updateLocalStorage && instance.options.saveState) {
 						instance.saveFieldValue(name, value);
+					}
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -974,8 +1001,9 @@ class blocksmd {
 					);
 					value = value ? parseInt(value) : null;
 					instance.state.formData[name] = value;
-					if (updateLocalStorage && instance.options.saveState)
+					if (updateLocalStorage && instance.options.saveState) {
 						instance.saveFieldValue(name, value);
+					}
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -992,8 +1020,9 @@ class blocksmd {
 				if (input) {
 					input.value = value;
 					instance.state.formData[name] = value;
-					if (updateLocalStorage && instance.options.saveState)
+					if (updateLocalStorage && instance.options.saveState) {
 						instance.saveFieldValue(name, value);
+					}
 					instance.reRenderBindElems(name);
 				}
 			}
@@ -1011,7 +1040,9 @@ class blocksmd {
 			window.location.hostname
 		}${window.location.pathname}form-data`;
 		const savedFormData = localStorage.getItem(localStorageKey);
-		if (!savedFormData) return;
+		if (!savedFormData) {
+			return;
+		}
 		for (const [name, value] of Object.entries(JSON.parse(savedFormData))) {
 			// Text field
 			if (
@@ -1057,8 +1088,9 @@ class blocksmd {
 							break;
 						}
 					}
-					if (select.classList.contains("bmd-form-countrycode-select"))
+					if (select.classList.contains("bmd-form-countrycode-select")) {
 						instance.setTelInputPlaceholder(select);
+					}
 				}
 			}
 
@@ -1194,7 +1226,9 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1212,7 +1246,9 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = isNumeric(e.target.value) ? Number(e.target.value) : null;
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1231,13 +1267,16 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 
 		// Update placeholder of telephone input if country calling code <select>
-		if (e.target.classList.contains("bmd-form-countrycode-select"))
+		if (e.target.classList.contains("bmd-form-countrycode-select")) {
 			instance.setTelInputPlaceholder(e.target);
+		}
 	};
 
 	/**
@@ -1258,7 +1297,9 @@ class blocksmd {
 			type,
 		);
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1278,7 +1319,9 @@ class blocksmd {
 			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
 		);
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1296,7 +1339,9 @@ class blocksmd {
 		const name = e.target.getAttribute("name");
 		const value = e.target.value;
 		instance.state.formData[name] = value;
-		if (instance.options.saveState) instance.saveFieldValue(name, value);
+		if (instance.options.saveState) {
+			instance.saveFieldValue(name, value);
+		}
 		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
@@ -1674,7 +1719,9 @@ class blocksmd {
 			const inputToFocus = formFieldsWithError[0].querySelector(
 				".bmd-form-str-check-input, .bmd-form-num-check-input, .bmd-form-datetime-input, .bmd-form-file-input",
 			);
-			if (inputToFocus) inputToFocus.focus();
+			if (inputToFocus) {
+				inputToFocus.focus();
+			}
 		}
 
 		return isFormValid;
@@ -2171,8 +2218,9 @@ class blocksmd {
 				}
 
 				// Also disable previous button if slide contains the specific attribute
-				if (slide.hasAttribute("data-bmd-disable-prev-btn"))
+				if (slide.hasAttribute("data-bmd-disable-prev-btn")) {
 					footerPreviousBtn.disabled = true;
+				}
 			}
 
 			// Autofocus (if applicable)
@@ -2181,10 +2229,14 @@ class blocksmd {
 					const elemToAutofocus = slide.querySelector(
 						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
 					);
-					if (elemToAutofocus) elemToAutofocus.focus();
+					if (elemToAutofocus) {
+						elemToAutofocus.focus();
+					}
 				} else {
 					const elemToAutofocus = slide.querySelector("[data-bmd-autofocus]");
-					if (elemToAutofocus) elemToAutofocus.focus();
+					if (elemToAutofocus) {
+						elemToAutofocus.focus();
+					}
 				}
 			}
 
@@ -2311,11 +2363,15 @@ class blocksmd {
 		const footerPreviousBtn = instance.container.querySelector(
 			".bmd-footer .bmd-previous-btn",
 		);
-		if (footerPreviousBtn) instance.setBtnProcessing(footerPreviousBtn);
+		if (footerPreviousBtn) {
+			instance.setBtnProcessing(footerPreviousBtn);
+		}
 		const footerNextBtn = instance.container.querySelector(
 			".bmd-footer .bmd-next-btn",
 		);
-		if (footerNextBtn) instance.setBtnProcessing(footerNextBtn);
+		if (footerNextBtn) {
+			instance.setBtnProcessing(footerNextBtn);
+		}
 
 		// Validate form (if active slide is <form> element)
 		if (activeSlide.tagName === "FORM") {
@@ -2451,11 +2507,15 @@ class blocksmd {
 		const footerPreviousBtn = instance.container.querySelector(
 			".bmd-footer .bmd-previous-btn",
 		);
-		if (footerPreviousBtn) instance.setBtnProcessing(footerPreviousBtn);
+		if (footerPreviousBtn) {
+			instance.setBtnProcessing(footerPreviousBtn);
+		}
 		const footerNextBtn = instance.container.querySelector(
 			".bmd-footer .bmd-next-btn",
 		);
-		if (footerNextBtn) instance.setBtnProcessing(footerNextBtn);
+		if (footerNextBtn) {
+			instance.setBtnProcessing(footerNextBtn);
+		}
 
 		// Get the previous slide
 		// If it is the same as the active slide, log error
@@ -2703,11 +2763,15 @@ class blocksmd {
 	loadRecaptchaScript = () => {
 		const instance = this;
 
-		if (!instance.options.recaptcha.siteKey || window.grecaptcha) return;
+		if (!instance.options.recaptcha.siteKey || window.grecaptcha) {
+			return;
+		}
 
 		// Return if script already loaded
 		const scriptId = `captcha-${instance.options.recaptcha.siteKey}`;
-		if (document.getElementById(scriptId)) return;
+		if (document.getElementById(scriptId)) {
+			return;
+		}
 
 		// Load script
 		const script = document.createElement("script");
@@ -2756,19 +2820,23 @@ class blocksmd {
 			// Handle padding inline bottom
 			rootElemClass += " bmd-pb-custom";
 			rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
-			if (instance.options.paddingInlineBottom === 0)
+			if (instance.options.paddingInlineBottom === 0) {
 				rootElemClass += " bmd-pb-0";
+			}
 
 			// Handle padding inline horizontal
 			rootElemClass += " bmd-px-custom";
 			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options.paddingInlineHorizontal}px;`;
-			if (instance.options.paddingInlineHorizontal === 0)
+			if (instance.options.paddingInlineHorizontal === 0) {
 				rootElemClass += " bmd-px-0";
+			}
 
 			// Handle padding inline top
 			rootElemClass += " bmd-pt-custom";
 			rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
-			if (instance.options.paddingInlineTop === 0) rootElemClass += " bmd-pt-0";
+			if (instance.options.paddingInlineTop === 0) {
+				rootElemClass += " bmd-pt-0";
+			}
 
 			instance.container.innerHTML = [
 				"<div",
@@ -2791,14 +2859,16 @@ class blocksmd {
 		}
 
 		// Get or create response id
-		if (instance.state.settings.page === "form-slides")
+		if (instance.state.settings.page === "form-slides") {
 			instance.getOrCreateResponseId();
+		}
 
 		// The following is done only for full page (not inline)
 		if (instance.options.isFullPage) {
 			// Set title and favicon
-			if (instance.state.settings.title !== undefined)
+			if (instance.state.settings.title !== undefined) {
 				document.title = instance.state.settings.title;
+			}
 			if (instance.state.settings.favicon !== undefined) {
 				let faviconLink = document.querySelector('link[rel~="icon"]');
 				if (!faviconLink) {
@@ -2833,8 +2903,9 @@ class blocksmd {
 
 		// Add setting if browser is Safari
 		try {
-			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
+			if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
 				instance.state.settings.browser = "safari";
+			}
 		} catch (error) {
 			console.error(error);
 		}
@@ -2877,8 +2948,9 @@ class blocksmd {
 		if (
 			instance.options.setColorSchemeAttrsAgain &&
 			instance.state.settings["color-scheme-toggle"] === "show"
-		)
+		) {
 			instance.setPreferredColorScheme();
+		}
 
 		// Add the made in loader to the DOM body
 		const localization = instance.state.settings.localization;
@@ -2925,7 +2997,9 @@ class blocksmd {
 				else {
 					// Delimeter is comma by default (as CSV is the default format)
 					let delimeter = ",";
-					if (getFormat === "tsv") delimeter = "\t";
+					if (getFormat === "tsv") {
+						delimeter = "\t";
+					}
 
 					// Parse and set response data
 					const parsedSpreadsheetData = parseSpreadsheetData(
@@ -2952,12 +3026,15 @@ class blocksmd {
 			instance.container.querySelector(".bmd-body").innerHTML = bodyTemplate;
 
 			// Hide page progress, header and/or footer (if applicable)
-			if (instance.state.settings["page-progress"] === "hide")
+			if (instance.state.settings["page-progress"] === "hide") {
 				rootElem.setAttribute("data-bmd-page-progress", "hide");
-			if (!instance.state.settings["header-render"])
+			}
+			if (!instance.state.settings["header-render"]) {
 				rootElem.setAttribute("data-bmd-header", "hide");
-			if (!instance.state.settings["footer-render"])
+			}
+			if (!instance.state.settings["footer-render"]) {
 				rootElem.setAttribute("data-bmd-footer", "hide");
+			}
 
 			// Create the content template and add to the DOM
 			const contentTemplateAndBindDivs = createContentTemplate(

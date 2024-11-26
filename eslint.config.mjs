@@ -7,6 +7,7 @@ export default [
 		files: ["**/*.js"],
 		rules: {
 			"dot-notation": "error",
+			"curly": "error",
 		},
 		languageOptions: {
 			sourceType: "commonjs",

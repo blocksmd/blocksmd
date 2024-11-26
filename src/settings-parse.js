@@ -15,7 +15,9 @@ function parseColor(colorString) {
 	let r, g, b;
 
 	// Strip any leading #
-	if (colorString.charAt(0) == "#") colorString = colorString.substr(1, 6);
+	if (colorString.charAt(0) == "#") {
+		colorString = colorString.substr(1, 6);
+	}
 
 	colorString = colorString.replace(/ /g, "");
 	colorString = colorString.toLowerCase();
@@ -522,7 +524,9 @@ function parseSettings(template) {
 	const settings = {};
 	for (let [key, value] of Object.entries(userSettings)) {
 		// Discard settings where the value is an empty string
-		if (value === "") continue;
+		if (value === "") {
+			continue;
+		}
 
 		// Make sure only accepted settings are available later
 		if (!(key in settingsRef)) {

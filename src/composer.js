@@ -16,18 +16,24 @@ function composeSharedFieldParams(params, formDelimiter) {
 
 	// Add the shared params
 	sharedParams.push(`\t${formDelimiter}question = ${params.question}`);
-	if (params.description !== undefined)
+	if (params.description !== undefined) {
 		sharedParams.push(`\t${formDelimiter}description = ${params.description}`);
-	if (params.fieldSize === "sm")
+	}
+	if (params.fieldSize === "sm") {
 		sharedParams.push(`\t${formDelimiter}fieldSize = ${params.fieldSize}`);
-	if (params.labelStyle === "classic")
+	}
+	if (params.labelStyle === "classic") {
 		sharedParams.push(`\t${formDelimiter}labelStyle = ${params.labelStyle}`);
-	if (params.subfield !== undefined)
+	}
+	if (params.subfield !== undefined) {
 		sharedParams.push(`\t${formDelimiter}subfield`);
-	if (params.disabled !== undefined)
+	}
+	if (params.disabled !== undefined) {
 		sharedParams.push(`\t${formDelimiter}disabled`);
-	if (params.autofocus !== undefined)
+	}
+	if (params.autofocus !== undefined) {
 		sharedParams.push(`\t${formDelimiter}autofocus`);
+	}
 
 	return sharedParams;
 }
@@ -42,7 +48,9 @@ function composeAttrs(params) {
 	const attrs = [];
 
 	// Add the id, CSS class names and other HTML attributes
-	if (params.id !== undefined) attrs.push(`#${params.id}`);
+	if (params.id !== undefined) {
+		attrs.push(`#${params.id}`);
+	}
 	if (params.classNames !== undefined) {
 		for (const className of params.classNames) {
 			attrs.push(`.${className}`);
@@ -247,18 +255,23 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.multiline !== undefined)
+		}
+		if (params.multiline !== undefined) {
 			templateChunks.push(`\t${formDelimiter}multiline`);
-		if (params.maxlength !== undefined)
+		}
+		if (params.maxlength !== undefined) {
 			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
-		if (params.pattern !== undefined)
+		}
+		if (params.pattern !== undefined) {
 			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -313,16 +326,20 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.maxlength !== undefined)
+		}
+		if (params.maxlength !== undefined) {
 			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
-		if (params.pattern !== undefined)
+		}
+		if (params.pattern !== undefined) {
 			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -377,16 +394,20 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.maxlength !== undefined)
+		}
+		if (params.maxlength !== undefined) {
 			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
-		if (params.pattern !== undefined)
+		}
+		if (params.pattern !== undefined) {
 			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -449,16 +470,20 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.maxlength !== undefined)
+		}
+		if (params.maxlength !== undefined) {
 			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
-		if (params.pattern !== undefined)
+		}
+		if (params.pattern !== undefined) {
 			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 		if (params.country !== undefined) {
 			templateChunks.push(`\t${formDelimiter}country = ${params.country}`);
 		}
@@ -521,16 +546,20 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.maxlength !== undefined)
+		}
+		if (params.maxlength !== undefined) {
 			templateChunks.push(`\t${formDelimiter}maxlength = ${params.maxlength}`);
-		if (params.pattern !== undefined)
+		}
+		if (params.pattern !== undefined) {
 			templateChunks.push(`\t${formDelimiter}pattern = ${params.pattern}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -588,22 +617,29 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.min !== undefined)
+		}
+		if (params.min !== undefined) {
 			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
-		if (params.max !== undefined)
+		}
+		if (params.max !== undefined) {
 			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
-		if (params.step !== undefined)
+		}
+		if (params.step !== undefined) {
 			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
-		if (params.unit !== undefined)
+		}
+		if (params.unit !== undefined) {
 			templateChunks.push(`\t${formDelimiter}unit = ${params.unit}`);
-		if (params.unitEnd !== undefined)
+		}
+		if (params.unitEnd !== undefined) {
 			templateChunks.push(`\t${formDelimiter}unitend = ${params.unitEnd}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -665,10 +701,11 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
+		}
 
 		const optionsString = params.options
 			.map((option) => {
@@ -683,8 +720,9 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}options = ${optionsString}`);
 
-		if (params.selected !== undefined)
+		if (params.selected !== undefined) {
 			templateChunks.push(`\t${formDelimiter}selected = ${params.selected}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -761,16 +799,20 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}choices = ${choicesString}`);
 
-		if (params.multiple !== undefined)
+		if (params.multiple !== undefined) {
 			templateChunks.push(`\t${formDelimiter}multiple`);
-		if (params.horizontal !== undefined)
+		}
+		if (params.horizontal !== undefined) {
 			templateChunks.push(`\t${formDelimiter}horizontal`);
-		if (params.hideFormText !== undefined)
+		}
+		if (params.hideFormText !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hideformtext`);
-		if (params.checked !== undefined)
+		}
+		if (params.checked !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,
 			);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -847,18 +889,23 @@ class Composer {
 			.join(", ");
 		templateChunks.push(`\t${formDelimiter}choices = ${choicesString}`);
 
-		if (params.multiple !== undefined)
+		if (params.multiple !== undefined) {
 			templateChunks.push(`\t${formDelimiter}multiple`);
-		if (params.supersize !== undefined)
+		}
+		if (params.supersize !== undefined) {
 			templateChunks.push(`\t${formDelimiter}supersize`);
-		if (params.hideLabels !== undefined)
+		}
+		if (params.hideLabels !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hidelabels`);
-		if (params.hideFormText !== undefined)
+		}
+		if (params.hideFormText !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hideformtext`);
-		if (params.checked !== undefined)
+		}
+		if (params.checked !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}checked = ${params.checked.join(", ")}`,
 			);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -913,14 +960,18 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.outOf !== undefined)
+		if (params.outOf !== undefined) {
 			templateChunks.push(`\t${formDelimiter}outof = ${params.outOf}`);
-		if (params.icon !== undefined)
+		}
+		if (params.icon !== undefined) {
 			templateChunks.push(`\t${formDelimiter}icon = ${params.icon}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
-		if (params.hideLabels !== undefined)
+		}
+		if (params.hideLabels !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hidelabels`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -978,22 +1029,29 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.startAt !== undefined)
+		if (params.startAt !== undefined) {
 			templateChunks.push(`\t${formDelimiter}startat = ${params.startAt}`);
-		if (params.outOf !== undefined)
+		}
+		if (params.outOf !== undefined) {
 			templateChunks.push(`\t${formDelimiter}outof = ${params.outOf}`);
-		if (params.labelStart !== undefined)
+		}
+		if (params.labelStart !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}labelstart = ${params.labelStart}`,
 			);
-		if (params.labelEnd !== undefined)
+		}
+		if (params.labelEnd !== undefined) {
 			templateChunks.push(`\t${formDelimiter}labelend = ${params.labelEnd}`);
-		if (params.hideLabelStart !== undefined)
+		}
+		if (params.hideLabelStart !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hidelabelstart`);
-		if (params.hideLabelEnd !== undefined)
+		}
+		if (params.hideLabelEnd !== undefined) {
 			templateChunks.push(`\t${formDelimiter}hidelabelend`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1049,18 +1107,23 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.min !== undefined)
+		}
+		if (params.min !== undefined) {
 			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
-		if (params.max !== undefined)
+		}
+		if (params.max !== undefined) {
 			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
-		if (params.step !== undefined)
+		}
+		if (params.step !== undefined) {
 			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1116,18 +1179,23 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.min !== undefined)
+		}
+		if (params.min !== undefined) {
 			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
-		if (params.max !== undefined)
+		}
+		if (params.max !== undefined) {
 			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
-		if (params.step !== undefined)
+		}
+		if (params.step !== undefined) {
 			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1183,18 +1251,23 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.placeholder !== undefined)
+		if (params.placeholder !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}placeholder = ${params.placeholder}`,
 			);
-		if (params.min !== undefined)
+		}
+		if (params.min !== undefined) {
 			templateChunks.push(`\t${formDelimiter}min = ${params.min}`);
-		if (params.max !== undefined)
+		}
+		if (params.max !== undefined) {
 			templateChunks.push(`\t${formDelimiter}max = ${params.max}`);
-		if (params.step !== undefined)
+		}
+		if (params.step !== undefined) {
 			templateChunks.push(`\t${formDelimiter}step = ${params.step}`);
-		if (params.value !== undefined)
+		}
+		if (params.value !== undefined) {
 			templateChunks.push(`\t${formDelimiter}value = ${params.value}`);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1248,14 +1321,17 @@ class Composer {
 		].concat(composeSharedFieldParams(params, formDelimiter));
 
 		// Add the other params
-		if (params.sizeLimit !== undefined)
+		if (params.sizeLimit !== undefined) {
 			templateChunks.push(`\t${formDelimiter}sizelimit = ${params.sizeLimit}`);
-		if (params.imageOnly !== undefined)
+		}
+		if (params.imageOnly !== undefined) {
 			templateChunks.push(`\t${formDelimiter}imageonly`);
-		if (params.currentFile !== undefined)
+		}
+		if (params.currentFile !== undefined) {
 			templateChunks.push(
 				`\t${formDelimiter}currentfile = ${params.currentFile}`,
 			);
+		}
 
 		// Close the input and add the attributes (if applicable)
 		templateChunks.push(")");
@@ -1299,7 +1375,9 @@ class Composer {
 	slide = (params) => {
 		var instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		var templateChunks = [];
 
 		// Add the slide and params
@@ -1309,14 +1387,21 @@ class Composer {
 				.filter((line) => !line.trim().startsWith("#!"))
 				.join("\n")
 				.trim() !== ""
-		)
+		) {
 			templateChunks.push(instance.settings.slideDelimiter);
-		if (params.jumpCondition !== undefined)
+		}
+		if (params.jumpCondition !== undefined) {
 			templateChunks.push(`-> ${params.jumpCondition}`);
-		if (params.pageProgress !== undefined)
+		}
+		if (params.pageProgress !== undefined) {
 			templateChunks.push(`|> ${params.pageProgress}`);
-		if (params.post !== undefined) templateChunks.push(">> post");
-		if (params.disablePrevious !== undefined) templateChunks.push("<< disable");
+		}
+		if (params.post !== undefined) {
+			templateChunks.push(">> post");
+		}
+		if (params.disablePrevious !== undefined) {
+			templateChunks.push("<< disable");
+		}
 
 		// Create the result, add it to the template and return
 		const result = `\n${templateChunks.join("\n")}\n`;
@@ -1340,7 +1425,9 @@ class Composer {
 	startSlide = (params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const templateChunks = [];
 
 		// Add the slide and params
@@ -1350,8 +1437,9 @@ class Composer {
 				.filter((line) => !line.trim().startsWith("#!"))
 				.join("\n")
 				.trim() !== ""
-		)
+		) {
 			templateChunks.push(instance.settings.slideDelimiter);
+		}
 		if (params.buttonText !== undefined) {
 			templateChunks.push(`-> start -> ${params.buttonText}`);
 		} else {
@@ -1380,7 +1468,9 @@ class Composer {
 	endSlide = (params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const templateChunks = [];
 
 		// Add the slide and params
@@ -1390,8 +1480,9 @@ class Composer {
 				.filter((line) => !line.trim().startsWith("#!"))
 				.join("\n")
 				.trim() !== ""
-		)
+		) {
 			templateChunks.push(instance.settings.slideDelimiter);
+		}
 		if (params.redirectUrl !== undefined) {
 			templateChunks.push(`-> end -> ${params.redirectUrl}`);
 		} else {
@@ -1451,7 +1542,9 @@ class Composer {
 	p = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1473,7 +1566,9 @@ class Composer {
 	h1 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1495,7 +1590,9 @@ class Composer {
 	h2 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1517,7 +1614,9 @@ class Composer {
 	h3 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1539,7 +1638,9 @@ class Composer {
 	h4 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1561,7 +1662,9 @@ class Composer {
 	h5 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1583,7 +1686,9 @@ class Composer {
 	h6 = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1605,7 +1710,9 @@ class Composer {
 	ul = (items, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const templateChunks = [];
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
@@ -1629,7 +1736,9 @@ class Composer {
 	ol = (items, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const templateChunks = [];
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
@@ -1653,7 +1762,9 @@ class Composer {
 	blockquote = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const templateChunks = [];
 		const attrs = composeAttrs(params);
 		if (attrs.length > 0) {
@@ -1685,7 +1796,9 @@ class Composer {
 	code = (content, params) => {
 		const instance = this;
 
-		if (!params) params = {};
+		if (!params) {
+			params = {};
+		}
 		const attrs = composeAttrs(params);
 		let result = "";
 		if (attrs.length > 0) {
@@ -1733,8 +1846,12 @@ class Composer {
 	divStart = (params) => {
 		const instance = this;
 
-		if (!params) params = {};
-		if (!params.bind) params.bind = [];
+		if (!params) {
+			params = {};
+		}
+		if (!params.bind) {
+			params.bind = [];
+		}
 
 		const attrs = composeAttrs(params);
 		let result = "";

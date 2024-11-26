@@ -457,7 +457,9 @@ const translations = {
  * @returns {string}
  */
 function getTranslation(localization, key) {
-	if (translations[localization] === undefined) localization = "en";
+	if (translations[localization] === undefined) {
+		localization = "en";
+	}
 	return translations[localization][key] || "";
 }
 

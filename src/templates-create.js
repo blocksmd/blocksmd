@@ -19,31 +19,37 @@ function createStyles(settings) {
 	const styleBlocks = [];
 
 	// Add the font import URL
-	if (settings["font-import-url"] !== undefined)
+	if (settings["font-import-url"] !== undefined) {
 		styleBlocks.push(`@import url("${settings["font-import-url"]}");`);
+	}
 
 	// Set up the base styles
 	const colorScheme = settings["color-scheme"] === "light" ? "lm" : "dm";
 	const altColorScheme = settings["color-scheme"] === "light" ? "dm" : "lm";
 	const baseStyles = [];
-	if (settings["font-family"] !== undefined)
+	if (settings["font-family"] !== undefined) {
 		baseStyles.push(`--bmd-body-font-family: ${settings["font-family"]};`);
-	if (settings["backdrop-opacity"] !== undefined)
+	}
+	if (settings["backdrop-opacity"] !== undefined) {
 		baseStyles.push(
 			`--bmd-backdrop-opacity-${colorScheme}: ${settings["backdrop-opacity"]};`,
 		);
-	if (settings["backdrop-opacity-alt-scheme"] !== undefined)
+	}
+	if (settings["backdrop-opacity-alt-scheme"] !== undefined) {
 		baseStyles.push(
 			`--bmd-backdrop-opacity-${altColorScheme}: ${settings["backdrop-opacity-alt-scheme"]};`,
 		);
-	if (settings["background-image"] !== undefined)
+	}
+	if (settings["background-image"] !== undefined) {
 		baseStyles.push(
 			`--bmd-body-bg-img-${colorScheme}: ${settings["background-image"]};`,
 		);
-	if (settings["background-image-alt-scheme"] !== undefined)
+	}
+	if (settings["background-image-alt-scheme"] !== undefined) {
 		baseStyles.push(
 			`--bmd-body-bg-img-${altColorScheme}: ${settings["background-image-alt-scheme"]};`,
 		);
+	}
 
 	// Set up the color styles
 	const colorStyles = [];
@@ -86,8 +92,9 @@ function createStyles(settings) {
 			: ".bmd-root";
 
 	// Add the base styles block
-	if (baseStyles.length > 0)
+	if (baseStyles.length > 0) {
 		styleBlocks.push(`${selector} {${baseStyles.join("")}}`);
+	}
 
 	// Add the color styles block (default color scheme)
 	if (colorStyles.length > 0) {
