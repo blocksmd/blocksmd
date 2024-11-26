@@ -49,7 +49,7 @@ const allSettings = {
 	placeholders: "hide",
 	postSheetName: "Responses",
 	postUrl: "https://api.example.com/submit",
-	restartButton: "hide",
+	restartButton: "show",
 	rounded: "pill",
 	slideControls: "hide",
 	slideDelimiter: "---",
@@ -102,7 +102,7 @@ const expectedTemplate = `
 #! placeholders = hide
 #! post-sheet-name = Responses
 #! post-url = https://api.example.com/submit
-#! restart-button = hide
+#! restart-button = show
 #! rounded = pill
 #! slide-controls = hide
 #! slide-delimiter = ---

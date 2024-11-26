@@ -90,7 +90,7 @@ export class Composer {
 	 * @property {string} [backdropOpacity] Sets an overlay of the `background-color` on top of the background image. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {string} [backgroundColor] The `background-color` of the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {string} [backgroundImage] The `background-image` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
+	 * @property {"hide"|"show"} [blocksmdBranding] Controls visibility of the blocks.md branding.
 	 * @property {string} [brand] An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of the slide CTA buttons.
 	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
@@ -107,11 +107,11 @@ export class Composer {
 	 * @property {"sm"|"lg"} [fontSize] Makes the `font-size` of everything on the page smaller or larger.
 	 * @property {string} [formDelimiter] Used to separate parameters when creating form fields. Default is `"|"`.
 	 * @property {"classic"} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
-	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
+	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
 	 * @property {"json"|"csv"|"tsv"} [getFormat] The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
 	 * @property {string} [getObjectsName] Name used for objects when reading data. Default is `"objects"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
 	 * @property {string} [getUrl] URL for reading data. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
-	 * @property {"hide"|"align"} [header] Controls header visibility and alignment.
+	 * @property {"hide"|"show"|"align"} [header] Controls header visibility and alignment.
 	 * @property {"anchored"} [headings] If set to `"anchored"`, all headings will contain an anchor link.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {"classic"} [labelStyle] If set to `"classic"`, the question and description of form fields will be made smaller.
@@ -123,13 +123,13 @@ export class Composer {
 	 * @property {string} [metaType] Sets the Open Graph type.
 	 * @property {string} [metaUrl] Sets the Open Graph URL.
 	 * @property {"form-slides"|"slides"|"single"} [page] Determines the layout of the page. Default is `"form-slides"`.
-	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
-	 * @property {"hide"} [placeholders] Controls visibility of input placeholders.
+	 * @property {"hide"|"show"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
+	 * @property {"hide"|"show"} [placeholders] Controls visibility of input placeholders.
 	 * @property {string} [postSheetName] When sending responses directly to Google Sheets, this specifies which sheet to save responses to.
 	 * @property {string} [postUrl] URL to send form responses to using POST request.
-	 * @property {"hide"} [restartButton] If set to `"hide"`, the restart button will be hidden.
+	 * @property {"show"} [restartButton] If set to `"show"`, the restart button will be visible.
 	 * @property {"none"|"pill"} [rounded] Controls rounding of buttons and UI elements.
-	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
+	 * @property {"hide"|"show"} [slideControls] Controls visibility of next and previous buttons.
 	 * @property {string} [slideDelimiter] Specifies where new slides are created. Default is `"---"`.
 	 * @property {string} [submitButtonText] Custom text for submit buttons.
 	 * @property {string} [title] The title of the page.
@@ -166,9 +166,9 @@ export class Composer {
 		 */
 		backgroundImage?: string;
 		/**
-		 * If set to `"hide"`, then the blocks.md branding will be hidden.
+		 * Controls visibility of the blocks.md branding.
 		 */
-		blocksmdBranding?: "hide";
+		blocksmdBranding?: "hide" | "show";
 		/**
 		 * An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
@@ -234,9 +234,9 @@ export class Composer {
 		 */
 		formStyle?: "classic";
 		/**
-		 * If set to `"hide"`, the footer will be hidden.
+		 * Controls visibility of the footer.
 		 */
-		footer?: "hide";
+		footer?: "hide" | "show";
 		/**
 		 * The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
 		 */
@@ -252,7 +252,7 @@ export class Composer {
 		/**
 		 * Controls header visibility and alignment.
 		 */
-		header?: "hide" | "align";
+		header?: "hide" | "show" | "align";
 		/**
 		 * If set to `"anchored"`, all headings will contain an anchor link.
 		 */
@@ -300,11 +300,11 @@ export class Composer {
 		/**
 		 * Controls visibility and function of the page progress.
 		 */
-		pageProgress?: "hide" | "decorative";
+		pageProgress?: "hide" | "show" | "decorative";
 		/**
 		 * Controls visibility of input placeholders.
 		 */
-		placeholders?: "hide";
+		placeholders?: "hide" | "show";
 		/**
 		 * When sending responses directly to Google Sheets, this specifies which sheet to save responses to.
 		 */
@@ -314,17 +314,17 @@ export class Composer {
 		 */
 		postUrl?: string;
 		/**
-		 * If set to `"hide"`, the restart button will be hidden.
+		 * If set to `"show"`, the restart button will be visible.
 		 */
-		restartButton?: "hide";
+		restartButton?: "show";
 		/**
 		 * Controls rounding of buttons and UI elements.
 		 */
 		rounded?: "none" | "pill";
 		/**
-		 * If set to `"hide"`, next and previous buttons will be hidden.
+		 * Controls visibility of next and previous buttons.
 		 */
-		slideControls?: "hide";
+		slideControls?: "hide" | "show";
 		/**
 		 * Specifies where new slides are created. Default is `"---"`.
 		 */

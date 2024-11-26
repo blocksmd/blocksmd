@@ -303,8 +303,8 @@ function parseSettings(template) {
 			accepted: "valid CSS for background-image",
 		},
 		"blocksmd-branding": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"brand": {
 			pattern: /^!\[.*\]\(.*\)$/s,
@@ -380,8 +380,8 @@ function parseSettings(template) {
 			accepted: "classic",
 		},
 		"footer": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"get-format": {
 			pattern: /^(json|csv|tsv)$/,
@@ -396,8 +396,8 @@ function parseSettings(template) {
 			accepted: "valid URL",
 		},
 		"header": {
-			pattern: /^(align|hide)$/,
-			accepted: "align || hide",
+			pattern: /^(align|hide|show)$/,
+			accepted: "align || hide || show",
 		},
 		"headings": {
 			pattern: /^anchored$/,
@@ -444,12 +444,12 @@ function parseSettings(template) {
 			accepted: "form-slides (default) || slides || single",
 		},
 		"page-progress": {
-			pattern: /^(hide|decorative)$/,
-			accepted: "hide || decorative",
+			pattern: /^(hide|show|decorative)$/,
+			accepted: "hide || show || decorative",
 		},
 		"placeholders": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"post-sheet-name": {
 			pattern: /^.*$/,
@@ -468,8 +468,8 @@ function parseSettings(template) {
 			accepted: "none || pill",
 		},
 		"slide-controls": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"slide-delimiter": {
 			pattern: /^.*$/,

@@ -21,18 +21,18 @@ export class blocksmd {
 	 * Options for the page or form.
 	 *
 	 * @typedef {Object} OptionsType
-	 * @property {"hide"} [blocksmdBranding] If set to `"hide"`, then the blocks.md branding will be hidden.
+	 * @property {"hide"|"show"} [blocksmdBranding] Controls visibility of the blocks.md branding.
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
 	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
-	 * @property {"hide"} [footer] If set to `"hide"`, the footer will be hidden.
+	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
 	 * @property {number} [paddingInlineTop] Padding top for inline pages or forms. Default is `20`.
-	 * @property {"hide"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
+	 * @property {"hide"|"show"|"decorative"} [pageProgress] Controls visibility and function of the page progress.
 	 * @property {Object} [postData] Extra data sent with POST requests.
 	 * @property {Object} [postHeaders] Headers for POST requests.
 	 * @property {boolean} [prioritizeURLFormData] Whether to prioritize URL form data. Default is `false`.
@@ -40,7 +40,7 @@ export class blocksmd {
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
-	 * @property {"hide"} [slideControls] If set to `"hide"`, next and previous buttons will be hidden.
+	 * @property {"hide"|"show"} [slideControls] Controls visibility of next and previous buttons.
 	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
 	 * @property {ThemeType} [themeDark] Dark theme.
 	 * @property {ThemeType} [themeLight] Light theme.
@@ -57,9 +57,9 @@ export class blocksmd {
 		container: Document | HTMLElement | Element,
 		options: {
 			/**
-			 * If set to `"hide"`, then the blocks.md branding will be hidden.
+			 * Controls visibility of the blocks.md branding.
 			 */
-			blocksmdBranding?: "hide";
+			blocksmdBranding?: "hide" | "show";
 			/**
 			 * The default or initial color scheme of the page. Default is `"light"`.
 			 */
@@ -73,9 +73,9 @@ export class blocksmd {
 			 */
 			errorMessageKey?: string;
 			/**
-			 * If set to `"hide"`, the footer will be hidden.
+			 * Controls visibility of the footer.
 			 */
-			footer?: "hide";
+			footer?: "hide" | "show";
 			/**
 			 * Headers for GET requests.
 			 */
@@ -103,7 +103,7 @@ export class blocksmd {
 			/**
 			 * Controls visibility and function of the page progress.
 			 */
-			pageProgress?: "hide" | "decorative";
+			pageProgress?: "hide" | "show" | "decorative";
 			/**
 			 * Extra data sent with POST requests.
 			 */
@@ -150,9 +150,9 @@ export class blocksmd {
 			 */
 			setColorSchemeAttrsAgain?: boolean;
 			/**
-			 * If set to `"hide"`, next and previous buttons will be hidden.
+			 * Controls visibility of next and previous buttons.
 			 */
-			slideControls?: "hide";
+			slideControls?: "hide" | "show";
 			/**
 			 * The index of the first slide to make active. Default is `0`.
 			 */
