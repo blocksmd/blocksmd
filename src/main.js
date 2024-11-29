@@ -55,7 +55,7 @@ class blocksmd {
 		themeDark: {
 			accent: "rgb(138, 180, 248)",
 			accentForeground: "rgb(0, 0, 0)",
-			backgroundColor: "rgb(26, 26, 26)",
+			backgroundColor: "rgb(20, 20, 20)",
 			color: "rgb(240, 240, 240)",
 		},
 		themeLight: {
