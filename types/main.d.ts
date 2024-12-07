@@ -39,6 +39,7 @@ export class blocksmd {
 	 * @property {RecaptchaType} [recaptcha] The Google reCAPTCHA attributes.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
+	 * @property {boolean} [sendFilesAsBase64] Whether to send files as base64. Default is `false`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
 	 * @property {"hide"|"show"} [slideControls] Controls visibility of next and previous buttons.
 	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
@@ -146,6 +147,10 @@ export class blocksmd {
 			 */
 			saveState?: boolean;
 			/**
+			 * Whether to send files as base64. Default is `false`.
+			 */
+			sendFilesAsBase64?: boolean;
+			/**
 			 * Whether to set color scheme attributes again.
 			 */
 			setColorSchemeAttrsAgain?: boolean;
@@ -225,6 +230,7 @@ export class blocksmd {
 		};
 		sanitize: boolean;
 		saveState: boolean;
+		sendFilesAsBase64: boolean;
 		setColorSchemeAttrsAgain: boolean;
 		slideControls: string;
 		startSlide: number;
@@ -538,6 +544,13 @@ export class blocksmd {
 	 * @returns {Promise<string>} The Google reCAPTCHA token
 	 */
 	executeRecaptcha: () => Promise<string>;
+	/**
+	 * Convert a file to base64
+	 *
+	 * @param {File} file
+	 * @returns {Promise<string>}
+	 */
+	fileToBase64: (file: File) => Promise<string>;
 	/**
 	 * POST form data.
 	 *

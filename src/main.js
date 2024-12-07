@@ -49,6 +49,7 @@ class blocksmd {
 		},
 		sanitize: true,
 		saveState: true,
+		sendFilesAsBase64: false,
 		setColorSchemeAttrsAgain: true,
 		slideControls: "",
 		startSlide: 0,
@@ -108,6 +109,7 @@ class blocksmd {
 	 * @property {RecaptchaType} [recaptcha] The Google reCAPTCHA attributes.
 	 * @property {boolean} [sanitize] Whether to sanitize template. Default is `true`.
 	 * @property {boolean} [saveState] Whether to save form data in local storage. Default is `true`.
+	 * @property {boolean} [sendFilesAsBase64] Whether to send files as base64. Default is `false`.
 	 * @property {boolean} [setColorSchemeAttrsAgain] Whether to set color scheme attributes again.
 	 * @property {"hide"|"show"} [slideControls] Controls visibility of next and previous buttons.
 	 * @property {number} [startSlide] The index of the first slide to make active. Default is `0`.
@@ -277,6 +279,13 @@ class blocksmd {
 				typeof options.saveState === "boolean"
 			) {
 				this.options.saveState = options.saveState;
+			}
+			// Send files as base64
+			if (
+				options.sendFilesAsBase64 !== undefined &&
+				typeof options.sendFilesAsBase64 === "boolean"
+			) {
+				this.options.sendFilesAsBase64 = options.sendFilesAsBase64;
 			}
 			// Set color scheme attributes again
 			if (
@@ -1870,6 +1879,21 @@ class blocksmd {
 	};
 
 	/**
+	 * Convert a file to base64
+	 *
+	 * @param {File} file
+	 * @returns {Promise<string>}
+	 */
+	fileToBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result.split(",")[1]);
+			reader.onerror = (error) => reject(error);
+		});
+	};
+
+	/**
 	 * POST form data.
 	 *
 	 * @param {boolean} postCondition
@@ -1938,16 +1962,39 @@ class blocksmd {
 				formData.append(input.getAttribute("name"), input.value);
 			});
 
-		// Add the chosen files from the inputs (these are not in the state)
-		instance.container
-			.querySelectorAll('.bmd-form-file-input[type="file"]')
-			.forEach((input) => {
+		// Process files - either append directly or convert to base64
+		const processFiles = async () => {
+			const _fileFields = [];
+			const fileInputs = instance.container.querySelectorAll(
+				'.bmd-form-file-input[type="file"]',
+			);
+
+			for (const input of fileInputs) {
 				const name = input.getAttribute("name");
 				const file = input.files[0];
+
 				if (file) {
-					formData.append(name, file);
+					if (instance.options.sendFilesAsBase64) {
+						try {
+							const base64String = await instance.fileToBase64(file);
+							formData.append(name, base64String);
+							formData.append(`${name}Filename`, file.name);
+							formData.append(`${name}Type`, file.type);
+						} catch (error) {
+							console.error(`Error converting file to base64: ${error}`);
+							formData.append(name, file);
+						}
+					} else {
+						formData.append(name, file);
+					}
+					_fileFields.push(name);
 				}
-			});
+			}
+
+			if (_fileFields.length > 0) {
+				formData.append("_fileFields", _fileFields.toString());
+			}
+		};
 
 		// Add the current file clear checks (these are not in the state)
 		instance.container
@@ -1966,54 +2013,57 @@ class blocksmd {
 		);
 		formData.append("_submitted", new Date().toUTCString());
 
-		// Get and use reCAPTCHA token if site key provided
-		if (instance.options.recaptcha.siteKey) {
-			return instance.executeRecaptcha().then((token) => {
-				formData.append("_captcha", token);
-				return fetch(instance.state.settings["post-url"], {
-					method: "POST",
-					headers: instance.options.postHeaders,
-					body: formData,
-				})
-					.then((response) =>
-						response
-							.json()
-							.then((json) => {
-								return { ok: response.ok, json: json };
-							})
-							.catch((error) => {
-								console.error(error);
-								return { ok: response.ok, json: {} };
-							}),
-					)
-					.catch((error) => {
-						console.error(error);
-						return { ok: false, json: {} };
-					});
-			});
-		}
-
-		// No reCAPTCHA needed, just send the form data
-		return fetch(instance.state.settings["post-url"], {
-			method: "POST",
-			headers: instance.options.postHeaders,
-			body: formData,
-		})
-			.then((response) =>
-				response
-					.json()
-					.then((json) => {
-						return { ok: response.ok, json: json };
+		// Process all files first
+		return processFiles().then(() => {
+			// Get and use reCAPTCHA token if site key provided
+			if (instance.options.recaptcha.siteKey) {
+				return instance.executeRecaptcha().then((token) => {
+					formData.append("_captcha", token);
+					return fetch(instance.state.settings["post-url"], {
+						method: "POST",
+						headers: instance.options.postHeaders,
+						body: formData,
 					})
-					.catch((error) => {
-						console.error(error);
-						return { ok: response.ok, json: {} };
-					}),
-			)
-			.catch((error) => {
-				console.error(error);
-				return { ok: false, json: {} };
-			});
+						.then((response) =>
+							response
+								.json()
+								.then((json) => {
+									return { ok: response.ok, json: json };
+								})
+								.catch((error) => {
+									console.error(error);
+									return { ok: response.ok, json: {} };
+								}),
+						)
+						.catch((error) => {
+							console.error(error);
+							return { ok: false, json: {} };
+						});
+				});
+			}
+
+			// No reCAPTCHA needed, just send the form data
+			return fetch(instance.state.settings["post-url"], {
+				method: "POST",
+				headers: instance.options.postHeaders,
+				body: formData,
+			})
+				.then((response) =>
+					response
+						.json()
+						.then((json) => {
+							return { ok: response.ok, json: json };
+						})
+						.catch((error) => {
+							console.error(error);
+							return { ok: response.ok, json: {} };
+						}),
+				)
+				.catch((error) => {
+					console.error(error);
+					return { ok: false, json: {} };
+				});
+		});
 	};
 
 	/**
