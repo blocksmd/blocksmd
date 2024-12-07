@@ -120,12 +120,13 @@ function doPost(e) {
 		}
 
 		// Return ok
+		lock.releaseLock();
 		return ContentService.createTextOutput(
 			JSON.stringify({ ok: true }),
 		).setMimeType(ContentService.MimeType.JSON);
 	} catch (e) {
-		throw e;
-	} finally {
+		// Throw error
 		lock.releaseLock();
+		throw e;
 	}
 }
