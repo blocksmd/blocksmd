@@ -63,7 +63,7 @@ const expectedTemplate1 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
+			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded.</p>
 		</div>
 	</div>
 </div>
@@ -142,7 +142,7 @@ const expectedTemplate2 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">ধন্যবাদ</h1>
-			<p class="bmd-fs-lead bmd-mb-1">আপনার জবাব রেকর্ড করা হয়েছে। ধন্যবাদ!</p>
+			<p class="bmd-fs-lead bmd-mb-1">আপনার জবাব রেকর্ড করা হয়েছে।</p>
 		</div>
 	</div>
 </div>
@@ -213,7 +213,7 @@ const expectedTemplate3 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">You've reached the end. Thanks for reading!</p>
+			<p class="bmd-fs-lead bmd-mb-1">You've reached the end.</p>
 		</div>
 	</div>
 </div>
@@ -282,7 +282,7 @@ const expectedTemplate4 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">ধন্যবাদ</h1>
-			<p class="bmd-fs-lead bmd-mb-1">আপনি শেষ পর্যন্ত পৌঁছেছেন৷ পড়ার জন্য ধন্যবাদ!</p>
+			<p class="bmd-fs-lead bmd-mb-1">আপনি শেষ পর্যন্ত পৌঁছেছেন।</p>
 		</div>
 	</div>
 </div>
@@ -594,7 +594,7 @@ const expectedTemplate8 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
+			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded.</p>
 		</div>
 	</div>
 </div>
@@ -639,7 +639,7 @@ const expectedTemplate9 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">You've reached the end. Thanks for reading!</p>
+			<p class="bmd-fs-lead bmd-mb-1">You've reached the end.</p>
 		</div>
 	</div>
 </div>
@@ -716,7 +716,7 @@ const expectedTemplate10 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
+			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded.</p>
 		</div>
 		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
 			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">

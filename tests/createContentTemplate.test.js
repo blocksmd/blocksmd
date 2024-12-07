@@ -80,7 +80,7 @@ const expectedTemplate1 = `
 	<div class="bmd-grid">
 		<div class="bmd-text-center">
 			<h1 class="bmd-h2 bmd-mb-2">Thank you</h1>
-			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded. Thank you!</p>
+			<p class="bmd-fs-lead bmd-mb-1">Your response has been recorded.</p>
 		</div>
 	</div>
 </div>
