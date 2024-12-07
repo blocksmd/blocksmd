@@ -1,5 +1,6 @@
 const scriptProp = PropertiesService.getScriptProperties();
 scriptProp.setProperty("uploadFolderId", "");
+scriptProp.setProperty("recaptchaSecret", "");
 
 function intialSetup() {
 	const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet();
@@ -27,6 +28,24 @@ function doPost(e) {
 		Object.keys(e.parameter).forEach((key) => {
 			data[key] = e.parameter[key];
 		});
+
+		// Handle reCAPTCHA
+		if (scriptProp.getProperty("recaptchaSecret")) {
+			const response = UrlFetchApp.fetch(
+				"https://www.google.com/recaptcha/api/siteverify",
+				{
+					method: "post",
+					payload: {
+						secret: scriptProp.getProperty("recaptchaSecret"),
+						response: data._captcha,
+					},
+				},
+			);
+			const responseJSON = JSON.parse(response.getContentText());
+			if (!responseJSON.success) {
+				throw new Error("CAPTCHA verification failed.");
+			}
+		}
 
 		// Handle file uploads
 		if (e.parameter._fileFields) {
@@ -105,10 +124,7 @@ function doPost(e) {
 			JSON.stringify({ ok: true }),
 		).setMimeType(ContentService.MimeType.JSON);
 	} catch (e) {
-		// Return not ok
-		return ContentService.createTextOutput(
-			JSON.stringify({ ok: false }),
-		).setMimeType(ContentService.MimeType.JSON);
+		throw e;
 	} finally {
 		lock.releaseLock();
 	}
