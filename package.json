@@ -1,18 +1,18 @@
 {
-	"name": "blocksmd",
+	"name": "formsmd",
 	"version": "1.1.0-beta.16",
-	"description": "Markdown to amazing forms and web pages",
+	"description": "Developer-first, open source Typeform alternative",
 	"main": "src/index.js",
 	"types": "types/index.d.ts",
 	"scripts": {
-		"build": "rtlcss dist/css/blocksmd.css dist/css/blocksmd.rtl.css && tsc && npm run lint && npm run format && csso dist/css/blocksmd.css -o dist/css/blocksmd.min.css -s file && csso dist/css/blocksmd.rtl.css -o dist/css/blocksmd.rtl.min.css -s file && webpack --config webpack.config.js && npx babel dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js && terser dist/js/blocksmd.bundle.min.js -o dist/js/blocksmd.bundle.min.js && npx babel dist/js/composer.bundle.min.js -o dist/js/composer.bundle.min.js && terser dist/js/composer.bundle.min.js -o dist/js/composer.bundle.min.js",
+		"build": "rtlcss dist/css/formsmd.css dist/css/formsmd.rtl.css && tsc && npm run lint && npm run format && csso dist/css/formsmd.css -o dist/css/formsmd.min.css -s file && csso dist/css/formsmd.rtl.css -o dist/css/formsmd.rtl.min.css -s file && webpack --config webpack.config.js && npx babel dist/js/formsmd.bundle.min.js -o dist/js/formsmd.bundle.min.js && terser dist/js/formsmd.bundle.min.js -o dist/js/formsmd.bundle.min.js && npx babel dist/js/composer.bundle.min.js -o dist/js/composer.bundle.min.js && terser dist/js/composer.bundle.min.js -o dist/js/composer.bundle.min.js",
 		"format": "npx prettier . --write",
 		"lint": "eslint bin/ --fix && eslint google-apps-script/ --fix && eslint src/ --fix && eslint tests/ --fix",
 		"test": "jest --runInBand",
 		"webpack": "webpack --config webpack.config.js"
 	},
 	"bin": {
-		"blocksmd": "./bin/index.js"
+		"formsmd": "./bin/index.js"
 	},
 	"keywords": [
 		"accessibility",

@@ -128,7 +128,7 @@ const madeInLoaderTemplate = `
 	<div class="bmd-main-container">
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
-				{% if settings["blocksmd-branding"] != "hide" %}
+				{% if settings["formsmd-branding"] != "hide" %}
 				{{ translations.madeInLoader | safe }}
 				{% else %}
 				<div class="bmd-specific-fs-20 bmd-text-emphasis bmd-fw-bold">{{ translations.loading }}...</div>
@@ -171,7 +171,7 @@ const bodyTemplate = `
 	<div class="bmd-main-container">
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
-				{% if settings["blocksmd-branding"] != "hide" %}
+				{% if settings["formsmd-branding"] != "hide" %}
 				{{ translations.madeInLoader | safe }}
 				{% else %}
 				<div class="bmd-specific-fs-20 bmd-text-emphasis bmd-fw-bold">{{ translations.loading }}...</div>
@@ -201,8 +201,8 @@ const bodyTemplate = `
 			</button>
 		</div>
 		{% endif %}
-		{% if settings["blocksmd-branding"] != "hide" %}
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		{% if settings["formsmd-branding"] != "hide" %}
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
 			{{ translations.madeInBtn | safe }}
 		</a>
 		{% endif %}
@@ -275,7 +275,7 @@ function createBodyTemplate(settings) {
 		settings.footer !== "hide" &&
 		(settings["color-scheme-toggle"] === "show" ||
 			(settings["slide-controls"] !== "hide" && settings.page !== "single") ||
-			settings["blocksmd-branding"] !== "hide");
+			settings["formsmd-branding"] !== "hide");
 
 	// Render the template using Nunjucks
 	const localization = settings.localization;

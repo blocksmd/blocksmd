@@ -27,7 +27,7 @@ const expectedTemplate1 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -48,8 +48,8 @@ const expectedTemplate1 = `
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 			</button>
 		</div>
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			Made in <strong class="bmd-antialiased">blocks.md</strong>
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			Made in <strong class="bmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
 </footer>
@@ -108,7 +108,7 @@ const expectedTemplate2 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -129,8 +129,8 @@ const expectedTemplate2 = `
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 			</button>
 		</div>
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			Made in <strong class="bmd-antialiased">blocks.md</strong>
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			Made in <strong class="bmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
 </footer>
@@ -188,7 +188,7 @@ const expectedTemplate3 = `
 	<div class="bmd-main-container">
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 				<div class="bmd-specific-fs-14">তে তৈরি</div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="লোড হচ্ছে"></div>
@@ -210,8 +210,8 @@ const expectedTemplate3 = `
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 			</button>
 		</div>
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			<strong class="bmd-antialiased">blocks.md</strong> তে তৈরি
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			<strong class="bmd-antialiased">Forms.md</strong> তে তৈরি
 		</a>
 	</div>
 </footer>
@@ -256,7 +256,7 @@ const expectedTemplate4 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -315,7 +315,7 @@ const expectedTemplate5 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -364,7 +364,7 @@ const expectedTemplate6 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -407,7 +407,7 @@ const expectedTemplate7 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -425,8 +425,8 @@ const expectedTemplate7 = `
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 			</button>
 		</div>
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			Made in <strong class="bmd-antialiased">blocks.md</strong>
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			Made in <strong class="bmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
 </footer>
@@ -463,7 +463,7 @@ const expectedTemplate8 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -472,8 +472,8 @@ const expectedTemplate8 = `
 
 <footer class="bmd-footer">
 	<div class="bmd-footer-inner">
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			Made in <strong class="bmd-antialiased">blocks.md</strong>
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			Made in <strong class="bmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
 </footer>
@@ -512,7 +512,7 @@ const expectedTemplate9 = `
 		<div class="bmd-loader-container">
 			<div class="bmd-text-center bmd-mb-3">
 				<div class="bmd-specific-fs-14">Made in</div>
-				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>blocks.md</strong></div>
+				<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>
 			</div>
 			<div class="bmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
@@ -521,8 +521,8 @@ const expectedTemplate9 = `
 
 <footer class="bmd-footer">
 	<div class="bmd-footer-inner">
-		<a href="https://blocks.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
-			Made in <strong class="bmd-antialiased">blocks.md</strong>
+		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+			Made in <strong class="bmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
 </footer>
@@ -549,7 +549,7 @@ test("Case 9 (no footer slide controls with page setting)", () => {
 	});
 });
 
-// Case 10 (no blocksmd branding)
+// Case 10 (no Forms.md branding)
 
 const expectedTemplate10 = `
 <div class="bmd-backdrop"></div>
@@ -580,10 +580,10 @@ const expectedTemplate10 = `
 </footer>
 `;
 
-test("Case 10 (no blocksmd branding)", () => {
+test("Case 10 (no Forms.md branding)", () => {
 	const result10 = createBodyTemplate({
-		"blocksmd-branding": "hide",
 		"color-scheme": "light",
+		"formsmd-branding": "hide",
 		"header": "hide",
 		"localization": "en",
 		"page": "slides",
@@ -593,9 +593,9 @@ test("Case 10 (no blocksmd branding)", () => {
 		beautify(expectedTemplate10, { format: "html" }),
 	);
 	expect(result10.settings).toMatchObject({
-		"blocksmd-branding": "hide",
 		"color-scheme": "light",
 		"footer-render": true,
+		"formsmd-branding": "hide",
 		"header-render": false,
 		"localization": "en",
 		"page": "slides",

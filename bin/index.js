@@ -88,7 +88,7 @@ fs.readdir(inputDir, function (err, files) {
 
 				// Escape all backticks from template and prepare it for the output
 				template = template.replace(/`/g, "\\`");
-				template = ["`", template, "`.blocksmd();"].join("\n");
+				template = ["`", template, "`.formsmd();"].join("\n");
 
 				// Create the files in the output directory
 				fs.writeFileSync(`${outputDir}/${route}.html`, htmlContent);
@@ -100,9 +100,9 @@ fs.readdir(inputDir, function (err, files) {
 	});
 });
 
-// Copy the blocksmd CSS and JS files
+// Copy the Forms.md CSS and JS files
 try {
-	fs.copySync(path.join(__dirname, "..", "dist"), `${outputDir}/blocksmd`);
+	fs.copySync(path.join(__dirname, "..", "dist"), `${outputDir}/formsmd`);
 } catch (err) {
 	console.error(err);
 }

@@ -302,10 +302,6 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid CSS for background-image",
 		},
-		"blocksmd-branding": {
-			pattern: /^(hide|show)$/,
-			accepted: "hide || show",
-		},
 		"brand": {
 			pattern: /^!\[.*\]\(.*\)$/s,
 			accepted:
@@ -371,17 +367,21 @@ function parseSettings(template) {
 			pattern: /^(sm|lg)$/,
 			accepted: "sm || lg",
 		},
+		"footer": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
 		"form-delimiter": {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
+		"formsmd-branding": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
 		"form-style": {
 			pattern: /^classic$/,
 			accepted: "classic",
-		},
-		"footer": {
-			pattern: /^(hide|show)$/,
-			accepted: "hide || show",
 		},
 		"get-format": {
 			pattern: /^(json|csv|tsv)$/,

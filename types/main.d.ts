@@ -1,4 +1,4 @@
-export class blocksmd {
+export class Formsmd {
 	/**
 	 * Google reCAPTCHA attributes.
 	 *
@@ -21,11 +21,11 @@ export class blocksmd {
 	 * Options for the page or form.
 	 *
 	 * @typedef {Object} OptionsType
-	 * @property {"hide"|"show"} [blocksmdBranding] Controls visibility of the blocks.md branding.
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
 	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
 	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
+	 * @property {"hide"|"show"} [formsmdBranding] Controls visibility of the Forms.md branding.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
@@ -58,10 +58,6 @@ export class blocksmd {
 		container: Document | HTMLElement | Element,
 		options: {
 			/**
-			 * Controls visibility of the blocks.md branding.
-			 */
-			blocksmdBranding?: "hide" | "show";
-			/**
 			 * The default or initial color scheme of the page. Default is `"light"`.
 			 */
 			colorScheme?: "light" | "dark";
@@ -77,6 +73,10 @@ export class blocksmd {
 			 * Controls visibility of the footer.
 			 */
 			footer?: "hide" | "show";
+			/**
+			 * Controls visibility of the Forms.md branding.
+			 */
+			formsmdBranding?: "hide" | "show";
 			/**
 			 * Headers for GET requests.
 			 */
@@ -207,11 +207,11 @@ export class blocksmd {
 		},
 	);
 	options: {
-		blocksmdBranding: string;
 		colorScheme: string;
 		errorFieldKey: string;
 		errorMessageKey: string;
 		footer: string;
+		formsmdBranding: string;
 		getHeaders: {};
 		id: string;
 		isFullPage: boolean;

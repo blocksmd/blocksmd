@@ -33,8 +33,8 @@
 		/>
 		<meta property="og:image" content="{{ settings['meta-image'] }}" />
 
-		<!-- blocks.md JS -->
-		<script src="./blocksmd/js/blocksmd.bundle.min.js"></script>
+		<!-- Forms.md JS -->
+		<script src="./formsmd/js/formsmd.bundle.min.js"></script>
 
 		<!-- Toggle color scheme -->
 		<script type="text/javascript">
@@ -43,14 +43,14 @@
 					"data-bmd-color-scheme-toggle",
 				) === "show"
 			)
-				blocksmd.setPreferredColorScheme();
+				formsmd.setPreferredColorScheme();
 		</script>
 
-		<!-- blocks.md CSS -->
+		<!-- Forms.md CSS -->
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="./blocksmd/css/blocksmd{% if settings.dir == 'rtl' %}.rtl{% endif %}.min.css"
+			href="./formsmd/css/formsmd{% if settings.dir == 'rtl' %}.rtl{% endif %}.min.css"
 		/>
 	</head>
 	<body class="bmd-body">
@@ -69,8 +69,8 @@
 
 		<!-- Content -->
 		<script type="text/javascript">
-			String.prototype.blocksmd = function () {
-				const instance = new blocksmd(this, document, { isFullPage: true });
+			String.prototype.formsmd = function () {
+				const instance = new Formsmd(this, document, { isFullPage: true });
 				instance.init();
 			};
 		</script>

@@ -1,5 +1,5 @@
 /*!
- * blocks.md
+ * Forms.md
  * @author Tahmid Khan Nafee <tahmid.hm.dev@gmail.com>
  * @license BUSL-1.1
  * Copyright (c) 2024 Tahmid Khan Nafee
@@ -24,13 +24,13 @@ const hljs = require("highlight.js/lib/common");
 const { marked } = require("marked");
 var nunjucks = require("nunjucks");
 
-class blocksmd {
+class Formsmd {
 	options = {
-		blocksmdBranding: "",
 		colorScheme: "light",
 		errorFieldKey: "field",
 		errorMessageKey: "message",
 		footer: "",
+		formsmdBranding: "",
 		getHeaders: {},
 		id: "",
 		isFullPage: false,
@@ -91,11 +91,11 @@ class blocksmd {
 	 * Options for the page or form.
 	 *
 	 * @typedef {Object} OptionsType
-	 * @property {"hide"|"show"} [blocksmdBranding] Controls visibility of the blocks.md branding.
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {string} [errorFieldKey] The key used to identify the field in error objects. Default is `"field"`.
 	 * @property {string} [errorMessageKey] The key used to identify the error message in error objects. Default is `"message"`.
 	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
+	 * @property {"hide"|"show"} [formsmdBranding] Controls visibility of the Forms.md branding.
 	 * @property {Object} [getHeaders] Headers for GET requests.
 	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
@@ -129,13 +129,6 @@ class blocksmd {
 
 		// Set the options for use
 		if (options) {
-			// blocks.md branding
-			if (
-				options.blocksmdBranding === "hide" ||
-				options.blocksmdBranding === "show"
-			) {
-				this.options.blocksmdBranding = options.blocksmdBranding;
-			}
 			// Color Scheme
 			if (options.colorScheme === "light" || options.colorScheme === "dark") {
 				this.options.colorScheme = options.colorScheme;
@@ -157,6 +150,13 @@ class blocksmd {
 			// Footer
 			if (options.footer === "hide" || options.footer === "show") {
 				this.options.footer = options.footer;
+			}
+			// Forms.md branding
+			if (
+				options.formsmdBranding === "hide" ||
+				options.formsmdBranding === "show"
+			) {
+				this.options.formsmdBranding = options.formsmdBranding;
 			}
 			// GET headers
 			if (
@@ -412,9 +412,9 @@ class blocksmd {
 			`#! color = ${theme.color} || ${themeAltScheme.color}`,
 		);
 
-		if (this.options.blocksmdBranding !== undefined) {
+		if (this.options.formsmdBranding !== undefined) {
 			templateSettingsFromOptions.push(
-				`#! blocksmd-branding = ${this.options.blocksmdBranding}`,
+				`#! formsmd-branding = ${this.options.formsmdBranding}`,
 			);
 		}
 		if (this.options.footer !== undefined) {
@@ -522,10 +522,10 @@ class blocksmd {
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const localStorageKey =
 			rootElem.getAttribute("data-bmd-color-scheme-scope") === "isolate"
-				? `blocksmd:${instance.getIdPrefix()}${window.location.hostname}${
+				? `formsmd:${instance.getIdPrefix()}${window.location.hostname}${
 						window.location.pathname
 					}color-scheme`
-				: "blocksmd:color-scheme";
+				: "formsmd:color-scheme";
 		const preferredColorScheme = localStorage.getItem(localStorageKey);
 		if (preferredColorScheme) {
 			rootElem.setAttribute("data-bmd-color-scheme", preferredColorScheme);
@@ -546,10 +546,10 @@ class blocksmd {
 		const rootElem = instance.container.querySelector(".bmd-root");
 		const localStorageKey =
 			instance.state.settings["color-scheme-scope"] === "isolate"
-				? `blocksmd:${instance.getIdPrefix()}${window.location.hostname}${
+				? `formsmd:${instance.getIdPrefix()}${window.location.hostname}${
 						window.location.pathname
 					}color-scheme`
-				: "blocksmd:color-scheme";
+				: "formsmd:color-scheme";
 		const currentColorScheme = rootElem.getAttribute("data-bmd-color-scheme");
 		if (currentColorScheme === "light") {
 			rootElem.setAttribute("data-bmd-color-scheme", "dark");
@@ -585,7 +585,7 @@ class blocksmd {
 	getOrCreateResponseId = () => {
 		const instance = this;
 
-		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+		const localStorageKey = `formsmd:${instance.getIdPrefix()}${
 			window.location.hostname
 		}${window.location.pathname}response-id`;
 		let responseId = localStorage.getItem(localStorageKey);
@@ -602,7 +602,7 @@ class blocksmd {
 	removeResponseId = () => {
 		const instance = this;
 
-		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+		const localStorageKey = `formsmd:${instance.getIdPrefix()}${
 			window.location.hostname
 		}${window.location.pathname}response-id`;
 		localStorage.removeItem(localStorageKey);
@@ -617,7 +617,7 @@ class blocksmd {
 	saveFieldValue = (name, value) => {
 		const instance = this;
 
-		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+		const localStorageKey = `formsmd:${instance.getIdPrefix()}${
 			window.location.hostname
 		}${window.location.pathname}form-data`;
 		let savedFormData = localStorage.getItem(localStorageKey) || "{}";
@@ -633,7 +633,7 @@ class blocksmd {
 	removeSavedFormData = () => {
 		const instance = this;
 
-		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+		const localStorageKey = `formsmd:${instance.getIdPrefix()}${
 			window.location.hostname
 		}${window.location.pathname}form-data`;
 		localStorage.removeItem(localStorageKey);
@@ -1052,7 +1052,7 @@ class blocksmd {
 	setSavedFormData = () => {
 		const instance = this;
 
-		const localStorageKey = `blocksmd:${instance.getIdPrefix()}${
+		const localStorageKey = `formsmd:${instance.getIdPrefix()}${
 			window.location.hostname
 		}${window.location.pathname}form-data`;
 		const savedFormData = localStorage.getItem(localStorageKey);
@@ -2938,14 +2938,14 @@ class blocksmd {
 
 			// Swap out the main CSS stylesheet in case of RTL
 			const mainStylesheetLink = document.querySelector(
-				'link[href$="blocksmd.min.css"]',
+				'link[href$="formsmd.min.css"]',
 			);
 			if (instance.state.settings.dir === "rtl" && mainStylesheetLink) {
 				mainStylesheetLink.setAttribute(
 					"href",
 					mainStylesheetLink
 						.getAttribute("href")
-						.replace("blocksmd.min.css", "blocksmd.rtl.min.css"),
+						.replace("formsmd.min.css", "formsmd.rtl.min.css"),
 				);
 			}
 		}
@@ -3186,4 +3186,4 @@ class blocksmd {
 	};
 }
 
-exports.blocksmd = blocksmd;
+exports.Formsmd = Formsmd;

@@ -88,15 +88,14 @@ export class Composer {
 	 *
 	 * @typedef {Object} SettingsType
 	 * @property {"all-slides"} [autofocus] If set to `"all-slides"`, when a new slide becomes active (including the first slide on page load), the very first form field will be auto-focused.
-	 * @property {string} [accent] The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {string} [accentForeground] The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {string} [backdropOpacity] Sets an overlay of the `background-color` on top of the background image. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {string} [backgroundColor] The `background-color` of the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {string} [backgroundImage] The `background-image` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
-	 * @property {"hide"|"show"} [blocksmdBranding] Controls visibility of the blocks.md branding.
-	 * @property {string} [brand] An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [accent] The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [accentForeground] The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [backdropOpacity] Sets an overlay of the `background-color` on top of the background image. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [backgroundColor] The `background-color` of the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [backgroundImage] The `background-image` of the page. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [brand] An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of the slide CTA buttons.
-	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+	 * @property {string} [color] The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {"domain-wide"|"isolate"} [colorSchemeScope] Determines how color scheme preference is saved and applied. Default is `"domain-wide"`.
 	 * @property {"show"} [colorSchemeToggle] If set to `"show"`, a toggle button will be available in the footer.
@@ -109,11 +108,12 @@ export class Composer {
 	 * @property {string} [fontImportUrl] URL to import custom fonts (must be valid CSS for the `@import` property).
 	 * @property {"sm"|"lg"} [fontSize] Makes the `font-size` of everything on the page smaller or larger.
 	 * @property {string} [formDelimiter] Used to separate parameters when creating form fields. Default is `"|"`.
+	 * @property {"hide"|"show"} [formsmdBranding] Controls visibility of the Forms.md branding.
 	 * @property {"classic"} [formStyle] If set to `"classic"`, the form fields will have a classic appearance.
 	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
-	 * @property {"json"|"csv"|"tsv"} [getFormat] The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
-	 * @property {string} [getObjectsName] Name used for objects when reading data. Default is `"objects"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
-	 * @property {string} [getUrl] URL for reading data. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
+	 * @property {"json"|"csv"|"tsv"} [getFormat] The format for reading data. Default is `"json"`. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
+	 * @property {string} [getObjectsName] Name used for objects when reading data. Default is `"objects"`. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
+	 * @property {string} [getUrl] URL for reading data. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
 	 * @property {"hide"|"show"|"align"} [header] Controls header visibility and alignment.
 	 * @property {"anchored"} [headings] If set to `"anchored"`, all headings will contain an anchor link.
 	 * @property {string} [id] Identifier for the page or form.
@@ -149,31 +149,27 @@ export class Composer {
 		 */
 		autofocus?: "all-slides";
 		/**
-		 * The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * The primary color (must be HTML name, hex code, or RGB) used on buttons, form fields, etc. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		accent?: string;
 		/**
-		 * The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * The text color (must be HTML name, hex code, or RGB) used on `accent` background, for example, the text on buttons. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		accentForeground?: string;
 		/**
-		 * Sets an overlay of the `background-color` on top of the background image. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * Sets an overlay of the `background-color` on top of the background image. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		backdropOpacity?: string;
 		/**
-		 * The `background-color` of the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * The `background-color` of the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		backgroundColor?: string;
 		/**
-		 * The `background-image` of the page. [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * The `background-image` of the page. [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		backgroundImage?: string;
 		/**
-		 * Controls visibility of the blocks.md branding.
-		 */
-		blocksmdBranding?: "hide" | "show";
-		/**
-		 * An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * An image of your logo added to the header of the page in the top-left corner (must be valid Markdown image). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		brand?: string;
 		/**
@@ -181,7 +177,7 @@ export class Composer {
 		 */
 		buttonAlignment?: "center" | "end" | "stretch";
 		/**
-		 * The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://blocksmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
+		 * The `color` of the text on the page (must be HTML name, hex code, or RGB). [Supports up to two values](https://formsmd.gitbook.io/docs/settings#different-values-for-light-mode-and-dark-mode).
 		 */
 		color?: string;
 		/**
@@ -233,6 +229,10 @@ export class Composer {
 		 */
 		formDelimiter?: string;
 		/**
+		 * Controls visibility of the Forms.md branding.
+		 */
+		formsmdBranding?: "hide" | "show";
+		/**
 		 * If set to `"classic"`, the form fields will have a classic appearance.
 		 */
 		formStyle?: "classic";
@@ -241,15 +241,15 @@ export class Composer {
 		 */
 		footer?: "hide" | "show";
 		/**
-		 * The format for reading data. Default is `"json"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
+		 * The format for reading data. Default is `"json"`. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
 		 */
 		getFormat?: "json" | "csv" | "tsv";
 		/**
-		 * Name used for objects when reading data. Default is `"objects"`. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
+		 * Name used for objects when reading data. Default is `"objects"`. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
 		 */
 		getObjectsName?: string;
 		/**
-		 * URL for reading data. [Read docs](https://blocksmd.gitbook.io/docs/set-and-read-data).
+		 * URL for reading data. [Read docs](https://formsmd.gitbook.io/docs/set-and-read-data).
 		 */
 		getUrl?: string;
 		/**
