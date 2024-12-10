@@ -11,7 +11,6 @@ const template1 = `
 #! backdrop-opacity = 10%
 #! background-color = white || black
 #! background-image = https://example.com/bg.jpg
-#! blocksmd-branding = hide
 #! brand = ![Logo](https://example.com/logo.png "Logo")
 #! button-alignment = end
 #! color = black || white
@@ -39,7 +38,6 @@ const expectedSettings1 = {
 	"background-color": "255, 255, 255",
 	"background-color-alt-scheme": "0, 0, 0",
 	"background-image": "https://example.com/bg.jpg",
-	"blocksmd-branding": "hide",
 	"brand": '![Logo](https://example.com/logo.png "Logo")',
 	"button-alignment": "end",
 	"color": "0, 0, 0",
@@ -66,9 +64,10 @@ const template2 = `
 #! font-family = Inter
 #! font-import-url = https://example.com/font/
 #! font-size = lg
-#! form-delimiter = \\n
-#! form-style = classic
 #! footer = hide
+#! form-delimiter = \\n
+#! formsmd-branding = hide
+#! form-style = classic
 #! get-format = json
 #! get-objects-name = examples
 #! get-url = https://example.com/api/examples/
@@ -99,9 +98,10 @@ const expectedSettings2 = {
 	"font-family": "Inter",
 	"font-import-url": "https://example.com/font/",
 	"font-size": "lg",
-	"form-delimiter": "\n",
-	"form-style": "classic",
 	"footer": "hide",
+	"form-delimiter": "\n",
+	"formsmd-branding": "hide",
+	"form-style": "classic",
 	"get-format": "json",
 	"get-objects-name": "examples",
 	"get-url": "https://example.com/api/examples/",

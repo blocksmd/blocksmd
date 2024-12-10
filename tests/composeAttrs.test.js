@@ -11,7 +11,7 @@ test("Case 1", () => {
 			classNames: ["col-6", "xs:col-6", "text-accent"],
 			attrs: [
 				{ name: "aria-label", value: "Label" },
-				{ name: "data-bmd-attr", value: "some value" },
+				{ name: "data-fmd-attr", value: "some value" },
 			],
 		}),
 	).toMatchObject([
@@ -20,7 +20,7 @@ test("Case 1", () => {
 		".xs:col-6",
 		".text-accent",
 		'aria-label="Label"',
-		'data-bmd-attr="some value"',
+		'data-fmd-attr="some value"',
 	]);
 });
 

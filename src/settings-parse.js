@@ -241,7 +241,7 @@ function getDefaultSettings() {
 	return {
 		"color-scheme": "light",
 		"color-scheme-scope": "domain-wide",
-		"css-prefix": "bmd-",
+		"css-prefix": "fmd-",
 		"dir": "ltr",
 		"form-delimiter": "|",
 		"get-format": "json",
@@ -301,10 +301,6 @@ function parseSettings(template) {
 		"background-image-alt-scheme": {
 			pattern: /^.*$/,
 			accepted: "valid CSS for background-image",
-		},
-		"blocksmd-branding": {
-			pattern: /^(hide|show)$/,
-			accepted: "hide || show",
 		},
 		"brand": {
 			pattern: /^!\[.*\]\(.*\)$/s,
@@ -371,17 +367,21 @@ function parseSettings(template) {
 			pattern: /^(sm|lg)$/,
 			accepted: "sm || lg",
 		},
+		"footer": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
 		"form-delimiter": {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
+		"formsmd-branding": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
 		"form-style": {
 			pattern: /^classic$/,
 			accepted: "classic",
-		},
-		"footer": {
-			pattern: /^(hide|show)$/,
-			accepted: "hide || show",
 		},
 		"get-format": {
 			pattern: /^(json|csv|tsv)$/,

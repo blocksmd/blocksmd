@@ -6,7 +6,7 @@ test("Case 1", () => {
 	expect(
 		formFieldSetup(
 			true,
-			'id="some-id" class="bmd-col-4 bmd-xs:col-6" aria-label="Label" data-title="Some title"',
+			'id="some-id" class="fmd-col-4 fmd-xs:col-6" aria-label="Label" data-title="Some title"',
 			`
 				| question = What is your name?
 				| description = Please enter your full name.
@@ -21,10 +21,10 @@ test("Case 1", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
+			'<div id="some-id" class="fmd-col-4 fmd-xs:col-6 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
-				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',
+				'What is your <span class="fmd-text-nowrap" aria-hidden="true">name?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">name? (required)</span>',
 			description: "Please enter your full name.",
 			fieldsize: "sm",
 			subfield: true,
@@ -53,10 +53,10 @@ test("Case 2 (no parsed attrbiutes, less params, weird formatting)", () => {
 			false,
 		),
 	).toMatchObject({
-		startTag: '<div class="bmd-form-field bmd-form-field-sm">',
+		startTag: '<div class="fmd-form-field fmd-form-field-sm">',
 		validParams: {
 			question:
-				'<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>',
+				'<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>',
 			fieldsize: "sm",
 		},
 		restParams: {
@@ -70,7 +70,7 @@ test("Case 3 (form delimiter set to new line)", () => {
 	expect(
 		formFieldSetup(
 			false,
-			'id="some-id" class="bmd-col-4 bmd-xs:col-6" aria-label="Label" data-title="Some title"',
+			'id="some-id" class="fmd-col-4 fmd-xs:col-6" aria-label="Label" data-title="Some title"',
 			`
 				question = What is your name?
 				description = Please enter your full name.
@@ -85,7 +85,7 @@ test("Case 3 (form delimiter set to new line)", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
+			'<div id="some-id" class="fmd-col-4 fmd-xs:col-6 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question: "What is your name?",
 			description: "Please enter your full name.",
@@ -103,7 +103,7 @@ test("Case 4", () => {
 	expect(
 		formFieldSetup(
 			false,
-			'id="some-id" class="bmd-col-8"',
+			'id="some-id" class="fmd-col-8"',
 			"question = Address Line 1 | subfield",
 			"|",
 			"en",
@@ -111,7 +111,7 @@ test("Case 4", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<div id="some-id" class="bmd-col-8 bmd-form-field bmd-form-field-classic-labels">',
+			'<div id="some-id" class="fmd-col-8 fmd-form-field fmd-form-field-classic-labels">',
 		validParams: {
 			question: "Address Line 1",
 			subfield: true,
@@ -124,7 +124,7 @@ test("Case 5 (use fieldset)", () => {
 	expect(
 		formFieldSetup(
 			true,
-			'id="some-id" class="bmd-col-4 bmd-xs:col-6" aria-label="Label" data-title="Some title"',
+			'id="some-id" class="fmd-col-4 fmd-xs:col-6" aria-label="Label" data-title="Some title"',
 			`
 				| question = What is your name?
 				| description = Please enter your full name.
@@ -139,10 +139,10 @@ test("Case 5 (use fieldset)", () => {
 		),
 	).toMatchObject({
 		startTag:
-			'<fieldset id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
+			'<fieldset id="some-id" class="fmd-col-4 fmd-xs:col-6 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">',
 		validParams: {
 			question:
-				'What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>',
+				'What is your <span class="fmd-text-nowrap" aria-hidden="true">name?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">name? (required)</span>',
 			description: "Please enter your full name.",
 			fieldsize: "sm",
 			subfield: true,

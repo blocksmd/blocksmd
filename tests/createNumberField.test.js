@@ -6,19 +6,19 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
-	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
+<div id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<label class="fmd-form-question" for="id_number">
+		What is your favorite <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter the number you like the best.
 	</p>
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		<input
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type in your favorite number here..."
 			required
 			value="7"
@@ -26,7 +26,7 @@ const expectedTemplate1 = `
 			max="100"
 			step="1"
 			disabled
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
 	</div>
 </div>
@@ -38,7 +38,7 @@ test("Case 1", () => {
 			createNumberField(
 				"number",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your favorite number?
 					| description = Please enter the number you like the best.
@@ -64,25 +64,25 @@ test("Case 1", () => {
 // Case 2 (unit and unit end)
 
 const expectedTemplate2 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="id_number">
+		What is your favorite <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter the number you like the best.
 	</p>
-	<div class="bmd-input-group">
-		<span id="id_number-unit" class="bmd-input-group-text">$</span>
+	<div class="fmd-input-group">
+		<span id="id_number-unit" class="fmd-input-group-text">$</span>
 		<input
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type a number here..."
 			required
 			aria-describedby="id_number-unit id_number-unit-end"
 		>
-		<span id="id_number-unit-end" class="bmd-input-group-text">kg</span>
+		<span id="id_number-unit-end" class="fmd-input-group-text">kg</span>
 	</div>
 </div>
 `;
@@ -93,7 +93,7 @@ test("Case 2 (unit and unit end)", () => {
 			createNumberField(
 				"number",
 				true,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				`
 					| question = What is your favorite number?
 					| description = Please enter the number you like the best.
@@ -112,20 +112,20 @@ test("Case 2 (unit and unit end)", () => {
 // Case 3 (unit, not required)
 
 const expectedTemplate3 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_number">
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="id_number">
 		What is your favorite number?
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter the number you like the best.
 	</p>
-	<div class="bmd-input-group">
-		<span id="id_number-unit" class="bmd-input-group-text">$</span>
+	<div class="fmd-input-group">
+		<span id="id_number-unit" class="fmd-input-group-text">$</span>
 		<input
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type a number here..."
 			aria-describedby="id_number-unit"
 		>
@@ -139,7 +139,7 @@ test("Case 3 (unit, not required)", () => {
 			createNumberField(
 				"number",
 				false,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				`
 					| question = What is your favorite number?
 					| description = Please enter the number you like the best.
@@ -157,24 +157,24 @@ test("Case 3 (unit, not required)", () => {
 // Case 4 (unit end, different id and localization)
 
 const expectedTemplate4 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="form1:id_number">
-		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (প্রয়োজন)</span>
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="form1:id_number">
+		What is your favorite <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (প্রয়োজন)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter the number you like the best.
 	</p>
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		<input
 			name="number"
 			id="form1:id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="এখানে একটি সংখ্যা টাইপ করুন..."
 			required
 			aria-describedby="form1:id_number-unit-end"
 		>
-		<span id="form1:id_number-unit-end" class="bmd-input-group-text">kg</span>
+		<span id="form1:id_number-unit-end" class="fmd-input-group-text">kg</span>
 	</div>
 </div>
 `;
@@ -185,7 +185,7 @@ test("Case 4 (unit end, different id and localization)", () => {
 			createNumberField(
 				"number",
 				true,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				`
 					| question = What is your favorite number?
 					| description = Please enter the number you like the best.
@@ -203,19 +203,19 @@ test("Case 4 (unit end, different id and localization)", () => {
 // Case 5 (invalid value, min, max, and step)
 
 const expectedTemplate5 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_number">
-		What is your favorite <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="id_number">
+		What is your favorite <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter the number you like the best.
 	</p>
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		<input
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type a number here..."
 			required
 		>
@@ -250,17 +250,17 @@ test("Case 5 (invalid value, min, max, and step)", () => {
 // Case 6 (different form delimiter)
 
 const expectedTemplate6 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_amount">
-		What is the <span class="bmd-text-nowrap" aria-hidden="true">amount?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">amount? (required)</span>
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="id_amount">
+		What is the <span class="fmd-text-nowrap" aria-hidden="true">amount?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">amount? (required)</span>
 	</label>
-	<div class="bmd-input-group">
-		<span id="id_amount-unit" class="bmd-input-group-text">$</span>
+	<div class="fmd-input-group">
+		<span id="id_amount-unit" class="fmd-input-group-text">$</span>
 		<input
 			name="amount"
 			id="id_amount"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type a number here..."
 			required
 			value="5.0"
@@ -300,16 +300,16 @@ test("Case 6 (different form delimiter)", () => {
 // Case 7 (no params)
 
 const expectedTemplate7 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_number">
-		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="id_number">
+		<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>
 	</label>
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		<input
 			name="number"
 			id="id_number"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="Type a number here..."
 			required
 		>
@@ -323,7 +323,7 @@ test("Case 7 (no params)", () => {
 			createNumberField(
 				"number",
 				true,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				"",
 				"|",
 				"",

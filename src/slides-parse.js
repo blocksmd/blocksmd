@@ -10,30 +10,30 @@ const slideTemplate = `
 <form
 	method="POST"
 	action="javascript:void(0);"
-	class="bmd-slide{% if isFirstSlide %} bmd-first-slide{% endif %}"
-	{% if jump and not isFirstSlide %}data-bmd-jump="{{ jump }}"{% endif %}
-	{% if pageProgress %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
-	{% if disablePrevBtn %}data-bmd-disable-prev-btn{% endif %}
-	{% if post %}data-bmd-post{% endif %}
+	class="fmd-slide{% if isFirstSlide %} fmd-first-slide{% endif %}"
+	{% if jump and not isFirstSlide %}data-fmd-jump="{{ jump }}"{% endif %}
+	{% if pageProgress %}data-fmd-page-progress="{{ pageProgress }}"{% endif %}
+	{% if disablePrevBtn %}data-fmd-disable-prev-btn{% endif %}
+	{% if post %}data-fmd-post{% endif %}
 >
-	<div class="bmd-grid">
+	<div class="fmd-grid">
 		{{ content }}
 		{% if startBtn %}
-		<div class="bmd-next-controls bmd-d-flex">
-			<button type="submit" class="bmd-submit-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+		<div class="fmd-next-controls fmd-d-flex">
+			<button type="submit" class="fmd-submit-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ startBtn }}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
 			</button>
 		</div>
 		{% else %}
-		<div class="bmd-next-controls bmd-d-flex">
-			<button type="submit" class="bmd-submit-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+		<div class="fmd-next-controls fmd-d-flex">
+			<button type="submit" class="fmd-submit-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{% if btnSettings.submitBtnText != "" %}
 				{{ btnSettings.submitBtnText }}
 				{% else %}
 				{{ translations.formSubmitBtn }}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon fmd-ms-2" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 				{% endif %}
 			</button>
 		</div>
@@ -42,27 +42,27 @@ const slideTemplate = `
 </form>
 {% else %}
 <div
-	class="bmd-slide{% if isFirstSlide %} bmd-first-slide{% endif %}"
-	{% if jump and not isFirstSlide %}data-bmd-jump="{{ jump }}"{% endif %}
-	{% if pageProgress %}data-bmd-page-progress="{{ pageProgress }}"{% endif %}
-	{% if disablePrevBtn %}data-bmd-disable-prev-btn{% endif %}
+	class="fmd-slide{% if isFirstSlide %} fmd-first-slide{% endif %}"
+	{% if jump and not isFirstSlide %}data-fmd-jump="{{ jump }}"{% endif %}
+	{% if pageProgress %}data-fmd-page-progress="{{ pageProgress }}"{% endif %}
+	{% if disablePrevBtn %}data-fmd-disable-prev-btn{% endif %}
 >
-	<div class="bmd-grid">
+	<div class="fmd-grid">
 		{{ content }}
 		{% if startBtn %}
-		<div class="bmd-next-controls bmd-d-flex">
-			<button type="button" class="bmd-next-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+		<div class="fmd-next-controls fmd-d-flex">
+			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ startBtn }}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
 			</button>
 		</div>
 		{% else %}
-		<div class="bmd-next-controls bmd-d-flex">
-			<button type="button" class="bmd-next-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+		<div class="fmd-next-controls fmd-d-flex">
+			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ translations.nextBtn }}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="bmd-icon bmd-ms-2 bmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-ltr" aria-hidden="true" focusable="false"><path d="M47 239c-9.4 9.4-9.4 24.6 0 33.9L207 433c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9L97.9 256 241 113c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0L47 239z"/></svg>
 			</button>
 		</div>
 		{% endif %}
@@ -73,16 +73,16 @@ const slideTemplate = `
 
 const endSlideTemplate = `
 <div
-	class="bmd-slide bmd-end-slide"
-	{% if redirect %}data-bmd-redirect="{{ redirect }}"{% endif %}
+	class="fmd-slide fmd-end-slide"
+	{% if redirect %}data-fmd-redirect="{{ redirect }}"{% endif %}
 >
-	<div class="bmd-grid">
+	<div class="fmd-grid">
 		{{ content }}
 		{% if btnSettings.showRestartBtn %}
-		<div class="bmd-next-controls bmd-d-flex bmd-justify-content-center">
-			<button type="button" class="bmd-restart-btn bmd-btn bmd-btn-accent bmd-d-flex bmd-align-items-center bmd-justify-content-center">
+		<div class="fmd-next-controls fmd-d-flex fmd-justify-content-center">
+			<button type="button" class="fmd-restart-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ translations.restartBtn }}
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-ms-2" aria-hidden="true" focusable="false"><path d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z"/></svg>
 			</button>
 		</div>
 		{% endif %}
@@ -314,15 +314,15 @@ function parseSlides(
 		endSlide = nunjucks.renderString(endSlideTemplate, {
 			content: isForm
 				? [
-						`<div class="bmd-text-center">`,
-						`	<h1 class="bmd-h2 bmd-mb-2">${getTranslation(localization, "form-submitted-title")}</h1>`,
-						`	<p class="bmd-fs-lead bmd-mb-1">${getTranslation(localization, "form-submitted-subtitle")}</p>`,
+						`<div class="fmd-text-center">`,
+						`	<h1 class="fmd-h2 fmd-mb-2">${getTranslation(localization, "form-submitted-title")}</h1>`,
+						`	<p class="fmd-fs-lead fmd-mb-1">${getTranslation(localization, "form-submitted-subtitle")}</p>`,
 						`</div>\n`,
 					].join("\n")
 				: [
-						`<div class="bmd-text-center">`,
-						`	<h1 class="bmd-h2 bmd-mb-2">${getTranslation(localization, "end-slide-title")}</h1>`,
-						`	<p class="bmd-fs-lead bmd-mb-1">${getTranslation(localization, "end-slide-subtitle")}</p>`,
+						`<div class="fmd-text-center">`,
+						`	<h1 class="fmd-h2 fmd-mb-2">${getTranslation(localization, "end-slide-title")}</h1>`,
+						`	<p class="fmd-fs-lead fmd-mb-1">${getTranslation(localization, "end-slide-subtitle")}</p>`,
 						`</div>\n`,
 					].join("\n"),
 			redirect: "",

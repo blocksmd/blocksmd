@@ -30,7 +30,7 @@ const { marked } = require("marked");
  */
 function getMarkedSettings(options) {
 	let markedSettings = {
-		"css-prefix": "bmd-",
+		"css-prefix": "fmd-",
 		"form-delimiter": "|",
 		"id": "",
 		"localization": "en",
@@ -76,16 +76,16 @@ renderer.blockquote = function (quote) {
 renderer.checkbox = function (checked) {
 	const markedSettings = getMarkedSettings(this.options);
 	if (checked) {
-		return `<div role="checkbox" class="bmd-list-check bmd-list-checked" aria-label="${getTranslation(markedSettings.localization, "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
+		return `<div role="checkbox" class="fmd-list-check fmd-list-checked" aria-label="${getTranslation(markedSettings.localization, "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
 	} else {
-		return `<div role="checkbox" class="bmd-list-check" aria-label="${getTranslation(markedSettings.localization, "list-check")}" aria-checked="false"></div>`;
+		return `<div role="checkbox" class="fmd-list-check" aria-label="${getTranslation(markedSettings.localization, "list-check")}" aria-checked="false"></div>`;
 	}
 };
 
 renderer.code = function (code, infostring, escaped) {
 	const markedSettings = getMarkedSettings(this.options);
 	infostring = infostring || "";
-	let startTag = '<div class="bmd-code-wrapper">';
+	let startTag = '<div class="fmd-code-wrapper">';
 
 	// Parse and add attributes to the element (if they are provided)
 	// Here, attributes are provided in the infostring before or after the lang
@@ -102,7 +102,7 @@ renderer.code = function (code, infostring, escaped) {
 		infostring = infostring.trim();
 		parsedAttrs = parseElemAttrs(attrs, markedSettings["css-prefix"]);
 		startTag = `<div ${parsedAttrs}>`;
-		startTag = addReservedClass(startTag, "bmd-code-wrapper");
+		startTag = addReservedClass(startTag, "fmd-code-wrapper");
 	}
 
 	// Get language and format code
@@ -116,7 +116,7 @@ renderer.code = function (code, infostring, escaped) {
 	// Mermaid integration
 	if (lang.toLowerCase() === "mermaid") {
 		startTag = parsedAttrs ? `<div ${parsedAttrs}>` : "<div>";
-		startTag = addReservedClass(startTag, "bmd-mermaid-wrapper");
+		startTag = addReservedClass(startTag, "fmd-mermaid-wrapper");
 		return [
 			`${startTag}`,
 			`	<pre class="mermaid">${code}</pre>`,
@@ -135,7 +135,7 @@ renderer.code = function (code, infostring, escaped) {
 
 	return [
 		`${startTag}`,
-		`	<div class="bmd-code-header"><span>${lang}</span><button type="button" class="bmd-copy-btn">${getTranslation(markedSettings.localization, "copy-btn")}</button></div>`,
+		`	<div class="fmd-code-header"><span>${lang}</span><button type="button" class="fmd-copy-btn">${getTranslation(markedSettings.localization, "copy-btn")}</button></div>`,
 		`	<pre tabindex="0"><code${langClass}>${code}</code></pre>`,
 		`</div>\n`,
 	].join("\n");
@@ -173,7 +173,7 @@ renderer.heading = function (text, level, raw) {
 		startTag = startTag.replace(/<([^\s>]+)/, `<$1 id="${id}"`);
 	}
 
-	return `${startTag}${text}&nbsp;<a href="#${id}" class="bmd-heading-anchor">#</a></h${level}>\n`;
+	return `${startTag}${text}&nbsp;<a href="#${id}" class="fmd-heading-anchor">#</a></h${level}>\n`;
 };
 
 renderer.image = function (href, title, text) {
@@ -351,7 +351,7 @@ renderer.table = function (header, body) {
 		body = `<tbody>${body}</tbody>`;
 	}
 	return [
-		`<table class="bmd-table">`,
+		`<table class="fmd-table">`,
 		`	<thead>${header}</thead>`,
 		`	${body}`,
 		`</table>\n`,

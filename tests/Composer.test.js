@@ -12,7 +12,6 @@ const allSettings = {
 	backdropOpacity: "0.5",
 	backgroundColor: "#F0F0F0",
 	backgroundImage: "url(bg.jpg)",
-	blocksmdBranding: "hide",
 	brand: "![Logo](logo.png)",
 	buttonAlignment: "stretch",
 	color: "#000000",
@@ -28,6 +27,7 @@ const allSettings = {
 	fontImportUrl: "https://fonts.googleapis.com/css2?family=Open+Sans",
 	fontSize: "sm",
 	formDelimiter: "|",
+	formsmdBranding: "hide",
 	formStyle: "classic",
 	footer: "hide",
 	getFormat: "json",
@@ -65,7 +65,6 @@ const expectedTemplate = `
 #! backdrop-opacity = 0.5
 #! background-color = #F0F0F0
 #! background-image = url(bg.jpg)
-#! blocksmd-branding = hide
 #! brand = ![Logo](logo.png)
 #! button-alignment = stretch
 #! color = #000000
@@ -81,6 +80,7 @@ const expectedTemplate = `
 #! font-import-url = https://fonts.googleapis.com/css2?family=Open+Sans
 #! font-size = sm
 #! form-delimiter = |
+#! formsmd-branding = hide
 #! form-style = classic
 #! footer = hide
 #! get-format = json

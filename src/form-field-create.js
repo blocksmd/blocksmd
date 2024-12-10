@@ -37,7 +37,7 @@ function formFieldSetup(
 	// Set up defaults
 	const validParams = {
 		question: required
-			? `<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (${getTranslation(localization, "required")})</span>`
+			? `<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (${getTranslation(localization, "required")})</span>`
 			: "...",
 	};
 	const restParams = {};
@@ -66,7 +66,7 @@ function formFieldSetup(
 				let question = value.split(" ");
 				const questionLastWord = question.pop();
 				question.push(
-					`<span class="bmd-text-nowrap" aria-hidden="true">${questionLastWord}<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">${questionLastWord} (${getTranslation(localization, "required")})</span>`,
+					`<span class="fmd-text-nowrap" aria-hidden="true">${questionLastWord}<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">${questionLastWord} (${getTranslation(localization, "required")})</span>`,
 				);
 				validParams[key] = question.join(" ");
 			} else {
@@ -93,15 +93,15 @@ function formFieldSetup(
 	if (parsedAttrs) {
 		startTag = `<${startTagName} ${parsedAttrs}>`;
 	}
-	startTag = addReservedClass(startTag, "bmd-form-field");
+	startTag = addReservedClass(startTag, "fmd-form-field");
 	if (validParams.fieldsize === "sm") {
-		startTag = addReservedClass(startTag, "bmd-form-field-sm");
+		startTag = addReservedClass(startTag, "fmd-form-field-sm");
 	}
 	if (
 		validParams.subfield !== undefined ||
 		validParams.labelstyle === "classic"
 	) {
-		startTag = addReservedClass(startTag, "bmd-form-field-classic-labels");
+		startTag = addReservedClass(startTag, "fmd-form-field-classic-labels");
 	}
 
 	return {
@@ -115,11 +115,11 @@ function formFieldSetup(
 
 const textFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question" for="{{ inputId }}">
+	<label class="fmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
@@ -127,41 +127,41 @@ const textFieldTemplate = `
 		name="{{ name }}"
 		id="{{ inputId }}"
 		type="{{ inputType }}"
-		class="{% if inputType == 'password' %}bmd-form-password-input{% else %}bmd-form-str-input{% endif %} bmd-form-control"
+		class="{% if inputType == 'password' %}fmd-form-password-input{% else %}fmd-form-str-input{% endif %} fmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
 		{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
 		{% if validParams.pattern %}pattern="{{ validParams.pattern }}"{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
-		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+		{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 	>
 </div>
 `;
 
 const multilineTextFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question" for="{{ inputId }}">
+	<label class="fmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
 	<textarea
 		name="{{ name }}"
 		id="{{ inputId }}"
-		class="bmd-form-str-input bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
-		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+		{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 		aria-describedby="{{ inputId }}-form-text"
 	>{% if validParams.value %}{{ validParams.value }}{% endif %}</textarea>
-	<div id="{{ inputId }}-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
-		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
+	<div id="{{ inputId }}-form-text" class="fmd-form-text-bottom fmd-d-flex fmd-align-items-center">
+		<kbd class="fmd-d-flex fmd-align-items-center fmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-mt-1 fmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
 		{{ translations.newLineText }}
 	</div>
 </div>
@@ -169,22 +169,22 @@ const multilineTextFieldTemplate = `
 
 const telFieldTemplate = `
 {{ startTag }}
-	<legend class="bmd-form-question">
+	<legend class="fmd-form-question">
 		{{ validParams.question | safe }}
 	</legend>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		<select
 			name="{{ name }}CountryCode"
 			id="{{ inputId }}CountryCode"
-			class="bmd-form-str-select bmd-form-countrycode-select bmd-form-select"
+			class="fmd-form-str-select fmd-form-countrycode-select fmd-form-select"
 			required
 			{% if validParams.disabled %}disabled{% endif %}
-			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 			aria-label="{{ translations.countryCallingCodeLabel }}"
 		>
 			{{ availableCountryOptions | safe }}
@@ -193,14 +193,14 @@ const telFieldTemplate = `
 			name="{{ name }}"
 			id="{{ inputId }}"
 			type="{{ inputType }}"
-			class="bmd-form-str-input bmd-form-control"
+			class="fmd-form-str-input fmd-form-control"
 			placeholder="{{ validParams.placeholder }}"
 			{% if required %}required{% endif %}
 			{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
 			{% if validParams.maxlength %}maxlength="{{ validParams.maxlength }}"{% endif %}
 			{% if validParams.pattern %}pattern="{{ validParams.pattern }}"{% endif %}
 			{% if validParams.disabled %}disabled{% endif %}
-			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 			aria-label="{{ translations.phoneNumberLabel }}"
 		>
 	</div>
@@ -355,23 +355,23 @@ function createTextField(
 
 const numberFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question" for="{{ inputId }}">
+	<label class="fmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
-	<div class="bmd-input-group">
+	<div class="fmd-input-group">
 		{% if validParams.unit %}
-		<span id="{{ inputId }}-unit" class="bmd-input-group-text">{{ validParams.unit }}</span>
+		<span id="{{ inputId }}-unit" class="fmd-input-group-text">{{ validParams.unit }}</span>
 		{% endif %}
 		<input
 			name="{{ name }}"
 			id="{{ inputId }}"
 			type="number"
-			class="bmd-form-num-input bmd-form-control"
+			class="fmd-form-num-input fmd-form-control"
 			placeholder="{{ validParams.placeholder }}"
 			{% if required %}required{% endif %}
 			{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
@@ -379,7 +379,7 @@ const numberFieldTemplate = `
 			{% if validParams.max %}max="{{ validParams.max }}"{% endif %}
 			{% if validParams.step %}step="{{ validParams.step }}"{% endif %}
 			{% if validParams.disabled %}disabled{% endif %}
-			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 			{% if validParams.unit and validParams.unitend %}
 			aria-describedby="{{ inputId }}-unit {{ inputId }}-unit-end"
 			{% elif validParams.unit %}
@@ -389,7 +389,7 @@ const numberFieldTemplate = `
 			{% endif %}
 		>
 		{% if validParams.unitend %}
-		<span id="{{ inputId }}-unit-end" class="bmd-input-group-text">{{ validParams.unitend }}</span>
+		<span id="{{ inputId }}-unit-end" class="fmd-input-group-text">{{ validParams.unitend }}</span>
 		{% endif %}
 	</div>
 </div>
@@ -478,21 +478,21 @@ function createNumberField(
 
 const selectFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question" for="{{ inputId }}">
+	<label class="fmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
 	<select
 		name="{{ name }}"
 		id="{{ inputId }}"
-		class="bmd-form-str-select bmd-form-select"
+		class="fmd-form-str-select fmd-form-select"
 		{% if required %}required{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
-		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+		{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 	>
 		<option
 			value=""
@@ -612,44 +612,44 @@ function createSelectField(
 
 const choiceFieldTemplate = `
 {{ startTag }}
-	<legend class="bmd-form-question">
+	<legend class="fmd-form-question">
 		{{ validParams.question | safe }}
 	</legend>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
 	{% if validParams.multiple and not validParams.hideformtext %}
-	<div class="bmd-form-text">
+	<div class="fmd-form-text">
 		{{ translations.chooseManyText }}
 	</div>
 	{% endif %}
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid{% if isPictureChoice or validParams.horizontal %} bmd-check-grid-h{% endif %}{% if isPictureChoice and validParams.supersize %} bmd-check-grid-h-lg{% endif %}">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid{% if isPictureChoice or validParams.horizontal %} fmd-check-grid-h{% endif %}{% if isPictureChoice and validParams.supersize %} fmd-check-grid-h-lg{% endif %}">
 			{% for choice in validParams.choices %}
-			<div class="bmd-form-check{% if isPictureChoice %} bmd-form-img-check{% endif %}">
+			<div class="fmd-form-check{% if isPictureChoice %} fmd-form-img-check{% endif %}">
 				<input
 					name="{{ name }}"
 					id="{{ inputId }}-{{ loop.index }}"
 					type="{% if validParams.multiple %}checkbox{% else %}radio{% endif %}"
-					class="bmd-form-str-check-input bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="{{ choice.value }}"
 					{% if validParams.checked %}{% if choice.value in validParams.checked %}checked{% endif %}{% endif %}
 					{% if validParams.disabled %}disabled{% endif %}
-					{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+					{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 				>
-				<label class="bmd-form-check-label" for="{{ inputId }}-{{ loop.index }}">
+				<label class="fmd-form-check-label" for="{{ inputId }}-{{ loop.index }}">
 					{% if isPictureChoice %}
-					<span class="bmd-form-check-frame">
+					<span class="fmd-form-check-frame">
 						<img src="{{ choice.image }}" alt="{{ choice.label }}">
 					</span>
 					{% if not validParams.hidelabels %}{{ choice.label }}{% endif %}
 					{% else %}
 					{{ choice.label }}
 					{% endif %}
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -759,14 +759,14 @@ function createChoiceField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}"`;
+	let validationAttrs = `data-fmd-name="${name}"`;
 	if (!validParams.multiple) {
-		validationAttrs += ' data-bmd-type="radio"';
+		validationAttrs += ' data-fmd-type="radio"';
 	} else {
-		validationAttrs += ' data-bmd-type="checkbox"';
+		validationAttrs += ' data-fmd-type="checkbox"';
 	}
 	if (required) {
-		validationAttrs += " data-bmd-required";
+		validationAttrs += " data-fmd-required";
 	}
 
 	// Only keep one checked value in case of radio buttons
@@ -791,42 +791,42 @@ function createChoiceField(
 
 const ratingFieldTemplate = `
 {{ startTag }}
-	<legend class="bmd-form-question">
+	<legend class="fmd-form-question">
 		{{ validParams.question | safe }}
 	</legend>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
-	<div class="bmd-rating-grid{% if validParams.outof > 5 %} bmd-rating-grid-5-or-more{% endif %}">
+	<div class="fmd-rating-grid{% if validParams.outof > 5 %} fmd-rating-grid-5-or-more{% endif %}">
 		{% for i in range(1, validParams.outof + 1) %}
 		<input 
 			name="{{ name }}"
 			id="{{ inputId }}-{{ i }}"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-rating-input"
+			class="fmd-form-num-check-input fmd-form-rating-input"
 			value="{{ i }}"
 			{% if validParams.value == i %}checked{% endif %}
 			{% if validParams.disabled %}disabled{% endif %}
-			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 		>
-		<label class="bmd-form-rating-label" for="{{ inputId }}-{{ i }}">
+		<label class="fmd-form-rating-label" for="{{ inputId }}-{{ i }}">
 			{% if validParams.icon == "heart" or validParams.icon == "hearts" %}
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
-				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="bmd-form-rating-svg-path-inner"/>
-				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="bmd-form-rating-svg-path-outer"/>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M39.8 263.8L64 288 256 480 448 288l24.2-24.2c25.5-25.5 39.8-60 39.8-96C512 92.8 451.2 32 376.2 32c-36 0-70.5 14.3-96 39.8L256 96 231.8 71.8c-25.5-25.5-60-39.8-96-39.8C60.8 32 0 92.8 0 167.8c0 36 14.3 70.5 39.8 96z" class="fmd-form-rating-svg-path-inner"/>
+				<path d="M256 141.3l-22.6-22.6L209.1 94.4C189.7 74.9 163.3 64 135.8 64C78.5 64 32 110.5 32 167.8c0 27.5 10.9 53.9 30.4 73.4l24.2 24.2L256 434.8 425.4 265.4l24.2-24.2c19.5-19.5 30.4-45.9 30.4-73.4C480 110.5 433.5 64 376.2 64c-27.5 0-53.9 10.9-73.4 30.4l-24.2 24.2L256 141.3zm22.6 316.1L256 480l-22.6-22.6L64 288 39.8 263.8C14.3 238.3 0 203.8 0 167.8C0 92.8 60.8 32 135.8 32c36 0 70.5 14.3 96 39.8l1.6 1.6L256 96l22.6-22.6 1.6-1.6c25.5-25.5 60-39.8 96-39.8C451.2 32 512 92.8 512 167.8c0 36-14.3 70.5-39.8 96L448 288 278.6 457.4z" class="fmd-form-rating-svg-path-outer"/>
 			</svg>
 			{% else %}
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="bmd-form-rating-svg" aria-hidden="true" focusable="false">
-				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="bmd-form-rating-svg-path-inner"/>
-				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="bmd-form-rating-svg-path-outer"/>
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="fmd-form-rating-svg" aria-hidden="true" focusable="false">
+				<path d="M288.1 0l63.5 195.6H557.2L390.9 316.4 454.4 512 288.1 391.1 121.7 512l63.5-195.6L18.9 195.6H224.5L288.1 0z" class="fmd-form-rating-svg-path-inner"/>
+				<path d="M351.6 195.6L304.9 51.8 288.1 0 271.2 51.8 224.5 195.6l-151.2 0-54.4 0 44 32 122.3 88.9L138.5 460.2 121.7 512l44-32 122.3-88.9L410.4 480l44 32-16.8-51.8L390.9 316.4l122.3-88.9 44-32-54.4 0-151.2 0zm107.1 32l-86.7 63-18.8 13.7 7.2 22.1 33.1 101.9-86.7-63-18.8-13.7-18.8 13.7-86.7 63 33.1-101.9 7.2-22.1L204 290.5l-86.7-63 107.1 0 23.2 0 7.2-22.1 33.1-101.9 33.1 101.9 7.2 22.1 23.3 0 107.1 0z" class="fmd-form-rating-svg-path-outer"/>
 			</svg>
 			{% endif %}
 			{% if not validParams.hidelabels %}
-			{{ i }}<span class="bmd-visually-hidden"> {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
+			{{ i }}<span class="fmd-visually-hidden"> {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
 			{% else %}
-			<span class="bmd-visually-hidden">{{ i }} {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
+			<span class="fmd-visually-hidden">{{ i }} {% if i == 1 %}{{ translations.starSingular }}{% else %}{{ translations.starPlural }}{% endif %}</span>
 			{% endif %}
 		</label>
 		{% endfor %}
@@ -902,9 +902,9 @@ function createRatingField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
+	let validationAttrs = `data-fmd-name="${name}" data-fmd-type="num-radio"`;
 	if (required) {
-		validationAttrs += " data-bmd-required";
+		validationAttrs += " data-fmd-required";
 	}
 
 	// Use Nunjucks to create the form field
@@ -923,25 +923,25 @@ function createRatingField(
 
 const opinionScaleFieldTemplate = `
 {{ startTag }}
-	<legend class="bmd-form-question">
+	<legend class="fmd-form-question">
 		{{ validParams.question | safe }}
 	</legend>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		{% for i in range(validParams.startat, validParams.outof + 1) %}
 		<input 
 			name="{{ name }}"
 			id="{{ inputId }}-{{ i }}"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="{{ i }}"
 			{% if validParams.value == i %}checked{% endif %}
 			{% if validParams.disabled %}disabled{% endif %}
-			{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+			{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 			{% if i == validParams.startat and validParams.labelstart %}
 			aria-describedby="{{ inputId }}-label-start"
 			{% endif %}
@@ -949,20 +949,20 @@ const opinionScaleFieldTemplate = `
 			aria-describedby="{{ inputId }}-label-end"
 			{% endif %}
 		>
-		<label class="bmd-form-scale-label" for="{{ inputId }}-{{ i }}">{{ i }}</label>
+		<label class="fmd-form-scale-label" for="{{ inputId }}-{{ i }}">{{ i }}</label>
 		{% endfor %}
 	</div>
 	{% if validParams.labelstart or validParams.labelend  %}
-	<div class="bmd-form-scale-text">
+	<div class="fmd-form-scale-text">
 		{% if validParams.labelstart %}
-		<div class="bmd-form-scale-text-start">
-			<span class="bmd-d-none bmd-xs:d-inline-block">{{ validParams.startat }} &mdash;</span>
+		<div class="fmd-form-scale-text-start">
+			<span class="fmd-d-none fmd-xs:d-inline-block">{{ validParams.startat }} &mdash;</span>
 			<span id="{{ inputId }}-label-start">{{ validParams.labelstart }}</span>
 		</div>
 		{% endif %}
 		{% if validParams.labelend %}
-		<div class="bmd-form-scale-text-end">
-			<span class="bmd-d-none bmd-xs:d-inline-block">{{ validParams.outof }} &mdash;</span>
+		<div class="fmd-form-scale-text-end">
+			<span class="fmd-d-none fmd-xs:d-inline-block">{{ validParams.outof }} &mdash;</span>
 			<span id="{{ inputId }}-label-end">{{ validParams.labelend }}</span>
 		</div>
 		{% endif %}
@@ -1048,9 +1048,9 @@ function createOpinionScaleField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="num-radio"`;
+	let validationAttrs = `data-fmd-name="${name}" data-fmd-type="num-radio"`;
 	if (required) {
-		validationAttrs += " data-bmd-required";
+		validationAttrs += " data-fmd-required";
 	}
 
 	// Use Nunjucks to create the form field
@@ -1069,11 +1069,11 @@ function createOpinionScaleField(
 
 const datetimeFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question" for="{{ inputId }}">
+	<label class="fmd-form-question" for="{{ inputId }}">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
@@ -1081,7 +1081,7 @@ const datetimeFieldTemplate = `
 		name="{{ name }}"
 		id="{{ inputId }}"
 		type="{{ inputType }}"
-		class="bmd-form-datetime-input bmd-form-control"
+		class="fmd-form-datetime-input fmd-form-control"
 		placeholder="{{ validParams.placeholder }}"
 		{% if required %}required{% endif %}
 		{% if validParams.value %}value="{{ validParams.value }}"{% endif %}
@@ -1089,7 +1089,7 @@ const datetimeFieldTemplate = `
 		{% if validParams.max %}max="{{ validParams.max }}"{% endif %}
 		{% if validParams.step %}step="{{ validParams.step }}"{% endif %}
 		{% if validParams.disabled %}disabled{% endif %}
-		{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+		{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 	>
 </div>
 `;
@@ -1172,7 +1172,7 @@ function createDatetimeField(
 	}
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="${inputType}"`;
+	let validationAttrs = `data-fmd-name="${name}" data-fmd-type="${inputType}"`;
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });
@@ -1191,33 +1191,33 @@ function createDatetimeField(
 
 const fileFieldTemplate = `
 {{ startTag }}
-	<label class="bmd-form-question">
+	<label class="fmd-form-question">
 		{{ validParams.question | safe }}
 	</label>
 	{% if validParams.description %}
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		{{ validParams.description }}
 	</p>
 	{% endif %}
 	{% if validParams.currentfile %}
-	<div class="bmd-current-file">
-		<div class="bmd-current-file-label">
+	<div class="fmd-current-file">
+		<div class="fmd-current-file-label">
 			{{ translations.fileInputCurrently }}: <a href="{{ validParams.currentfile }}">{{ validParams.currentfilename }}</a>
 		</div>
 		{% if not required %}
-		<div class="bmd-current-file-clear">
-			<div class="bmd-form-check">
+		<div class="fmd-current-file-clear">
+			<div class="fmd-form-check">
 				<input
 					name="{{ name }}Clear"
 					id="{{ inputId }}Clear"
 					type="checkbox"
-					class="bmd-form-file-clear-check-input bmd-form-check-input"
+					class="fmd-form-file-clear-check-input fmd-form-check-input"
 					value="Clear"
 				>
-				<label class="bmd-form-check-label" for="{{ inputId }}Clear">
+				<label class="fmd-form-check-label" for="{{ inputId }}Clear">
 					{{ translations.fileInputClearCheck | safe }}
-					<span class="bmd-form-clear-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path></svg>
+					<span class="fmd-form-clear-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"></path></svg>
 					</span>
 				</label>
 			</div>
@@ -1225,39 +1225,39 @@ const fileFieldTemplate = `
 		{% endif %}
 	</div>
 	{% endif %}
-	<div class="bmd-form-file">
-		<label class="bmd-form-file-label{% if validParams.disabled %} bmd-disabled{% endif %}">
+	<div class="fmd-form-file">
+		<label class="fmd-form-file-label{% if validParams.disabled %} fmd-disabled{% endif %}">
 			<input
 				name="{{ name }}"
 				id="{{ inputId }}"
 				type="file"
-				class="bmd-form-file-input"
+				class="fmd-form-file-input"
 				{% if required and not validParams.currentfile %}required{% endif %}
 				{% if validParams.imageonly %}accept="image/*"{% endif %}
 				{% if validParams.disabled %}disabled{% endif %}
-				{% if validParams.autofocus %}data-bmd-autofocus{% endif %}
+				{% if validParams.autofocus %}data-fmd-autofocus{% endif %}
 			>
-			<span class="bmd-d-block bmd-w-auto bmd-mw-100">
-				<span class="bmd-visually-hidden">
+			<span class="fmd-d-block fmd-w-auto fmd-mw-100">
+				<span class="fmd-visually-hidden">
 					{{ validParams.question | safe }}
 				</span>
-				<span class="bmd-file-empty-section">
-					<span class="bmd-form-file-img-container">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M389.8 125.2C363.7 88.1 320.7 64 272 64c-77.4 0-140.5 61-143.9 137.5c-.6 13-9 24.4-21.3 28.8C63.2 245.7 32 287.2 32 336c0 61.9 50.1 112 112 112l368 0c53 0 96-43 96-96c0-36.8-20.7-68.8-51.2-84.9c-13.4-7.1-20-22.5-15.8-37.1c2-6.9 3-14.3 3-22c0-44.2-35.8-80-80-80c-12.3 0-23.9 2.8-34.3 7.7c-14.1 6.7-30.9 2.3-39.9-10.5zM272 32c59.5 0 112.1 29.5 144 74.8C430.5 99.9 446.8 96 464 96c61.9 0 112 50.1 112 112c0 10.7-1.5 21-4.3 30.8C612.3 260.2 640 302.9 640 352c0 70.7-57.3 128-128 128l-368 0C64.5 480 0 415.5 0 336c0-62.8 40.2-116.1 96.2-135.9C100.3 106.6 177.4 32 272 32zM228.7 244.7l80-80c6.2-6.2 16.4-6.2 22.6 0l80 80c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L336 214.6 336 368c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-153.4-52.7 52.7c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6z"/></svg>
+				<span class="fmd-file-empty-section">
+					<span class="fmd-form-file-img-container">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M389.8 125.2C363.7 88.1 320.7 64 272 64c-77.4 0-140.5 61-143.9 137.5c-.6 13-9 24.4-21.3 28.8C63.2 245.7 32 287.2 32 336c0 61.9 50.1 112 112 112l368 0c53 0 96-43 96-96c0-36.8-20.7-68.8-51.2-84.9c-13.4-7.1-20-22.5-15.8-37.1c2-6.9 3-14.3 3-22c0-44.2-35.8-80-80-80c-12.3 0-23.9 2.8-34.3 7.7c-14.1 6.7-30.9 2.3-39.9-10.5zM272 32c59.5 0 112.1 29.5 144 74.8C430.5 99.9 446.8 96 464 96c61.9 0 112 50.1 112 112c0 10.7-1.5 21-4.3 30.8C612.3 260.2 640 302.9 640 352c0 70.7-57.3 128-128 128l-368 0C64.5 480 0 415.5 0 336c0-62.8 40.2-116.1 96.2-135.9C100.3 106.6 177.4 32 272 32zM228.7 244.7l80-80c6.2-6.2 16.4-6.2 22.6 0l80 80c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L336 214.6 336 368c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-153.4-52.7 52.7c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6z"/></svg>
 					</span>
-					<span class="bmd-d-block bmd-mt-3 bmd-first-letter-uppercase">
+					<span class="fmd-d-block fmd-mt-3 fmd-first-letter-uppercase">
 						{% if validParams.currentfile %}{{ translations.fileInputChange }}: {% endif %}{{ translations.fileInputChoose | safe }}
 					</span>
 				</span>
-				<span class="bmd-file-exists-section"></span>
-				<span class="bmd-form-file-size-limit bmd-mt-1">
+				<span class="fmd-file-exists-section"></span>
+				<span class="fmd-form-file-size-limit fmd-mt-1">
 					{{ translations.fileInputSizeLimit }}: {{ validParams.sizelimit }}MB
 				</span>
 			</span>
 		</label>
-		<div class="bmd-form-file-reset-btn-container">
-			<button type="button" class="bmd-form-file-reset-btn" aria-label="{{ translations.fileInputResetBtn }}">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/></svg>
+		<div class="fmd-form-file-reset-btn-container">
+			<button type="button" class="fmd-form-file-reset-btn" aria-label="{{ translations.fileInputResetBtn }}">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z"/></svg>
 			</button>
 		</div>
 	</div>
@@ -1330,7 +1330,7 @@ function createFileField(
 	validParams.sizelimit = validParams.sizelimit || 10;
 
 	// Create the validation attributes (to be added to the start tag)
-	let validationAttrs = `data-bmd-name="${name}" data-bmd-type="file" data-bmd-size-limit="${validParams.sizelimit}"`;
+	let validationAttrs = `data-fmd-name="${name}" data-fmd-type="file" data-fmd-size-limit="${validParams.sizelimit}"`;
 
 	// Use Nunjucks to create the form field
 	nunjucks.configure({ autoescape: false });

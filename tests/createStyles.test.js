@@ -7,40 +7,40 @@ const beautify = require("beautify");
 
 const expectedStyles1 = `
 @import url("https://example.com/font/");
-.bmd-root {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+.fmd-root {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
 }
-.bmd-root {
-	--bmd-accent-r: 0;
-	--bmd-accent-g: 0;
-	--bmd-accent-b: 139;
-	--bmd-accent-foreground-r: 255;
-	--bmd-accent-foreground-g: 255;
-	--bmd-accent-foreground-b: 255;
-	--bmd-body-bg-r: 255;
-	--bmd-body-bg-g: 255;
-	--bmd-body-bg-b: 255;
-	--bmd-body-color-r: 0;
-	--bmd-body-color-g: 0;
-	--bmd-body-color-b: 0;
+.fmd-root {
+	--fmd-accent-r: 0;
+	--fmd-accent-g: 0;
+	--fmd-accent-b: 139;
+	--fmd-accent-foreground-r: 255;
+	--fmd-accent-foreground-g: 255;
+	--fmd-accent-foreground-b: 255;
+	--fmd-body-bg-r: 255;
+	--fmd-body-bg-g: 255;
+	--fmd-body-bg-b: 255;
+	--fmd-body-color-r: 0;
+	--fmd-body-color-g: 0;
+	--fmd-body-color-b: 0;
 }
-.bmd-root[data-bmd-color-scheme="dark"] {
-	--bmd-accent-r: 179;
-	--bmd-accent-g: 206;
-	--bmd-accent-b: 229;
-	--bmd-accent-foreground-r: 0;
-	--bmd-accent-foreground-g: 0;
-	--bmd-accent-foreground-b: 0;
-	--bmd-body-bg-r: 0;
-	--bmd-body-bg-g: 0;
-	--bmd-body-bg-b: 0;
-	--bmd-body-color-r: 255;
-	--bmd-body-color-g: 255;
-	--bmd-body-color-b: 255;
+.fmd-root[data-fmd-color-scheme="dark"] {
+	--fmd-accent-r: 179;
+	--fmd-accent-g: 206;
+	--fmd-accent-b: 229;
+	--fmd-accent-foreground-r: 0;
+	--fmd-accent-foreground-g: 0;
+	--fmd-accent-foreground-b: 0;
+	--fmd-body-bg-r: 0;
+	--fmd-body-bg-g: 0;
+	--fmd-body-bg-b: 0;
+	--fmd-body-color-r: 255;
+	--fmd-body-color-g: 255;
+	--fmd-body-color-b: 255;
 }
 `;
 
@@ -74,40 +74,40 @@ test("Case 1", () => {
 
 const expectedStyles2 = `
 @import url("https://example.com/font/");
-.bmd-root {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+.fmd-root {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
 }
-.bmd-root[data-bmd-color-scheme="dark"] {
-	--bmd-accent-r: 179;
-	--bmd-accent-g: 206;
-	--bmd-accent-b: 229;
-	--bmd-accent-foreground-r: 0;
-	--bmd-accent-foreground-g: 0;
-	--bmd-accent-foreground-b: 0;
-	--bmd-body-bg-r: 0;
-	--bmd-body-bg-g: 0;
-	--bmd-body-bg-b: 0;
-	--bmd-body-color-r: 255;
-	--bmd-body-color-g: 255;
-	--bmd-body-color-b: 255;
+.fmd-root[data-fmd-color-scheme="dark"] {
+	--fmd-accent-r: 179;
+	--fmd-accent-g: 206;
+	--fmd-accent-b: 229;
+	--fmd-accent-foreground-r: 0;
+	--fmd-accent-foreground-g: 0;
+	--fmd-accent-foreground-b: 0;
+	--fmd-body-bg-r: 0;
+	--fmd-body-bg-g: 0;
+	--fmd-body-bg-b: 0;
+	--fmd-body-color-r: 255;
+	--fmd-body-color-g: 255;
+	--fmd-body-color-b: 255;
 }
-.bmd-root {
-	--bmd-accent-r: 0;
-	--bmd-accent-g: 0;
-	--bmd-accent-b: 139;
-	--bmd-accent-foreground-r: 255;
-	--bmd-accent-foreground-g: 255;
-	--bmd-accent-foreground-b: 255;
-	--bmd-body-bg-r: 255;
-	--bmd-body-bg-g: 255;
-	--bmd-body-bg-b: 255;
-	--bmd-body-color-r: 0;
-	--bmd-body-color-g: 0;
-	--bmd-body-color-b: 0;
+.fmd-root {
+	--fmd-accent-r: 0;
+	--fmd-accent-g: 0;
+	--fmd-accent-b: 139;
+	--fmd-accent-foreground-r: 255;
+	--fmd-accent-foreground-g: 255;
+	--fmd-accent-foreground-b: 255;
+	--fmd-body-bg-r: 255;
+	--fmd-body-bg-g: 255;
+	--fmd-body-bg-b: 255;
+	--fmd-body-color-r: 0;
+	--fmd-body-color-g: 0;
+	--fmd-body-color-b: 0;
 }
 `;
 
@@ -140,24 +140,24 @@ test("Case 2 (dark color scheme)", () => {
 // Case 3 (only light color scheme)
 
 const expectedStyles3 = `
-.bmd-root {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+.fmd-root {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
 }
-.bmd-root {
-	--bmd-accent-r: 0;
-	--bmd-accent-g: 0;
-	--bmd-accent-b: 139;
-	--bmd-accent-foreground-r: 255;
-	--bmd-accent-foreground-g: 255;
-	--bmd-accent-foreground-b: 255;
-	--bmd-body-bg-r: 255;
-	--bmd-body-bg-g: 255;
-	--bmd-body-bg-b: 255;
-	--bmd-body-color-r: 0;
-	--bmd-body-color-g: 0;
-	--bmd-body-color-b: 0;
+.fmd-root {
+	--fmd-accent-r: 0;
+	--fmd-accent-g: 0;
+	--fmd-accent-b: 139;
+	--fmd-accent-foreground-r: 255;
+	--fmd-accent-foreground-g: 255;
+	--fmd-accent-foreground-b: 255;
+	--fmd-body-bg-r: 255;
+	--fmd-body-bg-g: 255;
+	--fmd-body-bg-b: 255;
+	--fmd-body-color-r: 0;
+	--fmd-body-color-g: 0;
+	--fmd-body-color-b: 0;
 }
 `;
 
@@ -183,24 +183,24 @@ test("Case 3 (only light color scheme)", () => {
 // Case 4 (only dark color scheme)
 
 const expectedStyles4 = `
-.bmd-root {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+.fmd-root {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
 }
-.bmd-root[data-bmd-color-scheme="dark"] {
-	--bmd-accent-r: 179;
-	--bmd-accent-g: 206;
-	--bmd-accent-b: 229;
-	--bmd-accent-foreground-r: 0;
-	--bmd-accent-foreground-g: 0;
-	--bmd-accent-foreground-b: 0;
-	--bmd-body-bg-r: 0;
-	--bmd-body-bg-g: 0;
-	--bmd-body-bg-b: 0;
-	--bmd-body-color-r: 255;
-	--bmd-body-color-g: 255;
-	--bmd-body-color-b: 255;
+.fmd-root[data-fmd-color-scheme="dark"] {
+	--fmd-accent-r: 179;
+	--fmd-accent-g: 206;
+	--fmd-accent-b: 229;
+	--fmd-accent-foreground-r: 0;
+	--fmd-accent-foreground-g: 0;
+	--fmd-accent-foreground-b: 0;
+	--fmd-body-bg-r: 0;
+	--fmd-body-bg-g: 0;
+	--fmd-body-bg-b: 0;
+	--fmd-body-color-r: 255;
+	--fmd-body-color-g: 255;
+	--fmd-body-color-b: 255;
 }
 `;
 
@@ -226,12 +226,12 @@ test("Case 4 (only dark color scheme)", () => {
 // Case 5 (only base styles)
 
 const expectedStyles5 = `
-.bmd-root {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+.fmd-root {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
 }
 `;
 
@@ -256,40 +256,40 @@ test("Case 5 (only base styles)", () => {
 
 const expectedStyles6 = `
 @import url("https://example.com/font/");
-.bmd-root[data-bmd-id="form1"] {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+.fmd-root[data-fmd-id="form1"] {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
 }
-.bmd-root[data-bmd-id="form1"] {
-	--bmd-accent-r: 0;
-	--bmd-accent-g: 0;
-	--bmd-accent-b: 139;
-	--bmd-accent-foreground-r: 255;
-	--bmd-accent-foreground-g: 255;
-	--bmd-accent-foreground-b: 255;
-	--bmd-body-bg-r: 255;
-	--bmd-body-bg-g: 255;
-	--bmd-body-bg-b: 255;
-	--bmd-body-color-r: 0;
-	--bmd-body-color-g: 0;
-	--bmd-body-color-b: 0;
+.fmd-root[data-fmd-id="form1"] {
+	--fmd-accent-r: 0;
+	--fmd-accent-g: 0;
+	--fmd-accent-b: 139;
+	--fmd-accent-foreground-r: 255;
+	--fmd-accent-foreground-g: 255;
+	--fmd-accent-foreground-b: 255;
+	--fmd-body-bg-r: 255;
+	--fmd-body-bg-g: 255;
+	--fmd-body-bg-b: 255;
+	--fmd-body-color-r: 0;
+	--fmd-body-color-g: 0;
+	--fmd-body-color-b: 0;
 }
-.bmd-root[data-bmd-id="form1"][data-bmd-color-scheme="dark"] {
-	--bmd-accent-r: 179;
-	--bmd-accent-g: 206;
-	--bmd-accent-b: 229;
-	--bmd-accent-foreground-r: 0;
-	--bmd-accent-foreground-g: 0;
-	--bmd-accent-foreground-b: 0;
-	--bmd-body-bg-r: 0;
-	--bmd-body-bg-g: 0;
-	--bmd-body-bg-b: 0;
-	--bmd-body-color-r: 255;
-	--bmd-body-color-g: 255;
-	--bmd-body-color-b: 255;
+.fmd-root[data-fmd-id="form1"][data-fmd-color-scheme="dark"] {
+	--fmd-accent-r: 179;
+	--fmd-accent-g: 206;
+	--fmd-accent-b: 229;
+	--fmd-accent-foreground-r: 0;
+	--fmd-accent-foreground-g: 0;
+	--fmd-accent-foreground-b: 0;
+	--fmd-body-bg-r: 0;
+	--fmd-body-bg-g: 0;
+	--fmd-body-bg-b: 0;
+	--fmd-body-color-r: 255;
+	--fmd-body-color-g: 255;
+	--fmd-body-color-b: 255;
 }
 `;
 
@@ -323,40 +323,40 @@ test("Case 6 (different id)", () => {
 
 const expectedStyles7 = `
 @import url("https://example.com/font/");
-.bmd-root[data-bmd-id="mypage"] {
-	--bmd-body-font-family: "Inter", sans-serif;
-	--bmd-backdrop-opacity-dm: 0.05;
-	--bmd-backdrop-opacity-lm: 0.075;
-	--bmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
-	--bmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
+.fmd-root[data-fmd-id="mypage"] {
+	--fmd-body-font-family: "Inter", sans-serif;
+	--fmd-backdrop-opacity-dm: 0.05;
+	--fmd-backdrop-opacity-lm: 0.075;
+	--fmd-body-bg-img-dm: url("https://example.com/bg-dm.jpg");
+	--fmd-body-bg-img-lm: url("https://example.com/bg-lm.jpg");
 }
-.bmd-root[data-bmd-id="mypage"][data-bmd-color-scheme="dark"] {
-	--bmd-accent-r: 179;
-	--bmd-accent-g: 206;
-	--bmd-accent-b: 229;
-	--bmd-accent-foreground-r: 0;
-	--bmd-accent-foreground-g: 0;
-	--bmd-accent-foreground-b: 0;
-	--bmd-body-bg-r: 0;
-	--bmd-body-bg-g: 0;
-	--bmd-body-bg-b: 0;
-	--bmd-body-color-r: 255;
-	--bmd-body-color-g: 255;
-	--bmd-body-color-b: 255;
+.fmd-root[data-fmd-id="mypage"][data-fmd-color-scheme="dark"] {
+	--fmd-accent-r: 179;
+	--fmd-accent-g: 206;
+	--fmd-accent-b: 229;
+	--fmd-accent-foreground-r: 0;
+	--fmd-accent-foreground-g: 0;
+	--fmd-accent-foreground-b: 0;
+	--fmd-body-bg-r: 0;
+	--fmd-body-bg-g: 0;
+	--fmd-body-bg-b: 0;
+	--fmd-body-color-r: 255;
+	--fmd-body-color-g: 255;
+	--fmd-body-color-b: 255;
 }
-.bmd-root[data-bmd-id="mypage"] {
-	--bmd-accent-r: 0;
-	--bmd-accent-g: 0;
-	--bmd-accent-b: 139;
-	--bmd-accent-foreground-r: 255;
-	--bmd-accent-foreground-g: 255;
-	--bmd-accent-foreground-b: 255;
-	--bmd-body-bg-r: 255;
-	--bmd-body-bg-g: 255;
-	--bmd-body-bg-b: 255;
-	--bmd-body-color-r: 0;
-	--bmd-body-color-g: 0;
-	--bmd-body-color-b: 0;
+.fmd-root[data-fmd-id="mypage"] {
+	--fmd-accent-r: 0;
+	--fmd-accent-g: 0;
+	--fmd-accent-b: 139;
+	--fmd-accent-foreground-r: 255;
+	--fmd-accent-foreground-g: 255;
+	--fmd-accent-foreground-b: 255;
+	--fmd-body-bg-r: 255;
+	--fmd-body-bg-g: 255;
+	--fmd-body-bg-b: 255;
+	--fmd-body-color-r: 0;
+	--fmd-body-color-g: 0;
+	--fmd-body-color-b: 0;
 }
 `;
 
