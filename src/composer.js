@@ -87,7 +87,7 @@ function composeAttrs(params) {
  * @param {TranslationsType} translations
  * @returns {string}
  */
-function _(localization, translations) {
+function translate(localization, translations) {
 	if (translations[localization] !== undefined) {
 		return translations[localization];
 	} else {
@@ -1908,5 +1908,5 @@ class Composer {
 
 exports.composeSharedFieldParams = composeSharedFieldParams;
 exports.composeAttrs = composeAttrs;
-exports._ = _;
+exports.translate = translate;
 exports.Composer = Composer;

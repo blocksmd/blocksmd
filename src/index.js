@@ -7,9 +7,9 @@
 
 "use strict";
 
-const { _, Composer } = require("./composer");
+const { translate, Composer } = require("./composer");
 const { blocksmd } = require("./main");
 
-exports._ = _;
+exports.translate = translate;
 exports.Composer = Composer;
 exports.blocksmd = blocksmd;

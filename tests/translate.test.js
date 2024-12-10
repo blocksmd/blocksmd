@@ -1,6 +1,6 @@
 "use strict";
 
-const { _ } = require("../src/composer");
+const { translate } = require("../src/composer");
 
 // Case 1
 
@@ -10,9 +10,9 @@ test("Case 1", () => {
 		es: "Hola",
 		fr: "Bonjour",
 	};
-	expect(_("en", translations)).toBe("Hello");
-	expect(_("es", translations)).toBe("Hola");
-	expect(_("fr", translations)).toBe("Bonjour");
+	expect(translate("en", translations)).toBe("Hello");
+	expect(translate("es", translations)).toBe("Hola");
+	expect(translate("fr", translations)).toBe("Bonjour");
 });
 
 // Case 2 (first available translation for unknown localization)
@@ -22,13 +22,13 @@ test("Case 2 (first available translation for unknown localization)", () => {
 		en: "Hello",
 		es: "Hola",
 	};
-	expect(_("de", translations)).toBe("Hello");
+	expect(translate("de", translations)).toBe("Hello");
 });
 
 // Case 3 (empty translations object)
 
 test("Case 3 (empty translations object)", () => {
-	expect(_("en", {})).toBeUndefined();
+	expect(translate("en", {})).toBeUndefined();
 });
 
 // Case 4 (invalid inputs)
@@ -38,6 +38,6 @@ test("Case 4 (invalid inputs)", () => {
 		en: "Hello",
 		es: "Hola",
 	};
-	expect(_(null, translations)).toBe("Hello");
-	expect(_(undefined, translations)).toBe("Hello");
+	expect(translate(null, translations)).toBe("Hello");
+	expect(translate(undefined, translations)).toBe("Hello");
 });

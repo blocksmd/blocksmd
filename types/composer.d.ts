@@ -78,7 +78,10 @@ export function composeAttrs(params: any): Array<string>;
  * @param {TranslationsType} translations
  * @returns {string}
  */
-export function _(localization: string, translations: TranslationsType): string;
+export function translate(
+	localization: string,
+	translations: TranslationsType,
+): string;
 export class Composer {
 	/**
 	 * The page or form settings.
