@@ -311,7 +311,7 @@ function createCountryCallingCodeOptions(
 			const placeholder = placeholdersAndCallingCodes[country].placeholder;
 			const selected = country === selectedCountryCode ? " selected" : "";
 			options.push(
-				`<option value="${country} ${callingCode}"${selected} data-bmd-placeholder="${placeholder}">${country}</option>`,
+				`<option value="${country} ${callingCode}"${selected} data-fmd-placeholder="${placeholder}">${country}</option>`,
 			);
 		}
 	}

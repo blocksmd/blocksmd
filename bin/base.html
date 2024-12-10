@@ -3,11 +3,11 @@
 	dir="{{ settings.dir }}"
 	lang="{{ settings.localization }}"
 	spellcheck="false"
-	class="bmd-root"
-	data-bmd-color-scheme="{{ settings['color-scheme'] }}"
-	data-bmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
-	data-bmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
-	data-bmd-id="{{ settings.id }}"
+	class="fmd-root"
+	data-fmd-color-scheme="{{ settings['color-scheme'] }}"
+	data-fmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
+	data-fmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
+	data-fmd-id="{{ settings.id }}"
 >
 	<head>
 		<!-- Required meta tags -->
@@ -40,7 +40,7 @@
 		<script type="text/javascript">
 			if (
 				document.documentElement.getAttribute(
-					"data-bmd-color-scheme-toggle",
+					"data-fmd-color-scheme-toggle",
 				) === "show"
 			)
 				formsmd.setPreferredColorScheme();
@@ -53,13 +53,13 @@
 			href="./formsmd/css/formsmd{% if settings.dir == 'rtl' %}.rtl{% endif %}.min.css"
 		/>
 	</head>
-	<body class="bmd-body">
+	<body class="fmd-body">
 		<noscript>Please turn on JavaScript to see this page.</noscript>
-		<main class="bmd-main">
-			<div class="bmd-main-container">
-				<div class="bmd-loader-container">
+		<main class="fmd-main">
+			<div class="fmd-main-container">
+				<div class="fmd-loader-container">
 					<div
-						class="bmd-loader-spinner"
+						class="fmd-loader-spinner"
 						role="status"
 						aria-label="Loading"
 					></div>

@@ -5,7 +5,7 @@
  * @returns {string} the contents of the stylesheet
  */
 export function createStyles(settings: any): string;
-export const madeInLoaderTemplate: '\n<div class="bmd-backdrop"></div>\n\n<main class="bmd-main">\n\t<div class="bmd-main-container">\n\t\t<div class="bmd-loader-container">\n\t\t\t<div class="bmd-text-center bmd-mb-3">\n\t\t\t\t{% if settings["formsmd-branding"] != "hide" %}\n\t\t\t\t{{ translations.madeInLoader | safe }}\n\t\t\t\t{% else %}\n\t\t\t\t<div class="bmd-specific-fs-20 bmd-text-emphasis bmd-fw-bold">{{ translations.loading }}...</div>\n\t\t\t\t{% endif %}\n\t\t\t</div>\n\t\t\t<div class="bmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>\n\t\t</div>\n\t</div>\n</main>\n';
+export const madeInLoaderTemplate: '\n<div class="fmd-backdrop"></div>\n\n<main class="fmd-main">\n\t<div class="fmd-main-container">\n\t\t<div class="fmd-loader-container">\n\t\t\t<div class="fmd-text-center fmd-mb-3">\n\t\t\t\t{% if settings["formsmd-branding"] != "hide" %}\n\t\t\t\t{{ translations.madeInLoader | safe }}\n\t\t\t\t{% else %}\n\t\t\t\t<div class="fmd-specific-fs-20 fmd-text-emphasis fmd-fw-bold">{{ translations.loading }}...</div>\n\t\t\t\t{% endif %}\n\t\t\t</div>\n\t\t\t<div class="fmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>\n\t\t</div>\n\t</div>\n</main>\n';
 /**
  * Create the body template.
  *

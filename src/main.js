@@ -519,16 +519,16 @@ class Formsmd {
 	setPreferredColorScheme = () => {
 		const instance = this;
 
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 		const localStorageKey =
-			rootElem.getAttribute("data-bmd-color-scheme-scope") === "isolate"
+			rootElem.getAttribute("data-fmd-color-scheme-scope") === "isolate"
 				? `formsmd:${instance.getIdPrefix()}${window.location.hostname}${
 						window.location.pathname
 					}color-scheme`
 				: "formsmd:color-scheme";
 		const preferredColorScheme = localStorage.getItem(localStorageKey);
 		if (preferredColorScheme) {
-			rootElem.setAttribute("data-bmd-color-scheme", preferredColorScheme);
+			rootElem.setAttribute("data-fmd-color-scheme", preferredColorScheme);
 		}
 	};
 
@@ -543,19 +543,19 @@ class Formsmd {
 		const instance = this;
 
 		e.preventDefault();
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 		const localStorageKey =
 			instance.state.settings["color-scheme-scope"] === "isolate"
 				? `formsmd:${instance.getIdPrefix()}${window.location.hostname}${
 						window.location.pathname
 					}color-scheme`
 				: "formsmd:color-scheme";
-		const currentColorScheme = rootElem.getAttribute("data-bmd-color-scheme");
+		const currentColorScheme = rootElem.getAttribute("data-fmd-color-scheme");
 		if (currentColorScheme === "light") {
-			rootElem.setAttribute("data-bmd-color-scheme", "dark");
+			rootElem.setAttribute("data-fmd-color-scheme", "dark");
 			localStorage.setItem(localStorageKey, "dark");
 		} else if (currentColorScheme === "dark") {
-			rootElem.setAttribute("data-bmd-color-scheme", "light");
+			rootElem.setAttribute("data-fmd-color-scheme", "light");
 			localStorage.setItem(localStorageKey, "light");
 		}
 	};
@@ -649,11 +649,11 @@ class Formsmd {
 
 		// Re-render the bind <div> elements
 		instance.container
-			.querySelectorAll(`div[data-bmd-bind-${name}]`)
+			.querySelectorAll(`div[data-fmd-bind-${name}]`)
 			.forEach((div) => {
 				const template =
 					instance.state.bindDivTemplates[
-						div.getAttribute("data-bmd-bind-template-ref")
+						div.getAttribute("data-fmd-bind-template-ref")
 					];
 				marked.use({
 					renderer: renderer,
@@ -687,7 +687,7 @@ class Formsmd {
 
 		// Re-render the bind <span> elements
 		instance.container
-			.querySelectorAll(`span[data-bmd-bind-${name}]`)
+			.querySelectorAll(`span[data-fmd-bind-${name}]`)
 			.forEach((span) => {
 				span.innerText = instance.state.formData[name];
 			});
@@ -777,13 +777,13 @@ class Formsmd {
 	 */
 	setTelInputPlaceholder = (countryCodeSelect) => {
 		const telInput = countryCodeSelect
-			.closest(".bmd-form-field")
-			.querySelector('.bmd-form-str-input[type="tel"]');
+			.closest(".fmd-form-field")
+			.querySelector('.fmd-form-str-input[type="tel"]');
 		const selected = countryCodeSelect.selectedOptions[0];
 		if (telInput && selected) {
 			telInput.setAttribute(
 				"placeholder",
-				selected.getAttribute("data-bmd-placeholder"),
+				selected.getAttribute("data-fmd-placeholder"),
 			);
 		}
 	};
@@ -798,7 +798,7 @@ class Formsmd {
 		// Text fields
 		instance.container
 			.querySelectorAll(
-				'input.bmd-form-str-input[type="text"], input.bmd-form-str-input[type="email"], input.bmd-form-str-input[type="url"], input.bmd-form-str-input[type="tel"], textarea.bmd-form-str-input',
+				'input.fmd-form-str-input[type="text"], input.fmd-form-str-input[type="email"], input.fmd-form-str-input[type="url"], input.fmd-form-str-input[type="tel"], textarea.fmd-form-str-input',
 			)
 			.forEach((elem) => {
 				let name = elem.getAttribute("name");
@@ -811,7 +811,7 @@ class Formsmd {
 
 		// Number fields
 		instance.container
-			.querySelectorAll('input.bmd-form-num-input[type="number"]')
+			.querySelectorAll('input.fmd-form-num-input[type="number"]')
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = isNumeric(elem.value) ? Number(elem.value) : null;
@@ -822,7 +822,7 @@ class Formsmd {
 
 		// Select fields
 		instance.container
-			.querySelectorAll("select.bmd-form-str-select")
+			.querySelectorAll("select.fmd-form-str-select")
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const value = elem.value;
@@ -834,14 +834,14 @@ class Formsmd {
 		// Choice fields
 		instance.container
 			.querySelectorAll(
-				".bmd-form-check:first-child input.bmd-form-str-check-input",
+				".fmd-form-check:first-child input.fmd-form-str-check-input",
 			)
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				const type = elem.getAttribute("type");
 				const value = instance.getRadioCheckboxValue(
 					name,
-					"bmd-form-str-check-input",
+					"fmd-form-str-check-input",
 					type,
 				);
 				instance.state.formData[name] = value;
@@ -851,12 +851,12 @@ class Formsmd {
 
 		// Number choice fields
 		instance.container
-			.querySelectorAll("input.bmd-form-num-check-input:first-child")
+			.querySelectorAll("input.fmd-form-num-check-input:first-child")
 			.forEach((elem) => {
 				const name = elem.getAttribute("name");
 				let value = instance.getRadioCheckboxValue(
 					name,
-					"bmd-form-num-check-input",
+					"fmd-form-num-check-input",
 					"radio",
 				);
 				value = value ? parseInt(value) : null;
@@ -868,7 +868,7 @@ class Formsmd {
 		// Datetime fields
 		instance.container
 			.querySelectorAll(
-				'input.bmd-form-datetime-input[type="datetime-local"], input.bmd-form-datetime-input[type="date"], input.bmd-form-datetime-input[type="time"]',
+				'input.fmd-form-datetime-input[type="datetime-local"], input.fmd-form-datetime-input[type="date"], input.fmd-form-datetime-input[type="time"]',
 			)
 			.forEach((elem) => {
 				let name = elem.getAttribute("name");
@@ -913,7 +913,7 @@ class Formsmd {
 				instance.state.fieldTypes[name] === "tel"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-str-input[name="${name}"]`,
+					`.fmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -928,7 +928,7 @@ class Formsmd {
 			// Number field
 			if (instance.state.fieldTypes[name] === "number") {
 				const input = instance.container.querySelector(
-					`.bmd-form-num-input[name="${name}"]`,
+					`.fmd-form-num-input[name="${name}"]`,
 				);
 				if (input && isNumeric(value)) {
 					value = Number(value);
@@ -944,7 +944,7 @@ class Formsmd {
 			// Select field
 			if (instance.state.fieldTypes[name] === "select") {
 				const select = instance.container.querySelector(
-					`.bmd-form-str-select[name="${name}"]`,
+					`.fmd-form-str-select[name="${name}"]`,
 				);
 				if (select) {
 					const options = select.querySelectorAll("option");
@@ -959,7 +959,7 @@ class Formsmd {
 							break;
 						}
 					}
-					if (select.classList.contains("bmd-form-countrycode-select")) {
+					if (select.classList.contains("fmd-form-countrycode-select")) {
 						instance.setTelInputPlaceholder(select);
 					}
 				}
@@ -968,7 +968,7 @@ class Formsmd {
 			// Choice field
 			if (instance.state.fieldTypes[name] === "choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-str-check-input[name="${name}"]`,
+					`.fmd-form-str-check-input[name="${name}"]`,
 				);
 				if (input) {
 					const type = input.getAttribute("type");
@@ -979,7 +979,7 @@ class Formsmd {
 					}
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-str-check-input",
+						"fmd-form-str-check-input",
 						type,
 						value,
 					);
@@ -987,7 +987,7 @@ class Formsmd {
 					// Get value again, set to state, etc.
 					value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-str-check-input",
+						"fmd-form-str-check-input",
 						type,
 					);
 					instance.state.formData[name] = value;
@@ -1001,18 +1001,18 @@ class Formsmd {
 			// Number choice field
 			if (instance.state.fieldTypes[name] === "num-choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-num-check-input[name="${name}"]`,
+					`.fmd-form-num-check-input[name="${name}"]`,
 				);
 				if (input) {
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-num-check-input",
+						"fmd-form-num-check-input",
 						"radio",
 						value,
 					);
 					value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-num-check-input",
+						"fmd-form-num-check-input",
 						"radio",
 					);
 					value = value ? parseInt(value) : null;
@@ -1031,7 +1031,7 @@ class Formsmd {
 				instance.state.fieldTypes[name] === "time"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-datetime-input[name="${name}"]`,
+					`.fmd-form-datetime-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -1068,7 +1068,7 @@ class Formsmd {
 				instance.state.fieldTypes[name] === "tel"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-str-input[name="${name}"]`,
+					`.fmd-form-str-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -1080,7 +1080,7 @@ class Formsmd {
 			// Number field
 			if (instance.state.fieldTypes[name] === "number") {
 				const input = instance.container.querySelector(
-					`.bmd-form-num-input[name="${name}"]`,
+					`.fmd-form-num-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -1092,7 +1092,7 @@ class Formsmd {
 			// Select field
 			if (instance.state.fieldTypes[name] === "select") {
 				const select = instance.container.querySelector(
-					`.bmd-form-str-select[name="${name}"]`,
+					`.fmd-form-str-select[name="${name}"]`,
 				);
 				if (select) {
 					const options = select.querySelectorAll("option");
@@ -1104,7 +1104,7 @@ class Formsmd {
 							break;
 						}
 					}
-					if (select.classList.contains("bmd-form-countrycode-select")) {
+					if (select.classList.contains("fmd-form-countrycode-select")) {
 						instance.setTelInputPlaceholder(select);
 					}
 				}
@@ -1113,19 +1113,19 @@ class Formsmd {
 			// Choice field
 			if (instance.state.fieldTypes[name] === "choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-str-check-input[name="${name}"]`,
+					`.fmd-form-str-check-input[name="${name}"]`,
 				);
 				if (input) {
 					const type = input.getAttribute("type");
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-str-check-input",
+						"fmd-form-str-check-input",
 						type,
 						value,
 					);
 					instance.state.formData[name] = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-str-check-input",
+						"fmd-form-str-check-input",
 						type,
 					);
 					instance.reRenderBindElems(name);
@@ -1135,18 +1135,18 @@ class Formsmd {
 			// Number choice field
 			if (instance.state.fieldTypes[name] === "num-choice") {
 				const input = instance.container.querySelector(
-					`.bmd-form-num-check-input[name="${name}"]`,
+					`.fmd-form-num-check-input[name="${name}"]`,
 				);
 				if (input) {
 					instance.setRadioCheckboxValue(
 						name,
-						"bmd-form-num-check-input",
+						"fmd-form-num-check-input",
 						"radio",
 						String(value),
 					);
 					instance.state.formData[name] = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-num-check-input",
+						"fmd-form-num-check-input",
 						"radio",
 					);
 					instance.reRenderBindElems(name);
@@ -1160,7 +1160,7 @@ class Formsmd {
 				instance.state.fieldTypes[name] === "time"
 			) {
 				const input = instance.container.querySelector(
-					`.bmd-form-datetime-input[name="${name}"]`,
+					`.fmd-form-datetime-input[name="${name}"]`,
 				);
 				if (input) {
 					input.value = value;
@@ -1180,18 +1180,18 @@ class Formsmd {
 		const instance = this;
 
 		// Remove all errors
-		formField.querySelectorAll(".bmd-error").forEach((error) => {
+		formField.querySelectorAll(".fmd-error").forEach((error) => {
 			error.remove();
 		});
 
 		// Form fields with errors will have a type attribute
-		const type = formField.getAttribute("data-bmd-type");
+		const type = formField.getAttribute("data-fmd-type");
 
 		// Remove WAI-ARIA tags
 		// Choice field
 		if (type === "radio" || type === "checkbox") {
 			formField
-				.querySelectorAll(".bmd-form-str-check-input")
+				.querySelectorAll(".fmd-form-str-check-input")
 				.forEach((input) => {
 					input.removeAttribute("aria-invalid");
 					input.removeAttribute("aria-describedby");
@@ -1200,7 +1200,7 @@ class Formsmd {
 		// Number choice field
 		else if (type === "num-radio") {
 			formField
-				.querySelectorAll(".bmd-form-num-check-input")
+				.querySelectorAll(".fmd-form-num-check-input")
 				.forEach((input) => {
 					input.removeAttribute("aria-invalid");
 					const name = input.getAttribute("name");
@@ -1214,7 +1214,7 @@ class Formsmd {
 		// Datetime field
 		else if (type === "datetime-local" || type === "date" || type === "time") {
 			formField
-				.querySelectorAll(".bmd-form-datetime-input")
+				.querySelectorAll(".fmd-form-datetime-input")
 				.forEach((input) => {
 					input.removeAttribute("aria-invalid");
 					input.removeAttribute("aria-describedby");
@@ -1222,7 +1222,7 @@ class Formsmd {
 		}
 		// File field
 		else if (type === "file") {
-			formField.querySelectorAll(".bmd-form-file-input").forEach((input) => {
+			formField.querySelectorAll(".fmd-form-file-input").forEach((input) => {
 				input.removeAttribute("aria-invalid");
 				input.removeAttribute("aria-describedby");
 			});
@@ -1245,7 +1245,7 @@ class Formsmd {
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
 
@@ -1265,7 +1265,7 @@ class Formsmd {
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
 
@@ -1286,11 +1286,11 @@ class Formsmd {
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 
 		// Update placeholder of telephone input if country calling code <select>
-		if (e.target.classList.contains("bmd-form-countrycode-select")) {
+		if (e.target.classList.contains("fmd-form-countrycode-select")) {
 			instance.setTelInputPlaceholder(e.target);
 		}
 	};
@@ -1309,14 +1309,14 @@ class Formsmd {
 		const type = e.target.getAttribute("type");
 		const value = instance.getRadioCheckboxValue(
 			name,
-			"bmd-form-str-check-input",
+			"fmd-form-str-check-input",
 			type,
 		);
 		instance.state.formData[name] = value;
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
 
@@ -1332,13 +1332,13 @@ class Formsmd {
 
 		const name = e.target.getAttribute("name");
 		const value = parseInt(
-			instance.getRadioCheckboxValue(name, "bmd-form-num-check-input", "radio"),
+			instance.getRadioCheckboxValue(name, "fmd-form-num-check-input", "radio"),
 		);
 		instance.state.formData[name] = value;
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
 
@@ -1358,7 +1358,7 @@ class Formsmd {
 		if (instance.options.saveState) {
 			instance.saveFieldValue(name, value);
 		}
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
 		instance.reRenderBindElems(name);
 	};
 
@@ -1372,12 +1372,12 @@ class Formsmd {
 		const instance = this;
 
 		// Get the wrapper and inner section
-		const label = e.target.closest(".bmd-form-file-label");
-		const fileExistsSection = label.querySelector(".bmd-file-exists-section");
+		const label = e.target.closest(".fmd-form-file-label");
+		const fileExistsSection = label.querySelector(".fmd-file-exists-section");
 
 		// Reset first
-		instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
-		label.classList.remove("bmd-file-exists");
+		instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
+		label.classList.remove("fmd-file-exists");
 		fileExistsSection.innerHTML = "";
 
 		// Get the file and update wrapper depending on type
@@ -1409,24 +1409,24 @@ class Formsmd {
 			if (fileValid) {
 				if (imageFileTypes.includes(file.type)) {
 					fileExistsSection.innerHTML = [
-						`<span class="bmd-form-file-img-container">`,
+						`<span class="fmd-form-file-img-container">`,
 						`	<img src="${URL.createObjectURL(file)}" alt="${file.name}">`,
 						`</span>`,
-						`<span class="bmd-d-block bmd-mt-3">`,
-						`	<strong class="bmd-text-accent">${file.name}</strong>`,
+						`<span class="fmd-d-block fmd-mt-3">`,
+						`	<strong class="fmd-text-accent">${file.name}</strong>`,
 						`</span>\n`,
 					].join("\n");
 				} else {
 					fileExistsSection.innerHTML = [
-						`<span class="bmd-form-file-img-container">`,
-						`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M352 448l0-256-112 0c-26.5 0-48-21.5-48-48l0-112L64 32C46.3 32 32 46.3 32 64l0 384c0 17.7 14.3 32 32 32l256 0c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2L224 144c0 8.8 7.2 16 16 16l111.5 0zM0 64C0 28.7 28.7 0 64 0L220.1 0c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z"/></svg>`,
+						`<span class="fmd-form-file-img-container">`,
+						`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M352 448l0-256-112 0c-26.5 0-48-21.5-48-48l0-112L64 32C46.3 32 32 46.3 32 64l0 384c0 17.7 14.3 32 32 32l256 0c17.7 0 32-14.3 32-32zm-.5-288c-.7-2.8-2.1-5.4-4.2-7.4L231.4 36.7c-2.1-2.1-4.6-3.5-7.4-4.2L224 144c0 8.8 7.2 16 16 16l111.5 0zM0 64C0 28.7 28.7 0 64 0L220.1 0c12.7 0 24.9 5.1 33.9 14.1L369.9 129.9c9 9 14.1 21.2 14.1 33.9L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z"/></svg>`,
 						`</span>`,
-						`<span class="bmd-d-block bmd-mt-3">`,
-						`	<strong class="bmd-text-accent">${file.name}</strong>`,
+						`<span class="fmd-d-block fmd-mt-3">`,
+						`	<strong class="fmd-text-accent">${file.name}</strong>`,
 						`</span>\n`,
 					].join("\n");
 				}
-				label.classList.add("bmd-file-exists");
+				label.classList.add("fmd-file-exists");
 			}
 		}
 	};
@@ -1467,18 +1467,18 @@ class Formsmd {
 
 		// Get the input, wrapper and inner section
 		const fileInput = e.target
-			.closest(".bmd-form-field")
-			.querySelector('.bmd-form-file-input[type="file"]');
+			.closest(".fmd-form-field")
+			.querySelector('.fmd-form-file-input[type="file"]');
 		const label = e.target
-			.closest(".bmd-form-field")
-			.querySelector(".bmd-form-file-label");
-		const fileExistsSection = label.querySelector(".bmd-file-exists-section");
+			.closest(".fmd-form-field")
+			.querySelector(".fmd-form-file-label");
+		const fileExistsSection = label.querySelector(".fmd-file-exists-section");
 
 		// Reset
 		if (fileInput && label && fileExistsSection) {
 			fileInput.value = "";
-			instance.removeFieldErrors(e.target.closest(".bmd-form-field"));
-			label.classList.remove("bmd-file-exists");
+			instance.removeFieldErrors(e.target.closest(".fmd-form-field"));
+			label.classList.remove("fmd-file-exists");
 			fileExistsSection.innerHTML = "";
 		}
 	};
@@ -1491,7 +1491,7 @@ class Formsmd {
 	setBtnProcessing = (btn) => {
 		const instance = this;
 
-		btn.classList.add("bmd-btn-processing");
+		btn.classList.add("fmd-btn-processing");
 		const localization = instance.state.settings.localization;
 		btn.setAttribute("aria-label", getTranslation(localization, "loading"));
 	};
@@ -1504,14 +1504,14 @@ class Formsmd {
 	removeBtnProcessing = (btn) => {
 		const instance = this;
 
-		btn.classList.remove("bmd-btn-processing");
+		btn.classList.remove("fmd-btn-processing");
 		btn.removeAttribute("aria-label");
 		const localization = instance.state.settings.localization;
 		const footerPreviousBtn = instance.container.querySelector(
-			".bmd-footer .bmd-previous-btn",
+			".fmd-footer .fmd-previous-btn",
 		);
 		const footerNextBtn = instance.container.querySelector(
-			".bmd-footer .bmd-next-btn",
+			".fmd-footer .fmd-next-btn",
 		);
 		if (btn === footerPreviousBtn) {
 			btn.setAttribute(
@@ -1532,19 +1532,19 @@ class Formsmd {
 		const instance = this;
 
 		// Remove all field errors
-		slide.querySelectorAll(".bmd-form-field").forEach((formField) => {
+		slide.querySelectorAll(".fmd-form-field").forEach((formField) => {
 			instance.removeFieldErrors(formField);
 		});
 
 		// Remove all slide errors
-		slide.querySelectorAll(".bmd-error").forEach((error) => {
+		slide.querySelectorAll(".fmd-error").forEach((error) => {
 			error.remove();
 		});
 
 		// Remove WAI-ARIA tag from CTA button
 		const ctaBtn =
-			slide.querySelector(".bmd-submit-btn") ||
-			slide.querySelector(".bmd-next-btn");
+			slide.querySelector(".fmd-submit-btn") ||
+			slide.querySelector(".fmd-next-btn");
 		ctaBtn.removeAttribute("aria-describedby");
 	};
 
@@ -1559,8 +1559,8 @@ class Formsmd {
 		const error = document.createElement("div");
 		error.setAttribute("id", errorId);
 		error.innerHTML = [
-			`<div class="bmd-error">`,
-			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`<div class="fmd-error">`,
+			`	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
 			`	${message}`,
 			`</div>`,
 		].join("\n");
@@ -1591,17 +1591,17 @@ class Formsmd {
 		// These fields will have a type attribute
 		form
 			.querySelectorAll(
-				'.bmd-form-field[data-bmd-type="radio"][data-bmd-required], .bmd-form-field[data-bmd-type="checkbox"][data-bmd-required], .bmd-form-field[data-bmd-type="num-radio"][data-bmd-required], .bmd-form-field[data-bmd-type="datetime-local"], .bmd-form-field[data-bmd-type="date"], .bmd-form-field[data-bmd-type="time"], .bmd-form-field[data-bmd-type="file"]',
+				'.fmd-form-field[data-fmd-type="radio"][data-fmd-required], .fmd-form-field[data-fmd-type="checkbox"][data-fmd-required], .fmd-form-field[data-fmd-type="num-radio"][data-fmd-required], .fmd-form-field[data-fmd-type="datetime-local"], .fmd-form-field[data-fmd-type="date"], .fmd-form-field[data-fmd-type="time"], .fmd-form-field[data-fmd-type="file"]',
 			)
 			.forEach((formField) => {
-				const name = formField.getAttribute("data-bmd-name");
-				const type = formField.getAttribute("data-bmd-type");
+				const name = formField.getAttribute("data-fmd-name");
+				const type = formField.getAttribute("data-fmd-type");
 
 				// Required choice fields
 				if (type === "radio" || type === "checkbox") {
 					const value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-str-check-input",
+						"fmd-form-str-check-input",
 						type,
 					);
 					if (value.length === 0) {
@@ -1618,7 +1618,7 @@ class Formsmd {
 
 						// Add WAI-ARIA tags to the inputs
 						formField
-							.querySelectorAll(".bmd-form-str-check-input")
+							.querySelectorAll(".fmd-form-str-check-input")
 							.forEach((input) => {
 								input.setAttribute("aria-invalid", "true");
 								input.setAttribute("aria-describedby", errorId);
@@ -1629,7 +1629,7 @@ class Formsmd {
 				else if (type === "num-radio") {
 					const value = instance.getRadioCheckboxValue(
 						name,
-						"bmd-form-num-check-input",
+						"fmd-form-num-check-input",
 						"radio",
 					);
 					if (value.length === 0) {
@@ -1646,7 +1646,7 @@ class Formsmd {
 
 						// Add WAI-ARIA tags to the inputs
 						formField
-							.querySelectorAll(".bmd-form-num-check-input")
+							.querySelectorAll(".fmd-form-num-check-input")
 							.forEach((input) => {
 								input.setAttribute("aria-invalid", "true");
 								instance.setSingleAttribute(input, "aria-describedby", errorId);
@@ -1660,7 +1660,7 @@ class Formsmd {
 					type === "time"
 				) {
 					const value = formField.querySelector(
-						`.bmd-form-datetime-input[name="${name}"]`,
+						`.fmd-form-datetime-input[name="${name}"]`,
 					).value;
 
 					// Set up the pattern and error translation key
@@ -1691,7 +1691,7 @@ class Formsmd {
 
 						// Add WAI-ARIA tags to the input
 						formField
-							.querySelectorAll(".bmd-form-datetime-input")
+							.querySelectorAll(".fmd-form-datetime-input")
 							.forEach((input) => {
 								input.setAttribute("aria-invalid", "true");
 								input.setAttribute("aria-describedby", errorId);
@@ -1701,9 +1701,9 @@ class Formsmd {
 				// File fields
 				else if (type === "file") {
 					const sizeLimit = Number(
-						formField.getAttribute("data-bmd-size-limit"),
+						formField.getAttribute("data-fmd-size-limit"),
 					);
-					const file = formField.querySelector(".bmd-form-file-input").files[0];
+					const file = formField.querySelector(".fmd-form-file-input").files[0];
 					if (file) {
 						const fileSize = (file.size / 1024 / 1024).toFixed(4);
 						if (fileSize > sizeLimit) {
@@ -1720,7 +1720,7 @@ class Formsmd {
 
 							// Add WAI-ARIA tags to the input
 							formField
-								.querySelectorAll(".bmd-form-file-input")
+								.querySelectorAll(".fmd-form-file-input")
 								.forEach((input) => {
 									input.setAttribute("aria-invalid", "true");
 									input.setAttribute("aria-describedby", errorId);
@@ -1733,7 +1733,7 @@ class Formsmd {
 		// Focus on the first form field with error
 		if (formFieldsWithError.length > 0) {
 			const inputToFocus = formFieldsWithError[0].querySelector(
-				".bmd-form-str-check-input, .bmd-form-num-check-input, .bmd-form-datetime-input, .bmd-form-file-input",
+				".fmd-form-str-check-input, .fmd-form-num-check-input, .fmd-form-datetime-input, .fmd-form-file-input",
 			);
 			if (inputToFocus) {
 				inputToFocus.focus();
@@ -1762,16 +1762,16 @@ class Formsmd {
 		error.setAttribute("id", errorId);
 		const messageList = [];
 		if (messages.length > 0) {
-			messageList.push('<ul class="bmd-error-list">');
+			messageList.push('<ul class="fmd-error-list">');
 			for (const message of messages) {
 				messageList.push(`<li>${message}</li>`);
 			}
 			messageList.push("</ul>");
 		}
 		error.innerHTML = [
-			`<div class="bmd-error">`,
-			`	<div class="bmd-error-inner">`,
-			`		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
+			`<div class="fmd-error">`,
+			`	<div class="fmd-error-inner">`,
+			`		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-error-icon" aria-hidden="true" focusable="false"><path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>`,
 			`		${getTranslation(localization, "slide-error")}`,
 			`	</div>`,
 			`	${messageList.join("\n")}`,
@@ -1957,7 +1957,7 @@ class Formsmd {
 
 		// Add the password inputs (these are not in the state)
 		instance.container
-			.querySelectorAll('.bmd-form-password-input[type="password"]')
+			.querySelectorAll('.fmd-form-password-input[type="password"]')
 			.forEach((input) => {
 				formData.append(input.getAttribute("name"), input.value);
 			});
@@ -1966,7 +1966,7 @@ class Formsmd {
 		const processFiles = async () => {
 			const _fileFields = [];
 			const fileInputs = instance.container.querySelectorAll(
-				'.bmd-form-file-input[type="file"]',
+				'.fmd-form-file-input[type="file"]',
 			);
 
 			for (const input of fileInputs) {
@@ -1998,7 +1998,7 @@ class Formsmd {
 
 		// Add the current file clear checks (these are not in the state)
 		instance.container
-			.querySelectorAll('.bmd-form-file-clear-check-input[type="checkbox"]')
+			.querySelectorAll('.fmd-form-file-clear-check-input[type="checkbox"]')
 			.forEach((input) => {
 				const name = input.getAttribute("name");
 				formData.append(name, input.checked);
@@ -2077,7 +2077,7 @@ class Formsmd {
 		const instance = this;
 
 		const currentIndex = instance.state.slideData.currentIndex;
-		const slides = instance.container.querySelectorAll(".bmd-slide");
+		const slides = instance.container.querySelectorAll(".fmd-slide");
 		let prevSlide = slides[currentIndex];
 		let prevSlideIndex = currentIndex;
 
@@ -2086,7 +2086,7 @@ class Formsmd {
 			const slide = slides[i];
 
 			// If jump condition not present, this is the previous slide
-			if (!slide.hasAttribute("data-bmd-jump")) {
+			if (!slide.hasAttribute("data-fmd-jump")) {
 				prevSlide = slide;
 				prevSlideIndex = i;
 				break;
@@ -2095,7 +2095,7 @@ class Formsmd {
 			// Use Nunjucks to check jump condition
 			nunjucks.configure({ autoescape: false });
 			const jumpCondition = nunjucks.renderString(
-				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
+				`{% if ${slide.getAttribute("data-fmd-jump")} %}true{% endif %}`,
 				{
 					...instance.state.data,
 					...instance.state.formData,
@@ -2125,7 +2125,7 @@ class Formsmd {
 		const instance = this;
 
 		const currentIndex = instance.state.slideData.currentIndex;
-		const slides = instance.container.querySelectorAll(".bmd-slide");
+		const slides = instance.container.querySelectorAll(".fmd-slide");
 		let nextSlide = slides[currentIndex];
 		let nextSlideIndex = currentIndex;
 
@@ -2134,7 +2134,7 @@ class Formsmd {
 			const slide = slides[i];
 
 			// If jump condition not present, this is the next slide
-			if (!slide.hasAttribute("data-bmd-jump")) {
+			if (!slide.hasAttribute("data-fmd-jump")) {
 				nextSlide = slide;
 				nextSlideIndex = i;
 				break;
@@ -2143,7 +2143,7 @@ class Formsmd {
 			// Use Nunjucks to check jump condition
 			nunjucks.configure({ autoescape: false });
 			const jumpCondition = nunjucks.renderString(
-				`{% if ${slide.getAttribute("data-bmd-jump")} %}true{% endif %}`,
+				`{% if ${slide.getAttribute("data-fmd-jump")} %}true{% endif %}`,
 				{
 					...instance.state.data,
 					...instance.state.formData,
@@ -2170,12 +2170,12 @@ class Formsmd {
 	getSlideTransitionDuration = () => {
 		const instance = this;
 
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 
 		// If the duration is saved on the root element, return saved duration
-		if (rootElem.hasAttribute("data-bmd-slide-transition-duration")) {
+		if (rootElem.hasAttribute("data-fmd-slide-transition-duration")) {
 			return Number(
-				rootElem.getAttribute("data-bmd-slide-transition-duration"),
+				rootElem.getAttribute("data-fmd-slide-transition-duration"),
 			);
 		}
 		// Otherwise, calculate duration from CSS, save on root element, and return
@@ -2183,9 +2183,9 @@ class Formsmd {
 			let duration =
 				window
 					.getComputedStyle(rootElem)
-					.getPropertyValue("--bmd-slide-transition-duration") || "200ms";
+					.getPropertyValue("--fmd-slide-transition-duration") || "200ms";
 			duration = Number(duration.slice(0, -2));
-			rootElem.setAttribute("data-bmd-slide-transition-duration", duration);
+			rootElem.setAttribute("data-fmd-slide-transition-duration", duration);
 			return duration;
 		}
 	};
@@ -2206,13 +2206,13 @@ class Formsmd {
 		instance.state.slideData.currentIndex = index;
 
 		// Handle page progress (if applicable)
-		const pageProgress = instance.container.querySelector(".bmd-page-progress");
+		const pageProgress = instance.container.querySelector(".fmd-page-progress");
 		let slidePageProgress;
-		if (slide.hasAttribute("data-bmd-page-progress")) {
-			slidePageProgress = slide.getAttribute("data-bmd-page-progress");
-		} else if (slide.classList.contains("bmd-first-slide")) {
+		if (slide.hasAttribute("data-fmd-page-progress")) {
+			slidePageProgress = slide.getAttribute("data-fmd-page-progress");
+		} else if (slide.classList.contains("fmd-first-slide")) {
 			slidePageProgress = "0%";
-		} else if (slide.classList.contains("bmd-end-slide")) {
+		} else if (slide.classList.contains("fmd-end-slide")) {
 			slidePageProgress = "100%";
 		}
 		if (
@@ -2233,7 +2233,7 @@ class Formsmd {
 				slidePageProgress.replace("%", ""),
 			);
 			pageProgress
-				.querySelector(".bmd-progress-bar")
+				.querySelector(".fmd-progress-bar")
 				.setAttribute("style", `width: ${slidePageProgress}`);
 		}
 
@@ -2254,28 +2254,28 @@ class Formsmd {
 
 			// Handle the display and state of the footer slide control buttons
 			const footerBtnGroup = instance.container.querySelector(
-				".bmd-footer .bmd-btn-group",
+				".fmd-footer .fmd-btn-group",
 			);
 			if (footerBtnGroup) {
 				const footerPreviousBtn =
-					footerBtnGroup.querySelector(".bmd-previous-btn");
-				const footerNextBtn = footerBtnGroup.querySelector(".bmd-next-btn");
+					footerBtnGroup.querySelector(".fmd-previous-btn");
+				const footerNextBtn = footerBtnGroup.querySelector(".fmd-next-btn");
 
 				// Reset first
-				footerBtnGroup.classList.remove("bmd-d-none");
+				footerBtnGroup.classList.remove("fmd-d-none");
 				footerPreviousBtn.disabled = false;
 				footerNextBtn.disabled = false;
 
 				// Disable previous button for first slide
 				// Hide both for end slide
-				if (slide.classList.contains("bmd-first-slide")) {
+				if (slide.classList.contains("fmd-first-slide")) {
 					footerPreviousBtn.disabled = true;
-				} else if (slide.classList.contains("bmd-end-slide")) {
-					footerBtnGroup.classList.add("bmd-d-none");
+				} else if (slide.classList.contains("fmd-end-slide")) {
+					footerBtnGroup.classList.add("fmd-d-none");
 				}
 
 				// Also disable previous button if slide contains the specific attribute
-				if (slide.hasAttribute("data-bmd-disable-prev-btn")) {
+				if (slide.hasAttribute("data-fmd-disable-prev-btn")) {
 					footerPreviousBtn.disabled = true;
 				}
 			}
@@ -2284,13 +2284,13 @@ class Formsmd {
 			if (!fromInit || (fromInit && instance.options.isFullPage)) {
 				if (instance.state.settings.autofocus === "all-slides") {
 					const elemToAutofocus = slide.querySelector(
-						"input.bmd-form-str-input, textarea.bmd-form-str-input, input.bmd-form-num-input, select.bmd-form-str-select, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
+						"input.fmd-form-str-input, textarea.fmd-form-str-input, input.fmd-form-num-input, select.fmd-form-str-select, input.fmd-form-str-check-input, input.fmd-form-num-check-input, input.fmd-form-datetime-input, input.fmd-form-file-input",
 					);
 					if (elemToAutofocus) {
 						elemToAutofocus.focus();
 					}
 				} else {
-					const elemToAutofocus = slide.querySelector("[data-bmd-autofocus]");
+					const elemToAutofocus = slide.querySelector("[data-fmd-autofocus]");
 					if (elemToAutofocus) {
 						elemToAutofocus.focus();
 					}
@@ -2299,7 +2299,7 @@ class Formsmd {
 
 			// Set heights of <textarea> elements (in case of default values)
 			slide
-				.querySelectorAll("textarea.bmd-form-str-input")
+				.querySelectorAll("textarea.fmd-form-str-input")
 				.forEach((textarea) => {
 					instance.setTextareaHeight(textarea);
 				});
@@ -2316,14 +2316,14 @@ class Formsmd {
 	fadeInNextSlide = (activeSlide, nextSlide) => {
 		const instance = this;
 
-		activeSlide.classList.add("bmd-fade-out-to-top");
+		activeSlide.classList.add("fmd-fade-out-to-top");
 		setTimeout(function () {
-			activeSlide.classList.remove("bmd-slide-active");
-			nextSlide.classList.add("bmd-fade-in-from-bottom");
-			nextSlide.classList.add("bmd-slide-active");
+			activeSlide.classList.remove("fmd-slide-active");
+			nextSlide.classList.add("fmd-fade-in-from-bottom");
+			nextSlide.classList.add("fmd-slide-active");
 			setTimeout(function () {
-				nextSlide.classList.remove("bmd-fade-in-from-bottom");
-				activeSlide.classList.remove("bmd-fade-out-to-top");
+				nextSlide.classList.remove("fmd-fade-in-from-bottom");
+				activeSlide.classList.remove("fmd-fade-out-to-top");
 			}, instance.getSlideTransitionDuration());
 		}, instance.getSlideTransitionDuration());
 	};
@@ -2338,14 +2338,14 @@ class Formsmd {
 	fadeInPrevSlide = (activeSlide, prevSlide) => {
 		const instance = this;
 
-		activeSlide.classList.add("bmd-fade-out-to-bottom");
+		activeSlide.classList.add("fmd-fade-out-to-bottom");
 		setTimeout(function () {
-			activeSlide.classList.remove("bmd-slide-active");
-			prevSlide.classList.add("bmd-fade-in-from-top");
-			prevSlide.classList.add("bmd-slide-active");
+			activeSlide.classList.remove("fmd-slide-active");
+			prevSlide.classList.add("fmd-fade-in-from-top");
+			prevSlide.classList.add("fmd-slide-active");
 			setTimeout(function () {
-				prevSlide.classList.remove("bmd-fade-in-from-top");
-				activeSlide.classList.remove("bmd-fade-out-to-bottom");
+				prevSlide.classList.remove("fmd-fade-in-from-top");
+				activeSlide.classList.remove("fmd-fade-out-to-bottom");
 			}, instance.getSlideTransitionDuration());
 		}, instance.getSlideTransitionDuration());
 	};
@@ -2409,22 +2409,22 @@ class Formsmd {
 		const instance = this;
 
 		// Disable all clicks on root element
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 		rootElem.addEventListener("click", instance.disableAllClicks, true);
 
 		// Set CTA button and footer previous and next buttons to processing
 		const ctaBtn =
-			activeSlide.querySelector(".bmd-submit-btn") ||
-			activeSlide.querySelector(".bmd-next-btn");
+			activeSlide.querySelector(".fmd-submit-btn") ||
+			activeSlide.querySelector(".fmd-next-btn");
 		instance.setBtnProcessing(ctaBtn);
 		const footerPreviousBtn = instance.container.querySelector(
-			".bmd-footer .bmd-previous-btn",
+			".fmd-footer .fmd-previous-btn",
 		);
 		if (footerPreviousBtn) {
 			instance.setBtnProcessing(footerPreviousBtn);
 		}
 		const footerNextBtn = instance.container.querySelector(
-			".bmd-footer .bmd-next-btn",
+			".fmd-footer .fmd-next-btn",
 		);
 		if (footerNextBtn) {
 			instance.setBtnProcessing(footerNextBtn);
@@ -2436,7 +2436,7 @@ class Formsmd {
 			if (!instance.formValid(activeSlide)) {
 				// Remove all buttons from their processing states
 				instance.container
-					.querySelectorAll(".bmd-btn-processing")
+					.querySelectorAll(".fmd-btn-processing")
 					.forEach((btn) => {
 						instance.removeBtnProcessing(btn);
 					});
@@ -2460,7 +2460,7 @@ class Formsmd {
 
 			// Remove all buttons from their processing states
 			instance.container
-				.querySelectorAll(".bmd-btn-processing")
+				.querySelectorAll(".fmd-btn-processing")
 				.forEach((btn) => {
 					instance.removeBtnProcessing(btn);
 				});
@@ -2474,25 +2474,25 @@ class Formsmd {
 		// POST form data
 		const postCondition =
 			instance.state.settings.page === "form-slides" &&
-			(activeSlide.hasAttribute("data-bmd-post") ||
-				nextSlideAndIndex.slide.classList.contains("bmd-end-slide"))
+			(activeSlide.hasAttribute("data-fmd-post") ||
+				nextSlideAndIndex.slide.classList.contains("fmd-end-slide"))
 				? true
 				: false;
 		instance
 			.postFormData(
 				postCondition,
-				nextSlideAndIndex.slide.classList.contains("bmd-end-slide"),
+				nextSlideAndIndex.slide.classList.contains("fmd-end-slide"),
 			)
 			.then((promiseResult) => {
 				// Success
 				if (promiseResult.ok) {
 					// If next slide is the end slide: remove response id, remove form
 					// data from local storage, and redirect (if applicable)
-					if (nextSlideAndIndex.slide.classList.contains("bmd-end-slide")) {
+					if (nextSlideAndIndex.slide.classList.contains("fmd-end-slide")) {
 						instance.removeResponseId();
 						instance.removeSavedFormData();
 						const redirect =
-							nextSlideAndIndex.slide.getAttribute("data-bmd-redirect");
+							nextSlideAndIndex.slide.getAttribute("data-fmd-redirect");
 						if (redirect) {
 							window.location.href = redirect;
 							return;
@@ -2523,7 +2523,7 @@ class Formsmd {
 
 				// Remove all buttons from their processing states
 				instance.container
-					.querySelectorAll(".bmd-btn-processing")
+					.querySelectorAll(".fmd-btn-processing")
 					.forEach((btn) => {
 						instance.removeBtnProcessing(btn);
 					});
@@ -2537,7 +2537,7 @@ class Formsmd {
 						instance.disableAllClicks,
 						true,
 					);
-					if (nextSlideAndIndex.slide.classList.contains("bmd-end-slide")) {
+					if (nextSlideAndIndex.slide.classList.contains("fmd-end-slide")) {
 						instance.onCompletion(promiseResult.json);
 					}
 				}, instance.getSlideTransitionDuration() * 3);
@@ -2553,22 +2553,22 @@ class Formsmd {
 		const instance = this;
 
 		// Disable all clicks on root element
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 		rootElem.addEventListener("click", instance.disableAllClicks, true);
 
 		// Set CTA button and footer previous and next buttons to processing
 		const ctaBtn =
-			activeSlide.querySelector(".bmd-submit-btn") ||
-			activeSlide.querySelector(".bmd-next-btn");
+			activeSlide.querySelector(".fmd-submit-btn") ||
+			activeSlide.querySelector(".fmd-next-btn");
 		instance.setBtnProcessing(ctaBtn);
 		const footerPreviousBtn = instance.container.querySelector(
-			".bmd-footer .bmd-previous-btn",
+			".fmd-footer .fmd-previous-btn",
 		);
 		if (footerPreviousBtn) {
 			instance.setBtnProcessing(footerPreviousBtn);
 		}
 		const footerNextBtn = instance.container.querySelector(
-			".bmd-footer .bmd-next-btn",
+			".fmd-footer .fmd-next-btn",
 		);
 		if (footerNextBtn) {
 			instance.setBtnProcessing(footerNextBtn);
@@ -2583,7 +2583,7 @@ class Formsmd {
 
 			// Remove all buttons from their processing states
 			instance.container
-				.querySelectorAll(".bmd-btn-processing")
+				.querySelectorAll(".fmd-btn-processing")
 				.forEach((btn) => {
 					instance.removeBtnProcessing(btn);
 				});
@@ -2606,7 +2606,7 @@ class Formsmd {
 
 		// Remove all buttons from their processing states
 		instance.container
-			.querySelectorAll(".bmd-btn-processing")
+			.querySelectorAll(".fmd-btn-processing")
 			.forEach((btn) => {
 				instance.removeBtnProcessing(btn);
 			});
@@ -2629,7 +2629,7 @@ class Formsmd {
 
 		e.preventDefault();
 		const copyBtn = e.target;
-		const codeBlock = copyBtn.closest(".bmd-code-wrapper").querySelector("pre");
+		const codeBlock = copyBtn.closest(".fmd-code-wrapper").querySelector("pre");
 
 		// Copy code to clipboard
 		const range = document.createRange();
@@ -2666,19 +2666,19 @@ class Formsmd {
 		if (fromInit) {
 			// Blur header when scrolling over content
 			// This is done only for full page (header is always blurred inline)
-			const header = instance.container.querySelector(".bmd-header");
+			const header = instance.container.querySelector(".fmd-header");
 			if (header && instance.options.isFullPage) {
 				const pageProgress =
-					instance.container.querySelector(".bmd-page-progress");
+					instance.container.querySelector(".fmd-page-progress");
 				const pageProgressHeight = pageProgress ? pageProgress.offsetHeight : 0;
 				const heightToBlur = (pageProgressHeight + header.offsetHeight) / 3;
 				window.addEventListener(
 					"scroll",
 					function () {
 						if (window.scrollY > heightToBlur) {
-							header.classList.add("bmd-header-bg-blur");
+							header.classList.add("fmd-header-bg-blur");
 						} else {
-							header.classList.remove("bmd-header-bg-blur");
+							header.classList.remove("fmd-header-bg-blur");
 						}
 					},
 					false,
@@ -2687,13 +2687,13 @@ class Formsmd {
 
 			// Toggle color scheme button
 			instance.container
-				.querySelectorAll(".bmd-toggle-color-scheme-btn")
+				.querySelectorAll(".fmd-toggle-color-scheme-btn")
 				.forEach((btn) => {
 					btn.addEventListener("click", instance.toggleColorScheme);
 				});
 
 			// <form> submit
-			instance.container.querySelectorAll("form.bmd-slide").forEach((form) => {
+			instance.container.querySelectorAll("form.fmd-slide").forEach((form) => {
 				form.addEventListener("submit", function (e) {
 					instance.nextSlide(e.target);
 				});
@@ -2701,11 +2701,11 @@ class Formsmd {
 
 			// Slide next buttons
 			instance.container
-				.querySelectorAll(".bmd-slide .bmd-next-btn")
+				.querySelectorAll(".fmd-slide .fmd-next-btn")
 				.forEach((btn) => {
 					btn.addEventListener("click", function (e) {
-						if (!btn.classList.contains("bmd-btn-processing")) {
-							const parentSlide = btn.closest(".bmd-slide");
+						if (!btn.classList.contains("fmd-btn-processing")) {
+							const parentSlide = btn.closest(".fmd-slide");
 							instance.nextSlide(parentSlide);
 						}
 					});
@@ -2713,12 +2713,12 @@ class Formsmd {
 
 			// Footer previous button
 			instance.container
-				.querySelectorAll(".bmd-footer .bmd-previous-btn")
+				.querySelectorAll(".fmd-footer .fmd-previous-btn")
 				.forEach((btn) => {
 					btn.addEventListener("click", function (e) {
-						if (!btn.classList.contains("bmd-btn-processing")) {
+						if (!btn.classList.contains("fmd-btn-processing")) {
 							const activeSlide =
-								instance.container.querySelector(".bmd-slide-active");
+								instance.container.querySelector(".fmd-slide-active");
 							instance.prevSlide(activeSlide);
 						}
 					});
@@ -2726,14 +2726,14 @@ class Formsmd {
 
 			// Footer next button
 			instance.container
-				.querySelectorAll(".bmd-footer .bmd-next-btn")
+				.querySelectorAll(".fmd-footer .fmd-next-btn")
 				.forEach((btn) => {
 					btn.addEventListener("click", function (e) {
-						if (!btn.classList.contains("bmd-btn-processing")) {
+						if (!btn.classList.contains("fmd-btn-processing")) {
 							const activeSlide =
-								instance.container.querySelector(".bmd-slide-active");
+								instance.container.querySelector(".fmd-slide-active");
 							if (activeSlide.tagName === "FORM") {
-								activeSlide.querySelector(".bmd-submit-btn").click();
+								activeSlide.querySelector(".fmd-submit-btn").click();
 							} else {
 								instance.nextSlide(activeSlide);
 							}
@@ -2742,7 +2742,7 @@ class Formsmd {
 				});
 
 			// Restart buttons
-			instance.container.querySelectorAll(".bmd-restart-btn").forEach((btn) => {
+			instance.container.querySelectorAll(".fmd-restart-btn").forEach((btn) => {
 				btn.addEventListener("click", function (e) {
 					if (instance.options.isFullPage) {
 						window.location.reload();
@@ -2754,14 +2754,14 @@ class Formsmd {
 		}
 
 		// Copy buttons
-		container.querySelectorAll(".bmd-copy-btn").forEach((btn) => {
+		container.querySelectorAll(".fmd-copy-btn").forEach((btn) => {
 			btn.addEventListener("click", instance.copyCode);
 		});
 
 		// <input> elements
 		container
 			.querySelectorAll(
-				"input.bmd-form-str-input, input.bmd-form-num-input, input.bmd-form-str-check-input, input.bmd-form-num-check-input, input.bmd-form-datetime-input, input.bmd-form-file-input",
+				"input.fmd-form-str-input, input.fmd-form-num-input, input.fmd-form-str-check-input, input.fmd-form-num-check-input, input.fmd-form-datetime-input, input.fmd-form-file-input",
 			)
 			.forEach((input) => {
 				if (
@@ -2777,9 +2777,9 @@ class Formsmd {
 					input.getAttribute("type") === "radio" ||
 					input.getAttribute("type") === "checkbox"
 				) {
-					if (input.classList.contains("bmd-form-str-check-input")) {
+					if (input.classList.contains("fmd-form-str-check-input")) {
 						input.addEventListener("input", instance.choiceFieldOnInput);
-					} else if (input.classList.contains("bmd-form-num-check-input")) {
+					} else if (input.classList.contains("fmd-form-num-check-input")) {
 						input.addEventListener("input", instance.numChoiceFieldOnInput);
 					}
 				} else if (
@@ -2795,7 +2795,7 @@ class Formsmd {
 
 		// <textarea> elements
 		container
-			.querySelectorAll("textarea.bmd-form-str-input")
+			.querySelectorAll("textarea.fmd-form-str-input")
 			.forEach((textarea) => {
 				textarea.addEventListener("input", instance.textFieldOnInput);
 				textarea.addEventListener("input", instance.setTextareaHeightOnInput);
@@ -2803,13 +2803,13 @@ class Formsmd {
 
 		// <select> elements
 		container
-			.querySelectorAll("select.bmd-form-str-select")
+			.querySelectorAll("select.fmd-form-str-select")
 			.forEach((select) => {
 				select.addEventListener("input", instance.selectFieldOnInput);
 			});
 
 		// File input reset buttons
-		container.querySelectorAll(".bmd-form-file-reset-btn").forEach((btn) => {
+		container.querySelectorAll(".fmd-form-file-reset-btn").forEach((btn) => {
 			btn.addEventListener("click", instance.fileInputResetBtnOnClick);
 		});
 	};
@@ -2871,28 +2871,28 @@ class Formsmd {
 
 		// Add the root and body in case of inline
 		if (!instance.options.isFullPage) {
-			let rootElemClass = "bmd-root bmd-root-inline";
+			let rootElemClass = "fmd-root fmd-root-inline";
 			let rootElemStyle = "";
 
 			// Handle padding inline bottom
-			rootElemClass += " bmd-pb-custom";
-			rootElemStyle += ` --bmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
+			rootElemClass += " fmd-pb-custom";
+			rootElemStyle += ` --fmd-content-padding-bottom-custom: ${instance.options.paddingInlineBottom}px;`;
 			if (instance.options.paddingInlineBottom === 0) {
-				rootElemClass += " bmd-pb-0";
+				rootElemClass += " fmd-pb-0";
 			}
 
 			// Handle padding inline horizontal
-			rootElemClass += " bmd-px-custom";
-			rootElemStyle += ` --bmd-content-padding-x-custom: ${instance.options.paddingInlineHorizontal}px;`;
+			rootElemClass += " fmd-px-custom";
+			rootElemStyle += ` --fmd-content-padding-x-custom: ${instance.options.paddingInlineHorizontal}px;`;
 			if (instance.options.paddingInlineHorizontal === 0) {
-				rootElemClass += " bmd-px-0";
+				rootElemClass += " fmd-px-0";
 			}
 
 			// Handle padding inline top
-			rootElemClass += " bmd-pt-custom";
-			rootElemStyle += ` --bmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
+			rootElemClass += " fmd-pt-custom";
+			rootElemStyle += ` --fmd-content-padding-top-custom: ${instance.options.paddingInlineTop}px;`;
 			if (instance.options.paddingInlineTop === 0) {
-				rootElemClass += " bmd-pt-0";
+				rootElemClass += " fmd-pt-0";
 			}
 
 			instance.container.innerHTML = [
@@ -2900,14 +2900,14 @@ class Formsmd {
 				'	spellcheck="false"',
 				`	class="${rootElemClass}"`,
 				`	style="${rootElemStyle}"`,
-				`	data-bmd-color-scheme="${instance.state.settings["color-scheme"]}"`,
-				`	data-bmd-id="${instance.state.settings.id}"`,
+				`	data-fmd-color-scheme="${instance.state.settings["color-scheme"]}"`,
+				`	data-fmd-id="${instance.state.settings.id}"`,
 				">",
-				'	<div class="bmd-body">',
+				'	<div class="fmd-body">',
 				"		<noscript>Please turn on JavaScript to see this page.</noscript>",
-				'		<main class="bmd-main">',
-				'			<div class="bmd-loader-container">',
-				'				<div class="bmd-loader-spinner" role="status" aria-label="Loading"></div>',
+				'		<main class="fmd-main">',
+				'			<div class="fmd-loader-container">',
+				'				<div class="fmd-loader-spinner" role="status" aria-label="Loading"></div>',
 				"			</div>",
 				"		</main>",
 				"	</div>",
@@ -2968,29 +2968,29 @@ class Formsmd {
 		}
 
 		// Add the necessary attributes from the settings to the root
-		const rootElem = instance.container.querySelector(".bmd-root");
+		const rootElem = instance.container.querySelector(".fmd-root");
 		const rootSettingsAttributesMap = {
-			"browser": "data-bmd-browser",
-			"button-alignment": "data-bmd-button-alignment",
+			"browser": "data-fmd-browser",
+			"button-alignment": "data-fmd-button-alignment",
 			"dir": "dir",
-			"field-size": "data-bmd-field-size",
-			"font-size": "data-bmd-font-size",
-			"form-style": "data-bmd-form-style",
-			"header": "data-bmd-header",
-			"headings": "data-bmd-headings",
-			"id": "data-bmd-id",
-			"label-style": "data-bmd-label-style",
+			"field-size": "data-fmd-field-size",
+			"font-size": "data-fmd-font-size",
+			"form-style": "data-fmd-form-style",
+			"header": "data-fmd-header",
+			"headings": "data-fmd-headings",
+			"id": "data-fmd-id",
+			"label-style": "data-fmd-label-style",
 			"localization": "lang",
-			"placeholders": "data-bmd-placeholders",
-			"rounded": "data-bmd-rounded",
-			"vertical-alignment": "data-bmd-vertical-alignment",
+			"placeholders": "data-fmd-placeholders",
+			"rounded": "data-fmd-rounded",
+			"vertical-alignment": "data-fmd-vertical-alignment",
 		};
 		if (instance.options.setColorSchemeAttrsAgain) {
-			rootSettingsAttributesMap["color-scheme"] = "data-bmd-color-scheme";
+			rootSettingsAttributesMap["color-scheme"] = "data-fmd-color-scheme";
 			rootSettingsAttributesMap["color-scheme-scope"] =
-				"data-bmd-color-scheme-scope";
+				"data-fmd-color-scheme-scope";
 			rootSettingsAttributesMap["color-scheme-toggle"] =
-				"data-bmd-color-scheme-toggle";
+				"data-fmd-color-scheme-toggle";
 		}
 		for (const [key, value] of Object.entries(instance.state.settings)) {
 			if (rootSettingsAttributesMap[key] !== undefined) {
@@ -3012,7 +3012,7 @@ class Formsmd {
 		// Add the made in loader to the DOM body
 		const localization = instance.state.settings.localization;
 		nunjucks.configure({ autoescape: false });
-		instance.container.querySelector(".bmd-body").innerHTML =
+		instance.container.querySelector(".fmd-body").innerHTML =
 			nunjucks.renderString(madeInLoaderTemplate, {
 				settings: instance.state.settings,
 				translations: {
@@ -3080,17 +3080,17 @@ class Formsmd {
 			);
 			const bodyTemplate = bodyTemplateAndSettings.template;
 			instance.state.settings = bodyTemplateAndSettings.settings;
-			instance.container.querySelector(".bmd-body").innerHTML = bodyTemplate;
+			instance.container.querySelector(".fmd-body").innerHTML = bodyTemplate;
 
 			// Hide page progress, header and/or footer (if applicable)
 			if (instance.state.settings["page-progress"] === "hide") {
-				rootElem.setAttribute("data-bmd-page-progress", "hide");
+				rootElem.setAttribute("data-fmd-page-progress", "hide");
 			}
 			if (!instance.state.settings["header-render"]) {
-				rootElem.setAttribute("data-bmd-header", "hide");
+				rootElem.setAttribute("data-fmd-header", "hide");
 			}
 			if (!instance.state.settings["footer-render"]) {
-				rootElem.setAttribute("data-bmd-footer", "hide");
+				rootElem.setAttribute("data-fmd-footer", "hide");
 			}
 
 			// Create the content template and add to the DOM
@@ -3107,7 +3107,7 @@ class Formsmd {
 			instance.state.bindDivTemplates =
 				contentTemplateAndBindDivs.bindDivTemplates;
 			instance.container
-				.querySelector(".bmd-main-container")
+				.querySelector(".fmd-main-container")
 				.insertAdjacentHTML("beforeend", instance.template);
 
 			// Highlight code blocks
@@ -3148,14 +3148,14 @@ class Formsmd {
 
 			// Hide loader and show content
 			instance.container
-				.querySelector(".bmd-loader-container")
-				.classList.add("bmd-d-none");
+				.querySelector(".fmd-loader-container")
+				.classList.add("fmd-d-none");
 			if (instance.state.settings.page !== "single") {
 				const firstSlide =
-					instance.container.querySelectorAll(".bmd-slide")[
+					instance.container.querySelectorAll(".fmd-slide")[
 						instance.options.startSlide
 					];
-				firstSlide.classList.add("bmd-slide-active");
+				firstSlide.classList.add("fmd-slide-active");
 				instance.hasNewActiveSlide(
 					firstSlide,
 					instance.options.startSlide,
@@ -3163,12 +3163,12 @@ class Formsmd {
 				);
 			} else {
 				instance.container
-					.querySelector(".bmd-single")
-					.classList.add("bmd-single-active");
+					.querySelector(".fmd-single")
+					.classList.add("fmd-single-active");
 
 				// Set heights of <textarea> elements (in case of default values)
 				instance.container
-					.querySelectorAll("textarea.bmd-form-str-input")
+					.querySelectorAll("textarea.fmd-form-str-input")
 					.forEach((textarea) => {
 						instance.setTextareaHeight(textarea);
 					});

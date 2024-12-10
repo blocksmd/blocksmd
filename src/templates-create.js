@@ -28,26 +28,26 @@ function createStyles(settings) {
 	const altColorScheme = settings["color-scheme"] === "light" ? "dm" : "lm";
 	const baseStyles = [];
 	if (settings["font-family"] !== undefined) {
-		baseStyles.push(`--bmd-body-font-family: ${settings["font-family"]};`);
+		baseStyles.push(`--fmd-body-font-family: ${settings["font-family"]};`);
 	}
 	if (settings["backdrop-opacity"] !== undefined) {
 		baseStyles.push(
-			`--bmd-backdrop-opacity-${colorScheme}: ${settings["backdrop-opacity"]};`,
+			`--fmd-backdrop-opacity-${colorScheme}: ${settings["backdrop-opacity"]};`,
 		);
 	}
 	if (settings["backdrop-opacity-alt-scheme"] !== undefined) {
 		baseStyles.push(
-			`--bmd-backdrop-opacity-${altColorScheme}: ${settings["backdrop-opacity-alt-scheme"]};`,
+			`--fmd-backdrop-opacity-${altColorScheme}: ${settings["backdrop-opacity-alt-scheme"]};`,
 		);
 	}
 	if (settings["background-image"] !== undefined) {
 		baseStyles.push(
-			`--bmd-body-bg-img-${colorScheme}: ${settings["background-image"]};`,
+			`--fmd-body-bg-img-${colorScheme}: ${settings["background-image"]};`,
 		);
 	}
 	if (settings["background-image-alt-scheme"] !== undefined) {
 		baseStyles.push(
-			`--bmd-body-bg-img-${altColorScheme}: ${settings["background-image-alt-scheme"]};`,
+			`--fmd-body-bg-img-${altColorScheme}: ${settings["background-image-alt-scheme"]};`,
 		);
 	}
 
@@ -55,14 +55,14 @@ function createStyles(settings) {
 	const colorStyles = [];
 	const colorStylesAltScheme = [];
 	const colorVariablesPrefixMap = {
-		"accent": "--bmd-accent-",
-		"accent-alt-scheme": "--bmd-accent-",
-		"accent-foreground": "--bmd-accent-foreground-",
-		"accent-foreground-alt-scheme": "--bmd-accent-foreground-",
-		"background-color": "--bmd-body-bg-",
-		"background-color-alt-scheme": "--bmd-body-bg-",
-		"color": "--bmd-body-color-",
-		"color-alt-scheme": "--bmd-body-color-",
+		"accent": "--fmd-accent-",
+		"accent-alt-scheme": "--fmd-accent-",
+		"accent-foreground": "--fmd-accent-foreground-",
+		"accent-foreground-alt-scheme": "--fmd-accent-foreground-",
+		"background-color": "--fmd-body-bg-",
+		"background-color-alt-scheme": "--fmd-body-bg-",
+		"color": "--fmd-body-color-",
+		"color-alt-scheme": "--fmd-body-color-",
 	};
 	for (const [key, value] of Object.entries(settings)) {
 		if (colorVariablesPrefixMap[key] !== undefined) {
@@ -88,8 +88,8 @@ function createStyles(settings) {
 	// Create the selector using the id
 	const selector =
 		settings.id !== ""
-			? `.bmd-root[data-bmd-id="${settings.id}"]`
-			: ".bmd-root";
+			? `.fmd-root[data-fmd-id="${settings.id}"]`
+			: ".fmd-root";
 
 	// Add the base styles block
 	if (baseStyles.length > 0) {
@@ -102,7 +102,7 @@ function createStyles(settings) {
 			styleBlocks.push(`${selector} {${colorStyles.join("")}}`);
 		} else {
 			styleBlocks.push(
-				`${selector}[data-bmd-color-scheme="dark"] {${colorStyles.join("")}}`,
+				`${selector}[data-fmd-color-scheme="dark"] {${colorStyles.join("")}}`,
 			);
 		}
 	}
@@ -111,7 +111,7 @@ function createStyles(settings) {
 	if (colorStylesAltScheme.length > 0) {
 		if (settings["color-scheme"] === "light") {
 			styleBlocks.push(
-				`${selector}[data-bmd-color-scheme="dark"] {${colorStylesAltScheme.join("")}}`,
+				`${selector}[data-fmd-color-scheme="dark"] {${colorStylesAltScheme.join("")}}`,
 			);
 		} else {
 			styleBlocks.push(`${selector} {${colorStylesAltScheme.join("")}\n}`);
@@ -122,38 +122,38 @@ function createStyles(settings) {
 }
 
 const madeInLoaderTemplate = `
-<div class="bmd-backdrop"></div>
+<div class="fmd-backdrop"></div>
 
-<main class="bmd-main">
-	<div class="bmd-main-container">
-		<div class="bmd-loader-container">
-			<div class="bmd-text-center bmd-mb-3">
+<main class="fmd-main">
+	<div class="fmd-main-container">
+		<div class="fmd-loader-container">
+			<div class="fmd-text-center fmd-mb-3">
 				{% if settings["formsmd-branding"] != "hide" %}
 				{{ translations.madeInLoader | safe }}
 				{% else %}
-				<div class="bmd-specific-fs-20 bmd-text-emphasis bmd-fw-bold">{{ translations.loading }}...</div>
+				<div class="fmd-specific-fs-20 fmd-text-emphasis fmd-fw-bold">{{ translations.loading }}...</div>
 				{% endif %}
 			</div>
-			<div class="bmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
+			<div class="fmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
 		</div>
 	</div>
 </main>
 `;
 
 const bodyTemplate = `
-<div class="bmd-backdrop"></div>
+<div class="fmd-backdrop"></div>
 
 {% if settings["page-progress"] != "hide" %}
-<div class="bmd-page-progress">
-	<div class="bmd-progress">
-		<div class="bmd-progress-bar" style="width: 0%"></div>
+<div class="fmd-page-progress">
+	<div class="fmd-progress">
+		<div class="fmd-progress-bar" style="width: 0%"></div>
 	</div>
 </div>
 {% endif %}
 
 {% if settings["header-render"] %}
-<header class="bmd-header">
-	<div class="bmd-header-container">
+<header class="fmd-header">
+	<div class="fmd-header-container">
 		{% if settings.brand != undefined %}
 		{{ settings.brand | safe }}
 		{% if settings["brand-alt-scheme"] != undefined %}
@@ -167,42 +167,42 @@ const bodyTemplate = `
 </header>
 {% endif %}
 
-<main class="bmd-main">
-	<div class="bmd-main-container">
-		<div class="bmd-loader-container">
-			<div class="bmd-text-center bmd-mb-3">
+<main class="fmd-main">
+	<div class="fmd-main-container">
+		<div class="fmd-loader-container">
+			<div class="fmd-text-center fmd-mb-3">
 				{% if settings["formsmd-branding"] != "hide" %}
 				{{ translations.madeInLoader | safe }}
 				{% else %}
-				<div class="bmd-specific-fs-20 bmd-text-emphasis bmd-fw-bold">{{ translations.loading }}...</div>
+				<div class="fmd-specific-fs-20 fmd-text-emphasis fmd-fw-bold">{{ translations.loading }}...</div>
 				{% endif %}
 			</div>
-			<div class="bmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
+			<div class="fmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
 		</div>
 	</div>
 </main>
 
 {% if settings["footer-render"] %}
-<footer class="bmd-footer">
-	<div class="bmd-footer-inner">
+<footer class="fmd-footer">
+	<div class="fmd-footer-inner">
 		{% if settings["color-scheme-toggle"] == "show" %}
-		<button type="button" class="bmd-toggle-color-scheme-btn bmd-btn bmd-btn-accent bmd-btn-control bmd-btn-control-square bmd-d-flex bmd-align-items-center bmd-justify-content-center" aria-label="{{ translations.toggleColorSchemeBtn }}">
-			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="bmd-icon" aria-hidden="true" focusable="false"><path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clipRule="evenodd" /></svg>
+		<button type="button" class="fmd-toggle-color-scheme-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="{{ translations.toggleColorSchemeBtn }}">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fmd-icon" aria-hidden="true" focusable="false"><path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clipRule="evenodd" /></svg>
 		</button>
 		{% endif %}
 		{% if settings["slide-controls"] != "hide" and settings.page != "single" %}
-		<div class="bmd-btn-group" role="group">
-			<button type="button" class="bmd-previous-btn bmd-btn bmd-btn-accent bmd-btn-control bmd-btn-control-square bmd-d-flex bmd-align-items-center bmd-justify-content-center" aria-label="{{ translations.previousBtn }}" disabled>
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>
+		<div class="fmd-btn-group" role="group">
+			<button type="button" class="fmd-previous-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="{{ translations.previousBtn }}" disabled>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z"/></svg>
 			</button>
-			<div class="bmd-btn-group-vr"><div class="bmd-btn-group-vr-inner"></div></div>
-			<button type="button" class="bmd-next-btn bmd-btn bmd-btn-accent bmd-btn-control bmd-btn-control-square bmd-d-flex bmd-align-items-center bmd-justify-content-center" aria-label="{{ translations.nextBtn }}">
-				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
+			<div class="fmd-btn-group-vr"><div class="fmd-btn-group-vr-inner"></div></div>
+			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="{{ translations.nextBtn }}">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>
 			</button>
 		</div>
 		{% endif %}
 		{% if settings["formsmd-branding"] != "hide" %}
-		<a href="https://forms.md" target="_blank" class="bmd-btn bmd-btn-accent bmd-btn-control">
+		<a href="https://forms.md" target="_blank" class="fmd-btn fmd-btn-accent fmd-btn-control">
 			{{ translations.madeInBtn | safe }}
 		</a>
 		{% endif %}
@@ -234,23 +234,23 @@ function createBodyTemplate(settings) {
 	// alternate color scheme brand is also provided
 	if (settings.brand !== undefined) {
 		let brand = marked.parseInline(settings.brand);
-		brand = addReservedClass(brand, "bmd-header-brand");
+		brand = addReservedClass(brand, "fmd-header-brand");
 		if (settings["brand-alt-scheme"] !== undefined) {
 			brand =
 				settings["color-scheme"] === "light"
-					? addReservedClass(brand, "bmd-hide-dm")
-					: addReservedClass(brand, "bmd-hide-lm");
+					? addReservedClass(brand, "fmd-hide-dm")
+					: addReservedClass(brand, "fmd-hide-lm");
 		}
 		settings.brand = brand;
 
 		// Parse the brand for the alternate color scheme (if provided)
 		if (settings["brand-alt-scheme"] !== undefined) {
 			let brandAltScheme = marked.parseInline(settings["brand-alt-scheme"]);
-			brandAltScheme = addReservedClass(brandAltScheme, "bmd-header-brand");
+			brandAltScheme = addReservedClass(brandAltScheme, "fmd-header-brand");
 			brandAltScheme =
 				settings["color-scheme"] === "light"
-					? addReservedClass(brandAltScheme, "bmd-hide-lm")
-					: addReservedClass(brandAltScheme, "bmd-hide-dm");
+					? addReservedClass(brandAltScheme, "fmd-hide-lm")
+					: addReservedClass(brandAltScheme, "fmd-hide-dm");
 			settings["brand-alt-scheme"] = brandAltScheme;
 		}
 	}
@@ -258,10 +258,10 @@ function createBodyTemplate(settings) {
 	// Parse the CTA (if provided)
 	if (settings.cta !== undefined) {
 		let cta = marked.parseInline(settings.cta);
-		cta = addReservedClass(cta, "bmd-btn");
-		cta = addReservedClass(cta, "bmd-btn-accent");
-		cta = addReservedClass(cta, "bmd-btn-control");
-		cta = addReservedClass(cta, "bmd-ms-auto");
+		cta = addReservedClass(cta, "fmd-btn");
+		cta = addReservedClass(cta, "fmd-btn-accent");
+		cta = addReservedClass(cta, "fmd-btn-control");
+		cta = addReservedClass(cta, "fmd-ms-auto");
 		settings.cta = cta;
 	}
 
@@ -337,8 +337,8 @@ function createContentTemplate(template, settings, data, windowAndSanitize) {
 		);
 	} else {
 		template = [
-			`<div class="bmd-single">`,
-			`	<div class="bmd-grid">`,
+			`<div class="fmd-single">`,
+			`	<div class="fmd-grid">`,
 			`		<markdown>`,
 			`		${template}`,
 			`		</markdown>`,

@@ -116,7 +116,7 @@ class Composer {
 	 * @property {"light"|"dark"} [colorScheme] The default or initial color scheme of the page. Default is `"light"`.
 	 * @property {"domain-wide"|"isolate"} [colorSchemeScope] Determines how color scheme preference is saved and applied. Default is `"domain-wide"`.
 	 * @property {"show"} [colorSchemeToggle] If set to `"show"`, a toggle button will be available in the footer.
-	 * @property {string} [cssPrefix] Prefix added to all CSS classes. Default is `"bmd-"`.
+	 * @property {string} [cssPrefix] Prefix added to all CSS classes. Default is `"fmd-"`.
 	 * @property {string} [cta] Adds a call to action link styled as a button on the header (must be valid Markdown link).
 	 * @property {"ltr"|"rtl"} [dir] The direction of the page's text. Default is `"ltr"`.
 	 * @property {string} [favicon] The favicon of the page.

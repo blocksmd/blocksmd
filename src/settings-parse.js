@@ -241,7 +241,7 @@ function getDefaultSettings() {
 	return {
 		"color-scheme": "light",
 		"color-scheme-scope": "domain-wide",
-		"css-prefix": "bmd-",
+		"css-prefix": "fmd-",
 		"dir": "ltr",
 		"form-delimiter": "|",
 		"get-format": "json",

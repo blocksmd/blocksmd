@@ -13,9 +13,9 @@ const translations = {
 		"end-slide-subtitle": "You've reached the end.",
 		"file-input-change": "Change",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">choose file</strong><span class="bmd-xs:d-none"> or drag here</span>',
+			'<strong class="fmd-text-accent">choose file</strong><span class="fmd-xs:d-none"> or drag here</span>',
 		"file-input-clear-check":
-			'Clear<span class="bmd-visually-hidden"> current file</span>',
+			'Clear<span class="fmd-visually-hidden"> current file</span>',
 		"file-input-currently": "Currently",
 		"file-input-reset-btn": "Remove chosen file",
 		"file-input-size-error": "File exceeds the size limit.",
@@ -26,9 +26,9 @@ const translations = {
 		"list-check": "Not checked",
 		"list-checked": "Checked",
 		"loading": "Loading",
-		"made-in-btn": 'Made in <strong class="bmd-antialiased">Forms.md</strong>',
+		"made-in-btn": 'Made in <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">Made in</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">Made in</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "Next",
 		"nps-label-end": "Extremely likely",
 		"nps-label-start": "Not likely at all",
@@ -62,9 +62,9 @@ const translations = {
 		"end-slide-subtitle": "لقد وصلت إلى النهاية.",
 		"file-input-change": "تغيير",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">اختر ملفاً</strong><span class="bmd-xs:d-none"> أو اسحب إلى هنا</span>',
+			'<strong class="fmd-text-accent">اختر ملفاً</strong><span class="fmd-xs:d-none"> أو اسحب إلى هنا</span>',
 		"file-input-clear-check":
-			'مسح<span class="bmd-visually-hidden"> الملف الحالي</span>',
+			'مسح<span class="fmd-visually-hidden"> الملف الحالي</span>',
 		"file-input-currently": "حالياً",
 		"file-input-reset-btn": "إزالة الملف المختار",
 		"file-input-size-error": "الملف يتجاوز الحد المسموح به للحجم.",
@@ -75,9 +75,9 @@ const translations = {
 		"list-check": "غير محدد",
 		"list-checked": "محدد",
 		"loading": "جاري التحميل",
-		"made-in-btn": 'صنع في <strong class="bmd-antialiased">Forms.md</strong>',
+		"made-in-btn": 'صنع في <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">صنع في</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">صنع في</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "التالي",
 		"nps-label-end": "محتمل جداً",
 		"nps-label-start": "غير محتمل إطلاقاً",
@@ -112,9 +112,9 @@ const translations = {
 		"end-slide-subtitle": "আপনি শেষ পর্যন্ত পৌঁছেছেন।",
 		"file-input-change": "পালটান",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">ফাইল বেছে নিন</strong><span class="bmd-xs:d-none"> বা এখানে টেনে আনুন</span>',
+			'<strong class="fmd-text-accent">ফাইল বেছে নিন</strong><span class="fmd-xs:d-none"> বা এখানে টেনে আনুন</span>',
 		"file-input-clear-check":
-			'সাফ<span class="bmd-visually-hidden"> করুন বর্তমান ফাইল</span>',
+			'সাফ<span class="fmd-visually-hidden"> করুন বর্তমান ফাইল</span>',
 		"file-input-currently": "বর্তমানে",
 		"file-input-reset-btn": "নির্বাচিত ফাইল সরান",
 		"file-input-size-error": "ফাইলের সাইজ সীমা ছাড়িয়ে গেছে।",
@@ -125,9 +125,9 @@ const translations = {
 		"list-check": "চিহ্নিত না",
 		"list-checked": "চিহ্নিত",
 		"loading": "লোড হচ্ছে",
-		"made-in-btn": '<strong class="bmd-antialiased">Forms.md</strong> তে তৈরি',
+		"made-in-btn": '<strong class="fmd-antialiased">Forms.md</strong> তে তৈরি',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div><div class="bmd-specific-fs-14">তে তৈরি</div>',
+			'<div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div><div class="fmd-specific-fs-14">তে তৈরি</div>',
 		"next-btn": "পরবর্তী",
 		"nps-label-end": "অত্যন্ত সম্ভাবনাময়",
 		"nps-label-start": "কোনো সম্ভাবনা নেই",
@@ -161,9 +161,9 @@ const translations = {
 		"end-slide-subtitle": "Sie haben das Ende erreicht.",
 		"file-input-change": "Ändern",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">Datei auswählen</strong><span class="bmd-xs:d-none"> oder hierher ziehen</span>',
+			'<strong class="fmd-text-accent">Datei auswählen</strong><span class="fmd-xs:d-none"> oder hierher ziehen</span>',
 		"file-input-clear-check":
-			'Löschen<span class="bmd-visually-hidden"> aktuelle Datei</span>',
+			'Löschen<span class="fmd-visually-hidden"> aktuelle Datei</span>',
 		"file-input-currently": "Aktuell",
 		"file-input-reset-btn": "Ausgewählte Datei entfernen",
 		"file-input-size-error": "Datei überschreitet das Größenlimit.",
@@ -175,9 +175,9 @@ const translations = {
 		"list-checked": "Markiert",
 		"loading": "Lädt",
 		"made-in-btn":
-			'Erstellt mit <strong class="bmd-antialiased">Forms.md</strong>',
+			'Erstellt mit <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">Erstellt mit</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">Erstellt mit</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "Weiter",
 		"nps-label-end": "Äußerst wahrscheinlich",
 		"nps-label-start": "Überhaupt nicht wahrscheinlich",
@@ -211,9 +211,9 @@ const translations = {
 		"end-slide-subtitle": "Has llegado al final.",
 		"file-input-change": "Cambiar",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">elige el archivo</strong><span class="bmd-xs:d-none"> o arrastra aquí</span>',
+			'<strong class="fmd-text-accent">elige el archivo</strong><span class="fmd-xs:d-none"> o arrastra aquí</span>',
 		"file-input-clear-check":
-			'Borrar<span class="bmd-visually-hidden"> el archivo actual</span>',
+			'Borrar<span class="fmd-visually-hidden"> el archivo actual</span>',
 		"file-input-currently": "Actualmente",
 		"file-input-reset-btn": "Eliminar el archivo elegido",
 		"file-input-size-error": "El archivo excede el límite de tamaño.",
@@ -225,9 +225,9 @@ const translations = {
 		"list-checked": "Comprobado",
 		"loading": "Cargando",
 		"made-in-btn":
-			'Fabricado en <strong class="bmd-antialiased">Forms.md</strong>',
+			'Fabricado en <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">Fabricado en</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">Fabricado en</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "Siguiente",
 		"nps-label-end": "Extremadamente probable",
 		"nps-label-start": "Nada probable",
@@ -261,9 +261,9 @@ const translations = {
 		"end-slide-subtitle": "Vous êtes arrivé à la fin.",
 		"file-input-change": "Modifier",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">choisir un fichier</strong><span class="bmd-xs:d-none"> ou déposer ici</span>',
+			'<strong class="fmd-text-accent">choisir un fichier</strong><span class="fmd-xs:d-none"> ou déposer ici</span>',
 		"file-input-clear-check":
-			'Effacer<span class="bmd-visually-hidden"> le fichier actuel</span>',
+			'Effacer<span class="fmd-visually-hidden"> le fichier actuel</span>',
 		"file-input-currently": "Actuellement",
 		"file-input-reset-btn": "Supprimer le fichier choisi",
 		"file-input-size-error": "Le fichier dépasse la limite de taille.",
@@ -275,9 +275,9 @@ const translations = {
 		"list-checked": "Coché",
 		"loading": "Chargement",
 		"made-in-btn":
-			'Créé avec <strong class="bmd-antialiased">Forms.md</strong>',
+			'Créé avec <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">Créé avec</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">Créé avec</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "Suivant",
 		"nps-label-end": "Extrêmement probable",
 		"nps-label-start": "Pas du tout probable",
@@ -311,9 +311,9 @@ const translations = {
 		"end-slide-subtitle": "最後まで読んでいただきました。",
 		"file-input-change": "変更",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">ファイルを選択</strong><span class="bmd-xs:d-none"> またはここにドラッグ</span>',
+			'<strong class="fmd-text-accent">ファイルを選択</strong><span class="fmd-xs:d-none"> またはここにドラッグ</span>',
 		"file-input-clear-check":
-			'クリア<span class="bmd-visually-hidden"> 現在のファイル</span>',
+			'クリア<span class="fmd-visually-hidden"> 現在のファイル</span>',
 		"file-input-currently": "現在",
 		"file-input-reset-btn": "選択したファイルを削除",
 		"file-input-size-error": "ファイルサイズが制限を超えています。",
@@ -324,9 +324,9 @@ const translations = {
 		"list-check": "未チェック",
 		"list-checked": "チェック済み",
 		"loading": "読み込み中",
-		"made-in-btn": '<strong class="bmd-antialiased">Forms.md</strong> で作成',
+		"made-in-btn": '<strong class="fmd-antialiased">Forms.md</strong> で作成',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">作成：</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">作成：</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "次へ",
 		"nps-label-end": "非常にそう思う",
 		"nps-label-start": "全くそう思わない",
@@ -360,9 +360,9 @@ const translations = {
 		"end-slide-subtitle": "Você chegou ao fim.",
 		"file-input-change": "Alterar",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">escolher arquivo</strong><span class="bmd-xs:d-none"> ou arraste aqui</span>',
+			'<strong class="fmd-text-accent">escolher arquivo</strong><span class="fmd-xs:d-none"> ou arraste aqui</span>',
 		"file-input-clear-check":
-			'Limpar<span class="bmd-visually-hidden"> arquivo atual</span>',
+			'Limpar<span class="fmd-visually-hidden"> arquivo atual</span>',
 		"file-input-currently": "Atualmente",
 		"file-input-reset-btn": "Remover arquivo escolhido",
 		"file-input-size-error": "O arquivo excede o limite de tamanho.",
@@ -373,9 +373,9 @@ const translations = {
 		"list-check": "Não marcado",
 		"list-checked": "Marcado",
 		"loading": "Carregando",
-		"made-in-btn": 'Feito em <strong class="bmd-antialiased">Forms.md</strong>',
+		"made-in-btn": 'Feito em <strong class="fmd-antialiased">Forms.md</strong>',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">Feito em</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">Feito em</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "Próximo",
 		"nps-label-end": "Extremamente provável",
 		"nps-label-start": "Nada provável",
@@ -409,9 +409,9 @@ const translations = {
 		"end-slide-subtitle": "您已到达末尾。",
 		"file-input-change": "更改",
 		"file-input-choose":
-			'<strong class="bmd-text-accent">选择文件</strong><span class="bmd-xs:d-none"> 或拖放至此</span>',
+			'<strong class="fmd-text-accent">选择文件</strong><span class="fmd-xs:d-none"> 或拖放至此</span>',
 		"file-input-clear-check":
-			'清除<span class="bmd-visually-hidden"> 当前文件</span>',
+			'清除<span class="fmd-visually-hidden"> 当前文件</span>',
 		"file-input-currently": "当前",
 		"file-input-reset-btn": "移除所选文件",
 		"file-input-size-error": "文件超出大小限制。",
@@ -422,9 +422,9 @@ const translations = {
 		"list-check": "未选中",
 		"list-checked": "已选中",
 		"loading": "加载中",
-		"made-in-btn": '由 <strong class="bmd-antialiased">Forms.md</strong> 制作',
+		"made-in-btn": '由 <strong class="fmd-antialiased">Forms.md</strong> 制作',
 		"made-in-loader":
-			'<div class="bmd-specific-fs-14">由</div><div class="bmd-specific-fs-20 bmd-text-emphasis"><strong>Forms.md</strong></div>',
+			'<div class="fmd-specific-fs-14">由</div><div class="fmd-specific-fs-20 fmd-text-emphasis"><strong>Forms.md</strong></div>',
 		"next-btn": "下一步",
 		"nps-label-end": "非常可能",
 		"nps-label-start": "完全不可能",

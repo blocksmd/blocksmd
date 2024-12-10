@@ -46,7 +46,7 @@ function parseDivs(template, cssPrefix) {
 				for (let attr of extracted) {
 					attr = attr.trim();
 					if (attr) {
-						bindAttrs.push(`data-bmd-bind-${attr}`);
+						bindAttrs.push(`data-fmd-bind-${attr}`);
 					}
 				}
 				attrs =
@@ -59,7 +59,7 @@ function parseDivs(template, cssPrefix) {
 			// If data-binding attributes are present, add those attributes
 			// Also save the content and reference
 			if (bindAttrs.length > 0) {
-				bindAttrsStr = ` ${bindAttrs.join(" ")} data-bmd-bind-template-ref="${bindDivCount.toString()}"`;
+				bindAttrsStr = ` ${bindAttrs.join(" ")} data-fmd-bind-template-ref="${bindDivCount.toString()}"`;
 				bindDivTemplates[bindDivCount.toString()] = content;
 				bindDivCount += 1;
 			}
@@ -72,7 +72,7 @@ function parseDivs(template, cssPrefix) {
 		}
 
 		// Add the reserved class name to the start tag
-		startTag = addReservedClass(startTag, "bmd-grid");
+		startTag = addReservedClass(startTag, "fmd-grid");
 
 		return `\n${startTag}${content}</div>\n`;
 	});
@@ -94,7 +94,7 @@ function parseDivs(template, cssPrefix) {
 function parseBindSpans(template) {
 	return template.replace(
 		/\{\$\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\$\}/g,
-		"<span data-bmd-bind-$1>{{ $1 }}</span>",
+		"<span data-fmd-bind-$1>{{ $1 }}</span>",
 	);
 }
 

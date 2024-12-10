@@ -12,7 +12,7 @@ Hello {$ name $}!
 const expectedTemplate1 = `
 # Heading
 
-Hello <span data-bmd-bind-name>{{ name }}</span>!
+Hello <span data-fmd-bind-name>{{ name }}</span>!
 `;
 
 test("Case 1", () => {
@@ -29,11 +29,11 @@ I'm {$age$} years old.
 > {$   quote  $}
 `;
 const expectedTemplate2 = `
-# Hello, I'm <span data-bmd-bind-name>{{ name }}</span>
+# Hello, I'm <span data-fmd-bind-name>{{ name }}</span>
 
-I'm <span data-bmd-bind-age>{{ age }}</span> years old.
+I'm <span data-fmd-bind-age>{{ age }}</span> years old.
 
-> <span data-bmd-bind-quote>{{ quote }}</span>
+> <span data-fmd-bind-quote>{{ quote }}</span>
 `;
 
 test("Case 2 (multiple binds and weird formatting)", () => {
@@ -52,7 +52,7 @@ Paragraph {$ random   word  $}{$ 123 $} {$ x y z $}
 const expectedTemplate3 = `
 # Heading
 
-Paragraph <span data-bmd-bind-word>{{ word }}</span>
+Paragraph <span data-fmd-bind-word>{{ word }}</span>
 
 Paragraph {$ random   word  $}{$ 123 $} {$ x y z $}
 `;
