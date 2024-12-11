@@ -387,6 +387,217 @@ describe("Formsmd", () => {
 			formsmd.setFormDataToState();
 			expect(formsmd.state.formData.testField).toBe("testValue");
 		});
+
+		test("setFormDataFromURL should parse and set URL parameters", () => {
+			// Mock getRadioCheckboxValue method
+			const getRadioCheckboxValueSpy = jest.spyOn(
+				formsmd,
+				"getRadioCheckboxValue",
+			);
+			getRadioCheckboxValueSpy.mockImplementation((name, inputClass, type) => {
+				if (name === "radioField" && type === "radio") {
+					return "radioValue";
+				}
+				if (name === "checkboxField" && type === "checkbox") {
+					return ["check1", "check2"];
+				}
+				return "";
+			});
+
+			// Setup DOM elements for different field types
+			const formField = document.createElement("div");
+
+			// Text input
+			const textInput = document.createElement("input");
+			textInput.type = "text";
+			textInput.name = "textField";
+			textInput.classList.add("fmd-form-str-input");
+			formField.appendChild(textInput);
+
+			// Number input
+			const numberInput = document.createElement("input");
+			numberInput.type = "number";
+			numberInput.name = "numberField";
+			numberInput.classList.add("fmd-form-num-input");
+			formField.appendChild(numberInput);
+
+			// Select input
+			const select = document.createElement("select");
+			select.name = "selectField";
+			select.classList.add("fmd-form-str-select");
+			const option = document.createElement("option");
+			option.value = "option1";
+			select.appendChild(option);
+			formField.appendChild(select);
+
+			// Radio inputs
+			const radioInput = document.createElement("input");
+			radioInput.type = "radio";
+			radioInput.name = "radioField";
+			radioInput.value = "radioValue";
+			radioInput.classList.add("fmd-form-str-check-input");
+			formField.appendChild(radioInput);
+
+			// Checkbox inputs
+			const checkbox1 = document.createElement("input");
+			checkbox1.type = "checkbox";
+			checkbox1.name = "checkboxField";
+			checkbox1.value = "check1";
+			checkbox1.classList.add("fmd-form-str-check-input");
+			formField.appendChild(checkbox1);
+
+			// Datetime input
+			const datetimeInput = document.createElement("input");
+			datetimeInput.type = "datetime-local";
+			datetimeInput.name = "datetimeField";
+			datetimeInput.classList.add("fmd-form-datetime-input");
+			formField.appendChild(datetimeInput);
+
+			container.appendChild(formField);
+
+			// Setup container querySelector
+			container.querySelector = jest.fn((selector) => {
+				switch (selector) {
+					case '.fmd-form-str-input[name="textField"]':
+						return textInput;
+					case '.fmd-form-num-input[name="numberField"]':
+						return numberInput;
+					case '.fmd-form-str-select[name="selectField"]':
+						return select;
+					case '.fmd-form-str-check-input[name="radioField"]':
+						return radioInput;
+					case '.fmd-form-str-check-input[name="checkboxField"]':
+						return checkbox1;
+					case '.fmd-form-datetime-input[name="datetimeField"]':
+						return datetimeInput;
+					default:
+						return null;
+				}
+			});
+
+			// Setup field types in state
+			formsmd.state.fieldTypes = {
+				textField: "text",
+				numberField: "number",
+				selectField: "select",
+				radioField: "choice",
+				checkboxField: "choice",
+				datetimeField: "datetime-local",
+			};
+
+			// Mock URL search params
+			const mockURLSearchParams = new URLSearchParams(
+				"?textField=hello&numberField=42&selectField=option1&radioField=radioValue&checkboxField=check1,check2&datetimeField=2024-01-01T12:00",
+			);
+
+			// Mock window.location
+			const originalURL = window.location;
+			delete window.location;
+			window.location = {
+				...originalURL,
+				search: mockURLSearchParams.toString(),
+			};
+
+			formsmd.setFormDataFromURL(true);
+
+			// Verify form data was set correctly
+			expect(formsmd.state.formData.textField).toBe("hello");
+			expect(formsmd.state.formData.numberField).toBe(42);
+			expect(formsmd.state.formData.selectField).toBe("option1");
+			expect(formsmd.state.formData.radioField).toBe("radioValue");
+			expect(formsmd.state.formData.checkboxField).toEqual([
+				"check1",
+				"check2",
+			]);
+			expect(formsmd.state.formData.datetimeField).toBe("2024-01-01T12:00");
+
+			// Verify localStorage was updated
+			expect(localStorageMock.setItem).toHaveBeenCalled();
+
+			// Restore mocks and window.location
+			getRadioCheckboxValueSpy.mockRestore();
+			window.location = originalURL;
+		});
+
+		test("setSavedFormData should restore form data from localStorage", () => {
+			// Setup DOM elements for different field types
+			const formField = document.createElement("div");
+
+			// Text input
+			const textInput = document.createElement("input");
+			textInput.type = "text";
+			textInput.name = "textField";
+			textInput.classList.add("fmd-form-str-input");
+			formField.appendChild(textInput);
+
+			// Number input
+			const numberInput = document.createElement("input");
+			numberInput.type = "number";
+			numberInput.name = "numberField";
+			numberInput.classList.add("fmd-form-num-input");
+			formField.appendChild(numberInput);
+
+			// Select input
+			const select = document.createElement("select");
+			select.name = "selectField";
+			select.classList.add("fmd-form-str-select");
+			const option = document.createElement("option");
+			option.value = "option1";
+			select.appendChild(option);
+			formField.appendChild(select);
+
+			container.appendChild(formField);
+
+			// Setup container querySelector to return our elements
+			container.querySelector = jest.fn((selector) => {
+				switch (selector) {
+					case '.fmd-form-str-input[name="textField"]':
+						return textInput;
+					case '.fmd-form-num-input[name="numberField"]':
+						return numberInput;
+					case '.fmd-form-str-select[name="selectField"]':
+						return select;
+					default:
+						return null;
+				}
+			});
+
+			// Setup field types in state
+			formsmd.state.fieldTypes = {
+				textField: "text",
+				numberField: "number",
+				selectField: "select",
+			};
+
+			// Mock localStorage data
+			const mockSavedData = {
+				textField: "saved text",
+				numberField: 123,
+				selectField: "option1",
+			};
+			localStorageMock.getItem.mockReturnValue(JSON.stringify(mockSavedData));
+
+			formsmd.setSavedFormData();
+
+			// Verify form elements were updated with saved values
+			expect(textInput.value).toBe("saved text");
+			expect(numberInput.value).toBe("123");
+			expect(select.value).toBe("option1");
+
+			// Verify state was updated
+			expect(formsmd.state.formData.textField).toBe("saved text");
+			expect(formsmd.state.formData.numberField).toBe(123);
+			expect(formsmd.state.formData.selectField).toBe("option1");
+		});
+
+		test("setSavedFormData should handle missing localStorage data", () => {
+			localStorageMock.getItem.mockReturnValue(null);
+
+			formsmd.setSavedFormData();
+
+			// Verify nothing broke when no data was found
+			expect(formsmd.state.formData).toEqual({});
+		});
 	});
 
 	// Form field handling tests
@@ -411,6 +622,26 @@ describe("Formsmd", () => {
 			expect(localStorageMock.setItem).toHaveBeenCalled();
 		});
 
+		test("numberFieldOnInput should handle numeric input changes", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const input = document.createElement("input");
+			input.type = "number";
+			input.name = "testNumber";
+			input.value = "42";
+
+			formField.appendChild(input);
+			container.appendChild(formField);
+
+			input.closest = jest.fn().mockReturnValue(formField);
+			const event = { target: input };
+
+			formsmd.numberFieldOnInput(event);
+			expect(formsmd.state.formData.testNumber).toBe(42);
+			expect(localStorageMock.setItem).toHaveBeenCalled();
+		});
+
 		test("selectFieldOnInput should update form data and save to localStorage", () => {
 			const select = document.createElement("select");
 			const formField = document.createElement("div");
@@ -431,24 +662,6 @@ describe("Formsmd", () => {
 			expect(localStorageMock.setItem).toHaveBeenCalled();
 		});
 
-		test("setTelInputPlaceholder should update telephone input placeholder", () => {
-			const formField = document.createElement("div");
-			formField.classList.add("fmd-form-field");
-			const telInput = document.createElement("input");
-			telInput.type = "tel";
-			telInput.classList.add("fmd-form-str-input");
-			const select = document.createElement("select");
-			const option = document.createElement("option");
-			option.setAttribute("data-fmd-placeholder", "123-456-789");
-			select.appendChild(option);
-			formField.appendChild(telInput);
-			formField.appendChild(select);
-			container.appendChild(formField);
-
-			formsmd.setTelInputPlaceholder(select);
-			expect(telInput.getAttribute("placeholder")).toBe("123-456-789");
-		});
-
 		test("choiceFieldOnInput should handle radio and checkbox inputs", () => {
 			const input = document.createElement("input");
 			input.setAttribute("name", "testChoice");
@@ -465,6 +678,197 @@ describe("Formsmd", () => {
 
 			expect(formsmd.state.formData.testChoice).toBeDefined();
 			expect(localStorageMock.setItem).toHaveBeenCalled();
+		});
+
+		test("numChoiceFieldOnInput should handle numeric radio input changes", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const input = document.createElement("input");
+			input.type = "radio";
+			input.name = "testNumChoice";
+			input.value = "42";
+			input.classList.add("fmd-form-num-check-input");
+
+			formField.appendChild(input);
+			container.appendChild(formField);
+
+			input.closest = jest.fn().mockReturnValue(formField);
+			const event = { target: input };
+
+			// Mock getRadioCheckboxValue to return a string that will be parsed to number
+			jest.spyOn(formsmd, "getRadioCheckboxValue").mockReturnValue("42");
+
+			formsmd.numChoiceFieldOnInput(event);
+			expect(formsmd.state.formData.testNumChoice).toBe(42);
+			expect(localStorageMock.setItem).toHaveBeenCalled();
+		});
+
+		test("datetimeFieldOnInput should handle datetime input changes", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const input = document.createElement("input");
+			input.type = "datetime-local";
+			input.name = "testDateTime";
+			input.value = "2024-01-01T12:00";
+
+			formField.appendChild(input);
+			container.appendChild(formField);
+
+			input.closest = jest.fn().mockReturnValue(formField);
+			const event = { target: input };
+
+			formsmd.datetimeFieldOnInput(event);
+			expect(formsmd.state.formData.testDateTime).toBe("2024-01-01T12:00");
+			expect(localStorageMock.setItem).toHaveBeenCalled();
+		});
+
+		test("fileFieldOnInput should handle file selection", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const label = document.createElement("label");
+			label.classList.add("fmd-form-file-label");
+
+			const fileExistsSection = document.createElement("div");
+			fileExistsSection.classList.add("fmd-file-exists-section");
+
+			const input = document.createElement("input");
+			input.type = "file";
+			input.classList.add("fmd-form-file-input");
+			input.getAttribute = jest.fn().mockReturnValue("");
+
+			// Setup closest for both label and formField
+			input.closest = jest.fn((selector) => {
+				if (selector === ".fmd-form-file-label") {
+					return label;
+				}
+				if (selector === ".fmd-form-field") {
+					return formField;
+				}
+				return null;
+			});
+
+			label.appendChild(fileExistsSection);
+			formField.appendChild(label);
+			formField.appendChild(input);
+			container.appendChild(formField);
+
+			const mockFile = new File(["test content"], "test.txt", {
+				type: "text/plain",
+			});
+			Object.defineProperty(input, "files", {
+				value: [mockFile],
+			});
+
+			const event = {
+				target: input,
+			};
+
+			formsmd.fileFieldOnInput(event);
+			expect(label.classList.contains("fmd-file-exists")).toBe(true);
+			expect(fileExistsSection.innerHTML).toContain(mockFile.name);
+		});
+
+		test("fileFieldOnInput should handle image file selection", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const label = document.createElement("label");
+			label.classList.add("fmd-form-file-label");
+
+			const fileExistsSection = document.createElement("div");
+			fileExistsSection.classList.add("fmd-file-exists-section");
+
+			const input = document.createElement("input");
+			input.type = "file";
+			input.classList.add("fmd-form-file-input");
+			input.getAttribute = jest.fn().mockReturnValue("");
+
+			// Setup closest for both label and formField
+			input.closest = jest.fn((selector) => {
+				if (selector === ".fmd-form-file-label") {
+					return label;
+				}
+				if (selector === ".fmd-form-field") {
+					return formField;
+				}
+				return null;
+			});
+
+			label.appendChild(fileExistsSection);
+			formField.appendChild(label);
+			formField.appendChild(input);
+			container.appendChild(formField);
+
+			const mockImageFile = new File(["test image"], "test.jpg", {
+				type: "image/jpeg",
+			});
+			Object.defineProperty(input, "files", {
+				value: [mockImageFile],
+			});
+
+			const event = {
+				target: input,
+			};
+
+			global.URL.createObjectURL = jest.fn(() => "blob:test-url");
+
+			formsmd.fileFieldOnInput(event);
+			expect(label.classList.contains("fmd-file-exists")).toBe(true);
+			expect(fileExistsSection.innerHTML).toContain('<img src="blob:test-url"');
+			expect(fileExistsSection.innerHTML).toContain(mockImageFile.name);
+		});
+
+		test("fileToBase64 should convert file to base64", async () => {
+			const fileContent = "test content";
+			const file = new File([fileContent], "test.txt", { type: "text/plain" });
+
+			// Mock FileReader
+			const mockFileReader = {
+				readAsDataURL: jest.fn(),
+				result: `data:text/plain;base64,${btoa(fileContent)}`,
+			};
+
+			global.FileReader = jest.fn(() => mockFileReader);
+
+			// Create promise that will be resolved after mocking onload
+			const promise = formsmd.fileToBase64(file);
+
+			// Now that fileToBase64 has been called, mockFileReader.onload will exist
+			// We can trigger it to resolve the promise
+			mockFileReader.onload();
+
+			const result = await promise;
+			expect(result).toBe(btoa(fileContent));
+			expect(mockFileReader.readAsDataURL).toHaveBeenCalledWith(file);
+		});
+
+		test("fileToBase64 should handle read errors", async () => {
+			const file = new File(["test content"], "test.txt", {
+				type: "text/plain",
+			});
+			const mockError = new Error("Read failed");
+
+			// Mock FileReader
+			const mockFileReader = {
+				readAsDataURL: jest.fn(),
+				error: mockError,
+				onerror: null,
+			};
+
+			global.FileReader = jest.fn(() => mockFileReader);
+
+			// Create promise that will be rejected
+			const promise = formsmd.fileToBase64(file);
+
+			// Simulate error event
+			mockFileReader.onerror(mockError);
+
+			// Verify the promise rejects with the error
+			await expect(promise).rejects.toBe(mockError);
+			expect(mockFileReader.readAsDataURL).toHaveBeenCalledWith(file);
 		});
 
 		test("setTextareaHeight should update textarea height", () => {
@@ -484,6 +888,52 @@ describe("Formsmd", () => {
 
 			formsmd.setTextareaHeightOnInput(event);
 			expect(spy).toHaveBeenCalledWith(textarea);
+		});
+
+		test("fileInputResetBtnOnClick should reset file input", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+
+			const label = document.createElement("label");
+			label.classList.add("fmd-form-file-label");
+			label.classList.add("fmd-file-exists");
+
+			const fileExistsSection = document.createElement("div");
+			fileExistsSection.classList.add("fmd-file-exists-section");
+			fileExistsSection.innerHTML = "Test file content";
+
+			const input = document.createElement("input");
+			input.type = "file";
+			input.classList.add("fmd-form-file-input");
+
+			// Instead of trying to set value directly, we'll verify the reset through other means
+			Object.defineProperty(input, "value", {
+				writable: true,
+				value: "",
+			});
+
+			const resetBtn = document.createElement("button");
+			resetBtn.classList.add("fmd-form-file-reset-btn");
+
+			label.appendChild(fileExistsSection);
+			formField.appendChild(label);
+			formField.appendChild(input);
+			formField.appendChild(resetBtn);
+			container.appendChild(formField);
+
+			// Mock closest to return the formField
+			const mockClosest = jest.fn().mockReturnValue(formField);
+			resetBtn.closest = mockClosest;
+
+			const event = {
+				target: resetBtn,
+				preventDefault: jest.fn(),
+			};
+
+			formsmd.fileInputResetBtnOnClick(event);
+
+			expect(label.classList.contains("fmd-file-exists")).toBe(false);
+			expect(fileExistsSection.innerHTML).toBe("");
 		});
 	});
 
@@ -565,6 +1015,24 @@ describe("Formsmd", () => {
 			]);
 			expect(input1.checked).toBe(true);
 			expect(input2.checked).toBe(false);
+		});
+
+		test("setTelInputPlaceholder should update telephone input placeholder", () => {
+			const formField = document.createElement("div");
+			formField.classList.add("fmd-form-field");
+			const telInput = document.createElement("input");
+			telInput.type = "tel";
+			telInput.classList.add("fmd-form-str-input");
+			const select = document.createElement("select");
+			const option = document.createElement("option");
+			option.setAttribute("data-fmd-placeholder", "123-456-789");
+			select.appendChild(option);
+			formField.appendChild(telInput);
+			formField.appendChild(select);
+			container.appendChild(formField);
+
+			formsmd.setTelInputPlaceholder(select);
+			expect(telInput.getAttribute("placeholder")).toBe("123-456-789");
 		});
 	});
 
@@ -680,6 +1148,206 @@ describe("Formsmd", () => {
 			expect(formsmd.getSubmissionErrors({})).toEqual([]);
 			expect(formsmd.getSubmissionErrors({ errors: [] })).toEqual([]);
 			expect(formsmd.getSubmissionErrors({ errors: [{}] })).toEqual([]);
+		});
+
+		test("addSlideError should add error message to slide", () => {
+			// Create test elements
+			const slide = document.createElement("div");
+			const ctaBtn = document.createElement("button");
+			ctaBtn.classList.add("fmd-submit-btn");
+
+			const messages = ["Error 1", "Error 2"];
+
+			// Set up localization in state
+			formsmd.state.settings.localization = "en";
+			formsmd.state.slideData.currentIndex = 0;
+
+			formsmd.addSlideError(slide, ctaBtn, messages);
+
+			// Verify error container was created
+			const errorContainer = slide.querySelector(".fmd-error");
+			expect(errorContainer).toBeTruthy();
+
+			// Verify error messages were added
+			const errorList = slide.querySelector(".fmd-error-list");
+			expect(errorList).toBeTruthy();
+			expect(errorList.children.length).toBe(2);
+			expect(errorList.children[0].textContent).toBe("Error 1");
+			expect(errorList.children[1].textContent).toBe("Error 2");
+
+			// Verify aria-describedby was set on the button
+			const errorId = `${formsmd.getIdPrefix()}id_slide-0-error`;
+			expect(ctaBtn.getAttribute("aria-describedby")).toBe(errorId);
+		});
+
+		test("addSlideError should handle empty message array", () => {
+			const slide = document.createElement("div");
+			const ctaBtn = document.createElement("button");
+			const messages = [];
+
+			formsmd.state.settings.localization = "en";
+			formsmd.state.slideData.currentIndex = 0;
+
+			formsmd.addSlideError(slide, ctaBtn, messages);
+
+			// Verify error container exists but no error list
+			const errorContainer = slide.querySelector(".fmd-error");
+			expect(errorContainer).toBeTruthy();
+			const errorList = slide.querySelector(".fmd-error-list");
+			expect(errorList).toBeFalsy();
+		});
+
+		test("removeSlideErrors should clear all errors from slide", () => {
+			// Mock removeSingleAttribute method
+			const removeSingleAttributeSpy = jest.spyOn(
+				formsmd,
+				"removeSingleAttribute",
+			);
+
+			const slide = document.createElement("div");
+
+			// Add form fields with different types of inputs
+			const formFields = [
+				{
+					type: "radio",
+					inputs: [
+						{
+							type: "radio",
+							name: "radio1",
+							class: "fmd-form-str-check-input",
+						},
+						{
+							type: "radio",
+							name: "radio1",
+							class: "fmd-form-str-check-input",
+						},
+					],
+				},
+				{
+					type: "checkbox",
+					inputs: [
+						{
+							type: "checkbox",
+							name: "check1",
+							class: "fmd-form-str-check-input",
+						},
+						{
+							type: "checkbox",
+							name: "check1",
+							class: "fmd-form-str-check-input",
+						},
+					],
+				},
+				{
+					type: "num-radio",
+					inputs: [
+						{
+							type: "radio",
+							name: "numradio1",
+							class: "fmd-form-num-check-input",
+						},
+						{
+							type: "radio",
+							name: "numradio1",
+							class: "fmd-form-num-check-input",
+						},
+					],
+				},
+				{
+					type: "datetime-local",
+					inputs: [
+						{
+							type: "datetime-local",
+							name: "datetime1",
+							class: "fmd-form-datetime-input",
+						},
+					],
+				},
+				{
+					type: "file",
+					inputs: [
+						{ type: "file", name: "file1", class: "fmd-form-file-input" },
+					],
+				},
+			];
+
+			// Create form fields and add to slide
+			formFields.forEach((fieldConfig) => {
+				const formField = document.createElement("div");
+				formField.classList.add("fmd-form-field");
+				formField.setAttribute("data-fmd-type", fieldConfig.type);
+
+				// Add inputs
+				fieldConfig.inputs.forEach((inputConfig) => {
+					const input = document.createElement("input");
+					input.type = inputConfig.type;
+					input.name = inputConfig.name;
+					input.classList.add(inputConfig.class);
+
+					// Add error-related attributes
+					input.setAttribute("aria-invalid", "true");
+					const errorId = `${inputConfig.name}-error`;
+					input.setAttribute("aria-describedby", errorId);
+
+					formField.appendChild(input);
+				});
+
+				// Add error message
+				const error = document.createElement("div");
+				error.classList.add("fmd-error");
+				error.textContent = "Test error message";
+				formField.appendChild(error);
+
+				slide.appendChild(formField);
+			});
+
+			// Add a standalone slide error
+			const slideError = document.createElement("div");
+			slideError.classList.add("fmd-error");
+			slideError.textContent = "Slide error message";
+			slide.appendChild(slideError);
+
+			// Mock getIdPrefix method
+			jest.spyOn(formsmd, "getIdPrefix").mockReturnValue("test:");
+
+			// Add CTA button with proper class and aria-describedby
+			const submitBtn = document.createElement("button");
+			submitBtn.classList.add("fmd-submit-btn");
+			submitBtn.setAttribute("aria-describedby", "slide-error");
+			slide.appendChild(submitBtn);
+
+			// Execute removeSlideErrors
+			formsmd.removeSlideErrors(slide);
+
+			// Verify all error elements were removed
+			expect(slide.querySelectorAll(".fmd-error").length).toBe(0);
+
+			// Verify all form field inputs had error attributes cleared
+			formFields.forEach((fieldConfig) => {
+				fieldConfig.inputs.forEach((inputConfig) => {
+					const input = slide.querySelector(
+						`.${inputConfig.class}[name="${inputConfig.name}"]`,
+					);
+					expect(input.hasAttribute("aria-invalid")).toBe(false);
+
+					// Instead of checking hasAttribute, verify removeSingleAttribute was called
+					if (fieldConfig.type === "num-radio") {
+						expect(removeSingleAttributeSpy).toHaveBeenCalledWith(
+							input,
+							"aria-describedby",
+							`test:id_${inputConfig.name}-error`,
+						);
+					} else {
+						expect(input.getAttribute("aria-describedby")).toBe(null);
+					}
+				});
+			});
+
+			// Verify CTA button had aria-describedby removed
+			expect(submitBtn.hasAttribute("aria-describedby")).toBe(false);
+
+			// Clean up
+			removeSingleAttributeSpy.mockRestore();
 		});
 	});
 
@@ -805,6 +1473,201 @@ describe("Formsmd", () => {
 			expect(formsmd.state.slideData.currentIndex).toBe(1);
 			jest.runAllTimers();
 			expect(container.scroll).toHaveBeenCalledWith({ top: 0 });
+		});
+
+		test("fadeInNextSlide should handle slide transitions correctly", () => {
+			// Setup root element with transition duration
+			const rootElem = document.createElement("div");
+			rootElem.classList.add("fmd-root");
+			container.appendChild(rootElem);
+
+			const activeSlide = document.createElement("div");
+			activeSlide.classList.add("fmd-slide", "fmd-slide-active");
+
+			const nextSlide = document.createElement("div");
+			nextSlide.classList.add("fmd-slide");
+
+			rootElem.appendChild(activeSlide);
+			rootElem.appendChild(nextSlide);
+
+			// Mock getSlideTransitionDuration
+			const getSlideTransitionDurationSpy = jest.spyOn(
+				formsmd,
+				"getSlideTransitionDuration",
+			);
+			getSlideTransitionDurationSpy.mockReturnValue(200);
+
+			formsmd.fadeInNextSlide(activeSlide, nextSlide);
+
+			// First step of animation
+			expect(activeSlide.classList.contains("fmd-fade-out-to-top")).toBe(true);
+
+			// Run first timeout
+			jest.advanceTimersByTime(200);
+
+			expect(activeSlide.classList.contains("fmd-slide-active")).toBe(false);
+			expect(nextSlide.classList.contains("fmd-slide-active")).toBe(true);
+			expect(nextSlide.classList.contains("fmd-fade-in-from-bottom")).toBe(
+				true,
+			);
+
+			// Run second timeout
+			jest.advanceTimersByTime(200);
+
+			expect(nextSlide.classList.contains("fmd-fade-in-from-bottom")).toBe(
+				false,
+			);
+			expect(activeSlide.classList.contains("fmd-fade-out-to-top")).toBe(false);
+
+			// Clean up
+			getSlideTransitionDurationSpy.mockRestore();
+		});
+
+		test("fadeInPrevSlide should handle slide transitions correctly", () => {
+			// Setup root element with transition duration
+			const rootElem = document.createElement("div");
+			rootElem.classList.add("fmd-root");
+			container.appendChild(rootElem);
+
+			const activeSlide = document.createElement("div");
+			activeSlide.classList.add("fmd-slide", "fmd-slide-active");
+
+			const prevSlide = document.createElement("div");
+			prevSlide.classList.add("fmd-slide");
+
+			rootElem.appendChild(activeSlide);
+			rootElem.appendChild(prevSlide);
+
+			// Mock getSlideTransitionDuration
+			const getSlideTransitionDurationSpy = jest.spyOn(
+				formsmd,
+				"getSlideTransitionDuration",
+			);
+			getSlideTransitionDurationSpy.mockReturnValue(200);
+
+			formsmd.fadeInPrevSlide(activeSlide, prevSlide);
+
+			// First step of animation
+			expect(activeSlide.classList.contains("fmd-fade-out-to-bottom")).toBe(
+				true,
+			);
+
+			// Run first timeout
+			jest.advanceTimersByTime(200);
+
+			expect(activeSlide.classList.contains("fmd-slide-active")).toBe(false);
+			expect(prevSlide.classList.contains("fmd-slide-active")).toBe(true);
+			expect(prevSlide.classList.contains("fmd-fade-in-from-top")).toBe(true);
+
+			// Run second timeout
+			jest.advanceTimersByTime(200);
+
+			expect(prevSlide.classList.contains("fmd-fade-in-from-top")).toBe(false);
+			expect(activeSlide.classList.contains("fmd-fade-out-to-bottom")).toBe(
+				false,
+			);
+
+			// Clean up
+			getSlideTransitionDurationSpy.mockRestore();
+		});
+
+		test("prevSlide should handle transition to previous slide", () => {
+			// Mock slide transition methods
+			const fadeInPrevSlideSpy = jest.spyOn(formsmd, "fadeInPrevSlide");
+			const getPrevSlideSpy = jest.spyOn(formsmd, "getPrevSlide");
+			const getSlideTransitionDurationSpy = jest.spyOn(
+				formsmd,
+				"getSlideTransitionDuration",
+			);
+			getSlideTransitionDurationSpy.mockReturnValue(200);
+
+			// Create necessary elements
+			const rootElem = document.createElement("div");
+			rootElem.classList.add("fmd-root");
+
+			const activeSlide = document.createElement("div");
+			activeSlide.classList.add("fmd-slide", "fmd-slide-active");
+
+			const prevSlide = document.createElement("div");
+			prevSlide.classList.add("fmd-slide");
+
+			const nextBtn = document.createElement("button");
+			nextBtn.classList.add("fmd-next-btn");
+			activeSlide.appendChild(nextBtn);
+
+			const footerPrevBtn = document.createElement("button");
+			footerPrevBtn.classList.add("fmd-footer", "fmd-previous-btn");
+
+			const footerNextBtn = document.createElement("button");
+			footerNextBtn.classList.add("fmd-footer", "fmd-next-btn");
+
+			rootElem.appendChild(activeSlide);
+			rootElem.appendChild(prevSlide);
+			rootElem.appendChild(footerPrevBtn);
+			rootElem.appendChild(footerNextBtn);
+			container.appendChild(rootElem);
+
+			// Mock scroll and getBoundingClientRect methods
+			container.scroll = jest.fn();
+			container.scrollIntoView = jest.fn();
+			container.getBoundingClientRect = jest.fn().mockReturnValue({
+				top: 100,
+				bottom: 200,
+				left: 0,
+				right: 100,
+			});
+
+			// Setup container querySelector to return root element and buttons
+			const querySelectorMock = jest.fn((selector) => {
+				switch (selector) {
+					case ".fmd-root":
+						return rootElem;
+					case ".fmd-footer .fmd-previous-btn":
+						return footerPrevBtn;
+					case ".fmd-footer .fmd-next-btn":
+						return footerNextBtn;
+					default:
+						return null;
+				}
+			});
+			container.querySelector = querySelectorMock;
+
+			// Setup container querySelectorAll for buttons
+			container.querySelectorAll = jest.fn((selector) => {
+				if (selector === ".fmd-btn-processing") {
+					return [footerPrevBtn, footerNextBtn];
+				}
+				return [];
+			});
+
+			// Mock window.innerHeight
+			Object.defineProperty(window, "innerHeight", {
+				writable: true,
+				configurable: true,
+				value: 800,
+			});
+
+			// Mock getPrevSlide to return our previous slide
+			getPrevSlideSpy.mockReturnValue({
+				slide: prevSlide,
+				index: 0,
+			});
+
+			formsmd.prevSlide(activeSlide);
+
+			// Verify slide transition was triggered
+			expect(fadeInPrevSlideSpy).toHaveBeenCalledWith(activeSlide, prevSlide);
+
+			// Advance timers to complete transition
+			jest.advanceTimersByTime(600);
+
+			// Verify scroll was called
+			expect(container.scroll).toHaveBeenCalledWith({ top: 0 });
+
+			// Clean up
+			fadeInPrevSlideSpy.mockRestore();
+			getPrevSlideSpy.mockRestore();
+			getSlideTransitionDurationSpy.mockRestore();
 		});
 	});
 
@@ -967,6 +1830,79 @@ describe("Formsmd", () => {
 			expect(event.stopPropagation).toHaveBeenCalled();
 			expect(event.preventDefault).toHaveBeenCalled();
 			expect(result).toBe(false);
+		});
+	});
+
+	// reCAPTCHA tests
+	describe("reCAPTCHA handling", () => {
+		test("executeRecaptcha should handle successful verification", async () => {
+			// Mock grecaptcha
+			const mockToken = "test-token-123";
+			global.grecaptcha = {
+				ready: jest.fn((callback) => callback()),
+				execute: jest.fn().mockResolvedValue(mockToken),
+			};
+
+			// Set recaptcha options
+			formsmd.options.recaptcha.siteKey = "test-site-key";
+			formsmd.options.recaptcha.action = "test_action";
+
+			const token = await formsmd.executeRecaptcha();
+
+			expect(global.grecaptcha.ready).toHaveBeenCalled();
+			expect(global.grecaptcha.execute).toHaveBeenCalledWith("test-site-key", {
+				action: "test_action",
+			});
+			expect(token).toBe(mockToken);
+
+			// Cleanup
+			delete global.grecaptcha;
+			formsmd.options.recaptcha.siteKey = "";
+		});
+
+		test("executeRecaptcha should handle missing site key", async () => {
+			formsmd.options.recaptcha.siteKey = "";
+			const token = await formsmd.executeRecaptcha();
+			expect(token).toBe("");
+		});
+
+		test("executeRecaptcha should handle missing grecaptcha", async () => {
+			formsmd.options.recaptcha.siteKey = "test-site-key";
+			delete global.grecaptcha;
+
+			const consoleSpy = jest.spyOn(console, "error");
+			const token = await formsmd.executeRecaptcha();
+
+			expect(token).toBe("");
+			expect(consoleSpy).toHaveBeenCalledWith(
+				"CAPTCHA not loaded. Please try again.",
+			);
+
+			consoleSpy.mockRestore();
+			formsmd.options.recaptcha.siteKey = "";
+		});
+
+		test("executeRecaptcha should handle execution error", async () => {
+			// Mock grecaptcha with error
+			global.grecaptcha = {
+				ready: jest.fn((callback) => callback()),
+				execute: jest.fn().mockRejectedValue(new Error("Execution failed")),
+			};
+
+			formsmd.options.recaptcha.siteKey = "test-site-key";
+
+			const consoleSpy = jest.spyOn(console, "error");
+			const token = await formsmd.executeRecaptcha();
+
+			expect(token).toBe("");
+			expect(consoleSpy).toHaveBeenCalledWith(
+				"CAPTCHA execution error:",
+				expect.any(Error),
+			);
+
+			consoleSpy.mockRestore();
+			delete global.grecaptcha;
+			formsmd.options.recaptcha.siteKey = "";
 		});
 	});
 
