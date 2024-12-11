@@ -119,23 +119,141 @@ describe("Formsmd", () => {
 
 	// Class initialization and options tests
 	describe("Constructor and options", () => {
+		const defaultOptions = {
+			colorScheme: "light",
+			errorFieldKey: "field",
+			errorMessageKey: "message",
+			footer: "",
+			formsmdBranding: "",
+			getHeaders: {},
+			id: "",
+			isFullPage: false,
+			paddingInlineBottom: 20,
+			paddingInlineHorizontal: 0,
+			paddingInlineTop: 20,
+			pageProgress: "",
+			postData: {},
+			postHeaders: {},
+			prioritizeURLFormData: false,
+			recaptcha: {
+				siteKey: "",
+				action: "submit",
+				badgePosition: "bottomleft",
+				hideBadge: false,
+			},
+			sanitize: true,
+			saveState: true,
+			sendFilesAsBase64: false,
+			setColorSchemeAttrsAgain: true,
+			slideControls: "",
+			startSlide: 0,
+			themeDark: {
+				accent: "rgb(138, 180, 248)",
+				accentForeground: "rgb(0, 0, 0)",
+				backgroundColor: "rgb(20, 20, 20)",
+				color: "rgb(240, 240, 240)",
+			},
+			themeLight: {
+				accent: "rgb(30, 55, 153)",
+				accentForeground: "rgb(255, 255, 255)",
+				backgroundColor: "rgb(255, 255, 255)",
+				color: "rgb(0, 0, 0)",
+			},
+		};
+
 		test("Should initialize with default options", () => {
 			const basicFormsmd = new Formsmd("", container);
-			expect(basicFormsmd.options.colorScheme).toBe("light");
-			expect(basicFormsmd.options.isFullPage).toBe(false);
-			expect(basicFormsmd.options.sanitize).toBe(true);
+			expect(basicFormsmd.options).toEqual(defaultOptions);
 		});
 
 		test("Should override default options with provided options", () => {
 			const customOptions = {
 				colorScheme: "dark",
+				errorFieldKey: "customField",
+				errorMessageKey: "customMessage",
+				footer: "show",
+				formsmdBranding: "hide",
+				getHeaders: { Authorization: "Bearer token" },
+				id: "customID",
 				isFullPage: true,
+				paddingInlineBottom: 10,
+				paddingInlineHorizontal: 5,
+				paddingInlineTop: 15,
+				pageProgress: "show",
+				postData: { key: "value" },
+				postHeaders: { "Content-Type": "application/json" },
+				prioritizeURLFormData: true,
+				recaptcha: {
+					siteKey: "customSiteKey",
+					action: "login",
+					badgePosition: "bottomright",
+					hideBadge: true,
+				},
 				sanitize: false,
+				saveState: false,
+				sendFilesAsBase64: true,
+				setColorSchemeAttrsAgain: false,
+				slideControls: "hide",
+				startSlide: 2,
+				themeDark: {
+					accent: "rgb(0, 0, 0)",
+					accentForeground: "rgb(255, 255, 255)",
+					backgroundColor: "rgb(50, 50, 50)",
+					color: "rgb(200, 200, 200)",
+				},
+				themeLight: {
+					accent: "rgb(255, 0, 0)",
+					accentForeground: "rgb(0, 0, 0)",
+					backgroundColor: "rgb(240, 240, 240)",
+					color: "rgb(100, 100, 100)",
+				},
 			};
+
 			const customFormsmd = new Formsmd("", container, customOptions);
+
 			expect(customFormsmd.options.colorScheme).toBe("dark");
+			expect(customFormsmd.options.errorFieldKey).toBe("customField");
+			expect(customFormsmd.options.errorMessageKey).toBe("customMessage");
+			expect(customFormsmd.options.footer).toBe("show");
+			expect(customFormsmd.options.formsmdBranding).toBe("hide");
+			expect(customFormsmd.options.getHeaders).toEqual({
+				Authorization: "Bearer token",
+			});
+			expect(customFormsmd.options.id).toBe("customID");
 			expect(customFormsmd.options.isFullPage).toBe(true);
+			expect(customFormsmd.options.paddingInlineBottom).toBe(10);
+			expect(customFormsmd.options.paddingInlineHorizontal).toBe(5);
+			expect(customFormsmd.options.paddingInlineTop).toBe(15);
+			expect(customFormsmd.options.pageProgress).toBe("show");
+			expect(customFormsmd.options.postData).toEqual({ key: "value" });
+			expect(customFormsmd.options.postHeaders).toEqual({
+				"Content-Type": "application/json",
+			});
+			expect(customFormsmd.options.prioritizeURLFormData).toBe(true);
+			expect(customFormsmd.options.recaptcha).toEqual({
+				siteKey: "customSiteKey",
+				action: "login",
+				badgePosition: "bottomright",
+				hideBadge: true,
+			});
 			expect(customFormsmd.options.sanitize).toBe(false);
+			expect(customFormsmd.options.saveState).toBe(false);
+			expect(customFormsmd.options.sendFilesAsBase64).toBe(true);
+			expect(customFormsmd.options.setColorSchemeAttrsAgain).toBe(false);
+			expect(customFormsmd.options.slideControls).toBe("hide");
+			expect(customFormsmd.options.startSlide).toBe(2);
+			expect(customFormsmd.options.themeDark).toEqual({
+				accent: "rgb(0, 0, 0)",
+				accentForeground: "rgb(255, 255, 255)",
+				backgroundColor: "rgb(50, 50, 50)",
+				color: "rgb(200, 200, 200)",
+			});
+			expect(customFormsmd.options.themeLight).toEqual({
+				accent: "rgb(255, 0, 0)",
+				accentForeground: "rgb(0, 0, 0)",
+				backgroundColor: "rgb(240, 240, 240)",
+				color: "rgb(100, 100, 100)",
+			});
 		});
 	});
 
