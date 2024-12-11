@@ -43,6 +43,7 @@
 		"fs-extra": "^11.2.0",
 		"globals": "^15.12.0",
 		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
 		"prettier": "^3.2.5",
 		"rtlcss": "^4.1.1",
 		"terser": "^5.30.4",
@@ -65,5 +66,8 @@
 		"presets": [
 			"@babel/preset-env"
 		]
+	},
+	"jest": {
+		"testEnvironment": "jsdom"
 	}
 }
