@@ -1,6 +1,7 @@
 "use strict";
 
 const { Formsmd } = require("../src/main");
+const nunjucks = require("nunjucks");
 
 // Mock dependencies
 jest.mock("dompurify", () => {
@@ -361,6 +362,48 @@ describe("Formsmd", () => {
 		test("removeResponseId should remove ID from localStorage", () => {
 			formsmd.removeResponseId();
 			expect(localStorageMock.removeItem).toHaveBeenCalled();
+		});
+	});
+
+	// Data binding tests
+	describe("Data binding", () => {
+		test("Should update the content of bind <span> elements with formData values", () => {
+			const span = document.createElement("span");
+			span.setAttribute("data-fmd-bind-testField", "");
+			container.appendChild(span);
+
+			// Mock formData
+			formsmd.state.formData = { testField: "Updated value" };
+
+			// Call the method
+			formsmd.reRenderBindElems("testField");
+
+			// Assertion
+			expect(span.innerText).toBe("Updated value");
+		});
+
+		test("Should update the content of bind <div> elements with rendered templates", () => {
+			const div = document.createElement("div");
+			div.setAttribute("data-fmd-bind-testField", "");
+			div.setAttribute("data-fmd-bind-template-ref", "template1");
+			container.appendChild(div);
+
+			// Mock template and formData
+			formsmd.state.bindDivTemplates = {
+				template1: "Value: {{ testField }}",
+			};
+			formsmd.state.formData = { testField: "Rendered content" };
+
+			// Mock Nunjucks renderString
+			nunjucks.renderString.mockImplementation((template, data) => {
+				return template.replace("{{ testField }}", data.testField);
+			});
+
+			// Call the method
+			formsmd.reRenderBindElems("testField");
+
+			// Assertion
+			expect(div.innerHTML).toContain("Value: Rendered content");
 		});
 	});
 
