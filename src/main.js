@@ -2905,11 +2905,11 @@ class Formsmd {
 				">",
 				'	<div class="fmd-body">',
 				"		<noscript>Please turn on JavaScript to see this page.</noscript>",
-				'		<main class="fmd-main">',
+				'		<div class="fmd-main">',
 				'			<div class="fmd-loader-container">',
 				'				<div class="fmd-loader-spinner" role="status" aria-label="Loading"></div>',
 				"			</div>",
-				"		</main>",
+				"		</div>",
 				"	</div>",
 				"</div>\n",
 			].join("\n");

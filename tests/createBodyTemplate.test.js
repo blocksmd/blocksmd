@@ -14,15 +14,15 @@ const expectedTemplate1 = `
 	</div>
 </div>
 
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		<img class="fmd-header-brand fmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">
 		<img class="fmd-header-brand fmd-hide-lm" src="https://example.com/logo-dm.svg" loading="lazy" alt="Brand">
 		<a class="fmd-btn fmd-btn-accent fmd-btn-control fmd-ms-auto" href="https://example.com/sign-up/">Sign Up</a>
 	</div>
-</header>
+</div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -32,9 +32,9 @@ const expectedTemplate1 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<button type="button" class="fmd-toggle-color-scheme-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="Toggle color scheme">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fmd-icon" aria-hidden="true" focusable="false"><path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clipRule="evenodd" /></svg>
@@ -52,7 +52,7 @@ const expectedTemplate1 = `
 			Made in <strong class="fmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 1", () => {
@@ -95,15 +95,15 @@ const expectedTemplate2 = `
 	</div>
 </div>
 
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		<img class="fmd-header-brand fmd-hide-lm" src="https://example.com/logo-dm.svg" loading="lazy" alt="Brand">
 		<img class="fmd-header-brand fmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">
 		<a class="fmd-btn fmd-btn-accent fmd-btn-control fmd-ms-auto" href="https://example.com/sign-up/">Sign Up</a>
 	</div>
-</header>
+</div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -113,9 +113,9 @@ const expectedTemplate2 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<button type="button" class="fmd-toggle-color-scheme-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="Toggle color scheme">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fmd-icon" aria-hidden="true" focusable="false"><path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clipRule="evenodd" /></svg>
@@ -133,7 +133,7 @@ const expectedTemplate2 = `
 			Made in <strong class="fmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 2 (dark color scheme)", () => {
@@ -176,15 +176,15 @@ const expectedTemplate3 = `
 	</div>
 </div>
 
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		<img class="fmd-header-brand fmd-hide-dm" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">
 		<img class="fmd-header-brand fmd-hide-lm" src="https://example.com/logo-dm.svg" loading="lazy" alt="Brand">
 		<a class="fmd-btn fmd-btn-accent fmd-btn-control fmd-ms-auto" href="https://example.com/sign-up/">Sign Up</a>
 	</div>
-</header>
+</div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -194,9 +194,9 @@ const expectedTemplate3 = `
 			<div class="fmd-loader-progress" role="status" aria-label="লোড হচ্ছে"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<button type="button" class="fmd-toggle-color-scheme-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="রঙের স্কিম টগল করুন">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fmd-icon" aria-hidden="true" focusable="false"><path fillRule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clipRule="evenodd" /></svg>
@@ -214,7 +214,7 @@ const expectedTemplate3 = `
 			<strong class="fmd-antialiased">Forms.md</strong> তে তৈরি
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 3 (different localization)", () => {
@@ -251,7 +251,7 @@ test("Case 3 (different localization)", () => {
 const expectedTemplate4 = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -261,7 +261,7 @@ const expectedTemplate4 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 `;
 
 test("Case 4 (hide all)", () => {
@@ -304,13 +304,13 @@ test("Case 4 (hide all)", () => {
 const expectedTemplate5 = `
 <div class="fmd-backdrop"></div>
 
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		<img class="fmd-header-brand" src="https://example.com/logo-lm.svg" loading="lazy" alt="Brand">
 	</div>
-</header>
+</div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -320,7 +320,7 @@ const expectedTemplate5 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 `;
 
 test("Case 5 (only header brand)", () => {
@@ -353,13 +353,13 @@ test("Case 5 (only header brand)", () => {
 const expectedTemplate6 = `
 <div class="fmd-backdrop"></div>
 
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		<a class="fmd-btn fmd-btn-accent fmd-btn-control fmd-ms-auto" href="https://example.com/learn-more/">Learn More</a>
 	</div>
-</header>
+</div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -369,7 +369,7 @@ const expectedTemplate6 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 `;
 
 test("Case 6 (only header CTA)", () => {
@@ -402,7 +402,7 @@ test("Case 6 (only header CTA)", () => {
 const expectedTemplate7 = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -412,9 +412,9 @@ const expectedTemplate7 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<div class="fmd-btn-group" role="group">
 			<button type="button" class="fmd-previous-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="Previous" disabled>
@@ -429,7 +429,7 @@ const expectedTemplate7 = `
 			Made in <strong class="fmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 7 (no footer toggle color scheme button)", () => {
@@ -458,7 +458,7 @@ test("Case 7 (no footer toggle color scheme button)", () => {
 const expectedTemplate8 = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -468,15 +468,15 @@ const expectedTemplate8 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<a href="https://forms.md" target="_blank" class="fmd-btn fmd-btn-accent fmd-btn-control">
 			Made in <strong class="fmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 8 (no footer slide controls)", () => {
@@ -507,7 +507,7 @@ test("Case 8 (no footer slide controls)", () => {
 const expectedTemplate9 = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -517,15 +517,15 @@ const expectedTemplate9 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<a href="https://forms.md" target="_blank" class="fmd-btn fmd-btn-accent fmd-btn-control">
 			Made in <strong class="fmd-antialiased">Forms.md</strong>
 		</a>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 9 (no footer slide controls with page setting)", () => {
@@ -554,7 +554,7 @@ test("Case 9 (no footer slide controls with page setting)", () => {
 const expectedTemplate10 = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -563,9 +563,9 @@ const expectedTemplate10 = `
 			<div class="fmd-loader-progress" role="status" aria-label="Loading"></div>
 		</div>
 	</div>
-</main>
+</div>
 
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		<div class="fmd-btn-group" role="group">
 			<button type="button" class="fmd-previous-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="Previous" disabled>
@@ -577,7 +577,7 @@ const expectedTemplate10 = `
 			</button>
 		</div>
 	</div>
-</footer>
+</div>
 `;
 
 test("Case 10 (no Forms.md branding)", () => {

@@ -124,7 +124,7 @@ function createStyles(settings) {
 const madeInLoaderTemplate = `
 <div class="fmd-backdrop"></div>
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -137,7 +137,7 @@ const madeInLoaderTemplate = `
 			<div class="fmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
 		</div>
 	</div>
-</main>
+</div>
 `;
 
 const bodyTemplate = `
@@ -152,7 +152,7 @@ const bodyTemplate = `
 {% endif %}
 
 {% if settings["header-render"] %}
-<header class="fmd-header">
+<div class="fmd-header">
 	<div class="fmd-header-container">
 		{% if settings.brand != undefined %}
 		{{ settings.brand | safe }}
@@ -164,10 +164,10 @@ const bodyTemplate = `
 		{{ settings.cta | safe }}
 		{% endif %}
 	</div>
-</header>
+</div>
 {% endif %}
 
-<main class="fmd-main">
+<div class="fmd-main">
 	<div class="fmd-main-container">
 		<div class="fmd-loader-container">
 			<div class="fmd-text-center fmd-mb-3">
@@ -180,10 +180,10 @@ const bodyTemplate = `
 			<div class="fmd-loader-progress" role="status" aria-label="{{ translations.loading }}"></div>
 		</div>
 	</div>
-</main>
+</div>
 
 {% if settings["footer-render"] %}
-<footer class="fmd-footer">
+<div class="fmd-footer">
 	<div class="fmd-footer-inner">
 		{% if settings["color-scheme-toggle"] == "show" %}
 		<button type="button" class="fmd-toggle-color-scheme-btn fmd-btn fmd-btn-accent fmd-btn-control fmd-btn-control-square fmd-d-flex fmd-align-items-center fmd-justify-content-center" aria-label="{{ translations.toggleColorSchemeBtn }}">
@@ -207,7 +207,7 @@ const bodyTemplate = `
 		</a>
 		{% endif %}
 	</div>
-</footer>
+</div>
 {% endif %}
 `;
 
