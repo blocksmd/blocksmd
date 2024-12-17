@@ -166,6 +166,7 @@
 	--fmd-spacer: 16px;
 	--fmd-page-progress-display: block;
 	--fmd-page-progress-height: 5px;
+	--fmd-page-progress-border-radius: 0;
 	--fmd-header-display: flex;
 	--fmd-header-height: 52px;
 	--fmd-content-padding-x: calc(var(--fmd-spacer) * 4);
@@ -1108,6 +1109,8 @@
 	height: var(--fmd-page-progress-height);
 	flex-shrink: 0;
 	background-color: rgb(var(--fmd-body-bg-rgb));
+	border-radius: var(--fmd-page-progress-border-radius);
+	overflow: hidden;
 }
 
 .fmd-root .fmd-progress {
