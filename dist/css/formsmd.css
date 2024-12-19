@@ -1103,7 +1103,7 @@
 	position: sticky;
 	top: 0;
 	left: 0;
-	z-index: 1020;
+	z-index: 20;
 	display: var(--fmd-page-progress-display);
 	width: 100%;
 	height: var(--fmd-page-progress-height);
@@ -1130,7 +1130,7 @@
 	position: sticky;
 	top: var(--fmd-page-progress-height);
 	left: 0;
-	z-index: 1020;
+	z-index: 20;
 	display: var(--fmd-header-display);
 	align-items: center;
 	justify-content: center;
@@ -1187,7 +1187,7 @@
 	position: sticky;
 	bottom: 0;
 	right: 0;
-	z-index: 1030;
+	z-index: 30;
 	display: var(--fmd-footer-display);
 	width: auto;
 	height: auto;
