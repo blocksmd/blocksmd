@@ -3291,6 +3291,11 @@
 	white-space: nowrap !important;
 }
 
+.fmd-root[lang="ja"] .fmd-text-nowrap,
+.fmd-root[lang="zh"] .fmd-text-nowrap {
+	white-space: normal !important;
+}
+
 /* Text transform */
 
 .fmd-root .fmd-first-letter-uppercase::first-letter {
