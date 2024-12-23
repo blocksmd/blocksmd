@@ -2316,6 +2316,8 @@ class Formsmd {
 	fadeInNextSlide = (activeSlide, nextSlide) => {
 		const instance = this;
 
+		const rootElem = instance.container.querySelector(".fmd-root");
+		rootElem.classList.add("fmd-during-slide-transition");
 		activeSlide.classList.add("fmd-fade-out-to-top");
 		setTimeout(function () {
 			activeSlide.classList.remove("fmd-slide-active");
@@ -2324,6 +2326,9 @@ class Formsmd {
 			setTimeout(function () {
 				nextSlide.classList.remove("fmd-fade-in-from-bottom");
 				activeSlide.classList.remove("fmd-fade-out-to-top");
+				setTimeout(function () {
+					rootElem.classList.remove("fmd-during-slide-transition");
+				}, instance.getSlideTransitionDuration());
 			}, instance.getSlideTransitionDuration());
 		}, instance.getSlideTransitionDuration());
 	};
@@ -2338,6 +2343,8 @@ class Formsmd {
 	fadeInPrevSlide = (activeSlide, prevSlide) => {
 		const instance = this;
 
+		const rootElem = instance.container.querySelector(".fmd-root");
+		rootElem.classList.add("fmd-during-slide-transition");
 		activeSlide.classList.add("fmd-fade-out-to-bottom");
 		setTimeout(function () {
 			activeSlide.classList.remove("fmd-slide-active");
@@ -2346,6 +2353,9 @@ class Formsmd {
 			setTimeout(function () {
 				prevSlide.classList.remove("fmd-fade-in-from-top");
 				activeSlide.classList.remove("fmd-fade-out-to-bottom");
+				setTimeout(function () {
+					rootElem.classList.remove("fmd-during-slide-transition");
+				}, instance.getSlideTransitionDuration());
 			}, instance.getSlideTransitionDuration());
 		}, instance.getSlideTransitionDuration());
 	};

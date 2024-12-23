@@ -512,6 +512,10 @@
 	--fmd-input-datetime-placeholder-color: transparent;
 }
 
+.fmd-root.fmd-during-slide-transition {
+	overflow-y: hidden !important;
+}
+
 /**
  * The following styles can be globally scoped (via attribure on root), or 
  * locally. Therefore, any time a variable is changed in the following blocks, 
