@@ -3506,6 +3506,21 @@
 	justify-content: flex-end !important;
 }
 
+.fmd-root .fmd-justify-content-stretch {
+	justify-content: stretch !important;
+}
+
+.fmd-root
+	.fmd-slide:not(.fmd-end-slide)
+	.fmd-next-controls.fmd-justify-content-stretch
+	.fmd-submit-btn,
+.fmd-root
+	.fmd-slide:not(.fmd-end-slide)
+	.fmd-next-controls.fmd-justify-content-stretch
+	.fmd-next-btn {
+	width: 100%;
+}
+
 .fmd-root .fmd-d-none {
 	display: none !important;
 }

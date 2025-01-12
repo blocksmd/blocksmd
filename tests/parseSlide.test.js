@@ -8,6 +8,7 @@ const beautify = require("beautify");
 const template1 = `
 -> profession == "business"
 |> 25%
+|= CENTER
 << DISABLE
 >> POST
 
@@ -37,7 +38,7 @@ const expectedTemplate1 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex fmd-justify-content-center">
 			<button type="submit" class="fmd-submit-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				OK
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon fmd-ms-2" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
@@ -219,6 +220,7 @@ test("Case 4 (form, slide without form field, different localization)", () => {
 const template5 = `
 -> profession == "business"
 |> 25%
+=| stretch
 >> POST
 
 # Heading
@@ -243,7 +245,7 @@ const expectedTemplate5 = `
 		email* = EmailInput(question=What is your email address?)
 
 		</markdown>
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex fmd-justify-content-stretch">
 			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				Next
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
@@ -368,6 +370,7 @@ test("Case 7 (form, start slide without form field)", () => {
 const template8 = `
    ->   Start
 |> 25%
+	|= eND
 >> POST
 << DISABLE
 
@@ -385,7 +388,7 @@ const expectedTemplate8 = `
 		# Welcome
 
 		</markdown>
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex fmd-justify-content-end">
 			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				শুরু
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>

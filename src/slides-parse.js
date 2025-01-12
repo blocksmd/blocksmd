@@ -19,7 +19,7 @@ const slideTemplate = `
 	<div class="fmd-grid">
 		{{ content }}
 		{% if startBtn %}
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex{% if buttonAlignment %} fmd-justify-content-{{ buttonAlignment }}{% endif %}">
 			<button type="submit" class="fmd-submit-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ startBtn }}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
@@ -27,7 +27,7 @@ const slideTemplate = `
 			</button>
 		</div>
 		{% else %}
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex{% if buttonAlignment %} fmd-justify-content-{{ buttonAlignment }}{% endif %}">
 			<button type="submit" class="fmd-submit-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{% if btnSettings.submitBtnText != "" %}
 				{{ btnSettings.submitBtnText }}
@@ -50,7 +50,7 @@ const slideTemplate = `
 	<div class="fmd-grid">
 		{{ content }}
 		{% if startBtn %}
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex{% if buttonAlignment %} fmd-justify-content-{{ buttonAlignment }}{% endif %}">
 			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ startBtn }}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
@@ -58,7 +58,7 @@ const slideTemplate = `
 			</button>
 		</div>
 		{% else %}
-		<div class="fmd-next-controls fmd-d-flex">
+		<div class="fmd-next-controls fmd-d-flex{% if buttonAlignment %} fmd-justify-content-{{ buttonAlignment }}{% endif %}">
 			<button type="button" class="fmd-next-btn fmd-btn fmd-btn-accent fmd-d-flex fmd-align-items-center fmd-justify-content-center">
 				{{ translations.nextBtn }}
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="fmd-icon fmd-ms-2 fmd-hide-rtl" aria-hidden="true" focusable="false"><path d="M273 239c9.4 9.4 9.4 24.6 0 33.9L113 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143L79 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L273 239z"/></svg>
@@ -116,6 +116,7 @@ function parseSlide(template, isForm, isFirstSlide, btnSettings, localization) {
 	let pageProgress = "";
 	let disablePrevBtn = false;
 	let post = false;
+	let buttonAlignment = "";
 	let startBtn = "";
 	let redirect = "";
 	let slideType = "body";
@@ -179,6 +180,19 @@ function parseSlide(template, isForm, isFirstSlide, btnSettings, localization) {
 				);
 			}
 		}
+		// Get the CTA alignment (if provided using the line "=| ..." or "|= ...")
+		else if (line.trim().startsWith("=|") || line.trim().startsWith("|=")) {
+			line = line.trim();
+			line = line.slice(2).trim().toLowerCase();
+			if (
+				line === "start" ||
+				line === "center" ||
+				line === "end" ||
+				line === "stretch"
+			) {
+				buttonAlignment = line;
+			}
+		}
 		// Get the check for disabling the previous button in the footer (if
 		// provided using the line "<< DISABLE")
 		else if (line.match(/^\s*<<\s*disable\s*$/i)) {
@@ -212,6 +226,7 @@ function parseSlide(template, isForm, isFirstSlide, btnSettings, localization) {
 			isFormSlide: isFormSlide,
 			jump: "",
 			pageProgress: pageProgress,
+			buttonAlignment: buttonAlignment,
 			btnSettings: btnSettings,
 			disablePrevBtn: disablePrevBtn,
 			post: post,
@@ -231,6 +246,7 @@ function parseSlide(template, isForm, isFirstSlide, btnSettings, localization) {
 			isFormSlide: isFormSlide,
 			jump: jump,
 			pageProgress: pageProgress,
+			buttonAlignment: buttonAlignment,
 			btnSettings: btnSettings,
 			disablePrevBtn: disablePrevBtn,
 			post: post,
