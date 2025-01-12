@@ -1544,6 +1544,7 @@ const expectedSlideMultipleParams = `
 ---
 -> age > 18
 |> 2/5
+=| center
 >> post
 << disable
 `;
@@ -1555,6 +1556,7 @@ test("Slide with multiple parameters and existing content", () => {
 		composer.slide({
 			jumpCondition: "age > 18",
 			pageProgress: "2/5",
+			buttonAlignment: "center",
 			post: true,
 			disablePrevious: true,
 		}),
@@ -1597,6 +1599,7 @@ test("Start slide with custom button text and empty template", () => {
 const expectedStartSlideAllParams = `
 ---
 -> start -> Begin Here
+=| end
 `;
 
 test("Start slide with all parameters and existing content", () => {
@@ -1605,6 +1608,7 @@ test("Start slide with all parameters and existing content", () => {
 	expect(
 		composer.startSlide({
 			buttonText: "Begin Here",
+			buttonAlignment: "end",
 		}),
 	).toBe(expectedStartSlideAllParams);
 });

@@ -2577,6 +2577,7 @@ export class Composer {
 	 * @typedef {Object} SlideParamsType
 	 * @property {string} [jumpCondition] Logic jump condition that must be `true` for slide to be shown.
 	 * @property {string} [pageProgress] Progress indicator shown on top (e.g. `"50%"` or `"1/2"`).
+	 * @property {"start"|"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of this slide's CTA button.
 	 * @property {true} [post] If set, posts form data up to this slide when going to the next one.
 	 * @property {true} [disablePrevious] If set, disables the previous button.
 	 */
@@ -2596,6 +2597,10 @@ export class Composer {
 		 */
 		pageProgress?: string;
 		/**
+		 * Set the alignment of this slide's CTA button.
+		 */
+		buttonAlignment?: "start" | "center" | "end" | "stretch";
+		/**
 		 * If set, posts form data up to this slide when going to the next one.
 		 */
 		post?: true;
@@ -2609,6 +2614,7 @@ export class Composer {
 	 *
 	 * @typedef {Object} StartSlideParamsType
 	 * @property {string} [buttonText] Custom text for the start button.
+	 * @property {"start"|"center"|"end"|"stretch"} [buttonAlignment] Set the alignment of this slide's CTA button.
 	 */
 	/**
 	 * Create a start slide.
@@ -2621,6 +2627,10 @@ export class Composer {
 		 * Custom text for the start button.
 		 */
 		buttonText?: string;
+		/**
+		 * Set the alignment of this slide's CTA button.
+		 */
+		buttonAlignment?: "start" | "center" | "end" | "stretch";
 	}) => string;
 	/**
 	 * End slide params.
