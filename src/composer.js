@@ -1908,7 +1908,40 @@ class Composer {
 	div = (content, params) => {
 		const instance = this;
 
-		const result = `${instance.divStart(params)}${content}${instance.divEnd()}`;
+		if (!params) {
+			params = {};
+		}
+		if (!params.bind) {
+			params.bind = [];
+		}
+
+		const attrs = composeAttrs(params);
+		let result = "";
+
+		// Start tag construction
+		if (attrs.length > 0 || params.bind.length > 0) {
+			const attrPart = attrs.length > 0 ? attrs.join(" ") : "";
+			const bindPart =
+				params.bind.length > 0 ? `{$ ${params.bind.join(" ")} $}` : "";
+
+			// Handle cases where we might have either attrs or bindings or both
+			if (attrPart && bindPart) {
+				result = `\n::: [${attrPart} ${bindPart}]\n`;
+			} else if (attrPart) {
+				result = `\n::: [${attrPart}]\n`;
+			} else if (bindPart) {
+				result = `\n::: [${bindPart}]\n`;
+			}
+		} else {
+			result = "\n:::\n";
+		}
+
+		// Add content
+		result += content;
+
+		// Add end tag
+		result += "\n:::\n";
+
 		instance.template += result;
 		return result;
 	};
