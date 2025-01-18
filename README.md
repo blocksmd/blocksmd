@@ -16,7 +16,7 @@ npm install formsmd
 
 ### Use in browser
 
-Download the distribution files from [the GitHub repo](https://github.com/formsmd/formsmd). Include the files using `<link>` and `<script>` tags in your template.
+Download the distribution files from this repo and include them using `<link>` and `<script>` tags in your template.
 
 ```html
 <!-- Forms.md CSS -->
