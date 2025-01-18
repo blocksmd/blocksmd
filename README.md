@@ -2,7 +2,7 @@
 
 # Forms.md: Developer-first, open source Typeform alternative
 
-**Forms.md** lets you build powerful multi-step forms and surveys with minimal code. Create production-ready forms that are privacy-focused, accessible, localizable, and themeable. Perfect for user onboarding, data collection, customer feedback, and much more. The best part? [It's completely free](https://forms.md/pricing/).
+**Forms.md** (formerly Blocks.md) lets you build powerful multi-step forms and surveys with minimal code. Create production-ready forms that are privacy-focused, accessible, localizable, and themeable. Perfect for user onboarding, data collection, customer feedback, and much more. The best part? [It's completely free](https://forms.md/pricing/).
 
 To learn more, please [visit the website](https://forms.md) or [read the docs](https://docs.forms.md).
 
