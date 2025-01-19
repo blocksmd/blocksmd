@@ -34,9 +34,10 @@ Or RTL version:
 
 ## Usage
 
-Create forms programmatically using the `Composer` class, then initialize them with the `Formsmd` class:
+Create forms programmatically using the Composer class, then initialize them with the Formsmd class by passing in the template.
 
 ```javascript
+import "formsmd/dist/css/formsmd.min.css"; // Or import formsmd.rtl.min.css in case of RTL
 import { Composer, Formsmd } from "formsmd";
  
 // Create form with ID and submission endpoint
