@@ -27,7 +27,6 @@ export class Formsmd {
 	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
 	 * @property {"hide"|"show"} [formsmdBranding] Controls visibility of the Forms.md branding.
 	 * @property {Object} [getHeaders] Headers for GET requests.
-	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
@@ -81,10 +80,6 @@ export class Formsmd {
 			 * Headers for GET requests.
 			 */
 			getHeaders?: any;
-			/**
-			 * Identifier for the page or form.
-			 */
-			id?: string;
 			/**
 			 * Whether to render in full page mode. Default is `false`.
 			 */
@@ -213,7 +208,6 @@ export class Formsmd {
 		footer: string;
 		formsmdBranding: string;
 		getHeaders: {};
-		id: string;
 		isFullPage: boolean;
 		paddingInlineBottom: number;
 		paddingInlineHorizontal: number;

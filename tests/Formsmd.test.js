@@ -127,7 +127,6 @@ describe("Formsmd", () => {
 			footer: "",
 			formsmdBranding: "",
 			getHeaders: {},
-			id: "",
 			isFullPage: false,
 			paddingInlineBottom: 20,
 			paddingInlineHorizontal: 0,
@@ -175,7 +174,6 @@ describe("Formsmd", () => {
 				footer: "show",
 				formsmdBranding: "hide",
 				getHeaders: { Authorization: "Bearer token" },
-				id: "customID",
 				isFullPage: true,
 				paddingInlineBottom: 10,
 				paddingInlineHorizontal: 5,
@@ -220,7 +218,6 @@ describe("Formsmd", () => {
 			expect(customFormsmd.options.getHeaders).toEqual({
 				Authorization: "Bearer token",
 			});
-			expect(customFormsmd.options.id).toBe("customID");
 			expect(customFormsmd.options.isFullPage).toBe(true);
 			expect(customFormsmd.options.paddingInlineBottom).toBe(10);
 			expect(customFormsmd.options.paddingInlineHorizontal).toBe(5);

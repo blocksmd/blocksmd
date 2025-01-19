@@ -32,7 +32,6 @@ class Formsmd {
 		footer: "",
 		formsmdBranding: "",
 		getHeaders: {},
-		id: "",
 		isFullPage: false,
 		paddingInlineBottom: 20,
 		paddingInlineHorizontal: 0,
@@ -97,7 +96,6 @@ class Formsmd {
 	 * @property {"hide"|"show"} [footer] Controls visibility of the footer.
 	 * @property {"hide"|"show"} [formsmdBranding] Controls visibility of the Forms.md branding.
 	 * @property {Object} [getHeaders] Headers for GET requests.
-	 * @property {string} [id] Identifier for the page or form.
 	 * @property {boolean} [isFullPage] Whether to render in full page mode. Default is `false`.
 	 * @property {number} [paddingInlineBottom] Padding bottom for inline pages or forms. Default is `20`.
 	 * @property {number} [paddingInlineHorizontal] Horizontal padding for inline pages or forms. Default is `0`.
@@ -167,10 +165,6 @@ class Formsmd {
 					...this.options.getHeaders,
 					...options.getHeaders,
 				};
-			}
-			// Id
-			if (options.id !== undefined && typeof options.id === "string") {
-				this.options.id = options.id;
 			}
 			// Is full page
 			if (
@@ -379,9 +373,6 @@ class Formsmd {
 
 		// Set up the settings from the options
 		const templateSettingsFromOptions = [];
-		if (this.options.id !== "") {
-			templateSettingsFromOptions.push(`#! id = ${this.options.id}`);
-		}
 
 		let colorScheme = this.options.colorScheme;
 		const templateContainsColorScheme = template.match(
