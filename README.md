@@ -1,4 +1,4 @@
-![Forms.md cover image](https://res.cloudinary.com/dnriuttuy/image/upload/v1734953844/formsmd-og-image_grtjjr.png)
+![Forms.md cover image](https://res.cloudinary.com/dnriuttuy/image/upload/v1737557694/formsmd-og-image_qxkxec.png)
 
 # Forms.md: Developer-first, open source Typeform alternative
 
