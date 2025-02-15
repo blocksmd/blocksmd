@@ -1,6 +1,6 @@
 {
 	"name": "formsmd",
-	"version": "1.1.0-beta.16",
+	"version": "1.1.0",
 	"description": "Developer-first, open source Typeform alternative",
 	"main": "src/index.js",
 	"types": "types/index.d.ts",
@@ -31,7 +31,7 @@
 		"typeform-clone"
 	],
 	"author": "Tahmid Khan Nafee",
-	"license": "BUSL-1.1",
+	"license": "Apache-2.0",
 	"devDependencies": {
 		"@babel/cli": "^7.24.7",
 		"@babel/core": "^7.24.7",
