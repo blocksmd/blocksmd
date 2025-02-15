@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseSpreadsheetData } = require("../src/spreadsheet-data-parse");
 

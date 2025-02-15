@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createChoiceField } = require("../src/form-field-create");
 const beautify = require("beautify");
@@ -6,57 +6,57 @@ const beautify = require("beautify");
 // Case 1 (radio)
 
 const expectedTemplate1 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="radio" data-fmd-required id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid">
-			<div class="bmd-form-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="fmd-form-check-label" for="id_choice-1">
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice B"
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="fmd-form-check-label" for="id_choice-2">
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="fmd-form-check-label" for="id_choice-3">
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -72,7 +72,7 @@ test("Case 1 (radio)", () => {
 				"choice",
 				false,
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your choice?
 					| description = Please choose.
@@ -81,6 +81,7 @@ test("Case 1 (radio)", () => {
 					| subfield
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -91,58 +92,58 @@ test("Case 1 (radio)", () => {
 // Case 2 (radio, not required, checked value, horizontal)
 
 const expectedTemplate2 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" class="bmd-form-field">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="choice" data-fmd-type="radio" class="fmd-form-field">
+	<legend class="fmd-form-question">
 		What is your choice?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h">
-			<div class="bmd-form-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-a"
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="fmd-form-check-label" for="id_choice-1">
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					checked
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="fmd-form-check-label" for="id_choice-2">
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="fmd-form-check-label" for="id_choice-3">
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -167,6 +168,7 @@ test("Case 2 (radio, not required, checked value, horizontal)", () => {
 					| horizontal
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -177,64 +179,64 @@ test("Case 2 (radio, not required, checked value, horizontal)", () => {
 // Case 3 (radio, multiple checked values)
 
 const expectedTemplate3 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="radio" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid">
-			<div class="bmd-form-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="fmd-form-check-label" for="id_choice-1">
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="fmd-form-check-label" for="id_choice-2">
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="fmd-form-check-label" for="id_choice-3">
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -265,6 +267,7 @@ test("Case 3 (radio, multiple checked values)", () => {
 					| hidelabels
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -275,73 +278,73 @@ test("Case 3 (radio, multiple checked values)", () => {
 // Case 4 (radio, picture choice, multiple checked values)
 
 const expectedTemplate4 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="radio" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h bmd-check-grid-h-lg">
-			<div class="bmd-form-check bmd-form-img-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h fmd-check-grid-h-lg">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-1">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/a.png" alt="Choice A">
 					</span>
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-2">
+					<span class="fmd-form-check-frame">
 						<img src="" alt="Choice B">
 					</span>
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-3">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/c.png" alt="Choice C">
 					</span>
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -371,6 +374,7 @@ test("Case 4 (radio, picture choice, multiple checked values)", () => {
 					| supersize
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -381,67 +385,67 @@ test("Case 4 (radio, picture choice, multiple checked values)", () => {
 // Case 5 (radio, picture choice, hide labels, different form delimiter)
 
 const expectedTemplate5 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="choice" data-fmd-type="radio" id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
 		What is your choice?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h">
-			<div class="bmd-form-check bmd-form-img-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-1">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/a.png" alt="Choice A">
 					</span>
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					checked
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-2">
+					<span class="fmd-form-check-frame">
 						<img src="" alt="Choice B">
 					</span>
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="radio"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-3">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/c.png" alt="Choice C">
 					</span>
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -457,7 +461,7 @@ test("Case 5 (radio, picture choice, hide labels, different form delimiter)", ()
 				"choice",
 				true,
 				false,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					question = What is your choice?
 					description = Please choose.
@@ -467,6 +471,7 @@ test("Case 5 (radio, picture choice, hide labels, different form delimiter)", ()
 					hidelabels
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -477,60 +482,57 @@ test("Case 5 (radio, picture choice, hide labels, different form delimiter)", ()
 // Case 6 (checkbox)
 
 const expectedTemplate6 = `
-<fieldset data-bmd-name="choice" data-bmd-type="checkbox" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="checkbox" data-fmd-required id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-form-text">
-		Choose as many as you like
-	</div>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid">
-			<div class="bmd-form-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="fmd-form-check-label" for="id_choice-1">
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice B"
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="fmd-form-check-label" for="id_choice-2">
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="fmd-form-check-label" for="id_choice-3">
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -546,7 +548,7 @@ test("Case 6 (checkbox)", () => {
 				"choice",
 				false,
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your choice?
 					| description = Please choose.
@@ -554,8 +556,10 @@ test("Case 6 (checkbox)", () => {
 					| multiple
 					| fieldsize = sm
 					| subfield
+					| hideFormText
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -563,65 +567,65 @@ test("Case 6 (checkbox)", () => {
 	).toBe(beautify(expectedTemplate6, { format: "html" }));
 });
 
-// Case 7 (checkbox, not required, checked values, horizontal, different localization)
+// Case 7 (checkbox, not required, checked values, horizontal, different id and localization)
 
 const expectedTemplate7 = `
-<fieldset data-bmd-name="choice" data-bmd-type="checkbox" class="bmd-form-field">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="choice" data-fmd-type="checkbox" class="fmd-form-field">
+	<legend class="fmd-form-question">
 		What is your choice?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-form-text">
+	<div class="fmd-form-text">
 		এক বা একাধিক নির্বাচন করুন
 	</div>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h">
-			<div class="bmd-form-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-1"
+					id="page_123456:id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-a"
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
+				<label class="fmd-form-check-label" for="page_123456:id_choice-1">
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-2"
+					id="page_123456:id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					checked
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
+				<label class="fmd-form-check-label" for="page_123456:id_choice-2">
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check">
+			<div class="fmd-form-check">
 				<input
 					name="choice"
-					id="id_choice-3"
+					id="page_123456:id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 					checked
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
+				<label class="fmd-form-check-label" for="page_123456:id_choice-3">
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -630,7 +634,7 @@ const expectedTemplate7 = `
 </fieldset>
 `;
 
-test("Case 7 (checkbox, not required, checked values, horizontal, different localization)", () => {
+test("Case 7 (checkbox, not required, checked values, horizontal, different id and localization)", () => {
 	expect(
 		beautify(
 			createChoiceField(
@@ -647,6 +651,7 @@ test("Case 7 (checkbox, not required, checked values, horizontal, different loca
 					| multiple
 				`,
 				"|",
+				"page_123456",
 				"bn",
 			),
 			{ format: "html" },
@@ -657,76 +662,76 @@ test("Case 7 (checkbox, not required, checked values, horizontal, different loca
 // Case 8 (checkbox, picture choice)
 
 const expectedTemplate8 = `
-<fieldset data-bmd-name="choice" data-bmd-type="checkbox" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="checkbox" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-form-text">
+	<div class="fmd-form-text">
 		Choose as many as you like
 	</div>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h bmd-check-grid-h-lg">
-			<div class="bmd-form-check bmd-form-img-check">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h fmd-check-grid-h-lg">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-1"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice A"
 					checked
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-1">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-1">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/a.png" alt="Choice A">
 					</span>
 					Choice A
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-2"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="choice-b"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-2">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-2">
+					<span class="fmd-form-check-frame">
 						<img src="" alt="Choice B">
 					</span>
 					Choice B
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
-			<div class="bmd-form-check bmd-form-img-check">
+			<div class="fmd-form-check fmd-form-img-check">
 				<input
 					name="choice"
 					id="id_choice-3"
 					type="checkbox"
-					class="bmd-form-check-input"
+					class="fmd-form-str-check-input fmd-form-check-input"
 					value="Choice C"
 					disabled
-					data-bmd-autofocus
+					data-fmd-autofocus
 				>
-				<label class="bmd-form-check-label" for="id_choice-3">
-					<span class="bmd-form-check-frame">
+				<label class="fmd-form-check-label" for="id_choice-3">
+					<span class="fmd-form-check-frame">
 						<img src="https://example.com/c.png" alt="Choice C">
 					</span>
 					Choice C
-					<span class="bmd-form-check-mark">
-						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
+					<span class="fmd-form-check-mark">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z"/></svg>
 					</span>
 				</label>
 			</div>
@@ -757,6 +762,7 @@ test("Case 8 (checkbox, picture choice)", () => {
 					| multiple
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -767,12 +773,12 @@ test("Case 8 (checkbox, picture choice)", () => {
 // Case 9 (no params)
 
 const expectedTemplate9 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="radio" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>
 	</legend>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid">
 		</div>
 	</div>
 </fieldset>
@@ -780,7 +786,7 @@ const expectedTemplate9 = `
 
 test("Case 9 (no params)", () => {
 	expect(
-		beautify(createChoiceField("choice", false, true, "", "", "|", "en"), {
+		beautify(createChoiceField("choice", false, true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate9, { format: "html" }));
@@ -789,12 +795,12 @@ test("Case 9 (no params)", () => {
 // Case 10 (picture choice, no params)
 
 const expectedTemplate10 = `
-<fieldset data-bmd-name="choice" data-bmd-type="radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="radio" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>
 	</legend>
-	<div class="bmd-check-grid-wrapper">
-		<div class="bmd-check-grid bmd-check-grid-h">
+	<div class="fmd-check-grid-wrapper">
+		<div class="fmd-check-grid fmd-check-grid-h">
 		</div>
 	</div>
 </fieldset>
@@ -802,7 +808,7 @@ const expectedTemplate10 = `
 
 test("Case 10 (picture choice, no params)", () => {
 	expect(
-		beautify(createChoiceField("choice", true, true, "", "", "|", "en"), {
+		beautify(createChoiceField("choice", true, true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate10, { format: "html" }));

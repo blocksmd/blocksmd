@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { unescape } = require("./helpers");
 
@@ -15,7 +15,9 @@ function parseColor(colorString) {
 	let r, g, b;
 
 	// Strip any leading #
-	if (colorString.charAt(0) == "#") colorString = colorString.substr(1, 6);
+	if (colorString.charAt(0) == "#") {
+		colorString = colorString.substr(1, 6);
+	}
 
 	colorString = colorString.replace(/ /g, "");
 	colorString = colorString.toLowerCase();
@@ -239,11 +241,12 @@ function getDefaultSettings() {
 	return {
 		"color-scheme": "light",
 		"color-scheme-scope": "domain-wide",
-		"css-prefix": "bmd-",
+		"css-prefix": "fmd-",
 		"dir": "ltr",
 		"form-delimiter": "|",
-		"get-format": "csv",
+		"get-format": "json",
 		"get-objects-name": "objects",
+		"id": "",
 		"localization": "en",
 		"page": "form-slides",
 		"slide-delimiter": "---",
@@ -299,10 +302,6 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid CSS for background-image",
 		},
-		"blocksmd-branding": {
-			pattern: /^hide$/,
-			accepted: "hide",
-		},
 		"brand": {
 			pattern: /^!\[.*\]\(.*\)$/s,
 			accepted:
@@ -312,6 +311,10 @@ function parseSettings(template) {
 			pattern: /^!\[.*\]\(.*\)$/s,
 			accepted:
 				"Markdown image, example: ![Example logo](https://example.com/logo.png)",
+		},
+		"button-alignment": {
+			pattern: /^(center|end|stretch)$/,
+			accepted: "center || end || stretch",
 		},
 		"color": {
 			accepted: "valid color (name, hex code, or RGB)",
@@ -364,17 +367,25 @@ function parseSettings(template) {
 			pattern: /^(sm|lg)$/,
 			accepted: "sm || lg",
 		},
+		"footer": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
 		"form-delimiter": {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
-		"footer": {
-			pattern: /^hide$/,
-			accepted: "hide",
+		"formsmd-branding": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
+		},
+		"form-style": {
+			pattern: /^classic$/,
+			accepted: "classic",
 		},
 		"get-format": {
-			pattern: /^(csv|json|tsv)$/,
-			accepted: "csv (default) || json || tsv",
+			pattern: /^(json|csv|tsv)$/,
+			accepted: "json (default) || csv || tsv",
 		},
 		"get-objects-name": {
 			pattern: /^.*$/,
@@ -385,12 +396,20 @@ function parseSettings(template) {
 			accepted: "valid URL",
 		},
 		"header": {
-			pattern: /^(align|hide)$/,
-			accepted: "align || hide",
+			pattern: /^(align|hide|show)$/,
+			accepted: "align || hide || show",
 		},
 		"headings": {
 			pattern: /^anchored$/,
 			accepted: "anchored",
+		},
+		"id": {
+			pattern: /^[a-zA-Z][\w:.-]*$/,
+			accepted: "valid HTML id",
+		},
+		"label-style": {
+			pattern: /^classic$/,
+			accepted: "classic",
 		},
 		"localization": {
 			pattern: /^.*$/,
@@ -425,8 +444,12 @@ function parseSettings(template) {
 			accepted: "form-slides (default) || slides || single",
 		},
 		"page-progress": {
-			pattern: /^(hide|decorative)$/,
-			accepted: "hide || decorative",
+			pattern: /^(hide|show|decorative)$/,
+			accepted: "hide || show || decorative",
+		},
+		"placeholders": {
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"post-sheet-name": {
 			pattern: /^.*$/,
@@ -436,15 +459,23 @@ function parseSettings(template) {
 			pattern: /^.*$/,
 			accepted: "valid URL",
 		},
+		"restart-button": {
+			pattern: /^show$/,
+			accepted: "show",
+		},
 		"rounded": {
 			pattern: /^(none|pill)$/,
 			accepted: "none || pill",
 		},
 		"slide-controls": {
-			pattern: /^hide$/,
-			accepted: "hide",
+			pattern: /^(hide|show)$/,
+			accepted: "hide || show",
 		},
 		"slide-delimiter": {
+			pattern: /^.*$/,
+			accepted: "valid string",
+		},
+		"submit-button-text": {
 			pattern: /^.*$/,
 			accepted: "valid string",
 		},
@@ -455,10 +486,6 @@ function parseSettings(template) {
 		"vertical-alignment": {
 			pattern: /^start$/,
 			accepted: "start",
-		},
-		"vertical-padding": {
-			pattern: /^(static|sm-and-up:static)$/,
-			accepted: "static || sm-and-up:static",
 		},
 	};
 
@@ -497,7 +524,9 @@ function parseSettings(template) {
 	const settings = {};
 	for (let [key, value] of Object.entries(userSettings)) {
 		// Discard settings where the value is an empty string
-		if (value === "") continue;
+		if (value === "") {
+			continue;
+		}
 
 		// Make sure only accepted settings are available later
 		if (!(key in settingsRef)) {
@@ -529,14 +558,14 @@ function parseSettings(template) {
 				valueInvalid = true;
 			}
 		} else if (key === "css-prefix") {
-			if (value.match(settingsRef[key]["pattern"])) {
+			if (value.match(settingsRef[key].pattern)) {
 				settings[key] =
 					value === "none" ? "" : unescape(value.replace(/\\n/g, "\n"));
 			} else {
 				valueInvalid = true;
 			}
 		} else {
-			if (value.match(settingsRef[key]["pattern"])) {
+			if (value.match(settingsRef[key].pattern)) {
 				settings[key] = unescape(value.replace(/\\n/g, "\n"));
 			} else {
 				valueInvalid = true;
@@ -551,7 +580,7 @@ function parseSettings(template) {
 				keyForUser = key.substring(0, key.length - "-alt-scheme".length);
 			}
 			console.warn(
-				`[SETTINGS] "${keyForUser}" value "${value}" is not valid, accepted: ${settingsRef[key]["accepted"]}`,
+				`[SETTINGS] "${keyForUser}" value "${value}" is not valid, accepted: ${settingsRef[key].accepted}`,
 			);
 		}
 	}

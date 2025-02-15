@@ -24,25 +24,28 @@ export function formFieldSetup(
 	restParams: any;
 };
 /**
- * Create a text form field. Supported types are "text", "email", "url", and
- * "tel". For the multiline "text" type, the <textarea> element is used.
+ * Create a text form field. Supported types are "text", "email", "url",
+ * "tel", and "password". For the multiline "text" type, the <textarea>
+ * element is used.
  *
  * @param {string} name
- * @param {"text"|"email"|"url"|"tel"} inputType
+ * @param {"text"|"email"|"url"|"tel"|"password"} inputType
  * @param {boolean} required
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} text input form field as HTML string
  */
 export function createTextField(
 	name: string,
-	inputType: "text" | "email" | "url" | "tel",
+	inputType: "text" | "email" | "url" | "tel" | "password",
 	required: boolean,
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -53,6 +56,7 @@ export function createTextField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} number input form field as HTML string
  */
@@ -62,6 +66,7 @@ export function createNumberField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -72,6 +77,7 @@ export function createNumberField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} select box form field as HTML string
  */
@@ -81,6 +87,7 @@ export function createSelectField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -92,6 +99,7 @@ export function createSelectField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} choice input form field as HTML string
  */
@@ -102,6 +110,7 @@ export function createChoiceField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -112,6 +121,7 @@ export function createChoiceField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} rating input form field as HTML string
  */
@@ -121,6 +131,7 @@ export function createRatingField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;
 /**
@@ -131,6 +142,7 @@ export function createRatingField(
  * @param {string} parsedAttrs
  * @param {string} params
  * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
  * @param {string} localization
  * @returns {string} opinion scale form field as HTML string
  */
@@ -140,5 +152,50 @@ export function createOpinionScaleField(
 	parsedAttrs: string,
 	params: string,
 	formDelimiter: string,
+	id: string,
+	localization: string,
+): string;
+/**
+ * Create a datetime, date, or time form field.
+ *
+ * @param {string} name
+ * @param {"datetime"|"date"|"time"} inputType
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} datetime, date, or time input form field as HTML string
+ */
+export function createDatetimeField(
+	name: string,
+	inputType: "datetime" | "date" | "time",
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	id: string,
+	localization: string,
+): string;
+/**
+ * Create a file form field.
+ *
+ * @param {string} name
+ * @param {boolean} required
+ * @param {string} parsedAttrs
+ * @param {string} params
+ * @param {string} formDelimiter
+ * @param {string} id - the id of the page/form
+ * @param {string} localization
+ * @returns {string} file input form field as HTML string
+ */
+export function createFileField(
+	name: string,
+	required: boolean,
+	parsedAttrs: string,
+	params: string,
+	formDelimiter: string,
+	id: string,
 	localization: string,
 ): string;

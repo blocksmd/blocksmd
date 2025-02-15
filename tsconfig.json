@@ -6,6 +6,6 @@
 		"emitDeclarationOnly": true,
 		"moduleResolution": "node",
 		"outDir": "types",
-		"target": "es2021"
+		"target": "es6"
 	}
 }

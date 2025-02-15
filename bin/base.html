@@ -1,12 +1,13 @@
 <!doctype html>
 <html
-	dir="{{ settings['dir'] }}"
-	lang="{{ settings['localization'] }}"
+	dir="{{ settings.dir }}"
+	lang="{{ settings.localization }}"
 	spellcheck="false"
-	class="bmd-root"
-	data-bmd-color-scheme="{{ settings['color-scheme'] }}"
-	data-bmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
-	data-bmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
+	class="fmd-root"
+	data-fmd-color-scheme="{{ settings['color-scheme'] }}"
+	data-fmd-color-scheme-toggle="{{ settings['color-scheme-toggle'] }}"
+	data-fmd-color-scheme-scope="{{ settings['color-scheme-scope'] }}"
+	data-fmd-id="{{ settings.id }}"
 >
 	<head>
 		<!-- Required meta tags -->
@@ -14,8 +15,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<!-- Title and favicon -->
-		<title>{{ settings["title"] }}</title>
-		<link rel="icon" href="{{ settings['favicon'] }}" />
+		<title>{{ settings.title }}</title>
+		<link rel="icon" href="{{ settings.favicon }}" />
 
 		<!-- SEO -->
 		<meta name="description" content="{{ settings['meta-description'] }}" />
@@ -25,58 +26,52 @@
 		<!-- Open Graph -->
 		<meta property="og:type" content="{{ settings['meta-type'] }}" />
 		<meta property="og:url" content="{{ settings['meta-url'] }}" />
-		<meta property="og:title" content="{{ settings['title'] }}" />
+		<meta property="og:title" content="{{ settings.title }}" />
 		<meta
 			property="og:description"
 			content="{{ settings['meta-description'] }}"
 		/>
 		<meta property="og:image" content="{{ settings['meta-image'] }}" />
 
-		<!-- blocks.md JS -->
-		<script src="./blocksmd/js/blocksmd.bundle.min.js"></script>
+		<!-- Forms.md JS -->
+		<script src="./formsmd/js/formsmd.bundle.min.js"></script>
 
 		<!-- Toggle color scheme -->
 		<script type="text/javascript">
 			if (
 				document.documentElement.getAttribute(
-					"data-bmd-color-scheme-toggle",
+					"data-fmd-color-scheme-toggle",
 				) === "show"
 			)
-				blocksmd.setPreferredColorScheme();
+				formsmd.setPreferredColorScheme();
 		</script>
 
-		<!-- blocks.md CSS -->
+		<!-- Forms.md CSS -->
 		<link
 			rel="stylesheet"
 			type="text/css"
-			href="./blocksmd/css/blocksmd{% if settings['dir'] == 'rtl' %}.rtl{% endif %}.min.css"
+			href="./formsmd/css/formsmd{% if settings.dir == 'rtl' %}.rtl{% endif %}.min.css"
 		/>
 	</head>
-	<body class="bmd-body">
+	<body class="fmd-body">
 		<noscript>Please turn on JavaScript to see this page.</noscript>
-		<main class="bmd-main">
-			<div class="bmd-main-container">
-				<div class="bmd-loader-container">
+		<div class="fmd-main">
+			<div class="fmd-main-container">
+				<div class="fmd-loader-container">
 					<div
-						class="bmd-loader-spinner"
+						class="fmd-loader-spinner"
 						role="status"
 						aria-label="Loading"
 					></div>
 				</div>
 			</div>
-		</main>
+		</div>
 
 		<!-- Content -->
 		<script type="text/javascript">
-			String.prototype.blocksmd = function () {
-				blocksmd.init(this, {
-					// getHeaders: {},
-					// postData: {},
-					// postHeaders: {},
-					// prioritizeURLFormData: false,
-					// sanitize: false,
-					// setColorSchemeAttrsAgain: true,
-				});
+			String.prototype.formsmd = function () {
+				const instance = new Formsmd(this, document, { isFullPage: true });
+				instance.init();
 			};
 		</script>
 		<script src="./content/{{ route }}.md.js"></script>

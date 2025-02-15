@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-("use strict");
+"use strict";
 
 const { getDefaultSettings, parseSettings } = require("../src/settings-parse");
 const fs = require("fs-extra");
@@ -36,11 +36,14 @@ const argv = require("yargs/yargs")(process.argv.slice(2)).options({
 
 // Set up the directories
 // Make sure to remove any and all leading and trailing forward slashes
-const inputDir = `${cwd()}/${argv["input"].replace(/^\/+|\/+$/g, "")}`;
-const outputDir = `${cwd()}/${argv["output"].replace(/^\/+|\/+$/g, "")}`;
-if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir);
-if (!fs.existsSync(`${outputDir}/content`))
+const inputDir = `${cwd()}/${argv.input.replace(/^\/+|\/+$/g, "")}`;
+const outputDir = `${cwd()}/${argv.output.replace(/^\/+|\/+$/g, "")}`;
+if (!fs.existsSync(outputDir)) {
+	fs.mkdirSync(outputDir);
+}
+if (!fs.existsSync(`${outputDir}/content`)) {
 	fs.mkdirSync(`${outputDir}/content`);
+}
 const staticDirName = argv["static-dir-name"]
 	.replace(/^\/+|\/+$/g, "")
 	.split("/")[0];
@@ -74,7 +77,7 @@ fs.readdir(inputDir, function (err, files) {
 				const parsedTemplateAndSettings = parseSettings(template);
 				const settings = {
 					...getDefaultSettings(),
-					...parsedTemplateAndSettings["settings"],
+					...parsedTemplateAndSettings.settings,
 				};
 
 				// Use Nunjucks to create the HTML
@@ -85,7 +88,7 @@ fs.readdir(inputDir, function (err, files) {
 
 				// Escape all backticks from template and prepare it for the output
 				template = template.replace(/`/g, "\\`");
-				template = ["`", template, "`.blocksmd();"].join("\n");
+				template = ["`", template, "`.formsmd();"].join("\n");
 
 				// Create the files in the output directory
 				fs.writeFileSync(`${outputDir}/${route}.html`, htmlContent);
@@ -97,9 +100,9 @@ fs.readdir(inputDir, function (err, files) {
 	});
 });
 
-// Copy the blocksmd CSS and JS files
+// Copy the Forms.md CSS and JS files
 try {
-	fs.copySync(path.join(__dirname, "..", "dist"), `${outputDir}/blocksmd`);
+	fs.copySync(path.join(__dirname, "..", "dist"), `${outputDir}/formsmd`);
 } catch (err) {
 	console.error(err);
 }

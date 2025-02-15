@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 /**
  * Given a template string, parse the data-blocks and separate them from the

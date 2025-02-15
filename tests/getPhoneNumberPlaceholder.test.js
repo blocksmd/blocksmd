@@ -1,8 +1,6 @@
-("use strict");
+"use strict";
 
-const {
-	getPhoneNumberPlaceholder,
-} = require("../src/phone-number-placeholders");
+const { getPhoneNumberPlaceholder } = require("../src/phone-numbers");
 
 test("Case 1", () => {
 	expect(getPhoneNumberPlaceholder("US")).toBe("(201) 555-0123");

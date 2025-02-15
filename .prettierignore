@@ -3,7 +3,8 @@
 **/.hg
 **/node_modules
 dist/js
-dist/css/blocksmd.min.css
-dist/css/blocksmd.min.css.map
-dist/css/blocksmd.rtl.min.css
-dist/css/blocksmd.rtl.min.css.map
+dist/css/formsmd.min.css
+dist/css/formsmd.min.css.map
+dist/css/formsmd.rtl.min.css
+dist/css/formsmd.rtl.min.css.map
+README.md

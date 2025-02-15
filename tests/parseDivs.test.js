@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseDivs } = require("../src/div-span-parse");
 
@@ -13,7 +13,7 @@ Hello {{ name }}!
 `;
 const expectedTemplate1 = `
 
-<div class="bmd-grid">
+<div class="fmd-grid">
 
 # Heading
 
@@ -25,9 +25,9 @@ Hello {{ name }}!
 const expectedBindDivTemplates1 = {};
 
 test("Case 1", () => {
-	const result1 = parseDivs(template1, "bmd-");
-	expect(result1["template"]).toBe(expectedTemplate1);
-	expect(result1["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates1);
+	const result1 = parseDivs(template1, "fmd-");
+	expect(result1.template).toBe(expectedTemplate1);
+	expect(result1.bindDivTemplates).toMatchObject(expectedBindDivTemplates1);
 });
 
 // Case 2 (multiple <div> elements and attributes)
@@ -46,7 +46,7 @@ Hello {{ name }}!
 `;
 const expectedTemplate2 = `
 
-<div class="bmd-col-4 bmd-grid">
+<div class="fmd-col-4 fmd-grid">
 
 # Heading
 
@@ -56,7 +56,7 @@ Hello {{ name }}!
 
 
 
-<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-grid" aria-label="Label" data-title="Some title">
+<div id="some-id" class="fmd-col-4 fmd-xs:col-6 fmd-grid" aria-label="Label" data-title="Some title">
 
 > Just a blockquote
 
@@ -66,9 +66,9 @@ Hello {{ name }}!
 const expectedBindDivTemplates2 = {};
 
 test("Case 2 (multiple <div> elements and attributes)", () => {
-	const result2 = parseDivs(template2, "bmd-");
-	expect(result2["template"]).toBe(expectedTemplate2);
-	expect(result2["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates2);
+	const result2 = parseDivs(template2, "fmd-");
+	expect(result2.template).toBe(expectedTemplate2);
+	expect(result2.bindDivTemplates).toMatchObject(expectedBindDivTemplates2);
 });
 
 // Case 3 (bind and one-line)
@@ -89,7 +89,7 @@ Hello {{ name }}!
 `;
 const expectedTemplate3 = `
 
-<div class="bmd-col-4 bmd-grid" data-bmd-bind-name data-bmd-bind-age data-bmd-bind-template-ref="0">
+<div class="fmd-col-4 fmd-grid" data-fmd-bind-name data-fmd-bind-age data-fmd-bind-template-ref="0">
 
 # Heading
 
@@ -99,7 +99,7 @@ Hello {{ name }}!
 
 
 
-<div class="bmd-grid">
+<div class="fmd-grid">
 
 Word
 
@@ -107,7 +107,7 @@ Word
 
 
 
-<div id="some-id" class="bmd-col-4 bmd-xs:col-6 bmd-grid" aria-label="Label" data-title="Some title" data-bmd-bind-profession data-bmd-bind-skills data-bmd-bind-email data-bmd-bind-template-ref="1">
+<div id="some-id" class="fmd-col-4 fmd-xs:col-6 fmd-grid" aria-label="Label" data-title="Some title" data-fmd-bind-profession data-fmd-bind-skills data-fmd-bind-email data-fmd-bind-template-ref="1">
 
 > Just a blockquote
 
@@ -120,9 +120,9 @@ const expectedBindDivTemplates3 = {
 };
 
 test("Case 3 (bind and one-line)", () => {
-	const result3 = parseDivs(template3, "bmd-");
-	expect(result3["template"]).toBe(expectedTemplate3);
-	expect(result3["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates3);
+	const result3 = parseDivs(template3, "fmd-");
+	expect(result3.template).toBe(expectedTemplate3);
+	expect(result3.bindDivTemplates).toMatchObject(expectedBindDivTemplates3);
 });
 
 // Case 4 (odd marker)
@@ -140,7 +140,7 @@ Hello {{ name }}!
 `;
 const expectedTemplate4 = `
 
-<div class="bmd-grid">
+<div class="fmd-grid">
 
 Word
 
@@ -148,7 +148,7 @@ Word
 
 
 
-<div class="bmd-grid">
+<div class="fmd-grid">
 
 # Heading
 
@@ -162,9 +162,9 @@ Hello {{ name }}!
 const expectedBindDivTemplates4 = {};
 
 test("Case 4 (odd marker)", () => {
-	const result4 = parseDivs(template4, "bmd-");
-	expect(result4["template"]).toBe(expectedTemplate4);
-	expect(result4["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates4);
+	const result4 = parseDivs(template4, "fmd-");
+	expect(result4.template).toBe(expectedTemplate4);
+	expect(result4.bindDivTemplates).toMatchObject(expectedBindDivTemplates4);
 });
 
 // Case 5 (no <div> elements)
@@ -186,9 +186,9 @@ This is a paragraph.
 const expectedBindDivTemplates5 = {};
 
 test("Case 5 (no <div> elements)", () => {
-	const result5 = parseDivs(template5, "bmd-");
-	expect(result5["template"]).toBe(expectedTemplate5);
-	expect(result5["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates5);
+	const result5 = parseDivs(template5, "fmd-");
+	expect(result5.template).toBe(expectedTemplate5);
+	expect(result5.bindDivTemplates).toMatchObject(expectedBindDivTemplates5);
 });
 
 // Case 6 (empty string)
@@ -198,7 +198,7 @@ const expectedTemplate6 = "";
 const expectedBindDivTemplates6 = {};
 
 test("Case 6 (empty string)", () => {
-	const result6 = parseDivs(template6, "bmd-");
-	expect(result6["template"]).toBe(expectedTemplate6);
-	expect(result6["bindDivTemplates"]).toMatchObject(expectedBindDivTemplates6);
+	const result6 = parseDivs(template6, "fmd-");
+	expect(result6.template).toBe(expectedTemplate6);
+	expect(result6.bindDivTemplates).toMatchObject(expectedBindDivTemplates6);
 });

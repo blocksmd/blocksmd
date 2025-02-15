@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { createOpinionScaleField } = require("../src/form-field-create");
 const beautify = require("beautify");
@@ -6,123 +6,123 @@ const beautify = require("beautify");
 // Case 1
 
 const expectedTemplate1 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" data-fmd-required id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">opinion?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">opinion? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-0"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="0"
-			data-bmd-autofocus
+			data-fmd-autofocus
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-0">0</label>
+		<label class="fmd-form-scale-label" for="id_opinion-0">0</label>
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 		<input 
 			name="opinion"
 			id="id_opinion-6"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="6"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-6">6</label>
+		<label class="fmd-form-scale-label" for="id_opinion-6">6</label>
 		<input 
 			name="opinion"
 			id="id_opinion-7"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="7"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-7">7</label>
+		<label class="fmd-form-scale-label" for="id_opinion-7">7</label>
 		<input 
 			name="opinion"
 			id="id_opinion-8"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="8"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-8">8</label>
+		<label class="fmd-form-scale-label" for="id_opinion-8">8</label>
 		<input 
 			name="opinion"
 			id="id_opinion-9"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="9"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-9">9</label>
+		<label class="fmd-form-scale-label" for="id_opinion-9">9</label>
 		<input 
 			name="opinion"
 			id="id_opinion-10"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="10"
-			data-bmd-autofocus
+			data-fmd-autofocus
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-10">10</label>
+		<label class="fmd-form-scale-label" for="id_opinion-10">10</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">0 &mdash;</span>
         	<span id="id_opinion-label-start">Not likely at all</span>
         </div>
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">10 &mdash;</span>
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">10 &mdash;</span>
         	<span id="id_opinion-label-end">Extremely likely</span>
         </div>
     </div>
@@ -135,7 +135,7 @@ test("Case 1", () => {
 			createOpinionScaleField(
 				"opinion",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your opinion?
 					| description = Please choose.
@@ -146,6 +146,7 @@ test("Case 1", () => {
 					| outof = 4
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -156,70 +157,70 @@ test("Case 1", () => {
 // Case 2 (not required, start at 1, out of 5, value, disabled)
 
 const expectedTemplate2 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" class="bmd-form-field">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" class="fmd-form-field">
+	<legend class="fmd-form-question">
 		What is your opinion?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
 			disabled
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
 			checked
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
 			disabled
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">1 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">1 &mdash;</span>
         	<span id="id_opinion-label-start">Not likely at all</span>
         </div>
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">5 &mdash;</span>
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">5 &mdash;</span>
         	<span id="id_opinion-label-end">Extremely likely</span>
         </div>
     </div>
@@ -242,6 +243,7 @@ test("Case 2 (not required, start at 1, out of 5, value, disabled)", () => {
 					| disabled
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -252,80 +254,80 @@ test("Case 2 (not required, start at 1, out of 5, value, disabled)", () => {
 // Case 3 (out of 6, different labels, different form delimiter)
 
 const expectedTemplate3 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (required)</span>
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" data-fmd-required class="fmd-form-field fmd-form-field-classic-labels">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">opinion?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">opinion? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-0"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="0"
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-0">0</label>
+		<label class="fmd-form-scale-label" for="id_opinion-0">0</label>
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 		<input 
 			name="opinion"
 			id="id_opinion-6"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="6"
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-6">6</label>
+		<label class="fmd-form-scale-label" for="id_opinion-6">6</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">0 &mdash;</span>
         	<span id="id_opinion-label-start">Start</span>
         </div>
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">6 &mdash;</span>
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">6 &mdash;</span>
         	<span id="id_opinion-label-end">End</span>
         </div>
     </div>
@@ -345,8 +347,10 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 					outof = 6
 					labelstart = Start
 					labelend = End
+					labelstyle =   classic
 				`,
 				"\n",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -357,123 +361,123 @@ test("Case 3 (out of 6, different labels, different form delimiter)", () => {
 // Case 4 (different localization)
 
 const expectedTemplate4 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">opinion?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">opinion? (প্রয়োজন)</span>
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" data-fmd-required id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">opinion?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">opinion? (প্রয়োজন)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-0"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="0"
-			data-bmd-autofocus
+			data-fmd-autofocus
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-0">0</label>
+		<label class="fmd-form-scale-label" for="id_opinion-0">0</label>
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 		<input 
 			name="opinion"
 			id="id_opinion-6"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="6"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-6">6</label>
+		<label class="fmd-form-scale-label" for="id_opinion-6">6</label>
 		<input 
 			name="opinion"
 			id="id_opinion-7"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="7"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-7">7</label>
+		<label class="fmd-form-scale-label" for="id_opinion-7">7</label>
 		<input 
 			name="opinion"
 			id="id_opinion-8"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="8"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-8">8</label>
+		<label class="fmd-form-scale-label" for="id_opinion-8">8</label>
 		<input 
 			name="opinion"
 			id="id_opinion-9"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="9"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-9">9</label>
+		<label class="fmd-form-scale-label" for="id_opinion-9">9</label>
 		<input 
 			name="opinion"
 			id="id_opinion-10"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="10"
-			data-bmd-autofocus
+			data-fmd-autofocus
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-10">10</label>
+		<label class="fmd-form-scale-label" for="id_opinion-10">10</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">0 &mdash;</span>
         	<span id="id_opinion-label-start">কোনো সম্ভাবনা নেই</span>
         </div>
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">10 &mdash;</span>
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">10 &mdash;</span>
         	<span id="id_opinion-label-end">অত্যন্ত সম্ভাবনাময়</span>
         </div>
     </div>
@@ -486,7 +490,7 @@ test("Case 4 (different localization)", () => {
 			createOpinionScaleField(
 				"opinion",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your opinion?
 					| description = Please choose.
@@ -497,6 +501,7 @@ test("Case 4 (different localization)", () => {
 					| outof = 4
 				`,
 				"|",
+				"",
 				"bn",
 			),
 			{ format: "html" },
@@ -507,113 +512,113 @@ test("Case 4 (different localization)", () => {
 // Case 5 (hide labels)
 
 const expectedTemplate5 = `
-<fieldset data-bmd-name="choice" data-bmd-type="num-radio" data-bmd-required id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<legend class="bmd-form-question">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">choice?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">choice? (required)</span>
+<fieldset data-fmd-name="choice" data-fmd-type="num-radio" data-fmd-required id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">choice?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">choice? (required)</span>
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="choice"
 			id="id_choice-0"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="0"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-0">0</label>
+		<label class="fmd-form-scale-label" for="id_choice-0">0</label>
 		<input 
 			name="choice"
 			id="id_choice-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-1">1</label>
+		<label class="fmd-form-scale-label" for="id_choice-1">1</label>
 		<input 
 			name="choice"
 			id="id_choice-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-2">2</label>
+		<label class="fmd-form-scale-label" for="id_choice-2">2</label>
 		<input 
 			name="choice"
 			id="id_choice-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-3">3</label>
+		<label class="fmd-form-scale-label" for="id_choice-3">3</label>
 		<input 
 			name="choice"
 			id="id_choice-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-4">4</label>
+		<label class="fmd-form-scale-label" for="id_choice-4">4</label>
 		<input 
 			name="choice"
 			id="id_choice-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-5">5</label>
+		<label class="fmd-form-scale-label" for="id_choice-5">5</label>
 		<input 
 			name="choice"
 			id="id_choice-6"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="6"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-6">6</label>
+		<label class="fmd-form-scale-label" for="id_choice-6">6</label>
 		<input 
 			name="choice"
 			id="id_choice-7"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="7"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-7">7</label>
+		<label class="fmd-form-scale-label" for="id_choice-7">7</label>
 		<input 
 			name="choice"
 			id="id_choice-8"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="8"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-8">8</label>
+		<label class="fmd-form-scale-label" for="id_choice-8">8</label>
 		<input 
 			name="choice"
 			id="id_choice-9"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="9"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-9">9</label>
+		<label class="fmd-form-scale-label" for="id_choice-9">9</label>
 		<input 
 			name="choice"
 			id="id_choice-10"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="10"
-			data-bmd-autofocus
+			data-fmd-autofocus
 		>
-		<label class="bmd-form-scale-label" for="id_choice-10">10</label>
+		<label class="fmd-form-scale-label" for="id_choice-10">10</label>
 	</div>
 </fieldset>
 `;
@@ -624,7 +629,7 @@ test("Case 5 (hide labels)", () => {
 			createOpinionScaleField(
 				"choice",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your choice?
 					| description = Please choose.
@@ -635,6 +640,7 @@ test("Case 5 (hide labels)", () => {
 					| hideLabelEnd
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -645,65 +651,65 @@ test("Case 5 (hide labels)", () => {
 // Case 6 (not required, start at 1, out of 5, value, disabled, hide start label)
 
 const expectedTemplate6 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" class="bmd-form-field">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" class="fmd-form-field">
+	<legend class="fmd-form-question">
 		What is your opinion?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
 			checked
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
 			disabled
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 	</div>
-	<div class="bmd-form-scale-text">
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">5 &mdash;</span>
+	<div class="fmd-form-scale-text">
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">5 &mdash;</span>
         	<span id="id_opinion-label-end">Extremely likely</span>
         </div>
     </div>
@@ -727,6 +733,7 @@ test("Case 6 (not required, start at 1, out of 5, value, disabled, hide start la
 					| hideLabelStart
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -737,65 +744,65 @@ test("Case 6 (not required, start at 1, out of 5, value, disabled, hide start la
 // Case 7 (not required, start at 1, out of 5, value, disabled, hide end label)
 
 const expectedTemplate7 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" class="bmd-form-field">
-	<legend class="bmd-form-question">
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" class="fmd-form-field">
+	<legend class="fmd-form-question">
 		What is your opinion?
 	</legend>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please choose.
 	</p>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
 			disabled
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
 			checked
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
 			disabled
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">1 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">1 &mdash;</span>
         	<span id="id_opinion-label-start">Not likely at all</span>
         </div>
     </div>
@@ -819,6 +826,7 @@ test("Case 7 (not required, start at 1, out of 5, value, disabled, hide end labe
 					| hideLabelEnd
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -829,109 +837,109 @@ test("Case 7 (not required, start at 1, out of 5, value, disabled, hide end labe
 // Case 8 (no params)
 
 const expectedTemplate8 = `
-<fieldset data-bmd-name="opinion" data-bmd-type="num-radio" data-bmd-required class="bmd-form-field">
-	<legend class="bmd-form-question">
-		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
+<fieldset data-fmd-name="opinion" data-fmd-type="num-radio" data-fmd-required class="fmd-form-field">
+	<legend class="fmd-form-question">
+		<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>
 	</legend>
-	<div class="bmd-scale-grid">
+	<div class="fmd-scale-grid">
 		<input 
 			name="opinion"
 			id="id_opinion-0"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="0"
 			aria-describedby="id_opinion-label-start"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-0">0</label>
+		<label class="fmd-form-scale-label" for="id_opinion-0">0</label>
 		<input 
 			name="opinion"
 			id="id_opinion-1"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="1"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-1">1</label>
+		<label class="fmd-form-scale-label" for="id_opinion-1">1</label>
 		<input 
 			name="opinion"
 			id="id_opinion-2"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="2"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-2">2</label>
+		<label class="fmd-form-scale-label" for="id_opinion-2">2</label>
 		<input 
 			name="opinion"
 			id="id_opinion-3"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="3"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-3">3</label>
+		<label class="fmd-form-scale-label" for="id_opinion-3">3</label>
 		<input 
 			name="opinion"
 			id="id_opinion-4"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="4"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-4">4</label>
+		<label class="fmd-form-scale-label" for="id_opinion-4">4</label>
 		<input 
 			name="opinion"
 			id="id_opinion-5"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="5"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-5">5</label>
+		<label class="fmd-form-scale-label" for="id_opinion-5">5</label>
 		<input 
 			name="opinion"
 			id="id_opinion-6"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="6"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-6">6</label>
+		<label class="fmd-form-scale-label" for="id_opinion-6">6</label>
 		<input 
 			name="opinion"
 			id="id_opinion-7"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="7"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-7">7</label>
+		<label class="fmd-form-scale-label" for="id_opinion-7">7</label>
 		<input 
 			name="opinion"
 			id="id_opinion-8"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="8"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-8">8</label>
+		<label class="fmd-form-scale-label" for="id_opinion-8">8</label>
 		<input 
 			name="opinion"
 			id="id_opinion-9"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="9"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-9">9</label>
+		<label class="fmd-form-scale-label" for="id_opinion-9">9</label>
 		<input 
 			name="opinion"
 			id="id_opinion-10"
 			type="radio"
-			class="bmd-form-num-check-input bmd-form-scale-input"
+			class="fmd-form-num-check-input fmd-form-scale-input"
 			value="10"
 			aria-describedby="id_opinion-label-end"
 		>
-		<label class="bmd-form-scale-label" for="id_opinion-10">10</label>
+		<label class="fmd-form-scale-label" for="id_opinion-10">10</label>
 	</div>
-	<div class="bmd-form-scale-text">
-		<div class="bmd-form-scale-text-start">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">0 &mdash;</span>
+	<div class="fmd-form-scale-text">
+		<div class="fmd-form-scale-text-start">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">0 &mdash;</span>
         	<span id="id_opinion-label-start">Not likely at all</span>
         </div>
-        <div class="bmd-form-scale-text-end">
-        	<span class="bmd-d-none bmd-xs:d-inline-block">10 &mdash;</span>
+        <div class="fmd-form-scale-text-end">
+        	<span class="fmd-d-none fmd-xs:d-inline-block">10 &mdash;</span>
         	<span id="id_opinion-label-end">Extremely likely</span>
         </div>
     </div>
@@ -940,7 +948,7 @@ const expectedTemplate8 = `
 
 test("Case 8 (no params)", () => {
 	expect(
-		beautify(createOpinionScaleField("opinion", true, "", "", "|", "en"), {
+		beautify(createOpinionScaleField("opinion", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate8, { format: "html" }));

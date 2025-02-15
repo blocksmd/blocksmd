@@ -2,9 +2,12 @@ var path = require("path");
 
 module.exports = {
 	mode: "production",
-	entry: "./src/index.js",
+	entry: {
+		formsmd: "./src/main.js",
+		composer: "./src/composer.js",
+	},
 	output: {
-		filename: "blocksmd.bundle.min.js",
+		filename: "[name].bundle.min.js",
 		path: path.resolve(__dirname, "dist/js"),
 		libraryTarget: "window",
 	},

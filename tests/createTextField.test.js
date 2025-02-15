@@ -1,30 +1,31 @@
-("use strict");
+"use strict";
 
 const { createTextField } = require("../src/form-field-create");
+const { createCountryCallingCodeOptions } = require("../src/phone-numbers");
 const beautify = require("beautify");
 
 // Case 1
 
 const expectedTemplate1 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<label class="bmd-form-question" for="id_name">
-		What is your <span class="bmd-text-nowrap" aria-hidden="true">name?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">name? (required)</span>
+<div id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<label class="fmd-form-question" for="id_name">
+		What is your <span class="fmd-text-nowrap" aria-hidden="true">name?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">name? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		Please enter your full name.
 	</p>
 	<input
 		name="name"
 		id="id_name"
 		type="text"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="Type in your name here..."
 		required
 		value="John Doe"
 		maxlength="255"
 		pattern="[a-zA-Z0-9\s]+"
 		disabled
-		data-bmd-autofocus
+		data-fmd-autofocus
 	>
 </div>
 `;
@@ -36,7 +37,7 @@ test("Case 1", () => {
 				"name",
 				"text",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your name?
 					| description = Please enter your full name.
@@ -51,6 +52,7 @@ test("Case 1", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -61,18 +63,18 @@ test("Case 1", () => {
 // Case 2 (email)
 
 const expectedTemplate2 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_email">
-		What is your email <span class="bmd-text-nowrap" aria-hidden="true">address?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">address? (required)</span>
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="id_email">
+		What is your email <span class="fmd-text-nowrap" aria-hidden="true">address?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">address? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		We'll reach you directly.
 	</p>
 	<input
 		name="email"
 		id="id_email"
 		type="email"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="name@example.com"
 		required
 		value="john@example.com"
@@ -87,13 +89,14 @@ test("Case 2 (email)", () => {
 				"email",
 				"email",
 				true,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				`
 					| question = What is your email address?
 					| description = We'll reach you directly.
 					| value = john@example.com
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -104,18 +107,18 @@ test("Case 2 (email)", () => {
 // Case 3 (url)
 
 const expectedTemplate3 = `
-<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield">
-	<label class="bmd-form-question" for="id_website">
+<div id="some-id" class="fmd-col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels">
+	<label class="fmd-form-question" for="id_website">
 		What is your website address?
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		You can keep this empty if you don't have one yet.
 	</p>
 	<input
 		name="website"
 		id="id_website"
 		type="url"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="https://example.com"
 		maxlength="255"
 	>
@@ -129,7 +132,7 @@ test("Case 3 (url)", () => {
 				"website",
 				"url",
 				false,
-				'id="some-id" class="bmd-col-10"',
+				'id="some-id" class="fmd-col-10"',
 				`
 					|
 					| question = What is your website address?
@@ -140,6 +143,7 @@ test("Case 3 (url)", () => {
 					|
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -147,28 +151,28 @@ test("Case 3 (url)", () => {
 	).toBe(beautify(expectedTemplate3, { format: "html" }));
 });
 
-// Case 4 (form delimiter changed to new line, and different localization)
+// Case 4 (form delimiter changed to new line, different id and localization)
 
 const expectedTemplate4 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_name">
-		আপনার নাম <span class="bmd-text-nowrap" aria-hidden="true">কি?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">কি? (প্রয়োজন)</span>
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="form1:id_name">
+		আপনার নাম <span class="fmd-text-nowrap" aria-hidden="true">কি?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">কি? (প্রয়োজন)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		আপনার সম্পূর্ণ নাম লিখুন
 	</p>
 	<input
 		name="name"
-		id="id_name"
+		id="form1:id_name"
 		type="text"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
 		required
 	>
 </div>
 `;
 
-test("Case 4 (form delimiter changed to new line, and different localization)", () => {
+test("Case 4 (form delimiter changed to new line, different id and localization)", () => {
 	expect(
 		beautify(
 			createTextField(
@@ -181,6 +185,7 @@ test("Case 4 (form delimiter changed to new line, and different localization)", 
 					description = আপনার সম্পূর্ণ নাম লিখুন
 				`,
 				"\n",
+				"form1",
 				"bn",
 			),
 			{ format: "html" },
@@ -191,15 +196,15 @@ test("Case 4 (form delimiter changed to new line, and different localization)", 
 // Case 5 (no params)
 
 const expectedTemplate5 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_name">
-		<span class="bmd-text-nowrap" aria-hidden="true">...<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">... (required)</span>
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="id_name">
+		<span class="fmd-text-nowrap" aria-hidden="true">...<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">... (required)</span>
 	</label>
 	<input
 		name="name"
 		id="id_name"
 		type="text"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="Type your answer here..."
 		required
 	>
@@ -208,7 +213,7 @@ const expectedTemplate5 = `
 
 test("Case 5 (no params)", () => {
 	expect(
-		beautify(createTextField("name", "text", true, "", "", "|", "en"), {
+		beautify(createTextField("name", "text", true, "", "", "|", "", "en"), {
 			format: "html",
 		}),
 	).toBe(beautify(expectedTemplate5, { format: "html" }));
@@ -217,23 +222,23 @@ test("Case 5 (no params)", () => {
 // Case 6 (multiline)
 
 const expectedTemplate6 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field" aria-label="Label" data-title="Some title">
-	<label class="bmd-form-question" for="id_description">
-		Write a short description of your <span class="bmd-text-nowrap" aria-hidden="true">event<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">event (required)</span>
+<div id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field" aria-label="Label" data-title="Some title">
+	<label class="fmd-form-question" for="id_description">
+		Write a short description of your <span class="fmd-text-nowrap" aria-hidden="true">event<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">event (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		A few lines and you're good to go
 	</p>
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="Type in your description here..."
 		required
-		aria-details="id_description-form-text"
+		aria-describedby="id_description-form-text"
 	></textarea>
-	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
-		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
+	<div id="id_description-form-text" class="fmd-form-text-bottom fmd-d-flex fmd-align-items-center">
+		<kbd class="fmd-d-flex fmd-align-items-center fmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-mt-1 fmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
 		to add new line
 	</div>
 </div>
@@ -246,7 +251,7 @@ test("Case 6 (multiline)", () => {
 				"description",
 				"text",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = Write a short description of your event
 					| description = A few lines and you're good to go
@@ -254,6 +259,7 @@ test("Case 6 (multiline)", () => {
 					| multiline
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -264,24 +270,24 @@ test("Case 6 (multiline)", () => {
 // Case 7 (multiline with value)
 
 const expectedTemplate7 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_description">
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="id_description">
 		Write a short description of your event
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		A few lines and you're good to go
 	</p>
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="Type your answer here..."
-		data-bmd-autofocus
-		aria-details="id_description-form-text"
+		data-fmd-autofocus
+		aria-describedby="id_description-form-text"
 	>This is my
 description</textarea>
-	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
-		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
+	<div id="id_description-form-text" class="fmd-form-text-bottom fmd-d-flex fmd-align-items-center">
+		<kbd class="fmd-d-flex fmd-align-items-center fmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-mt-1 fmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
 		to add new line
 	</div>
 </div>
@@ -304,6 +310,7 @@ test("Case 7 (multiline with value)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -314,18 +321,18 @@ test("Case 7 (multiline with value)", () => {
 // Case 8 (email with value)
 
 const expectedTemplate8 = `
-<div id="some-id" class="bmd-col-8 bmd-form-field">
-	<label class="bmd-form-question" for="id_email">
-		What is your email <span class="bmd-text-nowrap" aria-hidden="true">address?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">address? (required)</span>
+<div id="some-id" class="fmd-col-8 fmd-form-field fmd-form-field-classic-labels">
+	<label class="fmd-form-question" for="id_email">
+		What is your email <span class="fmd-text-nowrap" aria-hidden="true">address?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">address? (required)</span>
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		We'll reach you directly.
 	</p>
 	<input
 		name="email"
 		id="id_email"
 		type="email"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="name@example.com"
 		required
 		value="john@example.com"
@@ -341,14 +348,16 @@ test("Case 8 (email with value)", () => {
 				"email",
 				"email",
 				true,
-				'id="some-id" class="bmd-col-8"',
+				'id="some-id" class="fmd-col-8"',
 				`
 					| question = What is your email address?
 					| description = We'll reach you directly.
 					| value = john@example.com
 					| pattern = .+@example\.com
+					| labelStyle = classic
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -359,18 +368,18 @@ test("Case 8 (email with value)", () => {
 // Case 9 (url with value)
 
 const expectedTemplate9 = `
-<div id="some-id" class="bmd-col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield">
-	<label class="bmd-form-question" for="id_website">
+<div id="some-id" class="fmd-col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels">
+	<label class="fmd-form-question" for="id_website">
 		What is your website address?
 	</label>
-	<p class="bmd-form-description">
+	<p class="fmd-form-description">
 		You can keep this empty if you don't have one yet.
 	</p>
 	<input
 		name="website"
 		id="id_website"
 		type="url"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="https://example.com"
 		value="https://"
 		maxlength="255"
@@ -385,7 +394,7 @@ test("Case 9 (url with value)", () => {
 				"website",
 				"url",
 				false,
-				'id="some-id" class="bmd-col-10"',
+				'id="some-id" class="fmd-col-10"',
 				`
 					|
 					| question = What is your website address?
@@ -397,6 +406,7 @@ test("Case 9 (url with value)", () => {
 					|
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -407,19 +417,19 @@ test("Case 9 (url with value)", () => {
 // Case 10 (multiline with different localization)
 
 const expectedTemplate10 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_description">
+<div class="fmd-form-field">
+	<label class="fmd-form-question" for="id_description">
 		...
 	</label>
 	<textarea
 		name="description"
 		id="id_description"
-		class="bmd-form-control"
+		class="fmd-form-str-input fmd-form-control"
 		placeholder="এখানে আপনার উত্তর টাইপ করুন..."
-		aria-details="id_description-form-text"
+		aria-describedby="id_description-form-text"
 	></textarea>
-	<div id="id_description-form-text" class="bmd-form-text-bottom bmd-d-flex bmd-align-items-center">
-		<kbd class="bmd-d-flex bmd-align-items-center bmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="bmd-icon bmd-mt-1 bmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
+	<div id="id_description-form-text" class="fmd-form-text-bottom fmd-d-flex fmd-align-items-center">
+		<kbd class="fmd-d-flex fmd-align-items-center fmd-me-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="fmd-icon fmd-mt-1 fmd-me-2" aria-hidden="true" focusable="false"><path d="M464 56V32h48V56 288v24H488 93.1l79 79 17 17-33.9 33.9-17-17L18.2 305l-17-17 17-17 120-120 17-17L189.1 168l-17 17-79 79H464V56z"/></svg> Enter</kbd>
 		নতুন লাইন যোগ করতে
 	</div>
 </div>
@@ -428,7 +438,16 @@ const expectedTemplate10 = `
 test("Case 10 (multiline with different localization)", () => {
 	expect(
 		beautify(
-			createTextField("description", "text", false, "", "multiline", "|", "bn"),
+			createTextField(
+				"description",
+				"text",
+				false,
+				"",
+				"multiline",
+				"|",
+				"",
+				"bn",
+			),
 			{ format: "html" },
 		),
 	).toBe(beautify(expectedTemplate10, { format: "html" }));
@@ -437,25 +456,39 @@ test("Case 10 (multiline with different localization)", () => {
 // Case 11 (telephone number)
 
 const expectedTemplate11 = `
-<div id="some-id" class="bmd-col-6 bmd-xs:col-10 bmd-form-field bmd-form-field-sm bmd-form-subfield" aria-label="Label" data-title="Some title">
-	<label class="bmd-form-question" for="id_phone">
-		What is your phone <span class="bmd-text-nowrap" aria-hidden="true">number?<sup class="bmd-text-accent">*</sup></span><span class="bmd-visually-hidden">number? (required)</span>
-	</label>
-	<p class="bmd-form-description">
+<fieldset id="some-id" class="fmd-col-6 fmd-xs:col-10 fmd-form-field fmd-form-field-sm fmd-form-field-classic-labels" aria-label="Label" data-title="Some title">
+	<legend class="fmd-form-question">
+		What is your phone <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (required)</span>
+	</legend>
+	<p class="fmd-form-description">
 		Please enter a number where we can reach you.
 	</p>
-	<input
-		name="phone"
-		id="id_phone"
-		type="tel"
-		class="bmd-form-control"
-		placeholder="(201) 555-0123"
-		required
-		maxlength="255"
-		disabled
-		data-bmd-autofocus
-	>
-</div>
+	<div class="fmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="fmd-form-str-select fmd-form-countrycode-select fmd-form-select"
+			required
+			disabled
+			data-fmd-autofocus
+			aria-label="Country calling code"
+		>
+			${createCountryCallingCodeOptions("US", [])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="fmd-form-str-input fmd-form-control"
+			placeholder="(201) 555-0123"
+			required
+			maxlength="255"
+			disabled
+			data-fmd-autofocus
+			aria-label="Phone number"
+		>
+	</div>
+</fieldset>
 `;
 
 test("Case 11 (telephone number)", () => {
@@ -465,7 +498,7 @@ test("Case 11 (telephone number)", () => {
 				"phone",
 				"tel",
 				true,
-				'id="some-id" class="bmd-col-6 bmd-xs:col-10" aria-label="Label" data-title="Some title"',
+				'id="some-id" class="fmd-col-6 fmd-xs:col-10" aria-label="Label" data-title="Some title"',
 				`
 					| question = What is your phone number?
 					| description = Please enter a number where we can reach you.
@@ -477,6 +510,7 @@ test("Case 11 (telephone number)", () => {
 					| autofocus
 				`,
 				"|",
+				"",
 				"en",
 			),
 			{ format: "html" },
@@ -487,27 +521,141 @@ test("Case 11 (telephone number)", () => {
 // Case 12 (telephone number with different country)
 
 const expectedTemplate12 = `
-<div class="bmd-form-field">
-	<label class="bmd-form-question" for="id_phone">
+<fieldset class="fmd-form-field">
+	<legend class="fmd-form-question">
 		...
-	</label>
-	<input
-		name="phone"
-		id="id_phone"
-		type="tel"
-		class="bmd-form-control"
-		placeholder="01812-345678"
-	>
-</div>
+	</legend>
+	<div class="fmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="fmd-form-str-select fmd-form-countrycode-select fmd-form-select"
+			required
+			aria-label="দেশের কলিং কোড"
+		>
+			${createCountryCallingCodeOptions("BD", [])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="fmd-form-str-input fmd-form-control"
+			placeholder="01812-345678"
+			aria-label="ফোন নম্বর"
+		>
+	</div>
+</fieldset>
 `;
 
 test("Case 12 (telephone number with different country)", () => {
 	expect(
 		beautify(
-			createTextField("phone", "tel", false, "", "country=bd", "|", "bn"),
+			createTextField("phone", "tel", false, "", "country=bd", "|", "", "bn"),
 			{
 				format: "html",
 			},
 		),
 	).toBe(beautify(expectedTemplate12, { format: "html" }));
+});
+
+// Case 13 (telephone number with restricted available countries)
+
+const expectedTemplate13 = `
+<fieldset class="fmd-form-field">
+	<legend class="fmd-form-question">
+		What is your phone <span class="fmd-text-nowrap" aria-hidden="true">number?<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">number? (required)</span>
+	</legend>
+	<p class="fmd-form-description">
+		Please enter a number where we can reach you.
+	</p>
+	<div class="fmd-input-group">
+		<select
+			name="phoneCountryCode"
+			id="id_phoneCountryCode"
+			class="fmd-form-str-select fmd-form-countrycode-select fmd-form-select"
+			required
+			aria-label="Country calling code"
+		>
+			${createCountryCallingCodeOptions("SG", ["GB", "BD", "US"])}
+		</select>
+		<input
+			name="phone"
+			id="id_phone"
+			type="tel"
+			class="fmd-form-str-input fmd-form-control"
+			placeholder="8123 4567"
+			required
+			aria-label="Phone number"
+		>
+	</div>
+</fieldset>
+`;
+
+test("Case 13 (telephone number with restricted available countries)", () => {
+	expect(
+		beautify(
+			createTextField(
+				"phone",
+				"tel",
+				true,
+				"",
+				`
+					| question = What is your phone number?
+					| description = Please enter a number where we can reach you.
+					| country =     sg
+					| availableCountries =   GB,bD,       US  
+				`,
+				"|",
+				"",
+				"en",
+			),
+			{ format: "html" },
+		),
+	).toBe(beautify(expectedTemplate13, { format: "html" }));
+});
+
+// Case 14 (password)
+
+const expectedTemplate14 = `
+<div id="some-id" class="fmd-col-8 fmd-form-field">
+	<label class="fmd-form-question" for="id_password">
+		Enter your <span class="fmd-text-nowrap" aria-hidden="true">password<sup class="fmd-text-accent">*</sup></span><span class="fmd-visually-hidden">password (required)</span>
+	</label>
+	<p class="fmd-form-description">
+		Must be 8 characters long.
+	</p>
+	<input
+		name="password"
+		id="id_password"
+		type="password"
+		class="fmd-form-password-input fmd-form-control"
+		placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+		required
+		value="my-password"
+		maxlength="8"
+	>
+</div>
+`;
+
+test("Case 14 (password)", () => {
+	expect(
+		beautify(
+			createTextField(
+				"password",
+				"password",
+				true,
+				'id="some-id" class="fmd-col-8"',
+				`
+					| question = Enter your password
+					| description = Must be 8 characters long.
+					| value = my-password
+					| maxlength = 8
+				`,
+				"|",
+				"",
+				"en",
+			),
+			{ format: "html" },
+		),
+	).toBe(beautify(expectedTemplate14, { format: "html" }));
 });

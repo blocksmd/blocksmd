@@ -1,4 +1,4 @@
-("use strict");
+"use strict";
 
 const { parseElemAttrs, addReservedClass } = require("./attrs-parse");
 const {
@@ -9,34 +9,51 @@ const {
 	createChoiceField,
 	createRatingField,
 	createOpinionScaleField,
+	createDatetimeField,
+	createFileField,
 } = require("./form-field-create");
 const { escape$1, cleanUrl } = require("./helpers");
 const { getTranslation } = require("./translations");
 const { marked } = require("marked");
 
 /**
- * Get settings for the Marked renderer. Settings saved in local storage are
- * given priority (as these are from the template). If saved settings are not
- * found (or local storage is not accessible), then the default is returned.
+ * Get settings for the Marked renderer. Settings are set in the options from
+ * the template.
  *
- * @returns {{"css-prefix": string, "form-delimiter": string, "localization":
- * string}}
+ * @param {Object} options
+ * @returns {{
+ *   "css-prefix": string,
+ *   "form-delimiter": string,
+ *   "id": string,
+ *   "localization": string
+ * }}
  */
-function getMarkedSettings() {
+function getMarkedSettings(options) {
 	let markedSettings = {
-		"css-prefix": "bmd-",
+		"css-prefix": "fmd-",
 		"form-delimiter": "|",
+		"id": "",
 		"localization": "en",
 	};
 
-	// Get the settings saved in local storage (if possible)
-	try {
-		markedSettings = JSON.parse(
-			localStorage.getItem(
-				`blocksmd:${window.location.hostname}${window.location.pathname}marked-settings`,
-			),
-		);
-	} catch (error) {}
+	// If settings not present in the options, return the defaults
+	if (options.markedSettings === undefined) {
+		return markedSettings;
+	}
+
+	// Update with the settings present in the options
+	if (options.markedSettings["css-prefix"] !== undefined) {
+		markedSettings["css-prefix"] = options.markedSettings["css-prefix"];
+	}
+	if (options.markedSettings["form-delimiter"] !== undefined) {
+		markedSettings["form-delimiter"] = options.markedSettings["form-delimiter"];
+	}
+	if (options.markedSettings.id !== undefined) {
+		markedSettings.id = options.markedSettings.id;
+	}
+	if (options.markedSettings.localization !== undefined) {
+		markedSettings.localization = options.markedSettings.localization;
+	}
 
 	return markedSettings;
 }
@@ -57,18 +74,18 @@ renderer.blockquote = function (quote) {
 };
 
 renderer.checkbox = function (checked) {
-	const markedSettings = getMarkedSettings();
+	const markedSettings = getMarkedSettings(this.options);
 	if (checked) {
-		return `<div role="checkbox" class="bmd-list-check bmd-list-checked" aria-label="${getTranslation(markedSettings["localization"], "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="bmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
+		return `<div role="checkbox" class="fmd-list-check fmd-list-checked" aria-label="${getTranslation(markedSettings.localization, "list-checked")}" aria-checked="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="fmd-icon" aria-hidden="true" focusable="false"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg></div>`;
 	} else {
-		return `<div role="checkbox" class="bmd-list-check" aria-label="${getTranslation(markedSettings["localization"], "list-check")}" aria-checked="false"></div>`;
+		return `<div role="checkbox" class="fmd-list-check" aria-label="${getTranslation(markedSettings.localization, "list-check")}" aria-checked="false"></div>`;
 	}
 };
 
 renderer.code = function (code, infostring, escaped) {
-	const markedSettings = getMarkedSettings();
+	const markedSettings = getMarkedSettings(this.options);
 	infostring = infostring || "";
-	let startTag = '<div class="bmd-code-wrapper">';
+	let startTag = '<div class="fmd-code-wrapper">';
 
 	// Parse and add attributes to the element (if they are provided)
 	// Here, attributes are provided in the infostring before or after the lang
@@ -85,19 +102,21 @@ renderer.code = function (code, infostring, escaped) {
 		infostring = infostring.trim();
 		parsedAttrs = parseElemAttrs(attrs, markedSettings["css-prefix"]);
 		startTag = `<div ${parsedAttrs}>`;
-		startTag = addReservedClass(startTag, "bmd-code-wrapper");
+		startTag = addReservedClass(startTag, "fmd-code-wrapper");
 	}
 
 	// Get language and format code
 	let lang = "";
 	const containsLang = infostring.match(/^\S*/);
-	if (containsLang) lang = containsLang[0];
+	if (containsLang) {
+		lang = containsLang[0];
+	}
 	code = code.replace(/\n$/, "") + "\n";
 
 	// Mermaid integration
 	if (lang.toLowerCase() === "mermaid") {
 		startTag = parsedAttrs ? `<div ${parsedAttrs}>` : "<div>";
-		startTag = addReservedClass(startTag, "bmd-mermaid-wrapper");
+		startTag = addReservedClass(startTag, "fmd-mermaid-wrapper");
 		return [
 			`${startTag}`,
 			`	<pre class="mermaid">${code}</pre>`,
@@ -106,20 +125,24 @@ renderer.code = function (code, infostring, escaped) {
 	}
 
 	// Encode code and create the language class for it
-	if (!escaped) code = escape$1(code, true);
+	if (!escaped) {
+		code = escape$1(code, true);
+	}
 	let langClass = "";
-	if (lang) langClass = ` class="language-${escape$1(lang, true)}"`;
+	if (lang) {
+		langClass = ` class="language-${escape$1(lang, true)}"`;
+	}
 
 	return [
 		`${startTag}`,
-		`	<div class="bmd-code-header"><span>${lang}</span><button type="button" class="bmd-copy-btn">${getTranslation(markedSettings["localization"], "copy-btn")}</button></div>`,
+		`	<div class="fmd-code-header"><span>${lang}</span><button type="button" class="fmd-copy-btn">${getTranslation(markedSettings.localization, "copy-btn")}</button></div>`,
 		`	<pre tabindex="0"><code${langClass}>${code}</code></pre>`,
 		`</div>\n`,
 	].join("\n");
 };
 
 renderer.heading = function (text, level, raw) {
-	const markedSettings = getMarkedSettings();
+	const markedSettings = getMarkedSettings(this.options);
 	text = text.trim();
 
 	// Parse and add attributes to the element (if they are provided)
@@ -144,10 +167,13 @@ renderer.heading = function (text, level, raw) {
 			.replace(/[^a-z0-9 -]/g, "")
 			.replace(/\s+/g, "-")
 			.replace(/-+/g, "-");
+		if (markedSettings.id !== "") {
+			id = `${markedSettings.id}:${id}`;
+		}
 		startTag = startTag.replace(/<([^\s>]+)/, `<$1 id="${id}"`);
 	}
 
-	return `${startTag}${text}&nbsp;<a href="#${id}" class="bmd-heading-anchor">#</a></h${level}>\n`;
+	return `${startTag}${text}&nbsp;<a href="#${id}" class="fmd-heading-anchor">#</a></h${level}>\n`;
 };
 
 renderer.image = function (href, title, text) {
@@ -166,7 +192,7 @@ renderer.image = function (href, title, text) {
 };
 
 renderer.list = function (body, ordered, start) {
-	const markedSettings = getMarkedSettings();
+	const markedSettings = getMarkedSettings(this.options);
 	const type = ordered ? "ol" : "ul";
 	let startAttr = "";
 	if (ordered) {
@@ -192,7 +218,7 @@ renderer.list = function (body, ordered, start) {
 };
 
 renderer.paragraph = function (text) {
-	const markedSettings = getMarkedSettings();
+	const markedSettings = getMarkedSettings(this.options);
 	text = text.trim();
 
 	// Parse and add attributes to the element (if they are provided)
@@ -219,7 +245,8 @@ renderer.paragraph = function (text) {
 				fieldInputType === "textinput" ||
 				fieldInputType === "emailinput" ||
 				fieldInputType === "urlinput" ||
-				fieldInputType === "telinput"
+				fieldInputType === "telinput" ||
+				fieldInputType === "passwordinput"
 			) {
 				return createTextField(
 					fieldName,
@@ -228,7 +255,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "numberinput") {
 				return createNumberField(
@@ -237,7 +265,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "selectbox") {
 				return createSelectField(
@@ -246,7 +275,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (
 				fieldInputType === "choiceinput" ||
@@ -259,7 +289,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "ratinginput") {
 				return createRatingField(
@@ -268,7 +299,8 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			} else if (fieldInputType === "opinionscale") {
 				return createOpinionScaleField(
@@ -277,7 +309,33 @@ renderer.paragraph = function (text) {
 					parsedAttrs,
 					fieldParams,
 					markedSettings["form-delimiter"],
-					markedSettings["localization"],
+					markedSettings.id,
+					markedSettings.localization,
+				);
+			} else if (
+				fieldInputType === "datetimeinput" ||
+				fieldInputType === "dateinput" ||
+				fieldInputType === "timeinput"
+			) {
+				return createDatetimeField(
+					fieldName,
+					fieldInputType.replace("input", ""),
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings.id,
+					markedSettings.localization,
+				);
+			} else if (fieldInputType === "fileinput") {
+				return createFileField(
+					fieldName,
+					fieldRequired,
+					parsedAttrs,
+					fieldParams,
+					markedSettings["form-delimiter"],
+					markedSettings.id,
+					markedSettings.localization,
 				);
 			}
 		} catch (error) {
@@ -289,9 +347,11 @@ renderer.paragraph = function (text) {
 };
 
 renderer.table = function (header, body) {
-	if (body) body = `<tbody>${body}</tbody>`;
+	if (body) {
+		body = `<tbody>${body}</tbody>`;
+	}
 	return [
-		`<table class="bmd-table">`,
+		`<table class="fmd-table">`,
 		`	<thead>${header}</thead>`,
 		`	${body}`,
 		`</table>\n`,
